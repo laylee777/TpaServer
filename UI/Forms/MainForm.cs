@@ -15,6 +15,7 @@ namespace DSEV
         private LocalizationMain 번역 = new LocalizationMain();
         private UI.Controls.WaitForm WaitForm;
         private StateForm StateForm = null;
+        private Int32 TestIndexNum = 1;
         public MainForm()
         {
             InitializeComponent();
@@ -30,6 +31,26 @@ namespace DSEV
             //this.t환경설정.SelectedPageChanged += SelectedTabPageChanged;
             this.KeyPreview = true;
             this.KeyDown += MainForm_KeyDown;
+
+
+
+            //MES테스트용
+            this.타이틀.ItemDoubleClick += 타이틀_ItemDoubleClick;
+        }
+
+        private void 타이틀_ItemDoubleClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            
+            MESSAGE message = new MESSAGE();
+            message.MSG_ID = "REQ_PROCESS_END";
+            message.SYSTEMID = "IVM01";
+            message.DATE_TIME = DateTime.Now.ToString();
+            message.BARCODE_ID = "F00395AB231;F00395AB231";
+            message.KEY = "52";
+
+            Global.mes통신.자료송신(message);
+
+            Debug.WriteLine("자료송신");
         }
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
@@ -116,69 +137,62 @@ namespace DSEV
                 //Debug.WriteLine($"투입버퍼 : {Global.장치통신.제품투입번호}\n검사지그1 : {Global.장치통신.상부촬영번호}\n검사지그2 : {Global.장치통신.상부인슐폭촬영번호}\n이송장치1 : {Global.장치통신.하부표면검사번호}\n검사지그4 : {Global.장치통신.레이져각인검사번호}\n검사지그5 : {Global.장치통신.큐알검증기검사번호}\n배출버퍼 : {Global.장치통신.결과요청번호}");
             }
 
+            if (e.KeyCode == Keys.T)
+            {
+                try
+                {
+                    Debug.WriteLine("T눌림^^");
+                    //Global.센서제어.ReadValues(센서컨트롤러.컨트롤러1, 999);
+                    //Global.피씨통신.CTQ1검사(999);
 
-            //if (e.KeyCode == Keys.S)
-            //{
-            //    Debug.WriteLine("S눌림^^");
-            //    Debug.WriteLine($"{Global.그랩제어.CurrentState(카메라구분.Cam47)}");
-            //}
+                    Global.피씨통신.검사시작(999);
+                }
+                catch (Exception a)
+                {
+                    Global.오류로그("Testing", "센서제어", a.Message, true);
+                }
+                //Debug.WriteLine("D눌림^^");
+                //Global.센서제어.ReadValues(센서컨트롤러.컨트롤러1, 999);
+                //Global.센서제어.ReadValues(센서컨트롤러.컨트롤러2, 999);
+                //Global.센서제어.ReadValues(센서컨트롤러.컨트롤러3, 999);
+                //Global.레이져마킹제어.레이져마킹시작(25);
+                //Global.그랩제어.Active(카메라구분.Cam02);
+                //Global.그랩제어.Active(카메라구분.Cam03);
+                //Debug.WriteLine($"투입버퍼 : {Global.장치통신.제품투입번호}\n검사지그1 : {Global.장치통신.상부촬영번호}\n검사지그2 : {Global.장치통신.상부인슐폭촬영번호}\n이송장치1 : {Global.장치통신.하부표면검사번호}\n검사지그4 : {Global.장치통신.레이져각인검사번호}\n검사지그5 : {Global.장치통신.큐알검증기검사번호}\n배출버퍼 : {Global.장치통신.결과요청번호}");
+            }
+            if (e.KeyCode == Keys.Z)
+            {
+                MESSAGE message = new MESSAGE();
+                message.MSG_ID = "REQ_PROCESS_START";
+                message.SYSTEMID = "EQU050";
+                message.DATE_TIME = "2024-04-03 14:35:29.55808";
+                message.BARCODE_ID = "F00395AB231;F00395AB231";
+                message.KEY = TestIndexNum.ToString("0000");
+                
+                TestIndexNum++;
+                
+                Global.mes통신.자료송신(message);
 
-            //if (e.KeyCode == Keys.R)
-            //{
-            //    Debug.WriteLine("R눌림^^");
-            //    Debug.WriteLine($"{Global.그랩제어.Ready(카메라구분.Cam47)}");
-            //}
+                Debug.WriteLine("자료송신");
 
-            //if (e.KeyCode == Keys.A)
-            //{
-            //    Debug.WriteLine("A눌림^^");
-            //    Debug.WriteLine($"{Global.그랩제어.Active(카메라구분.Cam47)}");
-            //}
-
-            //if (e.KeyCode == Keys.H)
-            //{
-            //    Debug.WriteLine("H눌림^^");
+            }
+            if (e.KeyCode == Keys.X)
+            {
+                MESSAGE message = new MESSAGE();
+                message.MSG_ID = "REQ_PROCESS_END";
+                message.SYSTEMID = "EQU050";
+                message.DATE_TIME = "2024-04-03 14:35:29.55808";
+                message.BARCODE_ID = "F00395AB231;F00395AB231";
+                message.KEY = TestIndexNum.ToString("0000");
+                Global.mes통신.자료송신(message);
+                
 
 
-            //    Global.그랩제어.TriggerShotGroup(Global.그랩제어.카메라그륩_Area1);
-            //    Global.그랩제어.TriggerShotGroup(Global.그랩제어.카메라그륩_Area2);
-            //    //Debug.WriteLine($"{Global.그랩제어.Active(카메라구분.Cam01)}");
-            //}
+                Debug.WriteLine("자료송신");
 
-            //if (e.KeyCode == Keys.T)
-            //{
-            //    Debug.WriteLine("T눌림^^");
-            //    //Debug.WriteLine($"{Global.그랩제어.TriggerShot(카메라구분.Cam01)}");
-            //    Global.모듈제어.VerifyOff(장치구분.QrVerify);
-            //}
+            }
 
 
-            //if (e.KeyCode == Keys.Z)
-            //{
-
-            //    Debug.WriteLine("Z눌림^^");
-            //    //Debug.WriteLine($"{Global.그랩제어.TriggerShot(카메라구분.Cam01)}");
-
-
-            //    Debug.WriteLine(Global.센서제어.Measure((센서구분)z));
-            //    z++;
-            //    if (z == 4) z = 1;
-            //}
-
-            //if (e.KeyCode == Keys.Q)
-            //{
-            //    Debug.WriteLine("Q눌림^^");
-            //    Global.PLC제어.작업여부끄기();
-
-            //    //Debug.WriteLine($"{Global.그랩제어.TriggerShot(카메라구분.Cam01)}");
-            //}
-
-            //if (e.KeyCode == Keys.B)
-            //{
-            //    Debug.WriteLine("B눌림^^");
-            //    Global.모듈제어.Sticker(장치구분.LabelSticker);
-            //    //Debug.WriteLine($"{Global.그랩제어.TriggerShot(카메라구분.Cam01)}");
-            //}
         }
 
         private void ShowWaitForm()

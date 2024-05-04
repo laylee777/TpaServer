@@ -145,19 +145,32 @@ namespace DSEV.Schemas
             if (검사번호 <= 0) return;
 
             //Global.모델자료.선택모델.검사시작(검사번호);
+            검사결과 사전검사 = Global.검사자료.검사항목찾기(검사번호);
+
+            if (사전검사.마킹전결과 == 결과구분.NG)
+            {
+                Global.라벨부착기제어.라벨부착(검사번호);
+                return;
+            }
+
             new Thread(() =>
             {
+
+
+
                 검사결과 검사 = Global.검사자료.큐알리딩수행(검사번호);
                 this.검증기구동신호 = false;
 
 
                 //큐알리딩이랑 라벨 부착 합치기
-                검사결과 부착전검사 = Global.검사자료.검사항목찾기(검사번호);
+                //검사결과 부착전검사 = Global.검사자료.검사항목찾기(검사번호);
 
+                Debug.WriteLine(검사.큐알등급.ToString());
+                if(검사.큐알등급 > 큐알등급.C || 검사.큐알등급 < 큐알등급.A) Global.라벨부착기제어.라벨부착(검사번호);
 
-                if (부착전검사.결과계산() == 결과구분.NG){
-                    Global.라벨부착기제어.라벨부착(검사번호);
-                };
+                //if (부착전검사.결과계산() == 결과구분.NG){
+                //    Global.라벨부착기제어.라벨부착(검사번호);
+                //};
 
                 
             }) { Priority = ThreadPriority.Highest }.Start();
@@ -322,7 +335,7 @@ namespace DSEV.Schemas
 
                     Global.피씨통신.CTQ1검사(CTQ1검사번호); 
                 
-                }) { Priority = ThreadPriority.AboveNormal }.Start();
+                }) { Priority = ThreadPriority.Highest }.Start();
                 
                 this.CTQ1검사신호 = false;
             }
@@ -334,7 +347,7 @@ namespace DSEV.Schemas
                     Global.피씨통신.CTQ2검사(CTQ2검사번호);
 
                 })
-                { Priority = ThreadPriority.AboveNormal }.Start();
+                { Priority = ThreadPriority.Highest }.Start();
 
                 this.CTQ2검사신호 = false;
             }
@@ -378,13 +391,9 @@ namespace DSEV.Schemas
             if (하부표면검사번호 > 0)
             {
                 new Thread(() => {
-                    
-                    Global.피씨통신.측면검사(하부표면검사번호); 
-                
-                
+                    Global.피씨통신.측면검사(하부표면검사번호);
                 }) { Priority = ThreadPriority.AboveNormal }.Start();
                 this.측면촬영신호 = false;
-
 
                 new Thread(() =>
                 {
@@ -393,7 +402,6 @@ namespace DSEV.Schemas
                 }).Start();
                 this.하부촬영신호 = false;
             }
-
         }
 
         // 최종 검사 결과 보고
@@ -405,23 +413,41 @@ namespace DSEV.Schemas
             //Global.피씨통신.결과요청(검사번호);
 
 
+            Debug.WriteLine("1");
             Global.모델자료.선택모델.검사종료(검사번호);
+            Debug.WriteLine("2");
             검사결과 검사 = Global.검사자료.검사결과계산(검사번호);
+            Debug.WriteLine("3");
             생산수량전송();
             // 강제배출
             Debug.WriteLine("검사결과 강제배출 확인중");
-            if (Global.환경설정.강제배출) { 결과전송(Global.환경설정.양품불량); return; }
+            if (Global.환경설정.강제배출) { 
+                결과전송(Global.환경설정.양품불량);
+
+                Global.검사자료.검사완료알림함수(검사);
+
+
+                return; }
 
             Debug.WriteLine("강제배출 아님. 검사 비어있는지 확인 중");
-            if (검사 == null) { 결과전송(false); return; }
+            if (검사 == null) { 
+                결과전송(false);
+                Global.검사자료.검사완료알림함수(검사);
+
+                return; }
+            
+            
             Debug.WriteLine("안비어있음. 결과전송 진행 예정");
             // 배출 수행
             결과전송(검사.측정결과 == 결과구분.OK);
             Debug.WriteLine($"{검사.측정결과}");
+
+            Global.검사자료.검사완료알림함수(검사);
         }
         // 신호 Writing 순서 중요
         private async void 결과전송(Boolean 양품여부)
         {
+            Debug.WriteLine("결과전송시작_test");
             this.양품여부요청 = 양품여부;
             this.불량여부요청 = !양품여부;
 
@@ -431,8 +457,8 @@ namespace DSEV.Schemas
             this.양품여부요청 = false;
             this.불량여부요청 = false;
 
-            //this.검사결과요청 = false;
-            
+            this.검사결과요청 = false;
+            Debug.WriteLine("결과전송완료_test");
         }
 
         // 핑퐁

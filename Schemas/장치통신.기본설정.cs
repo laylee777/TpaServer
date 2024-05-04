@@ -422,21 +422,6 @@ namespace DSEV.Schemas
             return 오류코드 == 0;
         }
 
-        /*
-        private Int16 GetDevice2(String Address, out Int32 오류코드)
-        {
-            Int16 value;
-            오류코드 = PLC.GetDevice2(Address, out value);
-            return value;
-        }
-
-        private Boolean SetDevice2(String Address, Int16 Data, out Int32 오류코드)
-        {
-            오류코드 = PLC.SetDevice2(Address, Data);
-            //Debug.WriteLine($"{Data}, {오류코드}", Address);
-            return 오류코드 == 0;
-        }
-        */
         #endregion
 
         #region 기본 클래스 및 함수
@@ -584,63 +569,6 @@ namespace DSEV.Schemas
             }
         }
 
-        //private class 센서자료
-        //{
-        //    private String[] 주소들;
-        //    private 센서주소[] 센서들;
-        //    private String 시작 = String.Empty;
-        //    private Int32 갯수 = 0;
-        //    private ActUtlType64 PLC = null;
-
-        //    public 센서자료(String startAddr, Int32 count)
-        //    {
-        //        시작 = startAddr;
-        //        갯수 = count;
-        //        Int32 start = Convert.ToInt32(startAddr.Substring(1), 16);
-        //        주소들 = new String[count];
-        //        센서들 = new 센서주소[count];
-        //        for (Int32 i = 0; i < count; i++)
-        //        {
-        //            String 주소 = $"W{(start + i).ToString("X")}";
-        //            센서주소 센서 = GetEnum(주소);
-        //            주소들[i] = 주소;
-        //            센서들[i] = 센서;
-        //            //Debug.WriteLine(센서, 주소);
-        //        }
-        //    }
-        //    public void Init(ActUtlType64 plc) => this.PLC = plc;
-
-        //    private 센서주소 GetEnum(String address)
-        //    {
-        //        foreach(센서주소 주소 in typeof(센서주소).GetEnumValues())
-        //        {
-        //            AddressAttribute a = Utils.GetAttribute<AddressAttribute>(주소);
-        //            if (a == null) continue;
-        //            if (a.Address == address) return 주소;
-        //        }
-        //        return 센서주소.주소없음;
-        //    }
-        //    private Single CalValue(센서주소 주소, Single v) => Convert.ToSingle(v / 1000);
-        //    public Boolean Read(out Dictionary<센서주소, Single> 자료)
-        //    {
-        //        자료 = new Dictionary<센서주소, Single>();
-        //        if (this.PLC == null) return false;
-
-        //        Int16[] vals = new Int16[갯수];
-        //        Int32 error = this.PLC.ReadDeviceBlock2(시작, 갯수, out vals[0]);
-        //        //Int32[] vals = new Int32[갯수];
-        //        //Int32 error = this.PLC.ReadDeviceRandom(String.Join("\n", 주소들), 갯수, out vals[0]);
-        //        Global.장치통신.통신오류알림(error);
-        //        if (error != 0) return false;
-
-        //        for (Int32 i = 0; i < vals.Length; i++)
-        //        {
-        //            센서주소 주소 = 센서들[i];
-        //            자료.Add(주소, CalValue(주소, vals[i]));
-        //        }
-        //        return true;
-        //    }
-        //}
         #endregion
     }
 }

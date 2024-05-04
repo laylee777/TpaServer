@@ -225,6 +225,7 @@ namespace DSEV.Schemas
                 //결과.큐알코드대체(내역.QrCode);
                 
                 
+                
                 결과.SetResults(내역.Data);
                 
                 

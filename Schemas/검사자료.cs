@@ -134,7 +134,7 @@ namespace DSEV.Schemas
         public 검사결과 큐알리딩수행(Int32 검사코드)
         {
             //검사결과 검사 = 검사시작(검사코드);
-            검사결과 검사 = 검사항목찾기(검사코드, true);
+            검사결과 검사 = 검사항목찾기(검사코드);
             if (검사 == null) return null;
             Global.큐알리더.리딩시작(검사);
             return 검사;
@@ -198,7 +198,9 @@ namespace DSEV.Schemas
                     return null;
                 }
                 검사.결과계산();
+                Debug.WriteLine("수량추가전");
                 Global.모델자료.수량추가(검사.모델구분, 검사.측정결과);
+                Debug.WriteLine("수량추가후");
                 this.검사스플.Remove(검사코드);
             }
             else
@@ -207,9 +209,14 @@ namespace DSEV.Schemas
                 검사.결과계산();
             }
 
-            this.검사완료알림?.Invoke(검사);
+            Debug.WriteLine("결과계산완료");
+            //this.검사완료알림?.Invoke(검사);
             return 검사;
         }
+
+        public void 검사완료알림함수(검사결과 결과)=> this.검사완료알림?.Invoke(결과);
+
+
 
         public void 검사수행알림(검사결과 검사) => this.검사완료알림?.Invoke(검사);
         public void 수동검사결과(카메라구분 카메라, 검사결과 검사)
