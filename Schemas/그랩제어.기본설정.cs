@@ -239,12 +239,6 @@ namespace DSEV.Schemas
             if (!그랩제어.Validate($"[{this.구분}] 카메라 초기화에 실패하였습니다.", nRet, true)) return false;
             nRet = this.Camera.OpenDevice();
             if (!그랩제어.Validate($"[{this.구분}] 카메라 연결 실패!", nRet, true)) return false;
-            //this.Camera.SetIntValue("Width", this.가로);
-            //this.Camera.SetIntValue("Height", this.세로);
-            
-            //if (this.OffsetX > 0)
-            //    this.Camera.SetIntValue("OffsetX", this.OffsetX);
-            //this.Camera.SetBoolValue("ReverseX", this.ReverseX);
             그랩제어.Validate("RegisterImageCallBackEx", this.Camera.RegisterImageCallBackEx(this.ImageCallBackDelegate, IntPtr.Zero), false);
             Global.정보로그(로그영역, "카메라 연결", $"[{this.구분}] 카메라 연결 성공!", false);
             return true;
@@ -267,8 +261,6 @@ namespace DSEV.Schemas
         {
             return 그랩제어.Validate($"{this.구분} Stop", Camera.StopGrabbing(), false);
         }
-
-        //public Boolean TrigForce() => 그랩제어.Validate($"{this.구분} TriggerSoftware", this.Camera.SetCommandValue("TriggerSoftware"), true);
 
         private void ImageCallBack(IntPtr surfaceAddr, ref MV_FRAME_OUT_INFO_EX frameInfo, IntPtr user)
         {
@@ -366,10 +358,5 @@ namespace DSEV.Schemas
         public override Boolean Stop() => true;
         public override void TurnOn() { }
         public override void TurnOff() { }
-        //internal void AcquisitionFinished(Mat img1, Mat img2, Int32 padding = 0)
-        //{
-        //    if (img1 == null || img2 == null) { AcquisitionFinished("Nothing."); return; }
-        //    this.AcquisitionFinished(Common.ConcatHorizontal(img1, img2, padding));
-        //}
     }
 }

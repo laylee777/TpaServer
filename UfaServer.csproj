@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>C:\IVM\VAD590\UFAServer\Execute\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -129,6 +129,7 @@
     <Compile Include="Euresys\Dalsa16K.cs" />
     <Compile Include="Euresys\MultiCam.cs" />
     <Compile Include="Schemas\Constants.cs" />
+    <Compile Include="Schemas\MES통신.cs" />
     <Compile Include="Schemas\MVSol.Enc.cs" />
     <Compile Include="Schemas\PlaneDistanceCalculator.cs" />
     <Compile Include="Schemas\Viewport\VDA590UFA3D.cs" />

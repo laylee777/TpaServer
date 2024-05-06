@@ -38,6 +38,7 @@ namespace DSEV
         public static 라벨부착기제어 라벨부착기제어;
         public static 레이져마킹제어 레이져마킹제어;
         public static 센서제어 센서제어;
+        public static MES통신 mes통신;
 
         //public static 샘플자료 샘플자료;
 
@@ -81,6 +82,11 @@ namespace DSEV
                 레이져마킹제어 = new 레이져마킹제어();
                 센서제어 = new 센서제어();
 
+
+
+                
+
+
                 로그자료.Init();
                 환경설정.Init();
                 유저자료.Init();
@@ -105,6 +111,23 @@ namespace DSEV
 
                 //샘플자료 = new 샘플자료();
                 //샘플자료.Init();
+
+
+
+
+
+
+                //24.04.02 mes 통신 추가 by LHD
+                mes통신 = new MES통신();
+                mes통신.Init();
+
+
+
+
+
+
+
+
 
                 Global.정보로그(로그영역, "초기화", "시스템을 초기화 합니다.", false);
                 Initialized?.Invoke(null, true);
@@ -145,7 +168,16 @@ namespace DSEV
                 레이져마킹제어.Close();
                 센서제어.Close();
 
+
+
                 Properties.Settings.Default.Save();
+
+
+
+                //mes종료추가 24.04.02 by LHD 
+
+                mes통신.Close();
+
                 Debug.WriteLine("시스템 종료");
                 return true;
             }
@@ -159,11 +191,22 @@ namespace DSEV
         {
             장치통신.Start();
             피씨통신.Start();
+
+
+
+            //mes통신추가 24.04.02 by LHD 
+            mes통신.Start();
+
+
             if (Global.환경설정.동작구분 != 동작구분.Live) return;
             큐알리더.Start();
             라벨부착기제어.Start();
             레이져마킹제어.Start();
             센서제어.Start();
+
+
+
+
         }
 
         public static void DxLocalization()

@@ -10,7 +10,8 @@ namespace DSEV.Schemas
     public enum 피씨구분
     {
         Server,
-        Client,
+        Client1,
+        Client2,
     }
 
     public enum 동작구분

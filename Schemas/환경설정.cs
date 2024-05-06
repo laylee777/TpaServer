@@ -86,6 +86,13 @@ namespace DSEV.Schemas
         [Translation("Work PC Port", "작업 컴퓨터 포트"), JsonProperty("WorkPort")] // Client or Server
         public Int32 서버포트 { get; set; } = 8080;
 
+
+        ////새롭게 추가 24.04.02
+        //[Translation("MES Server Host", "MES 서버 주소"), JsonProperty("MESHost")] // Client or Server
+        //public String MES주소 { get; set; } = "192.168.211.3";
+        //[Translation("MES Server Port", "MES 서버 포트"), JsonProperty("MESPort")] // Client or Server
+        //public Int32 MES포트 { get; set; } = 6003;
+
         [JsonProperty("CurrentModel")]
         public 모델구분 선택모델 { get; set; } = 모델구분.VDA590UFA;
 
@@ -142,7 +149,7 @@ namespace DSEV.Schemas
 
         public static NpgsqlConnection CreateDbConnection()
         {
-            NpgsqlConnectionStringBuilder b = new NpgsqlConnectionStringBuilder() { Host = "localhost", Port = 5432, Username = "postgres", Password = "ivmadmin", Database = "vda590ufa_renew" };
+            NpgsqlConnectionStringBuilder b = new NpgsqlConnectionStringBuilder() { Host = "localhost", Port = 5432, Username = "postgres", Password = "ivmadmin", Database = "vda590ufa" };
             return new NpgsqlConnection(b.ConnectionString);
         }
 

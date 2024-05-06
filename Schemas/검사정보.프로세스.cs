@@ -148,10 +148,6 @@ namespace DSEV.Schemas
         }
 
 
-
-
-
-
         public Boolean SetResultValue_Client(검사정보 검사, Double value, out Decimal 결과값, out Decimal 측정값, Boolean 마진포함 = false)
         {
             //Decimal result = PixelToMeter(검사, value);
@@ -273,8 +269,10 @@ namespace DSEV.Schemas
             if (내역 == null) return;
             foreach (Int32 index in 내역.Keys)
             {
+                
                 검사항목 항목 = (검사항목)index;
                 SetValue(항목, Convert.ToDouble(내역[index]));
+                Debug.WriteLine($"{항목}, {내역[index]}");
             }
         }
 
@@ -305,7 +303,6 @@ namespace DSEV.Schemas
             this.측면윤곽도계산();
             this.부자재검사결과();
             this.하부표면검사결과();
-            //this.B데이텀계산();
             //this.SetResult(검사항목.BottomDent, this.표면불량.Where(e => e.검사항목 == 검사항목.BottomDent).Count());
             //this.SetResult(검사항목.BottomScratch, this.표면불량.Where(e => e.검사항목 == 검사항목.BottomScratch).Count());
 
@@ -367,80 +364,10 @@ namespace DSEV.Schemas
             return this.측정결과;
         }
 
-        public void B데이텀계산()
-        {
-            Single B1 = (Single)this.GetItem(검사항목.B1).결과값;
-            Single B2 = (Single)this.GetItem(검사항목.B2).결과값;
-            Single B3 = (Single)this.GetItem(검사항목.B3).결과값;
-            Single B4 = (Single)this.GetItem(검사항목.B4).결과값;
-            Single B7 = (Single)this.GetItem(검사항목.B7).결과값;
-            Single B8 = (Single)this.GetItem(검사항목.B8).결과값;
-            Single B9 = (Single)this.GetItem(검사항목.B9).결과값;
-            Single B10 = (Single)this.GetItem(검사항목.B10).결과값;
 
-
-            Debug.WriteLine($"{B1},{B2},{B3},{B4}", "B1B4");
-
-            Debug.WriteLine($"{B7},{B8},{B9},{B10}", "B7B10");
-
-            Single Diff = (B1 + B2 + B3 + B4 + B7 + B8 + B9 + B10) / 8;
-
-
-            Debug.WriteLine($"{Diff}", "Diff");
-
-
-
-            Single B1_new = B1 - Diff;
-            Single B2_new = B2 - Diff;
-            Single B3_new = B3 - Diff;
-            Single B4_new = B4 - Diff;
-            Single B7_new = Diff - B7;
-            Single B8_new = Diff - B8;
-            Single B9_new = Diff - B9;
-            Single B10_new = Diff - B10;
-
-
-            Debug.WriteLine($"{B1_new},{B2_new},{B3_new},{B4_new}", "B1B4New");
-
-            Debug.WriteLine($"{B7_new},{B8_new},{B9_new},{B10_new}", "B7B10New");
-
-            this.SetResult(검사항목.B1, B1_new);
-            this.SetResult(검사항목.B2, B2_new);
-            this.SetResult(검사항목.B3, B3_new);
-            this.SetResult(검사항목.B4, B4_new);
-            this.SetResult(검사항목.B7, B7_new);
-            this.SetResult(검사항목.B8, B8_new);
-            this.SetResult(검사항목.B9, B9_new);
-            this.SetResult(검사항목.B10, B10_new);
-
-
-            List<Single> ShapeB1B4Diff = new List<Single>
-            {
-                B1_new - 269,
-                B2_new - 269,
-                B3_new - 269,
-                B4_new - 269
-            };
-
-
-            List<Single> ShapeB7B10Diff = new List<Single>
-            {
-                B7_new - 269,
-                B8_new - 269,
-                B9_new - 269,
-                B10_new - 269
-            };
-
-
-
-            this.SetResult(검사항목.ShapeB1B4, Math.Abs(ShapeB1B4Diff.Max() - ShapeB1B4Diff.Min()));
-            this.SetResult(검사항목.ShapeB7B10, Math.Abs(ShapeB7B10Diff.Max() - ShapeB7B10Diff.Min()));
-
-
-            return;
-
-        }
-
+        //결과계산1
+        //결과계산2
+        
 
 
 
