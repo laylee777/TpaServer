@@ -70,11 +70,8 @@ namespace DSEV.Schemas
         {
             영상촬영수행();
             평탄검사수행();
-            //외폭검사수행();
-            //두께측정수행();
             레이져마킹수행();
             큐알리딩수행();
-            //라벨부착수행();
             검사결과전송();
         }
 
@@ -82,10 +79,7 @@ namespace DSEV.Schemas
         public Int32 촬영위치번호(카메라구분 구분)
         {
             if (구분 == 카메라구분.Cam01) return this.인덱스버퍼[정보주소.하부표면];
-            //if (구분 == 카메라구분.Cam02 || 구분 == 카메라구분.Cam03) return this.인덱스버퍼[정보주소.상부촬영];
             if (구분 == 카메라구분.Cam02 || 구분 == 카메라구분.Cam03) return this.인덱스버퍼[정보주소.상부인슐폭];
-            //if (구분 == 카메라구분.Cam04 || 구분 == 카메라구분.Cam05) return this.인덱스버퍼[정보주소.측면표면];
-            //if (구분 == 카메라구분.Cam10) return this.인덱스버퍼[정보주소.제품투입];
             return 0;
         }
 
@@ -94,7 +88,6 @@ namespace DSEV.Schemas
         {
             if (!this.입출자료.Firing(구분, true, out Boolean 현재, out Boolean 변경))
             {
-                //if (현재) 정보쓰기(구분, false);
                 return -1;
             }
 
@@ -115,8 +108,6 @@ namespace DSEV.Schemas
 
             //index = 1;
             this.인덱스버퍼[구분] = index;
-            
-                
 
             //Debug.WriteLine("----------------------------------");
             if (index == 0) Global.경고로그(로그영역, 구분.ToString(), $"해당 위치에 검사할 제품의 Index가 없습니다.", false);
@@ -156,11 +147,8 @@ namespace DSEV.Schemas
             new Thread(() =>
             {
 
-
-
                 검사결과 검사 = Global.검사자료.큐알리딩수행(검사번호);
                 this.검증기구동신호 = false;
-
 
                 //큐알리딩이랑 라벨 부착 합치기
                 //검사결과 부착전검사 = Global.검사자료.검사항목찾기(검사번호);
@@ -196,9 +184,6 @@ namespace DSEV.Schemas
             Int32 검사번호 = this.검사위치번호(정보주소.레이져마킹);
             if (검사번호 <= 0) return;
 
-            //Global.모델자료.선택모델.검사시작(검사번호);
-            //Global.피씨통신.결과요청(검사번호);
-
             검사결과 검사 = Global.검사자료.검사항목찾기(검사번호);
             검사.결과계산();
 
@@ -227,13 +212,8 @@ namespace DSEV.Schemas
             Int32 검사번호 = this.검사위치번호(정보주소.평탄센서);
             if (검사번호 <= 0) return;
             
-            
-            
             new Thread(() => {
-                //Dictionary<센서주소, Single> 자료 = new Dictionary<센서주소, Single>();
-                //Boolean r = this.평탄센서.Read(out 자료);
 
-                
                 Debug.WriteLine("평탄검사 검사시작");
 
                 try
@@ -261,34 +241,8 @@ namespace DSEV.Schemas
                 Debug.WriteLine("평탄검사 종료");
 
                 if (!this.센서제로모드) this.평탄센서리딩신호 = false;
-                //if (r) { Global.검사자료.평탄검사수행(검사번호, 자료); }
             }) { Priority = ThreadPriority.AboveNormal }.Start();
         }
-        //private void 외폭검사수행()
-        //{
-        //    Int32 검사번호 = this.검사위치번호(정보주소.외폭센서);
-        //    if (검사번호 <= 0) return;
-        //    new Thread(() => {
-        //        Dictionary<센서주소, Single> 자료 = new Dictionary<센서주소, Single>();
-        //        Boolean r = this.외폭센서.Read(out 자료);
-        //        if (!this.센서제로모드) this.외폭센서리딩 = false;
-        //        if (r) { Global.검사자료.외폭검사수행(검사번호, 자료); }
-        //    })
-        //    { Priority = ThreadPriority.AboveNormal }.Start();
-
-        //}
-        //private void 두께측정수행()
-        //{
-        //    Int32 검사번호 = this.검사위치번호(정보주소.두께센서);
-        //    if (검사번호 <= 0) return;
-        //    new Thread(() => {
-        //        Dictionary<센서주소, Single> 자료 = new Dictionary<센서주소, Single>();
-        //        Boolean r = this.두께센서.Read(out 자료);
-        //        if (!this.센서제로모드) this.두께센서리딩 = false;
-        //        //if (r) { Global.검사자료.평탄검사수행(검사번호, 자료); }
-        //    })
-        //    { Priority = ThreadPriority.AboveNormal }.Start();
-        //}
 
         private void 영상촬영수행()
         {
@@ -351,28 +305,7 @@ namespace DSEV.Schemas
 
                 this.CTQ2검사신호 = false;
             }
-            //if (CTQ2검사번호 > 0)
-            //{
-            //    new Thread(() => { Global.피씨통신.상부검사(CTQ2검사번호); }) { Priority = ThreadPriority.AboveNormal }.Start();
-            //    this.CTQ2검사신호 = false;
-            //}
-            //상부인슐 대신 테스트
-            //if (CTQ2검사번호 > 0)
-            //{
-            //    new Thread(() =>
-            //    {
-            //        Global.조명제어.TurnOn(카메라구분.Cam02);
-            //        Global.조명제어.TurnOn(카메라구분.Cam03);
-            //        Global.그랩제어.Active(카메라구분.Cam02);
-            //        Global.그랩제어.Active(카메라구분.Cam03);
-            //    }).Start();
-            //    this.CTQ2검사신호 = false;
-            //}
-            //if (측면표면검사번호 > 0)
-            //{
-            //    new Thread(() => { Global.피씨통신.측면검사(측면표면검사번호); }) { Priority = ThreadPriority.AboveNormal }.Start();
-            //    this.측면촬영신호 = false;
-            //}
+            
             if (상부인슐폭검사번호 > 0)
             {
                 new Thread(() =>
@@ -384,9 +317,6 @@ namespace DSEV.Schemas
                 }).Start();
                 this.상부인슐폭검사신호 = false;
             }
-
-            //Global.모델자료.선택모델.검사시작(1);
-            //Global.검사자료.검사시작(1);
 
             if (하부표면검사번호 > 0)
             {
@@ -410,32 +340,26 @@ namespace DSEV.Schemas
             Int32 검사번호 = this.검사위치번호(정보주소.결과요청);
             if (검사번호 <= 0) return;
 
-            //Global.피씨통신.결과요청(검사번호);
-
-
             Debug.WriteLine("1");
             Global.모델자료.선택모델.검사종료(검사번호);
             Debug.WriteLine("2");
             검사결과 검사 = Global.검사자료.검사결과계산(검사번호);
             Debug.WriteLine("3");
             생산수량전송();
+
             // 강제배출
             Debug.WriteLine("검사결과 강제배출 확인중");
             if (Global.환경설정.강제배출) { 
                 결과전송(Global.환경설정.양품불량);
 
                 Global.검사자료.검사완료알림함수(검사);
-
-
                 return; }
 
             Debug.WriteLine("강제배출 아님. 검사 비어있는지 확인 중");
             if (검사 == null) { 
                 결과전송(false);
                 Global.검사자료.검사완료알림함수(검사);
-
                 return; }
-            
             
             Debug.WriteLine("안비어있음. 결과전송 진행 예정");
             // 배출 수행
@@ -444,6 +368,7 @@ namespace DSEV.Schemas
 
             Global.검사자료.검사완료알림함수(검사);
         }
+
         // 신호 Writing 순서 중요
         private async void 결과전송(Boolean 양품여부)
         {
@@ -475,23 +400,9 @@ namespace DSEV.Schemas
             this.통신상태알림?.Invoke();
         }
 
-        //private DateTime 테스트위치확인 = DateTime.Now;
         private Boolean 테스트수행()
         {
             통신핑퐁수행();
-            //if ((DateTime.Now - 테스트위치확인).TotalSeconds < 5) return true;
-            //테스트위치확인 = DateTime.Now;
-            //Random rnd = new Random();
-            //List<Int32> 목록 = new List<Int32>();
-            //foreach (정보주소 주소 in typeof(정보주소).GetEnumValues())
-            //{
-            //    Int32 val = 0;
-            //    if (주소 >= 정보주소.인덱스02 && 주소 <= 정보주소.인덱스07)
-            //        val = rnd.Next(0, 32);
-            //    목록.Add(val);
-            //}
-            //입출자료.Set(목록.ToArray());
-            //검사위치확인();
             return true;
         }
     }

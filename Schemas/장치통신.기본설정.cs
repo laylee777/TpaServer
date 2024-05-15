@@ -98,85 +98,10 @@ namespace DSEV.Schemas
             [Address("W201",2000)]
             번호리셋,
         }
-
-        //private enum 정보주소 : Int32
-        //{
-        //    [Address("W121")]
-        //    이송장치1,
-        //    [Address("W122")]
-        //    검사지그1,
-        //    [Address("W123")]
-        //    이송장치2,
-        //    [Address("W124")]
-        //    검사지그2,
-        //    [Address("W125")]
-        //    이송장치3,
-        //    [Address("W126")]
-        //    검사지그3,
-        //    [Address("W127")]
-        //    투입버퍼,
-
-        //    [Address("W13F")]
-        //    생산수량,
-
-        //    [Address("B0", 1000)]  // 결과 송신 후 리셋
-        //    결과요청,
-        //    [Address("B1", 1000)]  // 수신 후 리셋
-        //    평탄센서,
-        //    [Address("B2", 2000)]
-        //    상부촬영, // Cam04, Cam05
-        //    [Address("B3", 1000)]
-        //    큐알리더,
-        //    [Address("B4", 2000)]  // 수신 후 리셋
-        //    두께센서,
-        //    [Address("B5", 2000)]  // 수신 후 리셋
-        //    외폭센서,
-        //    [Address("B6", 2000)]
-        //    하부촬영, // Cam01
-        //    [Address("B7", 2000)]
-        //    측면촬영, // Cam06, Cam07
-
-        //    [Address("B8", 1000)]  // 프로그램 시작 시 당일 생산량이 없으면 True로 전송
-        //    번호리셋,
-        //    [Address("B9", 1000)]
-        //    전체불량,
-        //    [Address("BA", 2000)]
-        //    제품투입,
-
-        //    [Address("B100")]
-        //    양품여부,
-        //    [Address("B101")]
-        //    불량여부,
-        //    [Address("B103")]
-        //    자동수동,
-        //    [Address("B104")]
-        //    시작정지,
-        //    [Address("B107")]
-        //    피씨알람,
-        //    [Address("B108")]
-        //    비상정지,
-        //    [Address("B10D", 1000)]
-        //    통신핑퐁,
-        //}
-
+        
         // 센서 읽어들이는 순번으로 맞출 것
         public enum 센서항목
         {
-
-            //FLATA3,
-            //FLATa3,
-            //FLATa2,
-            //FLATA1,
-            //FLATa1,
-            //FLATa6,
-            //FLATa5,
-            //FLATa4,
-            //FLATa9,
-            //FLATA4,
-            //FLATa8,
-            //FLATa7,
-            //FLATA2,
-
             A3 = 0,
             a3 = 1,
             a2 = 2,
@@ -195,9 +120,7 @@ namespace DSEV.Schemas
         }
 
         private 통신자료 입출자료 = new 통신자료();
-        //private 센서자료 평탄센서 = new 센서자료("W100", 9);
-        //private 센서자료 외폭센서 = new 센서자료("W10A", 6);
-        //private 센서자료 두께센서 = new 센서자료("W113", 8);
+ 
         public static Boolean ToBool(Int32 val) { return val != 0; }
         public static Int32 ToInt(Boolean val) { return val ? 1 : 0; }
         private Int32 정보읽기(정보주소 구분) { return this.입출자료.Get(구분); }
@@ -228,15 +151,12 @@ namespace DSEV.Schemas
         //public Boolean 피씨알람발생 { get => 신호읽기(정보주소.피씨알람); set => 정보쓰기(정보주소.피씨알람, value); }
         public Boolean 검사번호리셋 { get => 신호읽기(정보주소.번호리셋); set => 정보쓰기(정보주소.번호리셋, value); }
         
-        
         public Boolean 통신확인핑퐁 { get => 신호읽기(정보주소.통신핑퐁); set => 정보쓰기(정보주소.통신핑퐁, value); }
         #endregion
 
         public Int32 제품투입번호 => this.입출자료.Get(정보주소.투입버퍼);  // 투입버퍼 안착시
 
-
         public Int32 내부인슐촬영번호 => this.입출자료.Get(정보주소.검사지그1);
-
 
         public Int32 상부촬영번호        => this.입출자료.Get(정보주소.검사지그2);
 
@@ -278,9 +198,6 @@ namespace DSEV.Schemas
             if (Global.환경설정.동작구분 == 동작구분.Live)
             {
                 this.입출자료.Init(new Action<정보주소, Int32>((주소, 값) => 자료전송(주소, 값)));
-                //this.평탄센서.Init(this.PLC);
-                //this.외폭센서.Init(this.PLC);
-                //this.두께센서.Init(this.PLC);
             }
             else this.입출자료.Init(null);
 
@@ -384,8 +301,6 @@ namespace DSEV.Schemas
             this.인덱스버퍼.Add(정보주소.라벨결과요구, 0);
             this.인덱스버퍼.Add(정보주소.결과요청, 0);
         }
-
-
 
         // 검사자료 로드 후 수행해야 함
         public void 인덱스리셋확인()
@@ -554,7 +469,7 @@ namespace DSEV.Schemas
                 변경 = this[구분].변경;
                 return 변경 && 현재 == 상태;
             }
-            //public Boolean Triggered(정보주소 구분, Boolean 상태) => ToBool(this[구분].정보) == 상태;
+
             public Dictionary<정보주소, Int32> Changes(정보주소 시작, 정보주소 종료) => this.Changes((Int32)시작, (Int32)종료);
             public Dictionary<정보주소, Int32> Changes(Int32 시작, Int32 종료)
             {

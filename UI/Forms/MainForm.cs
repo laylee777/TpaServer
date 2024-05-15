@@ -174,7 +174,6 @@ namespace DSEV
                 Global.mes통신.자료송신(message);
 
                 Debug.WriteLine("자료송신");
-
             }
             if (e.KeyCode == Keys.X)
             {

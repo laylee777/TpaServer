@@ -118,8 +118,8 @@ namespace DSEV
 
 
                 //24.04.02 mes 통신 추가 by LHD
-                mes통신 = new MES통신();
-                mes통신.Init();
+               // mes통신 = new MES통신();
+               // mes통신.Init();
 
 
 
@@ -176,7 +176,7 @@ namespace DSEV
 
                 //mes종료추가 24.04.02 by LHD 
 
-                mes통신.Close();
+                // mes통신.Close();
 
                 Debug.WriteLine("시스템 종료");
                 return true;
@@ -195,7 +195,7 @@ namespace DSEV
 
 
             //mes통신추가 24.04.02 by LHD 
-            mes통신.Start();
+            // mes통신.Start();
 
 
             if (Global.환경설정.동작구분 != 동작구분.Live) return;
