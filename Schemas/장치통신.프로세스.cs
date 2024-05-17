@@ -294,11 +294,12 @@ namespace DSEV.Schemas
                     Global.조명제어.TurnOn(카메라구분.Cam01);
                     Global.조명제어.TurnOn(카메라구분.Cam02);
                     Global.조명제어.TurnOn(카메라구분.Cam03);
-
-                    Global.그랩제어.Active(카메라구분.Cam01);
                     Global.그랩제어.Active(카메라구분.Cam02);
                     Global.그랩제어.Active(카메라구분.Cam03);
-                }).Start();
+                    Global.그랩제어.Active(카메라구분.Cam01);
+
+                })
+                { Priority = ThreadPriority.Highest }.Start();
                 this.측상촬영트리거3검사신호 = false;
             }
 
@@ -311,7 +312,8 @@ namespace DSEV.Schemas
                     Global.조명제어.TurnOn(카메라구분.Cam05);
                     Global.그랩제어.Active(카메라구분.Cam04);
                     Global.그랩제어.Active(카메라구분.Cam05);
-                }).Start();
+                })
+                { Priority = ThreadPriority.Highest }.Start();
                 this.하부촬영트리거3검사신호 = false;
             }
 
@@ -330,7 +332,8 @@ namespace DSEV.Schemas
                     this.커넥터촬영트리거3검사신호 = false;
 
 
-                }).Start();
+                })
+                { Priority = ThreadPriority.Highest }.Start();
             }
         }
 
