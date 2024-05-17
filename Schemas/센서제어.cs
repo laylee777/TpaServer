@@ -15,7 +15,8 @@ namespace DSEV.Schemas
     {
         컨트롤러1 = 1,
         컨트롤러2 = 2,
-        컨트롤러3 = 3
+        컨트롤러3 = 3,
+        컨트롤러4 = 4
     }
 
     public class 변위센서:큐알장치
@@ -102,9 +103,10 @@ namespace DSEV.Schemas
 
         public void Init()
         {
-            //this.Add(센서컨트롤러.컨트롤러1, new 변위센서(Global.환경설정.변위센서컨트롤러1주소, Global.환경설정.변위센서컨트롤러1포트));
+            this.Add(센서컨트롤러.컨트롤러1, new 변위센서(Global.환경설정.변위센서컨트롤러1주소, Global.환경설정.변위센서컨트롤러1포트));
             this.Add(센서컨트롤러.컨트롤러2, new 변위센서(Global.환경설정.변위센서컨트롤러2주소, Global.환경설정.변위센서컨트롤러2포트));
             this.Add(센서컨트롤러.컨트롤러3, new 변위센서(Global.환경설정.변위센서컨트롤러3주소, Global.환경설정.변위센서컨트롤러3포트));
+            this.Add(센서컨트롤러.컨트롤러4, new 변위센서(Global.환경설정.변위센서컨트롤러4주소, Global.환경설정.변위센서컨트롤러4포트));
 
             this.Values.ForEach(e => e.Init());
         }

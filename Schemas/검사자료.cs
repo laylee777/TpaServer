@@ -131,23 +131,37 @@ namespace DSEV.Schemas
             return 검사;
         }
 
-        public 검사결과 큐알리딩수행(Int32 검사코드)
+        public 검사결과 하부큐알리딩수행(Int32 검사코드)
         {
             //검사결과 검사 = 검사시작(검사코드);
             검사결과 검사 = 검사항목찾기(검사코드);
             if (검사 == null) return null;
-            Global.큐알리더.리딩시작(검사);
+            Global.하부큐알리더.리딩시작(검사);
+            Global.하부큐알리더2.리딩시작(검사);
             return 검사;
         }
+
+        public 검사결과 상부큐알리딩수행(Int32 검사코드)
+        {
+            //검사결과 검사 = 검사시작(검사코드);
+            검사결과 검사 = 검사항목찾기(검사코드);
+            if (검사 == null) return null;
+            Global.상부큐알리더.리딩시작(검사);
+            return 검사;
+        }
+
+        public Boolean 커버조립명령(Int32 검사코드)
+        {
+            검사결과 검사 = 검사항목찾기(검사코드);
+            if (검사 == null) return false;
+            결과구분 커버조립전결과 = 검사.측정결과;
+            if (커버조립전결과 == 결과구분.OK || 커버조립전결과 == 결과구분.PS) return true;
+            return false;
+        }
+
+
         public Dictionary<Int32, Int32> 큐알중복횟수(String 큐알코드, Int32[] indexs) => this.테이블.큐알중복횟수(큐알코드, indexs);
-        //public 검사결과 평탄검사수행(Int32 검사코드, Dictionary<센서주소, Single> 자료)
-        //{
-        //    검사결과 검사 = 검사항목찾기(검사코드);
-        //    if (검사 == null || 자료 == null || 자료.Count < 1) return 검사;
-        //    foreach (var s in 자료)
-        //        검사.SetResult(s.Key.ToString(), s.Value);
-        //    return 검사;
-        //}
+
         public 검사결과 평탄검사수행(Int32 검사코드, Dictionary<센서항목, Single> 자료)
         {
             검사결과 검사 = 검사항목찾기(검사코드);
@@ -319,7 +333,7 @@ namespace DSEV.Schemas
             modelBuilder.Entity<검사결과>().Property(e => e.측정결과).HasConversion(new EnumToNumberConverter<결과구분, Int32>());
             modelBuilder.Entity<검사결과>().Property(e => e.CTQ결과).HasConversion(new EnumToNumberConverter<결과구분, Int32>());
             modelBuilder.Entity<검사결과>().Property(e => e.외관결과).HasConversion(new EnumToNumberConverter<결과구분, Int32>());
-            modelBuilder.Entity<검사결과>().Property(e => e.큐알등급).HasConversion(new EnumToNumberConverter<큐알등급, Int32>());
+            //modelBuilder.Entity<검사결과>().Property(e => e.큐알등급).HasConversion(new EnumToNumberConverter<큐알등급, Int32>());
 
             modelBuilder.Entity<검사정보>().HasKey(e => new { e.검사일시, e.검사항목 });
             modelBuilder.Entity<검사정보>().Property(e => e.검사그룹).HasConversion(new EnumToNumberConverter<검사그룹, Int32>());

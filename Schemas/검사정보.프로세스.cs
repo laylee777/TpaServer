@@ -30,10 +30,10 @@ namespace DSEV.Schemas
         public 결과구분 측정결과 { get; set; } = 결과구분.WA;
         [Column("ilctq"), JsonProperty("ilctq"), Translation("CTQ", "CTQ결과")] //Critical to Quality
         public 결과구분 CTQ결과 { get; set; } = 결과구분.WA;
-        [Column("ilsuf"), JsonProperty("ilapp"), Translation("Suface", "외관결과")]
+        [Column("ilsuf"), JsonProperty("ilsuf"), Translation("Suface", "외관결과")]
         public 결과구분 외관결과 { get; set; } = 결과구분.WA;
-        [Column("ilqrg"), JsonProperty("ilqrg"), Translation("QR Legibility", "QR등급")]
-        public 큐알등급 큐알등급 { get; set; } = 큐알등급.X;
+        //[Column("ilqrg"), JsonProperty("ilqrg"), Translation("QR Legibility", "QR등급")]
+        //public 큐알등급 큐알등급 { get; set; } = 큐알등급.X;
         [Column("ilqrs"), JsonProperty("ilqrs"), Translation("QR Code", "QR코드")]
         public String 큐알내용 { get; set; } = String.Empty;
         //[Column("ilngs"), JsonProperty("ilngs"), Translation("NG Items", "불량정보")]
@@ -74,7 +74,7 @@ namespace DSEV.Schemas
             this.측정결과 = 결과구분.WA;
             this.CTQ결과 = 결과구분.WA;
             this.외관결과 = 결과구분.WA;
-            this.큐알등급 = 큐알등급.X;
+            //this.큐알등급 = 큐알등급.X;
             this.큐알내용 = String.Empty;
             this.불량정보 = String.Empty;
             this.검사내역.Clear();
@@ -207,8 +207,6 @@ namespace DSEV.Schemas
             return false;
         }
 
-
-
         public 검사정보 SetResult(검사정보 검사, Double value)
         {
             if (검사 == null) return null;
@@ -223,9 +221,9 @@ namespace DSEV.Schemas
         public 검사정보 SetResult(검사항목 항목, Double value) => SetResult(검사내역.Where(e => e.검사항목 == 항목).FirstOrDefault(), value);
         public void SetResults(카메라구분 카메라, Dictionary<String, Object> results)
         {
-            불량영역제거(카메라);
-            String scratch = ResultAttribute.VarName(검사항목.BottomScratch);
-            String dent = ResultAttribute.VarName(검사항목.BottomDent);
+            //불량영역제거(카메라);
+            //String scratch = ResultAttribute.VarName(검사항목.BottomScratch);
+            //String dent = ResultAttribute.VarName(검사항목.BottomDent);
             foreach (var result in results)
             {
                 //if (result.Key.Equals(scratch) || result.Key.Equals(dent))
@@ -248,7 +246,6 @@ namespace DSEV.Schemas
                 SetResult(항목, Convert.ToDouble(내역[index]));
             }
         }
-
 
         public 검사정보 SetValue(검사항목 항목, Double value) => SetValue(검사내역.Where(e => e.검사항목 == 항목).FirstOrDefault(), value);
         //결과만 추가하도록 새롭게 추가
@@ -302,33 +299,32 @@ namespace DSEV.Schemas
             this.바닥평면도계산();
             this.측면윤곽도계산();
             this.부자재검사결과();
-            this.하부표면검사결과();
+            //this.하부표면검사결과();
+
             //this.SetResult(검사항목.BottomDent, this.표면불량.Where(e => e.검사항목 == 검사항목.BottomDent).Count());
             //this.SetResult(검사항목.BottomScratch, this.표면불량.Where(e => e.검사항목 == 검사항목.BottomScratch).Count());
-
 
             List<결과구분> 전체결과 = new List<결과구분>();
             List<결과구분> 품질결과 = new List<결과구분>();
             List<결과구분> 외관결과 = new List<결과구분>();
-            List<결과구분> 마킹전결과목록 = new List<결과구분>();
+            //List<결과구분> 마킹전결과목록 = new List<결과구분>();
+
             foreach (검사정보 정보 in this.검사내역)
             {
                 // 임시로 검사중인 항목 완료 처리
                 if (정보.측정결과 < 결과구분.PS)
                 {
-                    
+             
                     this.SetResult(정보, Convert.ToDouble(정보.측정값));
-                    
                 }
                     
-
                 if (정보.측정결과 == 결과구분.PS) continue;
 
                 if (!전체결과.Contains(정보.측정결과)) 
                 {
                     전체결과.Add(정보.측정결과);
 
-                    if (정보.검사장치 != 장치구분.QrReader) 마킹전결과목록.Add(정보.측정결과);
+                    //if (정보.검사장치 != 장치구분.QrReader) 마킹전결과목록.Add(정보.측정결과);
 
                 } 
                 
@@ -338,7 +334,7 @@ namespace DSEV.Schemas
 
 
             this.측정결과 = 최종결과(전체결과);
-            this.마킹전결과 = 최종결과(마킹전결과목록);
+            //this.마킹전결과 = 최종결과(마킹전결과목록);
 
             if (this.측정결과 == 결과구분.OK)
             {
@@ -364,83 +360,75 @@ namespace DSEV.Schemas
             return this.측정결과;
         }
 
-
-        //결과계산1
-        //결과계산2
-        
-
-
-
-
         public void 바닥평면도계산()
         {
-            List<Point3f> 기준위치 = new List<Point3f>() {
-                new Point3f { X = -220000, Y = +90000, Z = (Single)this.GetItem(검사항목.A1).결과값 },
-                new Point3f { X = -220000, Y = -90000, Z = (Single)this.GetItem(검사항목.A3).결과값 },
-                new Point3f { X =  220000, Y = +90000, Z = (Single)this.GetItem(검사항목.A2).결과값 },
-                new Point3f { X =  220000, Y = -90000, Z = (Single)this.GetItem(검사항목.A4).결과값 },
-            };
+           // List<Point3f> 기준위치 = new List<Point3f>() {
+           //     new Point3f { X = -220000, Y = +90000, Z = (Single)this.GetItem(검사항목.A1).결과값 },
+           //     new Point3f { X = -220000, Y = -90000, Z = (Single)this.GetItem(검사항목.A3).결과값 },
+           //     new Point3f { X =  220000, Y = +90000, Z = (Single)this.GetItem(검사항목.A2).결과값 },
+           //     new Point3f { X =  220000, Y = -90000, Z = (Single)this.GetItem(검사항목.A4).결과값 },
+           // };
 
-            List<Point3f> 검사위치 = new List<Point3f>();
-            검사위치.AddRange(new Point3f[] {
-                new Point3f { X = -195000, Y =   90000, Z = (Single)this.GetItem(검사항목.a1).결과값 },
-                new Point3f { X = -195000, Y =   0,  Z = (Single)this.GetItem(검사항목.a2).결과값 },
-                new Point3f { X = -195000, Y =  -90000, Z = (Single)this.GetItem(검사항목.a3).결과값 },
-                new Point3f { X =    0, Y =   90000, Z = (Single)this.GetItem(검사항목.a4).결과값 },
-                new Point3f { X =    0, Y =   0,  Z = (Single)this.GetItem(검사항목.a5).결과값 },
-                new Point3f { X =    0, Y =  -90000, Z = (Single)this.GetItem(검사항목.a6).결과값 },
-                new Point3f { X =  195000, Y =   90000, Z = (Single)this.GetItem(검사항목.a7).결과값 },
-                new Point3f { X =  195000, Y =   0,  Z = (Single)this.GetItem(검사항목.a8).결과값 },
-                new Point3f { X =  195000, Y =  -90000, Z = (Single)this.GetItem(검사항목.a9).결과값 },
-            });
+           // List<Point3f> 검사위치 = new List<Point3f>();
+           // 검사위치.AddRange(new Point3f[] {
+           //     new Point3f { X = -195000, Y =   90000, Z = (Single)this.GetItem(검사항목.a1).결과값 },
+           //     new Point3f { X = -195000, Y =   0,  Z = (Single)this.GetItem(검사항목.a2).결과값 },
+           //     new Point3f { X = -195000, Y =  -90000, Z = (Single)this.GetItem(검사항목.a3).결과값 },
+           //     new Point3f { X =    0, Y =   90000, Z = (Single)this.GetItem(검사항목.a4).결과값 },
+           //     new Point3f { X =    0, Y =   0,  Z = (Single)this.GetItem(검사항목.a5).결과값 },
+           //     new Point3f { X =    0, Y =  -90000, Z = (Single)this.GetItem(검사항목.a6).결과값 },
+           //     new Point3f { X =  195000, Y =   90000, Z = (Single)this.GetItem(검사항목.a7).결과값 },
+           //     new Point3f { X =  195000, Y =   0,  Z = (Single)this.GetItem(검사항목.a8).결과값 },
+           //     new Point3f { X =  195000, Y =  -90000, Z = (Single)this.GetItem(검사항목.a9).결과값 },
+           // });
 
-            // Z 값을 기준으로 포인트를 내림차순으로 정렬
-            List<Point3f> sortedPoints = 기준위치.OrderByDescending(p => p.Z).ToList();
-            // Z 값을 기준으로 포인트를 오름차순으로 정렬
-           // List<Point3f> sortedPoints = 기준위치.OrderBy(p => p.Z).ToList();
+           // // Z 값을 기준으로 포인트를 내림차순으로 정렬
+           // List<Point3f> sortedPoints = 기준위치.OrderByDescending(p => p.Z).ToList();
+           // // Z 값을 기준으로 포인트를 오름차순으로 정렬
+           //// List<Point3f> sortedPoints = 기준위치.OrderBy(p => p.Z).ToList();
 
-            // Z 값이 가장 큰 3개의 포인트를 선택
-            List<Point3f> largest3Points = sortedPoints.Take(3).ToList();
+           // // Z 값이 가장 큰 3개의 포인트를 선택
+           // List<Point3f> largest3Points = sortedPoints.Take(3).ToList();
 
 
 
-            // Create an array of Vector3 containing the points
-            Vector3[] pointArray = new Vector3[largest3Points.Count];
-            for (int i = 0; i < largest3Points.Count; i++)
-            {
-                pointArray[i] = new Vector3(largest3Points[i].X, largest3Points[i].Y, largest3Points[i].Z);
-            }
+           // // Create an array of Vector3 containing the points
+           // Vector3[] pointArray = new Vector3[largest3Points.Count];
+           // for (int i = 0; i < largest3Points.Count; i++)
+           // {
+           //     pointArray[i] = new Vector3(largest3Points[i].X, largest3Points[i].Y, largest3Points[i].Z);
+           // }
 
-            // Fit a plane to the points
-            Plane plane = Plane.CreateFromVertices(pointArray[0], pointArray[1], pointArray[2]);
+           // // Fit a plane to the points
+           // Plane plane = Plane.CreateFromVertices(pointArray[0], pointArray[1], pointArray[2]);
 
-            // Get the coefficients of the plane equation
-            float A = plane.Normal.X;
-            float B = plane.Normal.Y;
-            float C = plane.Normal.Z;
-            float D = -plane.D;
+           // // Get the coefficients of the plane equation
+           // float A = plane.Normal.X;
+           // float B = plane.Normal.Y;
+           // float C = plane.Normal.Z;
+           // float D = -plane.D;
 
-            Console.WriteLine($"면 방정식: {A}x + {B}y + {C}z + {D} = 0");
+           // Console.WriteLine($"면 방정식: {A}x + {B}y + {C}z + {D} = 0");
 
-            // Calculate the perpendicular distances
-            List<float> distances = new List<float>();
-            foreach (var point in 검사위치)
-            {
-                Vector3 pointVector = new Vector3(point.X, point.Y, point.Z);
-                float distance = (Vector3.Dot(plane.Normal, pointVector) + plane.D) / plane.Normal.Length();
-                distances.Add(distance);
-            }
+           // // Calculate the perpendicular distances
+           // List<float> distances = new List<float>();
+           // foreach (var point in 검사위치)
+           // {
+           //     Vector3 pointVector = new Vector3(point.X, point.Y, point.Z);
+           //     float distance = (Vector3.Dot(plane.Normal, pointVector) + plane.D) / plane.Normal.Length();
+           //     distances.Add(distance);
+           // }
 
-            try
-            {
-                Single 바닥평면 = 0;
+           // try
+           // {
+           //     Single 바닥평면 = 0;
 
-                바닥평면 = Math.Abs(distances.Max() - distances.Min());
+           //     바닥평면 = Math.Abs(distances.Max() - distances.Min());
 
-                this.SetResult(검사항목.Flatness, 바닥평면);
+           //     this.SetResult(검사항목.Flatness, 바닥평면);
 
-            }
-            catch (Exception e) { Utils.DebugException(e, 0); }
+           // }
+           // catch (Exception e) { Utils.DebugException(e, 0); }
         }
 
         public void 측면윤곽도계산()
@@ -469,21 +457,21 @@ namespace DSEV.Schemas
         }
 
 
-        public void 하부표면검사결과()
-        {
-            if (검사내역.Where(e => e.검사항목 == 검사항목.BottomDent).FirstOrDefault().측정결과 == 결과구분.NG || 검사내역.Where(e => e.검사항목 == 검사항목.BottomScratch).FirstOrDefault().측정결과 == 결과구분.NG)
-            {
-                this.SetResult(검사항목.BottomSurface, 0);
-                return;
-            }
-            this.SetResult(검사항목.BottomSurface, 1);
-        }
+        //public void 하부표면검사결과()
+        //{
+        //    if (검사내역.Where(e => e.검사항목 == 검사항목.BottomDent).FirstOrDefault().측정결과 == 결과구분.NG || 검사내역.Where(e => e.검사항목 == 검사항목.BottomScratch).FirstOrDefault().측정결과 == 결과구분.NG)
+        //    {
+        //        this.SetResult(검사항목.BottomSurface, 0);
+        //        return;
+        //    }
+        //    this.SetResult(검사항목.BottomSurface, 1);
+        //}
 
         public void 큐알정보검사(String 코드, 큐알등급 등급)
         {
             this.큐알내용 = 코드;
-            this.큐알등급 = 등급;
-            this.SetResult(검사항목.QrLegibility, (Int32)this.큐알등급);
+            //this.큐알등급 = 등급;
+            //this.SetResult(검사항목.QrLegibility, (Int32)this.큐알등급);
             this.큐알정보검사();
         }
 
@@ -506,14 +494,14 @@ namespace DSEV.Schemas
         {
             if (!String.IsNullOrEmpty(this.큐알내용) || String.IsNullOrEmpty(코드)) return;
             this.큐알내용 = 코드;
-            this.SetResult(검사항목.QrLegibility, (Int32)큐알등급.X);
+            //this.SetResult(검사항목.QrLegibility, (Int32)큐알등급.X);
             this.큐알정보검사();
         }
 
         public 결과구분 큐알결과()
         {
             if (String.IsNullOrEmpty(this.큐알내용)) return 결과구분.NG;
-            List<검사항목> 항목들 = new List<검사항목>() { 검사항목.QrLegibility, 검사항목.QrValidate, 검사항목.QrDuplicated }; //, 검사항목.QrDistS, 검사항목.QrDistB
+            List<검사항목> 항목들 = new List<검사항목>() { 검사항목.QrValidate, 검사항목.QrDuplicated }; //, 검사항목.QrDistS, 검사항목.QrDistB
             foreach (검사항목 항목 in 항목들)
             {
                 검사정보 정보 = this.GetItem(항목);

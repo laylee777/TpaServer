@@ -125,7 +125,6 @@ namespace DSEV.UI.Controls
             if (!Utils.Confirm(this.FindForm(), 번역.리셋확인)) return;
             Global.모델자료.수량리셋();
             this.모델자료Bind.ResetBindings(false);
-            Global.피씨통신.동작상태알림();
         }
 
         private void 수동검사(object sender, EventArgs e)

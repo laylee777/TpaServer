@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DSEV</RootNamespace>
-    <AssemblyName>UfaServer</AssemblyName>
+    <AssemblyName>TpaServer</AssemblyName>
     <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>C:\IVM\VAD590\UFAServer\Execute\</OutputPath>
+    <OutputPath>C:\IVM\VAD590\TPAServer\Execute\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -33,7 +33,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Remote|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>\\192.168.111.3\ivm\VDA590\UFAServer\Execute\</OutputPath>
+    <OutputPath>\\192.168.3.5\ivm\VDA590\TPAServer\Execute\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
@@ -135,8 +135,6 @@
     <Compile Include="Schemas\Viewport\VDA590UFA3D.cs" />
     <Compile Include="Schemas\Viewport\Graphics3D.cs" />
     <Compile Include="Schemas\Viewport\HelixViewport.cs" />
-    <Compile Include="Schemas\라벨부착기제어.cs" />
-    <Compile Include="Schemas\레이져마킹제어.cs" />
     <Compile Include="Schemas\모델정보.검사설정.cs" />
     <Compile Include="Schemas\검사자료.cs" />
     <Compile Include="Schemas\검사자료.Reports.cs" />
@@ -153,10 +151,6 @@
     <Compile Include="Schemas\큐알검증.cs" />
     <Compile Include="Schemas\큐알리더.cs" />
     <Compile Include="Schemas\큐알장치.cs" />
-    <Compile Include="Schemas\피씨통신.프로세스.cs" />
-    <Compile Include="Schemas\피씨통신.기본설정.cs" />
-    <Compile Include="Schemas\피씨통신.확장설정.cs" />
-    <Compile Include="Schemas\피씨통신.확장프로세스.cs" />
     <Compile Include="UI\Controls\AnalogClock.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -466,6 +460,7 @@
       <DependentUpon>WaitForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
+    <None Include="Properties\DataSources\DSEV.Schemas.검사결과.datasource" />
     <None Include="Properties\DataSources\VDA590TPA.Schemas.글로벌변수제어.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

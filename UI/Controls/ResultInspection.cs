@@ -50,7 +50,7 @@ namespace DSEV.UI.Controls
             this.eCTQ결과.Properties.Appearance.ForeColor = 환경설정.ResultColor(결과.CTQ결과);
             this.e외관결과.Properties.Appearance.ForeColor = 환경설정.ResultColor(결과.외관결과);
             this.e큐알코드.Properties.Appearance.ForeColor = 환경설정.ResultColor(결과.큐알결과());
-            this.e큐알등급.Properties.Appearance.ForeColor = 환경설정.ResultColor(결과.GetItem(검사항목.QrLegibility).측정결과);
+            //this.e큐알등급.Properties.Appearance.ForeColor = 환경설정.ResultColor(결과.GetItem(검사항목.QrLegibility).측정결과);
             this.Bind검사결과.DataSource = 결과;
             this.Bind검사결과.ResetBindings(false);
         }

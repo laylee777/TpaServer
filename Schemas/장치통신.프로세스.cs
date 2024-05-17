@@ -35,9 +35,11 @@ namespace DSEV.Schemas
             if (오류 != 0)
             {
                 통신오류알림(오류);
+                Debug.WriteLine("오휴확인");
                 return false;
             }
             this.입출자료.Set(자료);
+            //Debug.WriteLine("오류없음.");
             return true;
         }
 
@@ -61,7 +63,7 @@ namespace DSEV.Schemas
         // 검사위치 변경 확인
         private void 검사위치확인()
         {
-            Dictionary<정보주소, Int32> 변경 = this.입출자료.Changes(정보주소.이송장치1, 정보주소.투입버퍼);
+            Dictionary<정보주소, Int32> 변경 = this.입출자료.Changes(정보주소.하부큐알트리거1, 정보주소.결과요청트리거3);
             if (변경.Count < 1) return;
             this.검사위치알림?.Invoke();
         }
@@ -70,16 +72,48 @@ namespace DSEV.Schemas
         {
             영상촬영수행();
             평탄검사수행();
-            레이져마킹수행();
             큐알리딩수행();
+            커버조립확인();
             검사결과전송();
+        }
+
+        private void 커버조립확인()
+        {
+
+            Int32 검사번호 = this.검사위치번호(정보주소.커버조립트리거1);
+
+            if (검사번호 > 0)
+            {
+                Debug.WriteLine("커버조립트리거 진입");
+                new Thread(() => {
+                    검사결과 검사 = Global.검사자료.검사항목찾기(검사번호);
+                    if(검사.측정결과 == 결과구분.OK || 검사.측정결과 == 결과구분.PS)
+                    {
+                        this.커버조립트리거2검사신호 = true;
+                        this.커버조립트리거3검사신호 = false;
+                    }
+                    else
+                    {
+                        this.커버조립트리거2검사신호 = true;
+                        this.커버조립트리거3검사신호 = false;
+                    } 
+
+                    Task.Delay(200).Wait();
+
+                    this.커버조립트리거2검사신호 = false;
+                    this.커버조립트리거3검사신호 = false;
+                })
+                { Priority = ThreadPriority.Highest }.Start();
+                Debug.WriteLine("커버조립부분 확인 완료!!!");
+            }
         }
 
         // 카메라 별 현재 검사 위치의 검사번호를 요청
         public Int32 촬영위치번호(카메라구분 구분)
         {
-            if (구분 == 카메라구분.Cam01) return this.인덱스버퍼[정보주소.하부표면];
-            if (구분 == 카메라구분.Cam02 || 구분 == 카메라구분.Cam03) return this.인덱스버퍼[정보주소.상부인슐폭];
+            if (구분 == 카메라구분.Cam01 || 구분 == 카메라구분.Cam02 || 구분 == 카메라구분.Cam03) return this.인덱스버퍼[정보주소.측상촬영트리거1];
+            if (구분 == 카메라구분.Cam04 || 구분 == 카메라구분.Cam05) return this.인덱스버퍼[정보주소.하부촬영트리거1];
+            if (구분 == 카메라구분.Cam06 || 구분 == 카메라구분.Cam07) return this.인덱스버퍼[정보주소.커넥터촬영트리거1];
             return 0;
         }
 
@@ -92,21 +126,16 @@ namespace DSEV.Schemas
             }
 
             Int32 index = 0;
-            if (구분 == 정보주소.제품투입) index = this.제품투입번호;
-            else if (구분 == 정보주소.내부인슐거리) index = this.내부인슐촬영번호;
-            else if (구분 == 정보주소.상부표면) index = this.상부촬영번호;
-            else if (구분 == 정보주소.CTQ검사1) index = this.CTQ1촬영번호;
-            else if (구분 == 정보주소.CTQ검사2) index = this.CTQ2촬영번호;
-            else if (구분 == 정보주소.상부인슐폭) index = this.상부인슐폭촬영번호;
-            else if (구분 == 정보주소.평탄센서) index = this.평탄도측정번호;
-            else if (구분 == 정보주소.하부표면) index = this.하부표면검사번호;
-            else if (구분 == 정보주소.측면표면) index = this.측면표면검사번호;
-            else if (구분 == 정보주소.레이져마킹) index = this.레이져각인검사번호;
-            else if (구분 == 정보주소.검증기구동) index = this.큐알검증기검사번호;
-            else if (구분 == 정보주소.라벨결과요구) index = this.라벨부착기검사번호;
-            else if (구분 == 정보주소.결과요청) index = this.결과요청번호;
+            if (구분 == 정보주소.하부큐알트리거1) index = this.제품투입번호;
+            else if (구분 == 정보주소.바닥평면트리거1) index = this.평탄도측정검사번호;
+            else if (구분 == 정보주소.측상촬영트리거1) index = this.측상검사번호;
+            else if (구분 == 정보주소.상부큐알트리거1) index = this.상부큐알검사번호;
+            else if (구분 == 정보주소.하부촬영트리거1) index = this.인슐폭측정검사번호;
+            else if (구분 == 정보주소.커넥터촬영트리거1) index = this.커넥턱검사번호;
+            else if (구분 == 정보주소.커버조립트리거1) index = this.커버체결번호;
+            else if (구분 == 정보주소.커버들뜸트리거1) index = this.커버검사번호;
+            else if (구분 == 정보주소.결과요청트리거1) index = this.결과요청번호;
 
-            //index = 1;
             this.인덱스버퍼[구분] = index;
 
             //Debug.WriteLine("----------------------------------");
@@ -119,8 +148,8 @@ namespace DSEV.Schemas
         public List<Int32> 검사중인항목()
         {
             List<Int32> 대상 = new List<Int32>();
-            Int32 시작 = (Int32)정보주소.이송장치1;
-            Int32 종료 = (Int32)정보주소.투입버퍼;
+            Int32 시작 = (Int32)정보주소.셔틀08제품인덱스;
+            Int32 종료 = (Int32)정보주소.셔틀01제품인덱스;
             for (Int32 i = 종료; i >= 시작; i--)
             {
                 정보주소 구분 = (정보주소)i;
@@ -132,212 +161,183 @@ namespace DSEV.Schemas
 
         private void 큐알리딩수행()
         {
-            Int32 검사번호 = this.검사위치번호(정보주소.검증기구동);
-            if (검사번호 <= 0) return;
+            Int32 하부큐알검사번호 = this.검사위치번호(정보주소.하부큐알트리거1);
+            Int32 상부큐알검사번호 = this.검사위치번호(정보주소.상부큐알트리거1);
 
-            //Global.모델자료.선택모델.검사시작(검사번호);
-            검사결과 사전검사 = Global.검사자료.검사항목찾기(검사번호);
-
-            if (사전검사.마킹전결과 == 결과구분.NG)
+            if (하부큐알검사번호 > 0)
             {
-                Global.라벨부착기제어.라벨부착(검사번호);
-                return;
+                Debug.WriteLine("하부 큐알 검사 시작!!!");
+                new Thread(() => {
+                    Global.모델자료.선택모델.검사시작(하부큐알검사번호);
+                    Debug.WriteLine("선택모델 검사시작");
+                    Global.검사자료.검사시작(하부큐알검사번호);
+                    Debug.WriteLine("검사자료 검사시작");
+                    this.하부큐알트리거3검사신호 = true;
+                    검사결과 검사 = Global.검사자료.하부큐알리딩수행(하부큐알검사번호);
+                    Task.Delay(200).Wait();
+                    this.하부큐알트리거3검사신호 = false;
+                })
+                { Priority = ThreadPriority.AboveNormal }.Start();
+                Debug.WriteLine("하부 큐알 검사 완료!!!");
             }
 
-            new Thread(() =>
+            if (상부큐알검사번호 > 0)
             {
-
-                검사결과 검사 = Global.검사자료.큐알리딩수행(검사번호);
-                this.검증기구동신호 = false;
-
-                //큐알리딩이랑 라벨 부착 합치기
-                //검사결과 부착전검사 = Global.검사자료.검사항목찾기(검사번호);
-
-                Debug.WriteLine(검사.큐알등급.ToString());
-                if(검사.큐알등급 > 큐알등급.C || 검사.큐알등급 < 큐알등급.A) Global.라벨부착기제어.라벨부착(검사번호);
-
-                //if (부착전검사.결과계산() == 결과구분.NG){
-                //    Global.라벨부착기제어.라벨부착(검사번호);
-                //};
-
-                
-            }) { Priority = ThreadPriority.Highest }.Start();
-        }
-
-        private void 라벨부착수행()
-        {
-            
-            Int32 검사번호 = this.검사위치번호(정보주소.라벨결과요구);
-            if (검사번호 <= 0) return;
-
-            //new Thread(() =>
-            //{
-            //    Global.라벨부착기제어.라벨부착(검사번호);
-            //})
-            //{ Priority = ThreadPriority.Highest }.Start();
-        }
-
-        private void 레이져마킹수행()
-        {
-
-            //잠시만 레이져 마킹으로 테스트
-            Int32 검사번호 = this.검사위치번호(정보주소.레이져마킹);
-            if (검사번호 <= 0) return;
-
-            검사결과 검사 = Global.검사자료.검사항목찾기(검사번호);
-            검사.결과계산();
-
-            if (검사.마킹전결과 == 결과구분.NG)
-            {
-                return;
+                new Thread(() => {
+                    검사결과 검사 = Global.검사자료.상부큐알리딩수행(상부큐알검사번호);
+                    //Debug.WriteLine(검사.큐알등급.ToString());
+                    this.상부큐알트리거3검사신호 = true;
+                    Task.Delay(200).Wait();
+                    this.상부큐알트리거3검사신호 = false;
+                })
+                { Priority = ThreadPriority.Highest }.Start();
+                Debug.WriteLine("상부 큐알 검사 완료!!!");
             }
-
-            new Thread(() =>
-            {
-                Global.레이져마킹제어.레이져마킹시작(검사번호);
-                //검사결과 검사 = Global.검사자료.큐알리딩수행(검사번호);
-                //this.검증기구동신호 = false;
-            })
-            { Priority = ThreadPriority.Highest }.Start();
         }
 
         private Boolean 센서제로모드 = false;
         public void 센서제로수행(Boolean 모드)
         {
             this.센서제로모드 = 모드;
-            if (!모드) 정보쓰기(정보주소.평탄센서, 0);
+            //if (!모드) 정보쓰기(정보주소.평탄센서, 0);
         }
         private void 평탄검사수행()
         {
-            Int32 검사번호 = this.검사위치번호(정보주소.평탄센서);
-            if (검사번호 <= 0) return;
-            
-            new Thread(() => {
+            Int32 바닥평면검사번호 = this.검사위치번호(정보주소.바닥평면트리거1);
+            Int32 커버들뜸검사번호 = this.검사위치번호(정보주소.커버들뜸트리거1);
 
-                Debug.WriteLine("평탄검사 검사시작");
+            if (바닥평면검사번호 > 0)
+            {
+                new Thread(() => {
+                    this.바닥평면트리거3검사신호 = true;
 
-                try
-                {
-                    //첫번째 항목 "M0" 제외하고 배열로 만듦
-                    string[] cont1Values = Global.센서제어.ReadValues(센서컨트롤러.컨트롤러2, 검사번호).Skip(1).ToArray();
-                    string[] cont2Values = Global.센서제어.ReadValues(센서컨트롤러.컨트롤러3, 검사번호).Skip(1).ToArray();
+                    Debug.WriteLine("바닥평면도 검사시작");
 
-                    //배열을 붙임!
-                    string[] mergedValues = cont1Values.Concat(cont2Values).ToArray();
-
-                    //Key,Value형태의 자료형으로 생성!
-                    Dictionary<센서항목, Single> 센서자료 = new Dictionary<센서항목, Single>();
-                    for (int i = 0; i < mergedValues.Length; i++)
+                    try
                     {
-                        센서자료.Add((센서항목)i, Single.Parse(mergedValues[i])/1000);
+                        //첫번째 항목 "M0" 제외하고 배열로 만듦
+                        string[] cont1Values = Global.센서제어.ReadValues(센서컨트롤러.컨트롤러1, 바닥평면검사번호).Skip(1).ToArray();
+                        string[] cont2Values = Global.센서제어.ReadValues(센서컨트롤러.컨트롤러2, 바닥평면검사번호).Skip(1).ToArray();
+
+                        //배열을 붙임!
+                        string[] mergedValues = cont1Values.Concat(cont2Values).ToArray();
+
+                        //Key,Value형태의 자료형으로 생성!
+                        Dictionary<센서항목, Single> 센서자료 = new Dictionary<센서항목, Single>();
+                        for (int i = 0; i < mergedValues.Length; i++)
+                        {
+                            센서자료.Add((센서항목)i+1, Single.Parse(mergedValues[i]) / 1000);
+                        }
+                        Global.검사자료.평탄검사수행(바닥평면검사번호, 센서자료);
+                        this.바닥평면트리거3검사신호 = false;
                     }
-                    Global.검사자료.평탄검사수행(검사번호, 센서자료);
-                }
-                catch(Exception ex)
-                {
-                    Global.오류로그(로그영역, "평탄검사", ex.Message, true);
-                }
+                    catch (Exception ex)
+                    {
+                        Global.오류로그(로그영역, "바닥평면검사", ex.Message, true);
+                        this.바닥평면트리거3검사신호 = false;
+                    }
 
-                Debug.WriteLine("평탄검사 종료");
+                    Debug.WriteLine("바닥평면검사 종료");
+                })
+                { Priority = ThreadPriority.Highest }.Start();
+            }
 
-                if (!this.센서제로모드) this.평탄센서리딩신호 = false;
-            }) { Priority = ThreadPriority.AboveNormal }.Start();
+            else if (커버들뜸검사번호 > 0)
+            {
+                new Thread(() => {
+                    this.커버들뜸트리거3검사신호 = true;
+
+                    Debug.WriteLine("커버들뜸 검사시작");
+
+                    try
+                    {
+                        //첫번째 항목 "M0" 제외하고 배열로 만듦
+                        string[] cont1Values = Global.센서제어.ReadValues(센서컨트롤러.컨트롤러3, 커버들뜸검사번호).Skip(1).ToArray();
+                        string[] cont2Values = Global.센서제어.ReadValues(센서컨트롤러.컨트롤러4, 커버들뜸검사번호).Skip(1).ToArray();
+
+                        //배열을 붙임!
+                        string[] mergedValues = cont1Values.Concat(cont2Values).ToArray();
+
+                        //Key,Value형태의 자료형으로 생성!
+                        Dictionary<센서항목, Single> 센서자료 = new Dictionary<센서항목, Single>();
+                        for (int i = 0; i < mergedValues.Length; i++)
+                        {
+                            센서자료.Add((센서항목)i+21, Single.Parse(mergedValues[i]) / 1000);
+                        }
+                        Global.검사자료.평탄검사수행(커버들뜸검사번호, 센서자료);
+                        this.커버들뜸트리거3검사신호 = false;
+                    }
+                    catch (Exception ex)
+                    {
+                        Global.오류로그(로그영역, "커버들뜸검사", ex.Message, true);
+                        this.커버들뜸트리거3검사신호 = false;
+                    }
+
+                    Debug.WriteLine("커버들뜸검사 종료");
+                })
+                { Priority = ThreadPriority.Highest }.Start();
+            }
         }
 
         private void 영상촬영수행()
         {
-            Int32 제품투입 = this.검사위치번호(정보주소.제품투입); 
-            Int32 내부인슐거리검사번호 = this.검사위치번호(정보주소.내부인슐거리);
-            Int32 상부표면검사번호 = this.검사위치번호(정보주소.상부표면);
-            Int32 CTQ1검사번호 = this.검사위치번호(정보주소.CTQ검사1);
-            Int32 CTQ2검사번호 = this.검사위치번호(정보주소.CTQ검사2);
-            Int32 상부인슐폭검사번호 = this.검사위치번호(정보주소.상부인슐폭);
-            
-            //동시 신호임
-            Int32 하부표면검사번호 = this.검사위치번호(정보주소.하부표면);
-            Int32 측면표면검사번호 = this.검사위치번호(정보주소.측면표면);
-            
-            if (제품투입 > 0)
-            {
-                new Thread(() => {
-                    Global.모델자료.선택모델.검사시작(제품투입);
-                    Debug.WriteLine("선택모델 검사시작");
-                    Global.검사자료.검사시작(제품투입);
-                    Global.피씨통신.검사시작(제품투입);
-                    Debug.WriteLine("검사자료 검사시작");
-                    //Global.피씨통신.검사시작(제품투입); 
-                }) { Priority = ThreadPriority.AboveNormal }.Start();
-                    Debug.WriteLine("PC통신 검사시작");
-                this.제품투입신호 = false;
-            }
-            
-            if (내부인슐거리검사번호 > 0)
-            {
-                new Thread(() => { Global.피씨통신.상부인슐검사(내부인슐거리검사번호); }) { Priority = ThreadPriority.AboveNormal }.Start();
-                this.내부인슐거리검사신호 = false;
-            }
-            
-            if (상부표면검사번호 > 0)
-            {
-                new Thread(() => { Global.피씨통신.상부검사(상부표면검사번호); }) { Priority = ThreadPriority.AboveNormal }.Start();
-                this.상부표면검사신호 = false;
-            }
-            
-            if (CTQ1검사번호 > 0)
-            {
-                new Thread(() => { 
+            Int32 측상카메라검사번호 = this.검사위치번호(정보주소.측상촬영트리거1); 
+            Int32 하부카메라검사번호 = this.검사위치번호(정보주소.하부촬영트리거1);
+            Int32 커넥터카메라검사번호 = this.검사위치번호(정보주소.커넥터촬영트리거1);
 
-                    Global.피씨통신.CTQ1검사(CTQ1검사번호); 
-                
-                }) { Priority = ThreadPriority.Highest }.Start();
-                
-                this.CTQ1검사신호 = false;
-            }
-
-            if (CTQ2검사번호 > 0)
-            {
-                new Thread(() => {
-
-                    Global.피씨통신.CTQ2검사(CTQ2검사번호);
-
-                })
-                { Priority = ThreadPriority.Highest }.Start();
-
-                this.CTQ2검사신호 = false;
-            }
-            
-            if (상부인슐폭검사번호 > 0)
+            if (측상카메라검사번호 > 0)
             {
                 new Thread(() =>
                 {
+                    this.측상촬영트리거3검사신호 = true;
+                    
+                    Global.조명제어.TurnOn(카메라구분.Cam01);
                     Global.조명제어.TurnOn(카메라구분.Cam02);
                     Global.조명제어.TurnOn(카메라구분.Cam03);
+
+                    Global.그랩제어.Active(카메라구분.Cam01);
                     Global.그랩제어.Active(카메라구분.Cam02);
                     Global.그랩제어.Active(카메라구분.Cam03);
                 }).Start();
-                this.상부인슐폭검사신호 = false;
+                this.측상촬영트리거3검사신호 = false;
             }
 
-            if (하부표면검사번호 > 0)
+            else if (하부카메라검사번호 > 0)
             {
-                new Thread(() => {
-                    Global.피씨통신.측면검사(하부표면검사번호);
-                }) { Priority = ThreadPriority.AboveNormal }.Start();
-                this.측면촬영신호 = false;
-
                 new Thread(() =>
                 {
-                    Global.조명제어.TurnOn(카메라구분.Cam01);
-                    Global.그랩제어.Active(카메라구분.Cam01);
+                    this.하부촬영트리거3검사신호 = true;
+                    Global.조명제어.TurnOn(카메라구분.Cam04);
+                    Global.조명제어.TurnOn(카메라구분.Cam05);
+                    Global.그랩제어.Active(카메라구분.Cam04);
+                    Global.그랩제어.Active(카메라구분.Cam05);
                 }).Start();
-                this.하부촬영신호 = false;
+                this.하부촬영트리거3검사신호 = false;
+            }
+
+            else if (커넥터카메라검사번호 > 0)
+            {
+                new Thread(() =>
+                {
+                    //this.커넥터촬영트리거3검사신호 = true;
+                    Global.조명제어.TurnOn(카메라구분.Cam06);
+                    Global.조명제어.TurnOn(카메라구분.Cam07);
+                    Global.그랩제어.Active(카메라구분.Cam06);
+                    Global.그랩제어.Active(카메라구분.Cam07);
+                    
+                    this.커넥터촬영트리거3검사신호 = true;
+                    Task.Delay(200).Wait();
+                    this.커넥터촬영트리거3검사신호 = false;
+
+
+                }).Start();
             }
         }
 
         // 최종 검사 결과 보고
         private void 검사결과전송()
         {
-            Int32 검사번호 = this.검사위치번호(정보주소.결과요청);
+            Int32 검사번호 = this.검사위치번호(정보주소.결과요청트리거1);
             if (검사번호 <= 0) return;
 
             Debug.WriteLine("1");
@@ -372,18 +372,17 @@ namespace DSEV.Schemas
         // 신호 Writing 순서 중요
         private async void 결과전송(Boolean 양품여부)
         {
-            Debug.WriteLine("결과전송시작_test");
-            this.양품여부요청 = 양품여부;
-            this.불량여부요청 = !양품여부;
+            Debug.WriteLine("결과전송시작");
+            this.결과요청트리거2검사신호 = !양품여부;
+            this.결과요청트리거3검사신호 = 양품여부;
 
             // 1초 후에 a를 false로 변경하는 비동기 작업 예약
-            await Task.Delay(1000);
-            
-            this.양품여부요청 = false;
-            this.불량여부요청 = false;
+            await Task.Delay(500);
 
-            this.검사결과요청 = false;
-            Debug.WriteLine("결과전송완료_test");
+            this.결과요청트리거2검사신호 = false;
+            this.결과요청트리거3검사신호 = false;
+
+            Debug.WriteLine("결과전송완료");
         }
 
         // 핑퐁

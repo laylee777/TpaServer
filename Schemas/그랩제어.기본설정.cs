@@ -247,10 +247,10 @@ namespace DSEV.Schemas
         public override Boolean Active()
         {
             this.Camera.ClearImageBuffer();
-            if(this.구분 == 카메라구분.Cam08 || this.구분 == 카메라구분.Cam09)
-            {
-                return 그랩제어.Validate($"{this.구분} Active", Camera.StartGrabbing(), false);
-            }
+            //if(this.구분 == 카메라구분.Cam08 || this.구분 == 카메라구분.Cam09)
+            //{
+            //    return 그랩제어.Validate($"{this.구분} Active", Camera.StartGrabbing(), false);
+            //}
             return 그랩제어.Validate($"{this.구분} Active", Camera.StartGrabbing(), true);
         }
 

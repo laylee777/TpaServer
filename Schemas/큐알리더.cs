@@ -16,14 +16,122 @@ namespace DSEV.Schemas
         리딩종료,
     }
 
-    public class 큐알리더 : 큐알장치
+    public class 하부큐알리더 : 큐알장치
     {
         public delegate void Communication(통신구분 통신, 리더명령 명령, String mesg);
         public event Communication 송신수신알림;
 
         public override String 로그영역 => "큐알리더";
-        public override String Host { get { return Global.환경설정.큐알리더주소; } set { Global.환경설정.큐알리더주소 = value; } }
-        public override Int32 Port { get { return Global.환경설정.큐알리더포트; } set { Global.환경설정.큐알리더포트 = value; } }
+        public override String Host { get { return Global.환경설정.하부큐알리더주소1; } set { Global.환경설정.하부큐알리더주소1 = value; } }
+        public override Int32 Port { get { return Global.환경설정.하부큐알리더포트2; } set { Global.환경설정.하부큐알리더포트2 = value; } }
+        protected 리더명령 현재명령 = 리더명령.명령없음;
+
+        public virtual 리더결과 자료수신(String data, 리더명령 명령)
+        {
+            리더결과 결과 = new 리더결과(명령, data);
+            this.송신수신알림?.Invoke(통신구분.RX, 명령, data.Trim());
+            return 결과;
+        }
+
+        protected virtual 리더결과 명령전송(리더명령 명령, String command, Int32 대기시간 = 1000)
+        {
+            송신수신알림?.Invoke(통신구분.TX, 명령, command.Trim());
+            리더결과 결과 = 자료수신(this.SendCommand(command, 대기시간), 명령);
+            if (!결과.정상여부 && String.IsNullOrEmpty(결과.오류내용))
+            {
+                //Task.Run(() => Global.오류로그(로그영역, "명령수행", $"[{로그영역}] 명령 전송에 실패하였습니다.", true));
+                String error = String.IsNullOrEmpty(결과.오류내용) ? "명령 전송에 실패하였습니다." : 결과.오류내용;
+                Global.오류로그(로그영역, "명령수행", $"[{로그영역}] {error}", true);
+            }
+            return 결과;
+        }
+        protected virtual 리더결과 명령전송(리더명령 명령, Int32 대기시간 = 1000) => this.명령전송(명령, Utils.GetDescription(명령), 대기시간);
+
+        public void 리딩시작(검사결과 검사)
+        {
+            Debug.WriteLine("리딩시작");
+            리더결과 결과 = 리딩시작();
+
+            Debug.WriteLine($"응답번호 : {결과.응답번호}, 응답자료 : {결과.응답자료}");
+            큐알등급 등급 = (큐알등급)결과.응답번호;
+            if (등급 == 큐알등급.X || 등급 > 큐알등급.C)
+            {
+                리딩종료();
+                리더결과 결과2 = 리딩시작();
+                if ((큐알등급)결과2.응답번호 != 큐알등급.X && !String.IsNullOrEmpty(결과2.응답자료) && 결과.응답번호 > 결과2.응답번호)
+                    결과 = 결과2;
+            }
+            리딩종료();
+            if (검사 == null) return;
+            //검사.큐알정보검사(결과.응답자료, (큐알등급)결과.응답번호);
+        }
+        public 리더결과 리딩시작() => 명령전송(리더명령.리딩시작, "LON\r");
+        public 리더결과 리딩종료() => 명령전송(리더명령.리딩종료, "LOFF\r");
+    }
+
+
+    //추후 큐알리더 합치기 필요 임시.
+    public class 하부큐알리더2 : 큐알장치
+    {
+        public delegate void Communication(통신구분 통신, 리더명령 명령, String mesg);
+        public event Communication 송신수신알림;
+
+        public override String 로그영역 => "큐알리더";
+        public override String Host { get { return Global.환경설정.하부큐알리더주소2; } set { Global.환경설정.하부큐알리더주소2 = value; } }
+        public override Int32 Port { get { return Global.환경설정.하부큐알리더포트2; } set { Global.환경설정.하부큐알리더포트2 = value; } }
+        protected 리더명령 현재명령 = 리더명령.명령없음;
+
+        public virtual 리더결과 자료수신(String data, 리더명령 명령)
+        {
+            리더결과 결과 = new 리더결과(명령, data);
+            this.송신수신알림?.Invoke(통신구분.RX, 명령, data.Trim());
+            return 결과;
+        }
+
+        protected virtual 리더결과 명령전송(리더명령 명령, String command, Int32 대기시간 = 1000)
+        {
+            송신수신알림?.Invoke(통신구분.TX, 명령, command.Trim());
+            리더결과 결과 = 자료수신(this.SendCommand(command, 대기시간), 명령);
+            if (!결과.정상여부 && String.IsNullOrEmpty(결과.오류내용))
+            {
+                //Task.Run(() => Global.오류로그(로그영역, "명령수행", $"[{로그영역}] 명령 전송에 실패하였습니다.", true));
+                String error = String.IsNullOrEmpty(결과.오류내용) ? "명령 전송에 실패하였습니다." : 결과.오류내용;
+                Global.오류로그(로그영역, "명령수행", $"[{로그영역}] {error}", true);
+            }
+            return 결과;
+        }
+        protected virtual 리더결과 명령전송(리더명령 명령, Int32 대기시간 = 1000) => this.명령전송(명령, Utils.GetDescription(명령), 대기시간);
+
+        public void 리딩시작(검사결과 검사)
+        {
+            Debug.WriteLine("리딩시작");
+            리더결과 결과 = 리딩시작();
+
+            Debug.WriteLine($"응답번호 : {결과.응답번호}, 응답자료 : {결과.응답자료}");
+            큐알등급 등급 = (큐알등급)결과.응답번호;
+            if (등급 == 큐알등급.X || 등급 > 큐알등급.C)
+            {
+                리딩종료();
+                리더결과 결과2 = 리딩시작();
+                if ((큐알등급)결과2.응답번호 != 큐알등급.X && !String.IsNullOrEmpty(결과2.응답자료) && 결과.응답번호 > 결과2.응답번호)
+                    결과 = 결과2;
+            }
+            리딩종료();
+            if (검사 == null) return;
+            //검사.큐알정보검사(결과.응답자료, (큐알등급)결과.응답번호);
+        }
+        public 리더결과 리딩시작() => 명령전송(리더명령.리딩시작, "LON\r");
+        public 리더결과 리딩종료() => 명령전송(리더명령.리딩종료, "LOFF\r");
+    }
+
+    public class 상부큐알리더 : 큐알장치
+    {
+        public delegate void Communication(통신구분 통신, 리더명령 명령, String mesg);
+        public event Communication 송신수신알림;
+
+        public override String 로그영역 => "큐알리더";
+        public override String Host { get { return Global.환경설정.상부큐알리더주소; } set { Global.환경설정.상부큐알리더주소 = value; } }
+        public override Int32 Port { get { return Global.환경설정.상부큐알리더포트; } set { Global.환경설정.상부큐알리더포트 = value; } }
         protected 리더명령 현재명령 = 리더명령.명령없음;
 
         public virtual 리더결과 자료수신(String data, 리더명령 명령)
@@ -68,6 +176,8 @@ namespace DSEV.Schemas
         public 리더결과 리딩시작() => 명령전송(리더명령.리딩시작, "LON\r");
         public 리더결과 리딩종료() => 명령전송(리더명령.리딩종료, "LOFF\r");
     }
+
+
 
     public class 리더결과
     {

@@ -139,7 +139,7 @@ namespace DSEV.Schemas
             if (this.ToolBlock != null) this.ToolBlock.DataBindings.Clear();
             else this.ToolBlock = new CogToolBlock();
             this.ToolBlock.Name = this.도구명칭;
-            if (this.카메라 == 카메라구분.Cam10) return;
+            //if (this.카메라 == 카메라구분.Cam10) return;
 
             // 파라미터 체크
             AddInput(this.ToolBlock, "InputImage", typeof(CogImage8Grey));
@@ -339,7 +339,7 @@ namespace DSEV.Schemas
         public Boolean 이미지로드(String path)
         {
             if (!File.Exists(path)) return false;
-            return 이미지검사(Common.LoadImage(path, this.카메라 == 카메라구분.Cam10));
+            return 이미지검사(Common.LoadImage(path, false));
         }
         public Boolean 이미지검사(ICogImage image)
         {

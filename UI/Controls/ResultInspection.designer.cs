@@ -34,7 +34,7 @@
             this.e외관결과 = new DevExpress.XtraEditors.TextEdit();
             this.Bind검사결과 = new System.Windows.Forms.BindingSource(this.components);
             this.eCTQ결과 = new DevExpress.XtraEditors.TextEdit();
-            this.e큐알등급 = new DevExpress.XtraEditors.TextEdit();
+            //this.e큐알등급 = new DevExpress.XtraEditors.TextEdit();
             this.e검사순번 = new DevExpress.XtraEditors.TextEdit();
             this.e측정결과 = new DevExpress.XtraEditors.LabelControl();
             this.e검사시간 = new DevExpress.XtraEditors.TextEdit();
@@ -57,7 +57,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.e외관결과.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Bind검사결과)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.eCTQ결과.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.e큐알등급.Properties)).BeginInit();
+            //((System.ComponentModel.ISupportInitialize)(this.e큐알등급.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e검사순번.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e검사시간.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e큐알코드.Properties)).BeginInit();
@@ -81,7 +81,7 @@
             this.layoutControl1.Controls.Add(this.e결과뷰어);
             this.layoutControl1.Controls.Add(this.e외관결과);
             this.layoutControl1.Controls.Add(this.eCTQ결과);
-            this.layoutControl1.Controls.Add(this.e큐알등급);
+            //this.layoutControl1.Controls.Add(this.e큐알등급);
             this.layoutControl1.Controls.Add(this.e검사순번);
             this.layoutControl1.Controls.Add(this.e측정결과);
             this.layoutControl1.Controls.Add(this.e검사시간);
@@ -140,19 +140,19 @@
             // 
             // e큐알등급
             // 
-            this.e큐알등급.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.Bind검사결과, "큐알등급", true));
-            this.e큐알등급.EditValue = "-";
-            this.e큐알등급.EnterMoveNextControl = true;
-            this.e큐알등급.Location = new System.Drawing.Point(1192, 10);
-            this.e큐알등급.Name = "e큐알등급";
-            this.e큐알등급.Properties.Appearance.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.e큐알등급.Properties.Appearance.Options.UseFont = true;
-            this.e큐알등급.Properties.Appearance.Options.UseTextOptions = true;
-            this.e큐알등급.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.e큐알등급.Properties.ReadOnly = true;
-            this.e큐알등급.Size = new System.Drawing.Size(66, 32);
-            this.e큐알등급.StyleController = this.layoutControl1;
-            this.e큐알등급.TabIndex = 7;
+            //this.e큐알등급.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.Bind검사결과, "큐알등급", true));
+            //this.e큐알등급.EditValue = "-";
+            //this.e큐알등급.EnterMoveNextControl = true;
+            //this.e큐알등급.Location = new System.Drawing.Point(1192, 10);
+            //this.e큐알등급.Name = "e큐알등급";
+            //this.e큐알등급.Properties.Appearance.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            //this.e큐알등급.Properties.Appearance.Options.UseFont = true;
+            //this.e큐알등급.Properties.Appearance.Options.UseTextOptions = true;
+            //this.e큐알등급.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            //this.e큐알등급.Properties.ReadOnly = true;
+            //this.e큐알등급.Size = new System.Drawing.Size(66, 32);
+            //this.e큐알등급.StyleController = this.layoutControl1;
+            //this.e큐알등급.TabIndex = 7;
             // 
             // e검사순번
             // 
@@ -289,7 +289,7 @@
             // 
             // layoutControlItem5
             // 
-            this.layoutControlItem5.Control = this.e큐알등급;
+            //this.layoutControlItem5.Control = this.e큐알등급;
             this.layoutControlItem5.Location = new System.Drawing.Point(1182, 0);
             this.layoutControlItem5.Name = "layoutControlItem5";
             this.layoutControlItem5.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 6, 6);
@@ -388,7 +388,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.e외관결과.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Bind검사결과)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.eCTQ결과.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.e큐알등급.Properties)).EndInit();
+            //((System.ComponentModel.ISupportInitialize)(this.e큐알등급.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e검사순번.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e검사시간.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e큐알코드.Properties)).EndInit();
@@ -425,7 +425,7 @@
         private DevExpress.XtraBars.Docking.DockManager dockManager1;
         private DevExpress.XtraBars.Docking.DockPanel dockPanel1;
         private DevExpress.XtraBars.Docking.ControlContainer dockPanel1_Container;
-        private DevExpress.XtraEditors.TextEdit e큐알등급;
+        //private DevExpress.XtraEditors.TextEdit e큐알등급;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private DevExpress.XtraEditors.TextEdit e외관결과;
         private DevExpress.XtraEditors.TextEdit eCTQ결과;

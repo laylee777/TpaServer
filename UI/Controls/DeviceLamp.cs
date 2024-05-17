@@ -48,8 +48,8 @@ namespace DSEV.UI.Controls
             this.카메라2.Set(Global.환경설정.동작구분 == 동작구분.LocalTest || Global.장치상태.카메라2);
             this.카메라3.Set(Global.환경설정.동작구분 == 동작구분.LocalTest || Global.장치상태.카메라3);
             this.조명장치.Set(Global.환경설정.동작구분 == 동작구분.LocalTest || Global.장치상태.조명장치);
-            this.큐알리더.Set(Global.환경설정.동작구분 == 동작구분.LocalTest || Global.장치상태.큐알리더);
-            this.피씨통신.Set(Global.환경설정.동작구분 == 동작구분.LocalTest || Global.장치상태.피씨통신);
+            this.큐알리더.Set(Global.환경설정.동작구분 == 동작구분.LocalTest || Global.장치상태.상부큐알리더);
+            //this.피씨통신.Set(Global.환경설정.동작구분 == 동작구분.LocalTest || Global.장치상태.피씨통신);
         }
 
         private enum 상태구분

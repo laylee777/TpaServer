@@ -48,7 +48,6 @@ namespace DSEV.UI.Controls
             this.b도구설정.EditValue = 그랩제어.대상카메라.First();
 
             Global.검사자료.수동검사알림 += 수동검사알림;
-            Global.피씨통신.검사설정변경 += 검사설정변경;
             this.ｅ교정계산.ButtonClick += 교정계산;
             this.b측정정보.Click += 측정정보;
 

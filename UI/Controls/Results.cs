@@ -50,8 +50,8 @@ namespace DSEV.UI.Controls
 
             Localization.SetColumnCaption(this.GridView1, typeof(검사결과));
             Localization.SetColumnCaption(this.GridView2, typeof(검사정보));
-            this.col검사일자.Caption = Localization.일자.GetString();
-            this.col검사시간.Caption = Localization.시간.GetString();
+            //this.col검사일자.Caption = Localization.일자.GetString();
+            //this.col검사시간.Caption = Localization.시간.GetString();
         }
 
         public void Close() { }

@@ -28,30 +28,32 @@ namespace DSEV
         public static 그랩제어 그랩제어;
         public static 비전검사 비전검사;
         public static 사진자료 사진자료;
-        public static 큐알리더 큐알리더;
+
+        //추후 합치기 필요 임시.
+        public static 상부큐알리더 상부큐알리더;
+        public static 하부큐알리더 하부큐알리더;
+        public static 하부큐알리더2 하부큐알리더2;
+
         public static 검사자료 검사자료;
-        //public static 피씨통신 피씨통신;
-        public static 피씨설정 피씨통신;
         public static 큐알검증 큐알검증;
         public static 캘리브자료 캘리브;
 
-        public static 라벨부착기제어 라벨부착기제어;
-        public static 레이져마킹제어 레이져마킹제어;
         public static 센서제어 센서제어;
+
         public static MES통신 mes통신;
 
         //public static 샘플자료 샘플자료;
 
         public static class 장치상태
         {
-            public static Boolean 정상여부 => 피씨통신 && 큐알리더 && 조명장치 && 그랩장치;
-            public static Boolean 피씨통신 => Global.피씨통신.정상여부;
-            public static Boolean 큐알리더 => Global.큐알리더.연결여부;
+            public static Boolean 정상여부 => 상부큐알리더 && 하부큐알리더 && 조명장치 && 그랩장치;
+            public static Boolean 상부큐알리더 => Global.상부큐알리더.연결여부;
+            public static Boolean 하부큐알리더 => Global.하부큐알리더.연결여부;
             public static Boolean 조명장치 => 조명제어.정상여부;
             public static Boolean 그랩장치 => Global.그랩제어.정상여부;
-            public static Boolean 카메라1 => Global.그랩제어.카메라1.상태;
-            public static Boolean 카메라2 => true;// Global.그랩제어.카메라2.상태;
-            public static Boolean 카메라3 => true;// Global.그랩제어.카메라3.상태;
+            public static Boolean 카메라1 => Global.그랩제어.상부검사카메라.상태;
+            public static Boolean 카메라2 => true;
+            public static Boolean 카메라3 => true;
             public static Boolean 자동수동 => Global.장치통신.자동수동여부;
             public static Boolean 시작정지 => Global.장치통신.시작정지여부;
         }
@@ -69,23 +71,19 @@ namespace DSEV
                 비전검사 = new 비전검사();
                 그랩제어 = new 그랩제어();
                 사진자료 = new 사진자료();
-                큐알리더 = new 큐알리더();
+
+                //추후 합치기 필요 임시.
+                
+                상부큐알리더 = new 상부큐알리더();
+                하부큐알리더 = new 하부큐알리더();
+                하부큐알리더2 = new 하부큐알리더2();
+
                 검사자료 = new 검사자료();
-                //피씨통신 = new 피씨통신();
-                피씨통신 = new 피씨설정();
 
                 큐알검증 = new 큐알검증();
                 캘리브 = new 캘리브자료();
 
-
-                라벨부착기제어 = new 라벨부착기제어();
-                레이져마킹제어 = new 레이져마킹제어();
                 센서제어 = new 센서제어();
-
-
-
-                
-
 
                 로그자료.Init();
                 환경설정.Init();
@@ -93,41 +91,27 @@ namespace DSEV
                 장치통신.Init();
                 모델자료.Init();
                 검사자료.Init();
-                큐알리더.Init();
+
+                //추후 합치기 필요 임시.
+                상부큐알리더.Init();
+                하부큐알리더.Init();
+                하부큐알리더2.Init();
+
                 if (!그랩제어.Init()) new Exception("카메라 초기화에 실패하였습니다.");
                 if (!장치통신.Open()) new Exception("PLC 서버에 연결할 수 없습니다.");
                 비전검사.Init(); // 그랩장치가 먼저 Init 되어야 함
                 사진자료.Init();
                 조명제어.Init();
-                피씨통신.Init();
 
                 큐알검증.Init();
                 캘리브.Init();
 
-
-                라벨부착기제어.Init();
-                레이져마킹제어.Init();
                 센서제어.Init();
-
-                //샘플자료 = new 샘플자료();
-                //샘플자료.Init();
-
-
-
-
 
 
                 //24.04.02 mes 통신 추가 by LHD
                // mes통신 = new MES통신();
                // mes통신.Init();
-
-
-
-
-
-
-
-
 
                 Global.정보로그(로그영역, "초기화", "시스템을 초기화 합니다.", false);
                 Initialized?.Invoke(null, true);
@@ -150,10 +134,11 @@ namespace DSEV
                 if (환경설정.동작구분 == 동작구분.Live)
                 {
                     조명제어.Close();
-                    큐알리더.Close();
+                    상부큐알리더.Close();
+                    하부큐알리더.Close();
+                    하부큐알리더2.Close();
                 }
 
-                피씨통신.Close();
                 장치통신.Close();
                 유저자료.Close();
                 환경설정.Close();
@@ -164,14 +149,9 @@ namespace DSEV
                 로그자료.Close();
                 캘리브.Close();
 
-                라벨부착기제어.Close();
-                레이져마킹제어.Close();
                 센서제어.Close();
 
-
-
                 Properties.Settings.Default.Save();
-
 
 
                 //mes종료추가 24.04.02 by LHD 
@@ -190,22 +170,15 @@ namespace DSEV
         public static void Start()
         {
             장치통신.Start();
-            피씨통신.Start();
-
-
 
             //mes통신추가 24.04.02 by LHD 
             // mes통신.Start();
 
-
             if (Global.환경설정.동작구분 != 동작구분.Live) return;
-            큐알리더.Start();
-            라벨부착기제어.Start();
-            레이져마킹제어.Start();
+            상부큐알리더.Start();
+            하부큐알리더.Start();
+            하부큐알리더2.Start();
             센서제어.Start();
-
-
-
 
         }
 

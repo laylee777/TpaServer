@@ -201,6 +201,19 @@ namespace DSEV.Schemas
         public override Boolean TurnOff(조명정보 정보) => SendCommand($"{정보.카메라} Off", $"{(Int32)정보.채널 - 1}f");//0000
     }
 
+    public class LCP24_30Q : 조명컨트롤러
+    {
+        public override String 로그영역 { get; set; } = nameof(LCP24_30Q);
+        public override 직렬포트 포트 { get; set; } = 직렬포트.None;
+        public override Int32 통신속도 { get; set; } = 9600;
+        public override Int32 최대밝기 { get; } = 1023;
+        public override String STX { get; set; } = $"{Convert.ToChar(2)}";
+        public override String ETX { get; set; } = $"{Convert.ToChar(3)}";
+        public override Boolean Set(조명정보 정보) => SendCommand($"{정보.카메라} Set", $"{(Int32)정보.채널 - 1}w{this.밝기변환(정보.밝기).ToString("d4")}");
+        public override Boolean Save(조명정보 정보) => false; // 커맨드가 있는지 모름
+        public override Boolean TurnOn(조명정보 정보) => SendCommand($"{정보.카메라} On", $"{(Int32)정보.채널 - 1}o");//{this.밝기변환(정보.밝기).ToString("d4")}
+        public override Boolean TurnOff(조명정보 정보) => SendCommand($"{정보.카메라} Off", $"{(Int32)정보.채널 - 1}f");//0000
+    }
 
 
     //public class LCP30DC : 조명컨트롤러

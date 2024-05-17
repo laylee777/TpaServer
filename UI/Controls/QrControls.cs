@@ -14,11 +14,11 @@ namespace DSEV.UI.Controls
 
         public void Init()
         {
-            this.b장치설정.Click += 장치설정;
-            this.b리딩시작.Click += 리딩시작;
-            this.b리딩종료.Click += 리딩종료;
+            //this.b장치설정.Click += 장치설정;
+            //this.b리딩시작.Click += 리딩시작;
+            //this.b리딩종료.Click += 리딩종료;
             this.g통신내역.CustomButtonClick += 내역삭제;
-            Global.큐알리더.송신수신알림 += 리더송신수신알림;
+           // Global.큐알리더.송신수신알림 += 리더송신수신알림;
         }
 
         public void Close() { }
@@ -36,9 +36,9 @@ namespace DSEV.UI.Controls
                 this.e통신내역.Items.RemoveAt(this.e통신내역.Items.Count - 1);
         }
 
-        private void 장치설정(object sender, EventArgs e) => Process.Start($"http://{Global.환경설정.큐알리더주소}/WebLink/");
-        private void 리딩시작(object sender, EventArgs e) => Global.큐알리더.리딩시작(null);
-        private void 리딩종료(object sender, EventArgs e) => Global.큐알리더.리딩종료();
+        //private void 장치설정(object sender, EventArgs e) => Process.Start($"http://{Global.환경설정.큐알리더주소}/WebLink/");
+       // private void 리딩시작(object sender, EventArgs e) => Global.큐알리더.리딩시작(null);
+        //private void 리딩종료(object sender, EventArgs e) => Global.큐알리더.리딩종료();
         private void 내역삭제(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e) => this.e통신내역.Items.Clear();
     }
 }

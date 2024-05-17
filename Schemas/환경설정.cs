@@ -18,9 +18,9 @@ namespace DSEV.Schemas
         public event 모델변경 모델변경알림;
 
         [JsonIgnore]
-        public const String 프로젝트번호 = "23-0404-003";
+        public const String 프로젝트번호 = "23-0404-004";
         [JsonIgnore]
-        public const String DefaultPath = @"C:\IVM\VDA590\UFAServer";
+        public const String DefaultPath = @"C:\\IVM\\VDA590\\TPAServer";
 
         [Description("프로그램 동작구분"), JsonProperty("RunType")]
         public 동작구분 동작구분 { get; set; } = 동작구분.Live;
@@ -43,46 +43,47 @@ namespace DSEV.Schemas
         public Int32 로그보관 { get; set; } = 200;
 
 
-        [Translation("Laser Marker Host", "레이져 각인기 주소"), JsonProperty("LaserMarkerHost")] // Keyence MX
-        public String 레이져각인기주소 { get; set; } = "192.168.111.201";
-        [Translation("Laser Marker Port", "레이져 각인기 포트"), JsonProperty("LaserMarkerPort")] // Keyence DN
-        public Int32 레이져각인기포트 { get; set; } = 50002;
-        [Translation("Use Laser Marker", "레이져 각인기 리딩"), JsonProperty("UseLaserMarker")]
-        public Boolean 레이져각인기여부 { get; set; } = true;
+        [Translation("Bottom Code Reader Host1", "하부코드 리더기1 주소"), JsonProperty("BottomCodeReaderHost1")] // Keyence SR-2000
+        public String 하부큐알리더주소1 { get; set; } = "192.168.3.50";
+        [Translation("Bottom Code Reader Port1", "하부코드 리더기1 포트"), JsonProperty("BottomCodeReaderPort1")] // Keyence SR-2000
+        public Int32 하부큐알리더포트1 { get; set; } = 9004;
+        [Translation("Bottom Code Reader Host2", "하부코드 리더기2 주소"), JsonProperty("BottomCodeReaderHost2")] // Keyence SR-2000
+        public String 하부큐알리더주소2 { get; set; } = "192.168.3.51";
+        [Translation("Bottom Code Reader Port2", "하부코드 리더기2 포트"), JsonProperty("BottomCodeReaderPort2")] // Keyence SR-2000
+        public Int32 하부큐알리더포트2 { get; set; } = 9004;
+        [Translation("Bottom Use Code Reader", "하부코드 리딩 유무"), JsonProperty("UseBottomCodeReader")]
+        public Boolean 하부큐알리더여부 { get; set; } = true;
 
-        [Translation("Code Reader Host", "코드 리더기 주소"), JsonProperty("CodeReaderHost")] // Keyence SR-2000
-        public String 큐알리더주소 { get; set; } = "192.168.111.202";
-        [Translation("Code Reader Port", "코드 리더기 포트"), JsonProperty("CodeReaderPort")] // Keyence SR-2000
-        public Int32 큐알리더포트 { get; set; } = 9004;
-        [Translation("Use Code Reader", "코드 리딩 유무"), JsonProperty("UseCodeReader")]
-        public Boolean 큐알리더여부 { get; set; } = true;
+        [Translation("Top Code Reader Host", "상부코드 리더기 주소"), JsonProperty("TopCodeReaderHost")] // Keyence SR-2000
+        public String 상부큐알리더주소 { get; set; } = "192.168.3.52";
+        [Translation("Top Code Reader Port", "상부코드 리더기 포트"), JsonProperty("TopCodeReaderPort")] // Keyence SR-2000
+        public Int32 상부큐알리더포트 { get; set; } = 9004;
+        [Translation("Top Use Code Reader", "상부코드 리딩 유무"), JsonProperty("UseTopCodeReader")]
+        public Boolean 상부큐알리더여부 { get; set; } = true;
 
-        [Translation("Label Sticker Host", "라벨 부착기 주소"), JsonProperty("LabelStickerHost")] // Domino ??
-        public String 라벨부착기주소 { get; set; } = "192.168.111.203";
-        [Translation("Label Sticker Port", "라벨 부착기 포트"), JsonProperty("LabelStickerPort")] // Domino ??
-        public Int32 라벨부착기포트 { get; set; } = 9100;
-        [Translation("Use Label Sticker", "라벨 부착기 리딩"), JsonProperty("UseLabelSticker")]
-        public Boolean 라벨부착여부 { get; set; } = true;
-
-
-        //[Translation("SensorController1 Host", "변위센서컨트롤러1 주소"), JsonProperty("SensorController1Host")] // Keyence DN
-        //public String 변위센서컨트롤러1주소 { get; set; } = "192.168.111.204";
-        //[Translation("SensorController1 Port", "변위센서컨트롤러1 포트"), JsonProperty("SensorController1Port")] // Keyence DN
-        //public Int32 변위센서컨트롤러1포트 { get; set; } = 64000;
+        [Translation("SensorController1 Host", "변위센서컨트롤러1 주소"), JsonProperty("SensorController1Host")] // Keyence DN
+        public String 변위센서컨트롤러1주소 { get; set; } = "192.168.3.100";
+        [Translation("SensorController1 Port", "변위센서컨트롤러1 포트"), JsonProperty("SensorController1Port")] // Keyence DN
+        public Int32 변위센서컨트롤러1포트 { get; set; } = 64000;
 
         [Translation("SensorController2 Host", "변위센서컨트롤러2 주소"), JsonProperty("SensorController2Host")] // Keyence DN
-        public String 변위센서컨트롤러2주소 { get; set; } = "192.168.111.205";
+        public String 변위센서컨트롤러2주소 { get; set; } = "192.168.3.101";
         [Translation("SensorController2 Port", "변위센서컨트롤러2 포트"), JsonProperty("SensorController2Port")] // Keyence DN
         public Int32 변위센서컨트롤러2포트 { get; set; } = 64000;
 
         [Translation("SensorController3 Host", "변위센서컨트롤러3 주소"), JsonProperty("SensorController3Host")] // Keyence DN
-        public String 변위센서컨트롤러3주소 { get; set; } = "192.168.111.206";
+        public String 변위센서컨트롤러3주소 { get; set; } = "192.168.3.102";
         [Translation("SensorController3 Port", "변위센서컨트롤러3 포트"), JsonProperty("SensorController3Port")] // Keyence DN
         public Int32 변위센서컨트롤러3포트 { get; set; } = 64000;
 
+        [Translation("SensorController4 Host", "변위센서컨트롤러4 주소"), JsonProperty("SensorController4Host")] // Keyence DN
+        public String 변위센서컨트롤러4주소 { get; set; } = "192.168.3.103";
+        [Translation("SensorController4 Port", "변위센서컨트롤러4 포트"), JsonProperty("SensorController4Port")] // Keyence DN
+        public Int32 변위센서컨트롤러4포트 { get; set; } = 64000;
+
 
         [Translation("Work PC Host", "작업 컴퓨터 주소"), JsonProperty("WorkHost")] // Client or Server
-        public String 서버주소 { get; set; } = "192.168.111.3";
+        public String 서버주소 { get; set; } = "192.168.3.5";
         [Translation("Work PC Port", "작업 컴퓨터 포트"), JsonProperty("WorkPort")] // Client or Server
         public Int32 서버포트 { get; set; } = 8080;
 
@@ -94,7 +95,7 @@ namespace DSEV.Schemas
         //public Int32 MES포트 { get; set; } = 6003;
 
         [JsonProperty("CurrentModel")]
-        public 모델구분 선택모델 { get; set; } = 모델구분.VDA590UFA;
+        public 모델구분 선택모델 { get; set; } = 모델구분.VDA590TPA;
 
         [Translation("Model Image Path", "제품 사진 경로"), JsonIgnore]
         public String 사진경로 { get { return Path.Combine(기본경로, "Items"); } }
@@ -149,7 +150,7 @@ namespace DSEV.Schemas
 
         public static NpgsqlConnection CreateDbConnection()
         {
-            NpgsqlConnectionStringBuilder b = new NpgsqlConnectionStringBuilder() { Host = "localhost", Port = 5432, Username = "postgres", Password = "ivmadmin", Database = "vda590ufa" };
+            NpgsqlConnectionStringBuilder b = new NpgsqlConnectionStringBuilder() { Host = "localhost", Port = 5432, Username = "postgres", Password = "ivmadmin", Database = "vda590tpa" };
             return new NpgsqlConnection(b.ConnectionString);
         }
 

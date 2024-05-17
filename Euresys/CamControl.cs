@@ -196,29 +196,6 @@ namespace DSEV.Multicam
             //this.FreeSufaceTable();
         }
 
-        /*
-        [Description("Software Trig")]
-        public void SoftTrig()
-        {
-            Debug.WriteLine(this.TrigDelay, "Delay");
-            if (this.TrigDelay > 0)
-            {
-                Task.Run(() => {
-                    Debug.WriteLine("Acquisition Start", this.Camera.ToString());
-                    Task.Delay(this.TrigDelay).Wait();
-                    this.Active();
-                    //MC.SetParam(this.Channel, "ForceTrig", "TRIG");
-                });
-            }
-            else
-            {
-                Debug.WriteLine("Acquisition Start", this.Camera.ToString());
-                this.Active();
-                //MC.SetParam(this.Channel, "ForceTrig", "TRIG");
-            }
-        }
-        */
-
         [Description("채널 상태")]
         public String ChannelState()
         {
@@ -231,19 +208,6 @@ namespace DSEV.Multicam
         {
             switch (signalInfo.Signal)
             {
-                //case MC.SIG_START_ACQUISITION_SEQUENCE:
-                //    Debug.WriteLine(signalInfo.Signal, "SIGNALINFO");
-                //    break;
-                //case MC.SIG_END_ACQUISITION_SEQUENCE:
-                //    Debug.WriteLine(signalInfo.Signal, "SIGNALINFO");
-                //    break;
-                //case MC.SIG_SURFACE_FILLED:
-                //    Debug.WriteLine(signalInfo.Signal, "SIGNALINFO");
-                //    UInt32 LineIndex, Elapsed_Ln;
-                //    MC.GetParam(this.Channel, "LineIndex", out LineIndex);
-                //    MC.GetParam(this.Channel, "Elapsed_Ln", out Elapsed_Ln);
-                //    Debug.WriteLine($"{LineIndex}, {Elapsed_Ln}", "LineIndex & Elapsed_Ln");
-                //    break;
                 case MC.SIG_SURFACE_PROCESSING:
                     ProcessingCallback(signalInfo);
                     break;
@@ -270,10 +234,6 @@ namespace DSEV.Multicam
 
                 if (this.AcquisitionMode == AcquisitionMode.WEB || this.AcquisitionMode == AcquisitionMode.PAGE)
                 {
-                    //UInt32 Elapsed_Pg, Remaining_Pg;
-                    //MC.GetParam(currentChannel, "Elapsed_Pg", out Elapsed_Pg);
-                    //MC.GetParam(currentChannel, "Remaining_Pg", out Remaining_Pg);
-                    //Debug.WriteLine($"{this.Camera}: Elapsed_Pg={Elapsed_Pg}, Remaining_Pg={Remaining_Pg}");
                     this.ImageGrap(currentChannel, signalInfo.SignalInfo, imageSizeX, imageSizeY, bufferPitch);
                 }
                 else if (this.AcquisitionMode == AcquisitionMode.LONGPAGE)
@@ -317,10 +277,6 @@ namespace DSEV.Multicam
         [Description("Acquisition Failed")]
         private void AcqFailureCallback(MC.SIGNALINFO signalInfo)
         {
-            //this.Idle();
-            ////UInt32 currentChannel = (UInt32)signalInfo.Context;
-            //AcquisitionData Data = new AcquisitionData(this.Camera, "Acquisition Failure, Channel State: IDLE");
-            //this.AcquisitionFinishedEvent?.Invoke(this.Camera, Data);
         }
     }
 
