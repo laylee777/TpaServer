@@ -88,31 +88,28 @@ namespace DSEV
                 로그자료.Init();
                 환경설정.Init();
                 유저자료.Init();
-                장치통신.Init();
                 모델자료.Init();
                 검사자료.Init();
-
                 //추후 합치기 필요 임시.
-                상부큐알리더.Init();
-                하부큐알리더.Init();
-                하부큐알리더2.Init();
-
-                if (!그랩제어.Init()) new Exception("카메라 초기화에 실패하였습니다.");
-                if (!장치통신.Open()) new Exception("PLC 서버에 연결할 수 없습니다.");
+                if(Global.환경설정.동작구분 == 동작구분.Live)
+                {
+                    장치통신.Init();
+                    상부큐알리더.Init();
+                    하부큐알리더.Init();
+                    하부큐알리더2.Init();
+                    if (!그랩제어.Init()) new Exception("카메라 초기화에 실패하였습니다.");
+                    if (!장치통신.Open()) new Exception("PLC 서버에 연결할 수 없습니다.");
+                    조명제어.Init();
+                    센서제어.Init();
+                }
+              
                 비전검사.Init(); // 그랩장치가 먼저 Init 되어야 함
                 사진자료.Init();
-                조명제어.Init();
-
                 큐알검증.Init();
                 캘리브.Init();
-
-                센서제어.Init();
-
-
                 //24.04.02 mes 통신 추가 by LHD
                // mes통신 = new MES통신();
                // mes통신.Init();
-
                 Global.정보로그(로그영역, "초기화", "시스템을 초기화 합니다.", false);
                 Initialized?.Invoke(null, true);
                 return true;

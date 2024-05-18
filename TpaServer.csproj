@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>C:\IVM\VAD590\TPAServer\Execute\</OutputPath>
+    <OutputPath>C:\IVM\VDA590\TPAServer\Execute\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -128,6 +128,21 @@
     <Compile Include="Euresys\CamControl.cs" />
     <Compile Include="Euresys\Dalsa16K.cs" />
     <Compile Include="Euresys\MultiCam.cs" />
+    <Compile Include="Migrations\20240517230604_init.cs" />
+    <Compile Include="Migrations\20240517230604_init.Designer.cs">
+      <DependentUpon>20240517230604_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\검사결과테이블ModelSnapshot.cs" />
+    <Compile Include="Migrations\로그테이블Migrations\20240517230654_init.cs" />
+    <Compile Include="Migrations\로그테이블Migrations\20240517230654_init.Designer.cs">
+      <DependentUpon>20240517230654_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\로그테이블Migrations\로그테이블ModelSnapshot.cs" />
+    <Compile Include="Migrations\캘리브테이블Migrations\20240517230708_init.cs" />
+    <Compile Include="Migrations\캘리브테이블Migrations\20240517230708_init.Designer.cs">
+      <DependentUpon>20240517230708_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\캘리브테이블Migrations\캘리브테이블ModelSnapshot.cs" />
     <Compile Include="Schemas\Constants.cs" />
     <Compile Include="Schemas\MES통신.cs" />
     <Compile Include="Schemas\MVSol.Enc.cs" />
@@ -479,6 +494,11 @@
     <PackageReference Include="HelixToolkit.Wpf">
       <Version>2.24.0</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
+      <Version>3.1.32</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.3</Version>
     </PackageReference>
@@ -516,17 +536,17 @@
     <None Include="Resources\Korea.svg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MvUtils\MvUtils\MvUtils.csproj">
+    <None Include="Resources\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\MvUtils\MvUtils\MvUtils.csproj">
       <Project>{bdb2ed5c-4a7f-4116-b5a0-1831a1ec0624}</Project>
       <Name>MvUtils</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UfaVision\UfaVision.csproj">
+    <ProjectReference Include="..\..\..\..\UfaVision\UfaVision.csproj">
       <Project>{88ad3d48-11a5-4350-8430-6c35cd85d49e}</Project>
       <Name>UfaVision</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

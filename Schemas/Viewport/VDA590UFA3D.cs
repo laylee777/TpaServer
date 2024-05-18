@@ -12,7 +12,7 @@ namespace DSEV.Schemas
     {
         #region 초기화
         public override String StlPath => Global.환경설정.기본경로;
-        public override String StlFile => Path.Combine(StlPath, "VDA590UFA.stl");
+        public override String StlFile => Path.Combine(StlPath, "VDA590TPA.stl");
         public override Double Scale => 1;
         internal override void LoadStl()
         {

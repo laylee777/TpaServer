@@ -209,14 +209,8 @@ namespace DSEV
                 message.BARCODE_ID = "F00395AB231;F00395AB231";
                 message.KEY = TestIndexNum.ToString("0000");
                 Global.mes통신.자료송신(message);
-                
-
-
                 Debug.WriteLine("자료송신");
-
             }
-
-
         }
 
         private void ShowWaitForm()
