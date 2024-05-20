@@ -38,7 +38,19 @@ namespace DSEV.Schemas
             return distances;
         }
 
+        public static float[] 편차계산(List<Single> 센서값)
+        {
+            Single[] distances = new Single[센서값.Count];
+            for (int lop = 0; lop < 센서값.Count; lop++)
+            {
+                distances[lop] = 센서값[lop] * 2;
+            }
+
+            return distances;
+        }
+
         public static Single FindMinMaxDiff(List<Single> items) => Math.Abs(items.Max() - items.Min());
         public static Single FindAbsMaxDiff(List<Single> items, Single factor = 2) => Math.Max(Math.Abs(items.Max()), Math.Abs(items.Min())) * factor;
+        public static Single FindAbsMaxDiff2(Single[] arr) => Math.Max(Math.Abs(arr.Max()), Math.Abs(arr.Min()));
     }
 }

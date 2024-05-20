@@ -289,35 +289,38 @@ namespace DSEV.Schemas
             {
                 new Thread(() =>
                 {
-                    this.측상촬영트리거3검사신호 = true;
-                    
                     Global.조명제어.TurnOn(카메라구분.Cam01);
                     Global.조명제어.TurnOn(카메라구분.Cam02);
                     Global.조명제어.TurnOn(카메라구분.Cam03);
+                    Global.그랩제어.Active(카메라구분.Cam01);
                     Global.그랩제어.Active(카메라구분.Cam02);
                     Global.그랩제어.Active(카메라구분.Cam03);
-                    Global.그랩제어.Active(카메라구분.Cam01);
+
+                    this.측상촬영트리거3검사신호 = true;
+                    Task.Delay(200).Wait();
+                    this.측상촬영트리거3검사신호 = false;
 
                 })
                 { Priority = ThreadPriority.Highest }.Start();
-                this.측상촬영트리거3검사신호 = false;
             }
 
-            else if (하부카메라검사번호 > 0)
+            if (하부카메라검사번호 > 0)
             {
                 new Thread(() =>
                 {
-                    this.하부촬영트리거3검사신호 = true;
                     Global.조명제어.TurnOn(카메라구분.Cam04);
                     Global.조명제어.TurnOn(카메라구분.Cam05);
                     Global.그랩제어.Active(카메라구분.Cam04);
                     Global.그랩제어.Active(카메라구분.Cam05);
+
+                    this.하부촬영트리거3검사신호 = true;
+                    Task.Delay(200).Wait();
+                    this.하부촬영트리거3검사신호 = false;
                 })
                 { Priority = ThreadPriority.Highest }.Start();
-                this.하부촬영트리거3검사신호 = false;
             }
 
-            else if (커넥터카메라검사번호 > 0)
+            if (커넥터카메라검사번호 > 0)
             {
                 new Thread(() =>
                 {
@@ -330,8 +333,6 @@ namespace DSEV.Schemas
                     this.커넥터촬영트리거3검사신호 = true;
                     Task.Delay(200).Wait();
                     this.커넥터촬영트리거3검사신호 = false;
-
-
                 })
                 { Priority = ThreadPriority.Highest }.Start();
             }

@@ -261,38 +261,37 @@ namespace DSEV.Schemas
         [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, Flatness)]
         a8 = 732,
 
+        //하단부 큰 노치 윤곽도
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "ShapeBigNotchLR")]
+        ShapeBigNotchLR = 801,
+
+        //하단부 큰 노치 윤곽도하위
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeBigNotchLR, "DistBigNotchL")]
+        DistBigNotchL = 821,
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeBigNotchLR, "DistBigNotchR")]
+        DistBigNotchR = 822,
+
 
         //J1J2윤곽도
         [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "ShapeJ1J2")]
-        ShapeJ1J2 = 801,
+        ShapeJ1J2 = 901,
         
         //J1J2윤곽도 하위
         [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeJ1J2, "j1")]
-        j1 = 821,
+        j1 = 921,
         [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeJ1J2, "j2")]
-        j2 = 822,
+        j2 = 922,
 
 
         //J3J4윤곽도
         [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "ShapeJ3J4")]
-        ShapeJ3J4 = 901,
+        ShapeJ3J4 = 1001,
         //J3J4윤곽도 하위
         [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeJ3J4, "j3")]
-        j3 = 921,
+        j3 = 1021,
         [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeJ3J4, "j4")]
-        j4 = 922,
-
-
-        //하단부 큰 노치 윤곽도
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "ShapeBigNotchLR")]
-        ShapeBigNotchLR = 1001,
-
-        //하단부 큰 노치 윤곽도하위
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeBigNotchLR, "DistBigNotchL")]
-        DistBigNotchL = 1021,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeBigNotchLR, "DistBigNotchR")]
-        DistBigNotchR = 1022,
-
+        j4 = 1022,
+      
 
         //사이드노치 위치
         [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchPosFL")]
