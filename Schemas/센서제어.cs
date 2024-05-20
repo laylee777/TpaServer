@@ -204,8 +204,5 @@ namespace DSEV.Schemas
 
         public Boolean SaveZeroSet(센서컨트롤러 컨트롤러, Int32 센서갯수) => this[컨트롤러].ZeroSetSaveMemoryAll(센서갯수);
     }
-
-
-
 }
 
