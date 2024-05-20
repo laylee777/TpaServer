@@ -201,8 +201,8 @@ namespace DSEV.Schemas
         public string[] ReadValues(센서컨트롤러 컨트롤러, Int32 검사번호) => this[컨트롤러].센서값확인(검사번호);
 
         public Boolean DoZeroSet(센서컨트롤러 컨트롤러, Int32 센서갯수) => this[컨트롤러].ZeroSetAll(센서갯수);
-        
 
+        public Boolean SaveZeroSet(센서컨트롤러 컨트롤러, Int32 센서갯수) => this[컨트롤러].ZeroSetSaveMemoryAll(센서갯수);
     }
 
 
