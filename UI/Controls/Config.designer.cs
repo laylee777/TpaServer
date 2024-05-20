@@ -35,7 +35,6 @@ namespace DSEV.UI.Controls
             this.d원본저장 = new DevExpress.XtraEditors.XtraFolderBrowserDialog(this.components);
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.e원본일수 = new DevExpress.XtraEditors.SpinEdit();
-            this.Bind환경설정 = new System.Windows.Forms.BindingSource(this.components);
             this.e사본경로 = new DevExpress.XtraEditors.ButtonEdit();
             this.e소수자리 = new DevExpress.XtraEditors.SpinEdit();
             this.e원본경로 = new DevExpress.XtraEditors.ButtonEdit();
@@ -72,10 +71,10 @@ namespace DSEV.UI.Controls
             this.d사본저장 = new DevExpress.XtraEditors.XtraFolderBrowserDialog(this.components);
             this.g환경설정 = new DevExpress.XtraEditors.GroupControl();
             this.e사진저장 = new DSEV.UI.Controls.ImageSave();
+            this.Bind환경설정 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.e원본일수.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Bind환경설정)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e사본경로.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e소수자리.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e원본경로.Properties)).BeginInit();
@@ -111,6 +110,7 @@ namespace DSEV.UI.Controls
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.g환경설정)).BeginInit();
             this.g환경설정.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Bind환경설정)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -159,10 +159,6 @@ namespace DSEV.UI.Controls
             this.e원본일수.Size = new System.Drawing.Size(163, 28);
             this.e원본일수.StyleController = this.layoutControl1;
             this.e원본일수.TabIndex = 17;
-            // 
-            // Bind환경설정
-            // 
-            this.Bind환경설정.DataSource = typeof(DSEV.Schemas.환경설정);
             // 
             // e사본경로
             // 
@@ -470,7 +466,7 @@ namespace DSEV.UI.Controls
             // 
             // toggleSwitch3
             // 
-            this.toggleSwitch3.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.Bind환경설정, "큐알리더여부", true));
+            this.toggleSwitch3.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.Bind환경설정, "상부큐알리더여부", true));
             this.toggleSwitch3.EnterMoveNextControl = true;
             this.toggleSwitch3.Location = new System.Drawing.Point(452, 105);
             this.toggleSwitch3.Name = "toggleSwitch3";
@@ -484,7 +480,7 @@ namespace DSEV.UI.Controls
             // 
             // textEdit6
             // 
-            this.textEdit6.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.Bind환경설정, "큐알리더포트", true));
+            this.textEdit6.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.Bind환경설정, "상부큐알리더포트", true));
             this.textEdit6.EnterMoveNextControl = true;
             this.textEdit6.Location = new System.Drawing.Point(307, 105);
             this.textEdit6.Name = "textEdit6";
@@ -498,7 +494,7 @@ namespace DSEV.UI.Controls
             // 
             // textEdit5
             // 
-            this.textEdit5.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.Bind환경설정, "큐알리더주소", true));
+            this.textEdit5.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.Bind환경설정, "상부큐알리더주소", true));
             this.textEdit5.EnterMoveNextControl = true;
             this.textEdit5.Location = new System.Drawing.Point(46, 105);
             this.textEdit5.Name = "textEdit5";
@@ -629,6 +625,10 @@ namespace DSEV.UI.Controls
             this.e사진저장.Size = new System.Drawing.Size(599, 269);
             this.e사진저장.TabIndex = 8;
             // 
+            // Bind환경설정
+            // 
+            this.Bind환경설정.DataSource = typeof(DSEV.Schemas.환경설정);
+            // 
             // Config
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -640,7 +640,6 @@ namespace DSEV.UI.Controls
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.e원본일수.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Bind환경설정)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e사본경로.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e소수자리.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e원본경로.Properties)).EndInit();
@@ -676,6 +675,7 @@ namespace DSEV.UI.Controls
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.g환경설정)).EndInit();
             this.g환경설정.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Bind환경설정)).EndInit();
             this.ResumeLayout(false);
 
         }

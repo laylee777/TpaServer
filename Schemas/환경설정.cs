@@ -104,9 +104,9 @@ namespace DSEV.Schemas
         [Description("마스터 이미지"), JsonIgnore]
         public String 마스터사진 { get { return Path.Combine(기본경로, "Masters"); } }
 
-        [JsonIgnore]
+        [JsonProperty("Forced Ejection")]
         public Boolean 강제배출 { get; set; } = true;
-        [JsonIgnore]
+        [JsonProperty("Forced Ejection OK/NG")]
         public Boolean 양품불량 { get; set; } = true;
 
         [JsonIgnore]

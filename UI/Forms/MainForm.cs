@@ -187,18 +187,18 @@ namespace DSEV
             //}
             if (e.KeyCode == Keys.Z)
             {
-                MESSAGE message = new MESSAGE();
-                message.MSG_ID = "REQ_PROCESS_START";
-                message.SYSTEMID = "EQU050";
-                message.DATE_TIME = "2024-04-03 14:35:29.55808";
-                message.BARCODE_ID = "F00395AB231;F00395AB231";
-                message.KEY = TestIndexNum.ToString("0000");
+                //MESSAGE message = new MESSAGE();
+                //message.MSG_ID = "REQ_PROCESS_START";
+                //message.SYSTEMID = "EQU050";
+                //message.DATE_TIME = "2024-04-03 14:35:29.55808";
+                //message.BARCODE_ID = "F00395AB231;F00395AB231";
+                //message.KEY = TestIndexNum.ToString("0000");
                 
-                TestIndexNum++;
+                //TestIndexNum++;
                 
-                Global.mes통신.자료송신(message);
+                //Global.mes통신.자료송신(message);
 
-                Debug.WriteLine("자료송신");
+                //Debug.WriteLine("자료송신");
             }
             if (e.KeyCode == Keys.X)
             {
@@ -235,7 +235,7 @@ namespace DSEV
             this.HideWaitForm();
             Common.SetForegroundWindow(this.Handle.ToInt32());
 
-            //// 로그인
+            // 로그인
             //Login login = new Login();
             //if (Utils.ShowDialog(login, this) == DialogResult.OK)
             //{
@@ -245,11 +245,6 @@ namespace DSEV
             //}
             //else this.Close();
 
-            //if (Global.환경설정.동작구분 == 동작구분.Live)
-            //{
-            //}
-            //else
-            //{
             ////자동로그인
             Global.환경설정.시스템관리자로그인();
             Localization.SetCulture();
