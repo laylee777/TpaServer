@@ -257,7 +257,7 @@ namespace DSEV.UI.Controls
             this.layoutControlGroup2.Location = new System.Drawing.Point(298, 94);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
             this.layoutControlGroup2.Size = new System.Drawing.Size(298, 106);
-            this.layoutControlGroup2.Text = "Sensors Zero Set";
+            this.layoutControlGroup2.Text = "Sensors Zero Set Mode";
             // 
             // layoutControlItem4
             // 

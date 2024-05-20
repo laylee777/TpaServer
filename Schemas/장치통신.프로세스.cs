@@ -209,15 +209,24 @@ namespace DSEV.Schemas
             if (바닥평면검사번호 > 0)
             {
                 new Thread(() => {
-                    this.바닥평면트리거3검사신호 = true;
-
                     Debug.WriteLine("바닥평면도 검사시작");
 
                     try
                     {
+                        if (Global.환경설정.제로셋모드)
+                        {
+                            Global.센서제어.SaveZeroSet(센서컨트롤러.컨트롤러1, 6);
+                            Global.센서제어.SaveZeroSet(센서컨트롤러.컨트롤러2, 6);
+                            
+                            Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러1, 6);
+                            Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러2, 6);
+                            //Task.Delay(5000).Wait();
+                        }
+
                         //첫번째 항목 "M0" 제외하고 배열로 만듦
                         string[] cont1Values = Global.센서제어.ReadValues(센서컨트롤러.컨트롤러1, 바닥평면검사번호).Skip(1).ToArray();
                         string[] cont2Values = Global.센서제어.ReadValues(센서컨트롤러.컨트롤러2, 바닥평면검사번호).Skip(1).ToArray();
+                        this.바닥평면트리거3검사신호 = true;
 
                         //배열을 붙임!
                         string[] mergedValues = cont1Values.Concat(cont2Values).ToArray();
@@ -245,15 +254,26 @@ namespace DSEV.Schemas
             else if (커버들뜸검사번호 > 0)
             {
                 new Thread(() => {
-                    this.커버들뜸트리거3검사신호 = true;
 
                     Debug.WriteLine("커버들뜸 검사시작");
 
                     try
                     {
+                        if (Global.환경설정.제로셋모드)
+                        {
+                            Global.센서제어.SaveZeroSet(센서컨트롤러.컨트롤러3, 7);
+                            Global.센서제어.SaveZeroSet(센서컨트롤러.컨트롤러3, 8);
+
+                            Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러3, 7);
+                            Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러4, 8);
+
+                            //Task.Delay(5000).Wait();
+                        }
+
                         //첫번째 항목 "M0" 제외하고 배열로 만듦
                         string[] cont1Values = Global.센서제어.ReadValues(센서컨트롤러.컨트롤러3, 커버들뜸검사번호).Skip(1).ToArray();
                         string[] cont2Values = Global.센서제어.ReadValues(센서컨트롤러.컨트롤러4, 커버들뜸검사번호).Skip(1).ToArray();
+                        this.커버들뜸트리거3검사신호 = true;
 
                         //배열을 붙임!
                         string[] mergedValues = cont1Values.Concat(cont2Values).ToArray();

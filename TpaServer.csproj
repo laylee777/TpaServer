@@ -17,10 +17,11 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>C:\IVM\VDA590\TPAServer\Execute\</OutputPath>
+    <OutputPath>bin\Debug\x64\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>x64</PlatformTarget>
@@ -539,11 +540,11 @@
     <None Include="Resources\icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\MvUtils\MvUtils\MvUtils.csproj">
+    <ProjectReference Include="..\..\MvUtils\MvUtils\MvUtils.csproj">
       <Project>{bdb2ed5c-4a7f-4116-b5a0-1831a1ec0624}</Project>
       <Name>MvUtils</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\UfaVision\UfaVision.csproj">
+    <ProjectReference Include="..\..\UfaVision\UfaVision.csproj">
       <Project>{88ad3d48-11a5-4350-8430-6c35cd85d49e}</Project>
       <Name>UfaVision</Name>
     </ProjectReference>

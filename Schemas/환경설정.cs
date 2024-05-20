@@ -108,6 +108,9 @@ namespace DSEV.Schemas
         public Boolean 강제배출 { get; set; } = true;
         [JsonProperty("Forced Ejection OK/NG")]
         public Boolean 양품불량 { get; set; } = true;
+        [JsonIgnore]
+        public Boolean 제로셋모드 { get; set; } = false;
+
 
         [JsonIgnore]
         public String Format { get { return "#,0." + String.Empty.PadLeft(this.결과자릿수, '0'); } }
