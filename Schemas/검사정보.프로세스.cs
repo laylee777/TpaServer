@@ -487,13 +487,13 @@ namespace DSEV.Schemas
             List<Point3f> 검사위치 = new List<Point3f>();
             검사위치.AddRange(new Point3f[] {
                  new Point3f { X = -200, Y =   105, Z = (Single)this.GetItem(검사항목.a1).결과값 },
-                 new Point3f { X = 0, Y =   200,  Z = (Single)this.GetItem(검사항목.a2).결과값 },
-                 new Point3f { X = -105, Y =  200, Z = (Single)this.GetItem(검사항목.a3).결과값 },
-                 new Point3f { X =    90, Y =   0, Z = (Single)this.GetItem(검사항목.a4).결과값 },
-                 new Point3f { X =    -90, Y =   0,  Z = (Single)this.GetItem(검사항목.a5).결과값 },
-                 new Point3f { X =    105, Y =  -230, Z = (Single)this.GetItem(검사항목.a6).결과값 },
-                 new Point3f { X =  0, Y =   -230, Z = (Single)this.GetItem(검사항목.a7).결과값 },
-                 new Point3f { X =  -105, Y =   -230,  Z = (Single)this.GetItem(검사항목.a8).결과값 },
+                 new Point3f { X = -200, Y =   0,  Z = (Single)this.GetItem(검사항목.a2).결과값 },
+                 new Point3f { X = -200, Y =  -105, Z = (Single)this.GetItem(검사항목.a3).결과값 },
+                 new Point3f { X =    0, Y =   90, Z = (Single)this.GetItem(검사항목.a4).결과값 },
+                 new Point3f { X =    0, Y =   -90,  Z = (Single)this.GetItem(검사항목.a5).결과값 },
+                 new Point3f { X =    230, Y =  105, Z = (Single)this.GetItem(검사항목.a6).결과값 },
+                 new Point3f { X =  230, Y =   0, Z = (Single)this.GetItem(검사항목.a7).결과값 },
+                 new Point3f { X =  230, Y =   -105,  Z = (Single)this.GetItem(검사항목.a8).결과값 },
              });
 
             // Z 값을 기준으로 포인트를 내림차순으로 정렬
