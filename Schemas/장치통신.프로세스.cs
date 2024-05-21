@@ -87,15 +87,25 @@ namespace DSEV.Schemas
                 Debug.WriteLine("커버조립트리거 진입");
                 new Thread(() => {
                     검사결과 검사 = Global.검사자료.검사항목찾기(검사번호);
-                    if(검사.측정결과 == 결과구분.OK || 검사.측정결과 == 결과구분.PS)
+
+                    if (Global.환경설정.강제커버조립사용)
                     {
-                        this.커버조립트리거2검사신호 = true;
-                        this.커버조립트리거3검사신호 = false;
+                        Debug.WriteLine("강제커버조립 들어옴");
+                        this.커버조립트리거2검사신호 = false;
+                        this.커버조립트리거3검사신호 = true;
                     }
                     else
                     {
-                        this.커버조립트리거2검사신호 = true;
-                        this.커버조립트리거3검사신호 = false;
+                        if (검사.측정결과 == 결과구분.OK || 검사.측정결과 == 결과구분.PS)
+                        {
+                            this.커버조립트리거2검사신호 = false;
+                            this.커버조립트리거3검사신호 = true;
+                        }
+                        else
+                        {
+                            this.커버조립트리거2검사신호 = true;
+                            this.커버조립트리거3검사신호 = false;
+                        }
                     }
 
                     Task.Delay(200).Wait();
@@ -373,15 +383,23 @@ namespace DSEV.Schemas
             Debug.WriteLine("검사결과 강제배출 확인중");
             if (Global.환경설정.강제배출) { 
                 결과전송(Global.환경설정.양품불량);
-
                 Global.검사자료.검사완료알림함수(검사);
-                return; }
+                return; 
+            }
+
+            if (Global.환경설정.강제커버조립사용)
+            {
+                결과전송(Global.환경설정.커버양품불량);
+                Global.검사자료.검사완료알림함수(검사);
+                return;
+            }
 
             Debug.WriteLine("강제배출 아님. 검사 비어있는지 확인 중");
             if (검사 == null) { 
                 결과전송(false);
                 Global.검사자료.검사완료알림함수(검사);
-                return; }
+                return; 
+            }
             
             Debug.WriteLine("안비어있음. 결과전송 진행 예정");
             // 배출 수행

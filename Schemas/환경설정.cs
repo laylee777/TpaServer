@@ -104,6 +104,10 @@ namespace DSEV.Schemas
         [Description("마스터 이미지"), JsonIgnore]
         public String 마스터사진 { get { return Path.Combine(기본경로, "Masters"); } }
 
+        [JsonProperty("Force Cover Assembly")]
+        public Boolean 강제커버조립사용{ get; set; } = false;
+        [JsonProperty("Force Cover Assembly OK/NG")]
+        public Boolean 커버양품불량 { get; set; } = true;
         [JsonProperty("Forced Ejection")]
         public Boolean 강제배출 { get; set; } = true;
         [JsonProperty("Forced Ejection OK/NG")]
@@ -114,6 +118,9 @@ namespace DSEV.Schemas
         public DateTime 이미지자동삭제시작시간 { get; set; } = DateTime.Now;
         [JsonProperty("Image SaveDays")]
         public Decimal 이미지보관일수 { get; set; } = 0;
+        [JsonProperty("MES Used")]
+        public Boolean MES사용유무 { get; set; } = false;
+       
         [JsonIgnore]
         public Boolean 제로셋모드 { get; set; } = false;
 
