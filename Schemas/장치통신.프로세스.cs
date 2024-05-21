@@ -77,6 +77,20 @@ namespace DSEV.Schemas
             검사결과전송();
         }
 
+        private async void 커버조립여부전송(Boolean 사용여부)
+        {
+            Debug.WriteLine("커버조립 여부전송시작");
+            this.커버조립트리거2검사신호 = !사용여부;
+            this.커버조립트리거3검사신호 = 사용여부;
+
+            await Task.Delay(200);
+
+            this.커버조립트리거2검사신호 = false;
+            this.커버조립트리거3검사신호 = false;
+
+            Debug.WriteLine("커버조립 여부전송완료");
+        }
+
         private void 커버조립확인()
         {
 
@@ -91,27 +105,30 @@ namespace DSEV.Schemas
                     if (Global.환경설정.강제커버조립사용)
                     {
                         Debug.WriteLine("강제커버조립 들어옴");
-                        this.커버조립트리거2검사신호 = false;
-                        this.커버조립트리거3검사신호 = true;
+                        커버조립여부전송(Global.환경설정.커버조립여부);
+                        //this.커버조립트리거2검사신호 = false;
+                        //this.커버조립트리거3검사신호 = true;
                     }
                     else
                     {
                         if (검사.측정결과 == 결과구분.OK || 검사.측정결과 == 결과구분.PS)
                         {
-                            this.커버조립트리거2검사신호 = false;
-                            this.커버조립트리거3검사신호 = true;
+                            커버조립여부전송(true);
+                            //this.커버조립트리거2검사신호 = false;
+                            //this.커버조립트리거3검사신호 = true;
                         }
                         else
                         {
-                            this.커버조립트리거2검사신호 = true;
-                            this.커버조립트리거3검사신호 = false;
+                            커버조립여부전송(false);
+                            //this.커버조립트리거2검사신호 = true;
+                            //this.커버조립트리거3검사신호 = false;
                         }
                     }
 
-                    Task.Delay(200).Wait();
+                    //Task.Delay(200).Wait();
 
-                    this.커버조립트리거2검사신호 = false;
-                    this.커버조립트리거3검사신호 = false;
+                    //this.커버조립트리거2검사신호 = false;
+                    //this.커버조립트리거3검사신호 = false;
                 })
                 { Priority = ThreadPriority.Highest }.Start();
                 Debug.WriteLine("커버조립부분 확인 완료!!!");
@@ -385,13 +402,6 @@ namespace DSEV.Schemas
                 결과전송(Global.환경설정.양품불량);
                 Global.검사자료.검사완료알림함수(검사);
                 return; 
-            }
-
-            if (Global.환경설정.강제커버조립사용)
-            {
-                결과전송(Global.환경설정.커버양품불량);
-                Global.검사자료.검사완료알림함수(검사);
-                return;
             }
 
             Debug.WriteLine("강제배출 아님. 검사 비어있는지 확인 중");
