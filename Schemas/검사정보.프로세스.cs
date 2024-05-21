@@ -298,6 +298,7 @@ namespace DSEV.Schemas
             //}
 
             Debug.WriteLine("평면도/운곽도 계산시작");
+            this.선윤곽도계산();
             this.바닥평면도계산();
             this.커버윤곽도계산();
             this.커버들뜸계산();
@@ -367,11 +368,15 @@ namespace DSEV.Schemas
 
         public void 커버들뜸계산()
         {
+            검사정보 M1 = this.GetItem(검사항목.m1);
+            검사정보 M2 = this.GetItem(검사항목.m2);
+            검사정보 M3 = this.GetItem(검사항목.m3);
+
             List<Single> 커버들뜸값 = new List<Single>();
 
-            커버들뜸값.Add((Single)this.GetItem(검사항목.m1).결과값);
-            커버들뜸값.Add((Single)this.GetItem(검사항목.m2).결과값);
-            커버들뜸값.Add((Single)this.GetItem(검사항목.m3).결과값);
+            커버들뜸값.Add((Single)(M1.기준값 - M1.결과값));
+            커버들뜸값.Add((Single)(M2.기준값 - M2.결과값));
+            커버들뜸값.Add((Single)(M3.기준값 - M3.결과값));
 
             Single[] 커버들뜸편차 = PlaneDistanceCalculator.편차계산(커버들뜸값);
             Single 커버들뜸높이 = PlaneDistanceCalculator.FindAbsMaxDiff2(커버들뜸편차);

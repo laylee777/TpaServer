@@ -107,6 +107,15 @@ namespace DSEV.Schemas
             InspItems.Add(new Width3D(검사항목.C3C7) { Point = new Point3D(+75, -39, tz + offset), PointS = new Point3D(+75, -hy, tz + offset), PointE = new Point3D(+75, hy, tz + offset), Name = "C3C7", LabelS = "C3", LabelE = "C7", LabelMargin = 6, LabelStyle = NamePrintType.Up });
             InspItems.Add(new Width3D(검사항목.C4C8) { Point = new Point3D(+200, -39, tz + offset), PointS = new Point3D(+200, -hy, tz + offset), PointE = new Point3D(+200, hy, tz + offset), Name = "C4C8", LabelS = "C4", LabelE = "C8", LabelMargin = 6, LabelStyle = NamePrintType.Up });
 
+            //InspItems.Add(new Circle3D(검사항목.a1) { Point = new Point3D(-200, +105, tz), Name = "a1", LabelStyle = NamePrintType.Up });
+            //InspItems.Add(new Circle3D(검사항목.a2) { Point = new Point3D(0, 200, tz), Name = "a2", LabelStyle = NamePrintType.Up });
+            //InspItems.Add(new Circle3D(검사항목.a3) { Point = new Point3D(-105, 200, tz), Name = "a3", LabelStyle = NamePrintType.Up });
+            //InspItems.Add(new Circle3D(검사항목.a4) { Point = new Point3D(+90, 0, tz), Name = "a4", LabelStyle = NamePrintType.Up });
+            //InspItems.Add(new Circle3D(검사항목.a5) { Point = new Point3D(-90, 0, tz), Name = "a5", LabelStyle = NamePrintType.Up });
+            //InspItems.Add(new Circle3D(검사항목.a6) { Point = new Point3D(+105, -230, tz), Name = "a6", LabelStyle = NamePrintType.Up });
+            //InspItems.Add(new Circle3D(검사항목.a7) { Point = new Point3D(0, -230, tz), Name = "a7", LabelStyle = NamePrintType.Up });
+            //InspItems.Add(new Circle3D(검사항목.a8) { Point = new Point3D(-105, -230, tz), Name = "a8", LabelStyle = NamePrintType.Up });
+
             InspItems.ForEach(e => e.Create(Children));
         }
         #endregion
