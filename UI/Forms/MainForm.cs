@@ -194,32 +194,32 @@ namespace DSEV
             //    //Global.그랩제어.Active(카메라구분.Cam03);
             //    //Debug.WriteLine($"투입버퍼 : {Global.장치통신.제품투입번호}\n검사지그1 : {Global.장치통신.상부촬영번호}\n검사지그2 : {Global.장치통신.상부인슐폭촬영번호}\n이송장치1 : {Global.장치통신.하부표면검사번호}\n검사지그4 : {Global.장치통신.레이져각인검사번호}\n검사지그5 : {Global.장치통신.큐알검증기검사번호}\n배출버퍼 : {Global.장치통신.결과요청번호}");
             //}
-            //if (e.KeyCode == Keys.Z)
-            //{
-            //    //MESSAGE message = new MESSAGE();
-            //    //message.MSG_ID = "REQ_PROCESS_START";
-            //    //message.SYSTEMID = "EQU050";
-            //    //message.DATE_TIME = "2024-04-03 14:35:29.55808";
-            //    //message.BARCODE_ID = "F00395AB231;F00395AB231";
-            //    //message.KEY = TestIndexNum.ToString("0000");
-                
-            //    //TestIndexNum++;
-                
-            //    //Global.mes통신.자료송신(message);
+            if (e.KeyCode == Keys.Z)
+            {
+                MESSAGE message = new MESSAGE();
+                message.MSG_ID = "REQ_PROCESS_START";
+                message.SYSTEMID = "EQU050";
+                message.DATE_TIME = "2024-04-03 14:35:29.55808";
+                message.BARCODE_ID = "F00395AB231;F00395AB231";
+                message.KEY = TestIndexNum.ToString("0000");
 
-            //    //Debug.WriteLine("자료송신");
-            //}
-            //if (e.KeyCode == Keys.X)
-            //{
-            //    MESSAGE message = new MESSAGE();
-            //    message.MSG_ID = "REQ_PROCESS_END";
-            //    message.SYSTEMID = "EQU050";
-            //    message.DATE_TIME = "2024-04-03 14:35:29.55808";
-            //    message.BARCODE_ID = "F00395AB231;F00395AB231";
-            //    message.KEY = TestIndexNum.ToString("0000");
-            //    Global.mes통신.자료송신(message);
-            //    Debug.WriteLine("자료송신");
-            //}
+                TestIndexNum++;
+
+                Global.mes통신.자료송신(message);
+
+                Debug.WriteLine("자료송신");
+            }
+            if (e.KeyCode == Keys.X)
+            {
+                MESSAGE message = new MESSAGE();
+                message.MSG_ID = "REQ_PROCESS_END";
+                message.SYSTEMID = "EQU050";
+                message.DATE_TIME = "2024-04-03 14:35:29.55808";
+                message.BARCODE_ID = "F00395AB231;F00395AB231";
+                message.KEY = TestIndexNum.ToString("0000");
+                Global.mes통신.자료송신(message);
+                Debug.WriteLine("자료송신");
+            }
         }
 
         private void ShowWaitForm()

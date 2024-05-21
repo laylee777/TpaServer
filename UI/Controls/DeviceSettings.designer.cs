@@ -68,11 +68,13 @@ namespace DSEV.UI.Controls
             this.e유저관리 = new DSEV.UI.Controls.Users();
             this.Bind환경설정 = new System.Windows.Forms.BindingSource(this.components);
             this.BindLocalization = new System.Windows.Forms.BindingSource(this.components);
+
             this.e강제커버조립 = new DevExpress.XtraEditors.ToggleSwitch();
             this.layoutControlGroup6 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             this.e커버배출구분 = new DevExpress.XtraEditors.ToggleSwitch();
             this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
+
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).BeginInit();
             this.splitContainerControl1.Panel1.SuspendLayout();
@@ -322,10 +324,12 @@ namespace DSEV.UI.Controls
             this.b시간초기화.Appearance.Options.UseTextOptions = true;
             this.b시간초기화.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.b시간초기화.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+
             this.b시간초기화.Location = new System.Drawing.Point(442, 386);
             this.b시간초기화.Name = "b시간초기화";
             this.b시간초기화.Padding = new System.Windows.Forms.Padding(5);
             this.b시간초기화.Size = new System.Drawing.Size(161, 32);
+
             this.b시간초기화.StyleController = this.layoutControl1;
             this.b시간초기화.TabIndex = 11;
             this.b시간초기화.Text = "현재시간으로 초기화";
@@ -674,11 +678,13 @@ namespace DSEV.UI.Controls
             this.xtraTabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Bind환경설정)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BindLocalization)).EndInit();
+
             ((System.ComponentModel.ISupportInitialize)(this.e강제커버조립.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e커버배출구분.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
+
             this.ResumeLayout(false);
 
         }
