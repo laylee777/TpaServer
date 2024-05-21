@@ -96,7 +96,7 @@ namespace DSEV.Schemas
                     {
                         this.커버조립트리거2검사신호 = true;
                         this.커버조립트리거3검사신호 = false;
-                    } 
+                    }
 
                     Task.Delay(200).Wait();
 
@@ -215,8 +215,8 @@ namespace DSEV.Schemas
                     {
                         if (Global.환경설정.제로셋모드)
                         {
-                            Global.센서제어.SaveZeroSet(센서컨트롤러.컨트롤러1, 6);
-                            Global.센서제어.SaveZeroSet(센서컨트롤러.컨트롤러2, 6);
+                            //Global.센서제어.SaveZeroSet(센서컨트롤러.컨트롤러1, 6);
+                            //Global.센서제어.SaveZeroSet(센서컨트롤러.컨트롤러2, 6);
                             
                             Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러1, 6);
                             Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러2, 6);
@@ -251,7 +251,7 @@ namespace DSEV.Schemas
                 { Priority = ThreadPriority.Highest }.Start();
             }
 
-            else if (커버들뜸검사번호 > 0)
+            if (커버들뜸검사번호 > 0)
             {
                 new Thread(() => {
 
@@ -261,8 +261,8 @@ namespace DSEV.Schemas
                     {
                         if (Global.환경설정.제로셋모드)
                         {
-                            Global.센서제어.SaveZeroSet(센서컨트롤러.컨트롤러3, 7);
-                            Global.센서제어.SaveZeroSet(센서컨트롤러.컨트롤러4, 8);
+                            //Global.센서제어.SaveZeroSet(센서컨트롤러.컨트롤러3, 7);
+                            //Global.센서제어.SaveZeroSet(센서컨트롤러.컨트롤러4, 8);
 
                             Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러3, 7);
                             Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러4, 8);
@@ -401,7 +401,7 @@ namespace DSEV.Schemas
             this.결과요청트리거3검사신호 = 양품여부;
 
             // 1초 후에 a를 false로 변경하는 비동기 작업 예약
-            await Task.Delay(500);
+            await Task.Delay(1000);
 
             this.결과요청트리거2검사신호 = false;
             this.결과요청트리거3검사신호 = false;

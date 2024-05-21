@@ -71,7 +71,16 @@ namespace DSEV
 
             //}
 
+            
+            if(e.KeyCode == Keys.S)
+            {
+                Debug.WriteLine("센서세이브 트리거");
 
+                Global.센서제어.SaveZeroSet(센서컨트롤러.컨트롤러1, 6);
+                Global.센서제어.SaveZeroSet(센서컨트롤러.컨트롤러2, 6);
+                Global.센서제어.SaveZeroSet(센서컨트롤러.컨트롤러3, 7);
+                Global.센서제어.SaveZeroSet(센서컨트롤러.컨트롤러4, 8);
+            }
             //if (e.KeyCode == Keys.P)
             //{
             //    Debug.WriteLine("트리거2검사신호");

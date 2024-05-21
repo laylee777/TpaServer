@@ -112,10 +112,10 @@ namespace DSEV.Schemas
 
         public string[] ZeroSet(Int32 센서번호)
         {
-            Debug.WriteLine($"{센서번호} ZeroSet 시작");
+            Debug.WriteLine($"{센서번호:D2} ZeroSet 시작");
 
             // 센서에 명령어를 전송하고 응답을 받아옵니다.
-            this.command2 = $"SW,{센서번호},001,+000000001\r\n";
+            this.command2 = $"SW,{센서번호:D2},001,+000000001\r\n";
             this.commandBytes2 = encoding.GetBytes(command2);
             Stream.Write(commandBytes2, 0, commandBytes2.Length);
 
@@ -127,7 +127,7 @@ namespace DSEV.Schemas
             // 문자열을 ','를 기준으로 분할하여 배열로 저장
             string[] values = encoding.GetString(buffer, 0, bytesRead).Split(',');
 
-            Debug.WriteLine($"{센서번호} ZeroSet 완료");
+            Debug.WriteLine($"{센서번호:D2} ZeroSet 완료");
             return values;
         }
 
@@ -153,10 +153,10 @@ namespace DSEV.Schemas
 
         public string[] ZeroSetSaveMemory(Int32 센서번호)
         {
-            Debug.WriteLine($"{센서번호} ZeroSet세이브기능On 시작");
+            Debug.WriteLine($"{센서번호:D2} ZeroSet세이브기능On 시작");
 
             // 센서에 명령어를 전송하고 응답을 받아옵니다.
-            this.command2 = $"SW,{센서번호},152,1\r\n";
+            this.command2 = $"SW,{센서번호:D2},152,+000000001\r\n";
             this.commandBytes2 = encoding.GetBytes(command2);
             Stream.Write(commandBytes2, 0, commandBytes2.Length);
 
@@ -168,7 +168,7 @@ namespace DSEV.Schemas
             // 문자열을 ','를 기준으로 분할하여 배열로 저장
             string[] values = encoding.GetString(buffer, 0, bytesRead).Split(',');
 
-            Debug.WriteLine($"{센서번호} ZeroSet세이브기능On 완료");
+            Debug.WriteLine($"{센서번호:D2} ZeroSet세이브기능On 완료");
             return values;
         }
 
