@@ -108,6 +108,12 @@ namespace DSEV.Schemas
         public Boolean 강제배출 { get; set; } = true;
         [JsonProperty("Forced Ejection OK/NG")]
         public Boolean 양품불량 { get; set; } = true;
+        [JsonProperty("Image Auto Delete")]
+        public Boolean 이미지자동삭제모드 { get; set; } = false;
+        [JsonProperty("Image Auto Delete StartTime")]
+        public DateTime 이미지자동삭제시작시간 { get; set; } = DateTime.Now;
+        [JsonProperty("Image SaveDays")]
+        public Decimal 이미지보관일수 { get; set; } = 0;
         [JsonIgnore]
         public Boolean 제로셋모드 { get; set; } = false;
 

@@ -174,6 +174,7 @@ namespace DSEV.Schemas
                     Debug.WriteLine("검사자료 검사시작");
                     this.하부큐알트리거3검사신호 = true;
                     검사결과 검사 = Global.검사자료.하부큐알리딩수행(하부큐알검사번호);
+                   
                     Task.Delay(200).Wait();
                     this.하부큐알트리거3검사신호 = false;
                 })
@@ -364,11 +365,8 @@ namespace DSEV.Schemas
             Int32 검사번호 = this.검사위치번호(정보주소.결과요청트리거1);
             if (검사번호 <= 0) return;
 
-            Debug.WriteLine("1");
             Global.모델자료.선택모델.검사종료(검사번호);
-            Debug.WriteLine("2");
             검사결과 검사 = Global.검사자료.검사결과계산(검사번호);
-            Debug.WriteLine("3");
             생산수량전송();
 
             // 강제배출

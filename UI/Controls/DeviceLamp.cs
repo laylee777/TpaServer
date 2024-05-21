@@ -15,21 +15,19 @@ namespace DSEV.UI.Controls
 
         private 장치상태 장치통신;
         private 장치상태 큐알리더;
-        private 장치상태 피씨통신;
+        //private 장치상태 피씨통신;
         private 장치상태 조명장치;
         private 장치상태 카메라1;
-        private 장치상태 카메라2;
-        private 장치상태 카메라3;
 
         public void Init()
         {
             this.장치통신 = new 장치상태(this.e장치통신, true);
             this.큐알리더 = new 장치상태(this.e각인리더);
-            this.피씨통신 = new 장치상태(this.e피씨통신);
+            //this.피씨통신 = new 장치상태(this.e피씨통신);
             this.조명장치 = new 장치상태(this.e조명장치);
             this.카메라1 = new 장치상태(this.e카메라1);
-            this.카메라2 = new 장치상태(this.e카메라2);
-            this.카메라3 = new 장치상태(this.e카메라3);
+            //this.카메라2 = new 장치상태(this.e카메라2);
+            //this.카메라3 = new 장치상태(this.e카메라3);
             Global.장치통신.통신상태알림 += 통신상태알림;
             this.통신상태알림();
         }
@@ -45,8 +43,6 @@ namespace DSEV.UI.Controls
             if (Global.장치통신.정상여부) this.장치통신.Set(Global.장치통신.통신확인핑퐁 ? 상태구분.정상 : 상태구분.대기);
             else this.장치통신.Set(상태구분.오류);
             this.카메라1.Set(Global.환경설정.동작구분 == 동작구분.LocalTest || Global.장치상태.카메라1);
-            this.카메라2.Set(Global.환경설정.동작구분 == 동작구분.LocalTest || Global.장치상태.카메라2);
-            this.카메라3.Set(Global.환경설정.동작구분 == 동작구분.LocalTest || Global.장치상태.카메라3);
             this.조명장치.Set(Global.환경설정.동작구분 == 동작구분.LocalTest || Global.장치상태.조명장치);
             this.큐알리더.Set(Global.환경설정.동작구분 == 동작구분.LocalTest || Global.장치상태.상부큐알리더);
             //this.피씨통신.Set(Global.환경설정.동작구분 == 동작구분.LocalTest || Global.장치상태.피씨통신);

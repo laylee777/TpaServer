@@ -51,9 +51,7 @@ namespace DSEV
             public static Boolean 하부큐알리더 => Global.하부큐알리더.연결여부;
             public static Boolean 조명장치 => 조명제어.정상여부;
             public static Boolean 그랩장치 => Global.그랩제어.정상여부;
-            public static Boolean 카메라1 => Global.그랩제어.상부검사카메라.상태;
-            public static Boolean 카메라2 => true;
-            public static Boolean 카메라3 => true;
+            public static Boolean 카메라1 => Global.그랩제어.상부검사카메라.상태 && Global.그랩제어.측면검사카메라1.상태 && Global.그랩제어.측면검사카메라2.상태 && Global.그랩제어.하부검사카메라1.상태 && Global.그랩제어.하부검사카메라2.상태 && Global.그랩제어.커넥터검사카메라1.상태 && Global.그랩제어.커넥터검사카메라2.상태;
             public static Boolean 자동수동 => Global.장치통신.자동수동여부;
             public static Boolean 시작정지 => Global.장치통신.시작정지여부;
         }
@@ -73,7 +71,7 @@ namespace DSEV
                 사진자료 = new 사진자료();
 
                 //추후 합치기 필요 임시.
-                
+
                 상부큐알리더 = new 상부큐알리더();
                 하부큐알리더 = new 하부큐알리더();
                 하부큐알리더2 = new 하부큐알리더2();
@@ -91,7 +89,7 @@ namespace DSEV
                 모델자료.Init();
                 검사자료.Init();
                 //추후 합치기 필요 임시.
-                if(Global.환경설정.동작구분 == 동작구분.Live)
+                if (Global.환경설정.동작구분 == 동작구분.Live)
                 {
                     장치통신.Init();
                     상부큐알리더.Init();
@@ -102,14 +100,14 @@ namespace DSEV
                     조명제어.Init();
                     센서제어.Init();
                 }
-              
+
                 비전검사.Init(); // 그랩장치가 먼저 Init 되어야 함
                 사진자료.Init();
                 큐알검증.Init();
                 캘리브.Init();
                 //24.04.02 mes 통신 추가 by LHD
-               // mes통신 = new MES통신();
-               // mes통신.Init();
+                // mes통신 = new MES통신();
+                // mes통신.Init();
                 Global.정보로그(로그영역, "초기화", "시스템을 초기화 합니다.", false);
                 Initialized?.Invoke(null, true);
                 return true;
