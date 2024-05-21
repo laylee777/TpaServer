@@ -52,5 +52,7 @@ namespace DSEV.Schemas
         public static Single FindMinMaxDiff(List<Single> items) => Math.Abs(items.Max() - items.Min());
         public static Single FindAbsMaxDiff(List<Single> items, Single factor = 2) => Math.Max(Math.Abs(items.Max()), Math.Abs(items.Min())) * factor;
         public static Single FindAbsMaxDiff2(Single[] arr) => Math.Max(Math.Abs(arr.Max()), Math.Abs(arr.Min()));
+
+        public static Single 선윤곽도계산(검사정보 정보1, 검사정보 정보2) => (Single)(Math.Max(Math.Abs(정보1.기준값 - 정보1.결과값), Math.Abs(정보2.기준값 - 정보2.결과값)) * 2);
     }
 }

@@ -262,7 +262,7 @@ namespace DSEV.Schemas
                         if (Global.환경설정.제로셋모드)
                         {
                             Global.센서제어.SaveZeroSet(센서컨트롤러.컨트롤러3, 7);
-                            Global.센서제어.SaveZeroSet(센서컨트롤러.컨트롤러3, 8);
+                            Global.센서제어.SaveZeroSet(센서컨트롤러.컨트롤러4, 8);
 
                             Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러3, 7);
                             Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러4, 8);

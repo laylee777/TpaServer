@@ -448,6 +448,28 @@ namespace DSEV.Schemas
 
         }
 
+        public void 선윤곽도계산()
+        {
+            검사정보 H1 = this.GetItem(검사항목.h1);
+            검사정보 H2 = this.GetItem(검사항목.h2);
+            검사정보 H3 = this.GetItem(검사항목.h3);
+            검사정보 H4 = this.GetItem(검사항목.h4);
+
+            검사정보 J1 = this.GetItem(검사항목.j1);
+            검사정보 J2 = this.GetItem(검사항목.j2);
+            검사정보 J3 = this.GetItem(검사항목.j3);
+            검사정보 J4 = this.GetItem(검사항목.j4);
+
+            검사정보 F1 = this.GetItem(검사항목.DistBigNotchL);
+            검사정보 F2 = this.GetItem(검사항목.DistBigNotchR);
+
+            this.SetResult(검사항목.ShapeH1H2, PlaneDistanceCalculator.선윤곽도계산(H1, H2));
+            this.SetResult(검사항목.ShapeH3H4, PlaneDistanceCalculator.선윤곽도계산(H3, H4));
+            this.SetResult(검사항목.ShapeJ1J2, PlaneDistanceCalculator.선윤곽도계산(J1, J2));
+            this.SetResult(검사항목.ShapeJ3J4, PlaneDistanceCalculator.선윤곽도계산(J3, J4));
+            this.SetResult(검사항목.ShapeBigNotchLR, PlaneDistanceCalculator.선윤곽도계산(F1, F2));
+        }
+
         public void 바닥평면도계산()
         {
             List<Point3f> 기준위치 = new List<Point3f>() {
@@ -471,19 +493,7 @@ namespace DSEV.Schemas
 
             // Z 값을 기준으로 포인트를 내림차순으로 정렬
             List<Point3f> sortedPoints = 기준위치.OrderBy(p => p.Z).ToList();
-            foreach (var item in sortedPoints)
-            {
-                Debug.WriteLine($"|-----------------{item.Z}-----------------|");
-            }
-        
             List<Point3f> largest3Points = sortedPoints.Take(3).ToList();
-
-            foreach (var item in largest3Points)
-            {
-                Debug.WriteLine($"|------------------------------------------|");
-                Debug.WriteLine($"|-----------------{item.Z}-----------------|");
-                Debug.WriteLine($"|------------------------------------------|");
-            }
 
             // Create an array of Vector3 containing the points
             Vector3[] pointArray = new Vector3[largest3Points.Count];
