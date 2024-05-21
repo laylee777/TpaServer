@@ -196,9 +196,6 @@ namespace DSEV.Schemas
         //    return 검사;
         //}
 
-
-
-
         public 검사결과 검사결과계산(Int32 검사코드)
         {
             if (검사코드 < 1) return null;

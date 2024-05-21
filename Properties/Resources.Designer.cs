@@ -93,6 +93,16 @@ namespace DSEV.Properties {
         /// <summary>
         ///   DevExpress.Utils.Svg.SvgImage 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static DevExpress.Utils.Svg.SvgImage Save {
+            get {
+                object obj = ResourceManager.GetObject("Save", resourceCulture);
+                return ((DevExpress.Utils.Svg.SvgImage)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   DevExpress.Utils.Svg.SvgImage 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static DevExpress.Utils.Svg.SvgImage vision {
             get {
                 object obj = ResourceManager.GetObject("vision", resourceCulture);
