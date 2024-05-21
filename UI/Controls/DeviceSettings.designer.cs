@@ -45,6 +45,7 @@ namespace DSEV.UI.Controls
             this.e이미지저장일수 = new DevExpress.XtraEditors.SpinEdit();
             this.e이미지자동삭제 = new DevExpress.XtraEditors.ToggleSwitch();
             this.e이미지삭제시작시간 = new DevExpress.XtraEditors.TimeEdit();
+            this.b시간초기화 = new DevExpress.XtraEditors.SimpleButton();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -60,14 +61,13 @@ namespace DSEV.UI.Controls
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             this.e큐알장치 = new DSEV.UI.Controls.QrControls();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.e기본설정 = new DSEV.UI.Controls.Config();
             this.e유저관리 = new DSEV.UI.Controls.Users();
             this.Bind환경설정 = new System.Windows.Forms.BindingSource(this.components);
             this.BindLocalization = new System.Windows.Forms.BindingSource(this.components);
-            this.b시간초기화 = new DevExpress.XtraEditors.SimpleButton();
-            this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).BeginInit();
             this.splitContainerControl1.Panel1.SuspendLayout();
@@ -102,10 +102,10 @@ namespace DSEV.UI.Controls
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
             this.xtraTabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Bind환경설정)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BindLocalization)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainerControl1
@@ -303,6 +303,21 @@ namespace DSEV.UI.Controls
             this.e이미지삭제시작시간.StyleController = this.layoutControl1;
             this.e이미지삭제시작시간.TabIndex = 10;
             // 
+            // b시간초기화
+            // 
+            this.b시간초기화.Appearance.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.b시간초기화.Appearance.Options.UseFont = true;
+            this.b시간초기화.Appearance.Options.UseTextOptions = true;
+            this.b시간초기화.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.b시간초기화.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.b시간초기화.Location = new System.Drawing.Point(442, 337);
+            this.b시간초기화.Name = "b시간초기화";
+            this.b시간초기화.Padding = new System.Windows.Forms.Padding(5);
+            this.b시간초기화.Size = new System.Drawing.Size(155, 32);
+            this.b시간초기화.StyleController = this.layoutControl1;
+            this.b시간초기화.TabIndex = 11;
+            this.b시간초기화.Text = "현재시간으로 초기화";
+            // 
             // Root
             // 
             this.Root.AppearanceItemCaption.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
@@ -486,6 +501,15 @@ namespace DSEV.UI.Controls
             this.layoutControlItem7.Text = "Delete Image Start Time";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(173, 20);
             // 
+            // layoutControlItem9
+            // 
+            this.layoutControlItem9.Control = this.b시간초기화;
+            this.layoutControlItem9.Location = new System.Drawing.Point(423, 48);
+            this.layoutControlItem9.Name = "layoutControlItem9";
+            this.layoutControlItem9.Size = new System.Drawing.Size(159, 36);
+            this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem9.TextVisible = false;
+            // 
             // e큐알장치
             // 
             this.e큐알장치.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -525,30 +549,6 @@ namespace DSEV.UI.Controls
             // BindLocalization
             // 
             this.BindLocalization.DataSource = typeof(DSEV.UI.Controls.DeviceSettings.LocalizationDeviceSetting);
-            // 
-            // b시간초기화
-            // 
-            this.b시간초기화.Appearance.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.b시간초기화.Appearance.Options.UseFont = true;
-            this.b시간초기화.Appearance.Options.UseTextOptions = true;
-            this.b시간초기화.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.b시간초기화.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.b시간초기화.Location = new System.Drawing.Point(442, 337);
-            this.b시간초기화.Name = "b시간초기화";
-            this.b시간초기화.Padding = new System.Windows.Forms.Padding(5);
-            this.b시간초기화.Size = new System.Drawing.Size(155, 32);
-            this.b시간초기화.StyleController = this.layoutControl1;
-            this.b시간초기화.TabIndex = 11;
-            this.b시간초기화.Text = "현재시간으로 초기화";
-            // 
-            // layoutControlItem9
-            // 
-            this.layoutControlItem9.Control = this.b시간초기화;
-            this.layoutControlItem9.Location = new System.Drawing.Point(423, 48);
-            this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(159, 36);
-            this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem9.TextVisible = false;
             // 
             // DeviceSettings
             // 
@@ -591,10 +591,10 @@ namespace DSEV.UI.Controls
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
             this.xtraTabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Bind환경설정)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BindLocalization)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
             this.ResumeLayout(false);
 
         }
