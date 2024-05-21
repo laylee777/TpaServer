@@ -5,9 +5,9 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TpaServer", "TpaServer.csproj", "{4C1D513F-E601-45D8-BCCF-AA8AAD0E3426}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvUtils", "..\..\..\..\MvUtils\MvUtils\MvUtils.csproj", "{BDB2ED5C-4A7F-4116-B5A0-1831A1EC0624}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvUtils", "..\..\..\..\Project\OsEnE\2024\VDA590\MvUtils\MvUtils\MvUtils.csproj", "{BDB2ED5C-4A7F-4116-B5A0-1831A1EC0624}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UfaVision", "..\..\..\..\UfaVision\UfaVision.csproj", "{88AD3D48-11A5-4350-8430-6C35CD85D49E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UfaVision", "..\..\..\..\Project\OsEnE\2024\VDA590\UfaVision\UfaVision.csproj", "{88AD3D48-11A5-4350-8430-6C35CD85D49E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
