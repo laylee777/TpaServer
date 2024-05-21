@@ -22,13 +22,13 @@ namespace DSEV.UI.Controls
             this.e배출구분.IsOn = Global.환경설정.양품불량;
             this.e이미지자동삭제.IsOn = Global.환경설정.이미지자동삭제모드;
             this.e강제커버조립.IsOn = Global.환경설정.강제커버조립사용;
-            this.e커버배출구분.IsOn = Global.환경설정.커버양품불량;
+            this.e커버조립여부.IsOn = Global.환경설정.커버조립여부;
 
             this.e강제배출.EditValueChanged += 강제배출Changed;
             this.e배출구분.EditValueChanged += 배출구분Changed;
             this.e이미지자동삭제.EditValueChanged += 이미지자동삭제Changed;
             this.e강제커버조립.EditValueChanged += 강제커버조립Changed;
-            this.e커버배출구분.EditValueChanged += 커버배출구분Changed;
+            this.e커버조립여부.EditValueChanged += 커버조립여부Changed;
 
             this.b캠트리거리셋.Click += 캠트리거리셋;
             this.e센서리셋.IsOn = false;
@@ -47,7 +47,7 @@ namespace DSEV.UI.Controls
             this.e유저관리.Init();
         }
 
-        private void 커버배출구분Changed(object sender, EventArgs e) => Global.환경설정.커버양품불량 = this.e커버배출구분.IsOn;
+        private void 커버조립여부Changed(object sender, EventArgs e) => Global.환경설정.커버조립여부 = this.e커버조립여부.IsOn;
   
         private void 강제커버조립Changed(object sender, EventArgs e) => Global.환경설정.강제커버조립사용 = e강제커버조립.IsOn;
 

@@ -112,7 +112,7 @@ namespace DSEV.Schemas
         [JsonProperty("Force Cover Assembly")]
         public Boolean 강제커버조립사용{ get; set; } = false;
         [JsonProperty("Force Cover Assembly OK/NG")]
-        public Boolean 커버양품불량 { get; set; } = true;
+        public Boolean 커버조립여부 { get; set; } = true;
         [JsonProperty("Forced Ejection")]
         public Boolean 강제배출 { get; set; } = true;
         [JsonProperty("Forced Ejection OK/NG")]
