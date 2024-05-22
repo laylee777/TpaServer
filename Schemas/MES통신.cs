@@ -24,16 +24,25 @@ namespace DSEV.Schemas
         public String 로그영역 = "MES통신";
         private MESClient 통신장치;
 
+        public enum 메세지아이디
+        {
+            REP_PROCESS_START = 0,
+            REP_PROCESS_END = 3,
+            REP_LINK_TEST = 5,
+        }
 
-        public Boolean Init() {
+
+        public Boolean Init()
+        {
             try
             {
                 Debug.WriteLine("mes통신 시작");
                 this.통신장치 = new MESClient();
                 this.통신장치.Init();
                 this.통신장치.자료수신 += 통신장치_자료수신;
-                
-            }catch(Exception ex)
+
+            }
+            catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
                 return false;
@@ -47,7 +56,7 @@ namespace DSEV.Schemas
             {
                 Debug.WriteLine("자료수신");
                 // 장비 구동 여부 관련 메시지일 경우
-                if (e.MSG_ID == "REP_PROCESS_START")
+                if (e.MSG_ID == 메세지아이디.REP_PROCESS_START.ToString())
                 {
                     //OK일 경우
                     if (e.RESULT == "0")
@@ -59,19 +68,19 @@ namespace DSEV.Schemas
                     Global.오류로그(로그영역, "MES통신", $"불량품 투입됨", true);
 
                 }
-                else if (e.MSG_ID == "REP_PROCESS_END")
+                else if (e.MSG_ID == 메세지아이디.REP_PROCESS_END.ToString())
                 {
                     Global.정보로그(로그영역, "MES통신", $"착공완료응답 수신완료", true);
                     return;
                 }
-                else if (e.MSG_ID == "REP_LINK_TEST")
+                else if (e.MSG_ID == 메세지아이디.REP_LINK_TEST.ToString())
                 {
                     Global.정보로그(로그영역, "MES통신", $"LINKTEST 수신완료", true);
                     return;
                 }
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Global.오류로그(로그영역, "자료수신", $"수신 자료가 올바르지 않습니다. {ex.Message}", true);
             }
@@ -81,8 +90,6 @@ namespace DSEV.Schemas
         public void Start() => this.통신장치?.Start();
         public void Stop() => this.통신장치?.Stop();
 
-
-
         public Boolean 자료송신(MESSAGE messge)
         {
             if (!this.통신장치.연결여부) return false;
@@ -91,14 +98,6 @@ namespace DSEV.Schemas
             Global.오류로그(로그영역, "자료전송", $"[REQ_PROCESS_START] 자료전송에 실패하였습니다.", true);
             return false;
         }
-
-
-
-
-
-
-
-
     }
 
 
@@ -114,9 +113,7 @@ namespace DSEV.Schemas
         public TcpClient 통신소켓 = null;
         public NetworkStream Stream { get => 통신소켓?.GetStream(); }
 
-
         //string xmlData = GenerateXmlMessage("REQ_PROCESS_START", "EQPID", "20240304093001553", "F00395AB231;F00395AB231");
-
         public void Init() { this.통신소켓 = new TcpClient() { ReceiveBufferSize = 4096, SendBufferSize = 4096, SendTimeout = 10000, ReceiveTimeout = 10000 }; }
         public void Start() { this.동작여부 = true; new Thread(Read) { Priority = ThreadPriority.AboveNormal }.Start(); }
         public void Close()
@@ -149,11 +146,8 @@ namespace DSEV.Schemas
             this.통신소켓 = null;
         }
 
-
         private Int32 통신연결간격 = 3;
         private DateTime 통신연결시간 = DateTime.Today;
-        
-        
         public Boolean Connect()
         {
             //if (Global.환경설정.동작구분 == 동작구분.LocalTest) return false;
@@ -169,16 +163,13 @@ namespace DSEV.Schemas
                 this.통신소켓?.Connect(address, 6003);
                 return 연결여부;
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 //Debug.WriteLine($"[{Global.환경설정.서버주소}] 연결할 수 없습니다. {ex.Message}", 로그영역);
                 Global.경고로그(로그영역, "MES연결", $"[MES] 연결할 수 없습니다. {ex.Message}", true);
             }
             return false;
         }
-
-
-
 
         public List<Byte> ReceiveBuffer = new List<Byte>();
         public void Read()
@@ -205,7 +196,7 @@ namespace DSEV.Schemas
                     string messege = Encoding.UTF8.GetString(buffer.ToArray());
                     Debug.WriteLine($"자료수신4 : {messege}");
 
-                    if (messege == "") continue; 
+                    if (messege == "") continue;
                     this.자료수신?.Invoke(this, XmlMessageConverter.DeserializeXmlMessage(messege));
 
                 }
@@ -215,8 +206,6 @@ namespace DSEV.Schemas
                 }
             }
         }
-
-
         public Boolean Send(String data)
         {
             if (!this.연결여부) return false;
@@ -234,9 +223,6 @@ namespace DSEV.Schemas
                 return false;
             }
         }
-
-
-
     }
 
 
@@ -250,6 +236,19 @@ namespace DSEV.Schemas
         public string RESULT { get; set; }
         public string RESULT_MSG { get; set; }
         public string KEY { get; set; }
+
+        public MESSAGE SetMessage(String msgid, String systemid, String datetime, String barcodeid, String result, String resultmsg, String key)
+        {
+            this.MSG_ID = msgid;
+            this.SYSTEMID = systemid;
+            this.DATE_TIME = datetime;
+            this.BARCODE_ID = barcodeid;
+            this.RESULT = result;
+            this.RESULT_MSG = resultmsg;
+            this.KEY = key;
+
+            return this;
+        }
     }
 
     public class XmlMessageConverter

@@ -45,9 +45,9 @@ namespace DSEV.UI.Controls
             this.e이미지저장일수 = new DevExpress.XtraEditors.SpinEdit();
             this.e이미지자동삭제 = new DevExpress.XtraEditors.ToggleSwitch();
             this.e이미지삭제시작시간 = new DevExpress.XtraEditors.TimeEdit();
-            this.b시간초기화 = new DevExpress.XtraEditors.SimpleButton();
             this.e강제커버조립 = new DevExpress.XtraEditors.ToggleSwitch();
             this.e커버조립여부 = new DevExpress.XtraEditors.ToggleSwitch();
+            this.eMES사용유무 = new DevExpress.XtraEditors.ToggleSwitch();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -63,10 +63,13 @@ namespace DSEV.UI.Controls
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlGroup6 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlGroup7 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.emptySpaceItem4 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.e큐알장치 = new DSEV.UI.Controls.QrControls();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.e기본설정 = new DSEV.UI.Controls.Config();
@@ -94,6 +97,7 @@ namespace DSEV.UI.Controls
             ((System.ComponentModel.ISupportInitialize)(this.e이미지삭제시작시간.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e강제커버조립.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e커버조립여부.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eMES사용유무.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
@@ -109,10 +113,13 @@ namespace DSEV.UI.Controls
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).BeginInit();
             this.xtraTabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Bind환경설정)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BindLocalization)).BeginInit();
@@ -186,9 +193,9 @@ namespace DSEV.UI.Controls
             this.layoutControl1.Controls.Add(this.e이미지저장일수);
             this.layoutControl1.Controls.Add(this.e이미지자동삭제);
             this.layoutControl1.Controls.Add(this.e이미지삭제시작시간);
-            this.layoutControl1.Controls.Add(this.b시간초기화);
             this.layoutControl1.Controls.Add(this.e강제커버조립);
             this.layoutControl1.Controls.Add(this.e커버조립여부);
+            this.layoutControl1.Controls.Add(this.eMES사용유무);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(2, 27);
             this.layoutControl1.Name = "layoutControl1";
@@ -213,13 +220,13 @@ namespace DSEV.UI.Controls
             // 
             // e센서리셋
             // 
-            this.e센서리셋.Location = new System.Drawing.Point(506, 151);
+            this.e센서리셋.Location = new System.Drawing.Point(496, 156);
             this.e센서리셋.Name = "e센서리셋";
             this.e센서리셋.Properties.Appearance.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.e센서리셋.Properties.Appearance.Options.UseFont = true;
             this.e센서리셋.Properties.OffText = "Off";
             this.e센서리셋.Properties.OnText = "On";
-            this.e센서리셋.Size = new System.Drawing.Size(84, 22);
+            this.e센서리셋.Size = new System.Drawing.Size(89, 22);
             this.e센서리셋.StyleController = this.layoutControl1;
             this.e센서리셋.TabIndex = 6;
             // 
@@ -310,25 +317,10 @@ namespace DSEV.UI.Controls
             this.e이미지삭제시작시간.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.e이미지삭제시작시간.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.Default;
-            this.e이미지삭제시작시간.Properties.MaskSettings.Set("mask", "");
-            this.e이미지삭제시작시간.Size = new System.Drawing.Size(228, 26);
+            this.e이미지삭제시작시간.Properties.MaskSettings.Set("mask", "T");
+            this.e이미지삭제시작시간.Size = new System.Drawing.Size(219, 26);
             this.e이미지삭제시작시간.StyleController = this.layoutControl1;
             this.e이미지삭제시작시간.TabIndex = 10;
-            // 
-            // b시간초기화
-            // 
-            this.b시간초기화.Appearance.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.b시간초기화.Appearance.Options.UseFont = true;
-            this.b시간초기화.Appearance.Options.UseTextOptions = true;
-            this.b시간초기화.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.b시간초기화.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.b시간초기화.Location = new System.Drawing.Point(442, 386);
-            this.b시간초기화.Name = "b시간초기화";
-            this.b시간초기화.Padding = new System.Windows.Forms.Padding(5);
-            this.b시간초기화.Size = new System.Drawing.Size(161, 32);
-            this.b시간초기화.StyleController = this.layoutControl1;
-            this.b시간초기화.TabIndex = 11;
-            this.b시간초기화.Text = "현재시간으로 초기화";
             // 
             // e강제커버조립
             // 
@@ -353,6 +345,18 @@ namespace DSEV.UI.Controls
             this.e커버조립여부.StyleController = this.layoutControl1;
             this.e커버조립여부.TabIndex = 5;
             // 
+            // eMES사용유무
+            // 
+            this.eMES사용유무.Location = new System.Drawing.Point(217, 474);
+            this.eMES사용유무.Name = "eMES사용유무";
+            this.eMES사용유무.Properties.Appearance.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.eMES사용유무.Properties.Appearance.Options.UseFont = true;
+            this.eMES사용유무.Properties.OffText = "Off";
+            this.eMES사용유무.Properties.OnText = "On";
+            this.eMES사용유무.Size = new System.Drawing.Size(84, 22);
+            this.eMES사용유무.StyleController = this.layoutControl1;
+            this.eMES사용유무.TabIndex = 6;
+            // 
             // Root
             // 
             this.Root.AppearanceItemCaption.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
@@ -367,7 +371,9 @@ namespace DSEV.UI.Controls
             this.layoutControlItem6,
             this.emptySpaceItem2,
             this.layoutControlGroup5,
-            this.layoutControlGroup6});
+            this.layoutControlGroup6,
+            this.layoutControlGroup7,
+            this.emptySpaceItem4});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(622, 605);
             this.Root.TextVisible = false;
@@ -375,9 +381,9 @@ namespace DSEV.UI.Controls
             // emptySpaceItem1
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 417);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 509);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(602, 134);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(602, 42);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlGroup1
@@ -435,7 +441,7 @@ namespace DSEV.UI.Controls
             this.layoutControlItem4.Control = this.e센서리셋;
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Padding = new DevExpress.XtraLayout.Utils.Padding(10, 10, 10, 10);
+            this.layoutControlItem4.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 15, 15, 0);
             this.layoutControlItem4.Size = new System.Drawing.Size(289, 57);
             this.layoutControlItem4.Text = "State";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(173, 25);
@@ -487,7 +493,7 @@ namespace DSEV.UI.Controls
             this.layoutControlItem5,
             this.layoutControlItem8,
             this.layoutControlItem7,
-            this.layoutControlItem9});
+            this.emptySpaceItem3});
             this.layoutControlGroup5.Location = new System.Drawing.Point(0, 294);
             this.layoutControlGroup5.Name = "layoutControlGroup5";
             this.layoutControlGroup5.OptionsItemText.TextToControlDistance = 3;
@@ -533,18 +539,17 @@ namespace DSEV.UI.Controls
             this.layoutControlItem7.Location = new System.Drawing.Point(0, 48);
             this.layoutControlItem7.Name = "layoutControlItem7";
             this.layoutControlItem7.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
-            this.layoutControlItem7.Size = new System.Drawing.Size(423, 36);
+            this.layoutControlItem7.Size = new System.Drawing.Size(414, 36);
             this.layoutControlItem7.Text = "Delete Image Start Time";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(173, 20);
             // 
-            // layoutControlItem9
+            // emptySpaceItem3
             // 
-            this.layoutControlItem9.Control = this.b시간초기화;
-            this.layoutControlItem9.Location = new System.Drawing.Point(423, 48);
-            this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(165, 36);
-            this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem9.TextVisible = false;
+            this.emptySpaceItem3.AllowHotTrack = false;
+            this.emptySpaceItem3.Location = new System.Drawing.Point(414, 48);
+            this.emptySpaceItem3.Name = "emptySpaceItem3";
+            this.emptySpaceItem3.Size = new System.Drawing.Size(174, 36);
+            this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlGroup6
             // 
@@ -590,6 +595,43 @@ namespace DSEV.UI.Controls
             this.layoutControlItem11.Size = new System.Drawing.Size(289, 45);
             this.layoutControlItem11.Text = "Assembly";
             this.layoutControlItem11.TextSize = new System.Drawing.Size(173, 25);
+            // 
+            // layoutControlGroup7
+            // 
+            this.layoutControlGroup7.AppearanceGroup.Options.UseTextOptions = true;
+            this.layoutControlGroup7.AppearanceGroup.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.layoutControlGroup7.CustomizationFormText = "Sensors Zero Set Mode";
+            this.layoutControlGroup7.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem12});
+            this.layoutControlGroup7.Location = new System.Drawing.Point(0, 417);
+            this.layoutControlGroup7.Name = "layoutControlGroup7";
+            this.layoutControlGroup7.OptionsItemText.TextToControlDistance = 3;
+            this.layoutControlGroup7.Size = new System.Drawing.Size(313, 92);
+            this.layoutControlGroup7.Text = "MES Use";
+            // 
+            // layoutControlItem12
+            // 
+            this.layoutControlItem12.AppearanceItemCaption.Font = new System.Drawing.Font("맑은 고딕", 12.75F, System.Drawing.FontStyle.Bold);
+            this.layoutControlItem12.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem12.AppearanceItemCaption.Options.UseTextOptions = true;
+            this.layoutControlItem12.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.layoutControlItem12.Control = this.eMES사용유무;
+            this.layoutControlItem12.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.layoutControlItem12.CustomizationFormText = "State";
+            this.layoutControlItem12.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem12.Name = "layoutControlItem12";
+            this.layoutControlItem12.Padding = new DevExpress.XtraLayout.Utils.Padding(10, 10, 10, 10);
+            this.layoutControlItem12.Size = new System.Drawing.Size(289, 43);
+            this.layoutControlItem12.Text = "MES Use On/Off";
+            this.layoutControlItem12.TextSize = new System.Drawing.Size(173, 23);
+            // 
+            // emptySpaceItem4
+            // 
+            this.emptySpaceItem4.AllowHotTrack = false;
+            this.emptySpaceItem4.Location = new System.Drawing.Point(313, 417);
+            this.emptySpaceItem4.Name = "emptySpaceItem4";
+            this.emptySpaceItem4.Size = new System.Drawing.Size(289, 92);
+            this.emptySpaceItem4.TextSize = new System.Drawing.Size(0, 0);
             // 
             // e큐알장치
             // 
@@ -659,6 +701,7 @@ namespace DSEV.UI.Controls
             ((System.ComponentModel.ISupportInitialize)(this.e이미지삭제시작시간.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e강제커버조립.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e커버조립여부.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eMES사용유무.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
@@ -674,10 +717,13 @@ namespace DSEV.UI.Controls
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem4)).EndInit();
             this.xtraTabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Bind환경설정)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BindLocalization)).EndInit();
@@ -722,12 +768,15 @@ namespace DSEV.UI.Controls
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
         private DevExpress.XtraEditors.TimeEdit e이미지삭제시작시간;
-        private DevExpress.XtraEditors.SimpleButton b시간초기화;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
         private DevExpress.XtraEditors.ToggleSwitch e강제커버조립;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup6;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
         private DevExpress.XtraEditors.ToggleSwitch e커버조립여부;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem3;
+        private DevExpress.XtraEditors.ToggleSwitch eMES사용유무;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup7;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem4;
     }
 }

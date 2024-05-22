@@ -42,12 +42,9 @@ namespace DSEV
         {
             
             MESSAGE message = new MESSAGE();
-            message.MSG_ID = "REQ_PROCESS_END";
-            message.SYSTEMID = "IVM01";
-            message.DATE_TIME = DateTime.Now.ToString();
-            message.BARCODE_ID = "F00395AB231;F00395AB231";
-            message.KEY = "52";
 
+            message.SetMessage("REQ_PROCESS_END", "IVM01", DateTime.Now.ToString(), "F00395AB231;F00395AB231", String.Empty, String.Empty, "50");
+  
             Global.mes통신.자료송신(message);
 
             Debug.WriteLine("자료송신");

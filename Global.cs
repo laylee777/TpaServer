@@ -83,6 +83,8 @@ namespace DSEV
 
                 센서제어 = new 센서제어();
 
+                mes통신 = new MES통신();
+
                 로그자료.Init();
                 환경설정.Init();
                 유저자료.Init();
@@ -106,8 +108,9 @@ namespace DSEV
                 큐알검증.Init();
                 캘리브.Init();
                 //24.04.02 mes 통신 추가 by LHD
-                mes통신 = new MES통신();
-                mes통신.Init();
+               
+                if(Global.환경설정.MES사용유무) mes통신.Init();
+
                 Global.정보로그(로그영역, "초기화", "시스템을 초기화 합니다.", false);
                 Initialized?.Invoke(null, true);
                 return true;

@@ -99,7 +99,8 @@ namespace DSEV.Schemas
             if (검사번호 > 0)
             {
                 Debug.WriteLine("커버조립트리거 진입");
-                new Thread(() => {
+                new Thread(() =>
+                {
                     검사결과 검사 = Global.검사자료.검사항목찾기(검사번호);
 
                     if (Global.환경설정.강제커버조립사용)
@@ -110,13 +111,9 @@ namespace DSEV.Schemas
                     else
                     {
                         if (검사.측정결과 == 결과구분.OK || 검사.측정결과 == 결과구분.PS)
-                        {
                             커버조립여부전송(true);
-                        }
                         else
-                        {
                             커버조립여부전송(false);
-                        }
                     }
                 })
                 { Priority = ThreadPriority.Highest }.Start();
@@ -183,14 +180,15 @@ namespace DSEV.Schemas
             if (하부큐알검사번호 > 0)
             {
                 Debug.WriteLine("하부 큐알 검사 시작!!!");
-                new Thread(() => {
+                new Thread(() =>
+                {
                     Global.모델자료.선택모델.검사시작(하부큐알검사번호);
                     Debug.WriteLine("선택모델 검사시작");
                     Global.검사자료.검사시작(하부큐알검사번호);
                     Debug.WriteLine("검사자료 검사시작");
                     this.하부큐알확인완료신호 = true;
                     검사결과 검사 = Global.검사자료.하부큐알리딩수행(하부큐알검사번호);
-                   
+
                     Task.Delay(200).Wait();
                     this.하부큐알확인완료신호 = false;
                 })
@@ -200,7 +198,8 @@ namespace DSEV.Schemas
 
             if (상부큐알검사번호 > 0)
             {
-                new Thread(() => {
+                new Thread(() =>
+                {
                     검사결과 검사 = Global.검사자료.상부큐알리딩수행(상부큐알검사번호);
                     //Debug.WriteLine(검사.큐알등급.ToString());
                     this.상부큐알확인완료신호 = true;
@@ -225,7 +224,8 @@ namespace DSEV.Schemas
 
             if (바닥평면검사번호 > 0)
             {
-                new Thread(() => {
+                new Thread(() =>
+                {
                     Debug.WriteLine("바닥평면도 검사시작");
 
                     try
@@ -249,7 +249,7 @@ namespace DSEV.Schemas
                         Dictionary<센서항목, Single> 센서자료 = new Dictionary<센서항목, Single>();
                         for (int i = 0; i < mergedValues.Length; i++)
                         {
-                            센서자료.Add((센서항목)i+1, Single.Parse(mergedValues[i]) / 1000);
+                            센서자료.Add((센서항목)i + 1, Single.Parse(mergedValues[i]) / 1000);
                         }
                         Global.검사자료.평탄검사수행(바닥평면검사번호, 센서자료);
                         this.바닥평면확인완료신호 = false;
@@ -267,7 +267,8 @@ namespace DSEV.Schemas
 
             if (커버들뜸검사번호 > 0)
             {
-                new Thread(() => {
+                new Thread(() =>
+                {
 
                     Debug.WriteLine("커버들뜸 검사시작");
 
@@ -291,7 +292,7 @@ namespace DSEV.Schemas
                         Dictionary<센서항목, Single> 센서자료 = new Dictionary<센서항목, Single>();
                         for (int i = 0; i < mergedValues.Length; i++)
                         {
-                            센서자료.Add((센서항목)i+21, Single.Parse(mergedValues[i]) / 1000);
+                            센서자료.Add((센서항목)i + 21, Single.Parse(mergedValues[i]) / 1000);
                         }
                         Global.검사자료.평탄검사수행(커버들뜸검사번호, 센서자료);
                         this.커버들뜸확인완료신호 = false;
@@ -310,7 +311,7 @@ namespace DSEV.Schemas
 
         private void 영상촬영수행()
         {
-            Int32 측상카메라검사번호 = this.검사위치번호(정보주소.측상촬영트리거); 
+            Int32 측상카메라검사번호 = this.검사위치번호(정보주소.측상촬영트리거);
             Int32 하부카메라검사번호 = this.검사위치번호(정보주소.하부촬영트리거);
             Int32 커넥터카메라검사번호 = this.검사위치번호(정보주소.커넥터촬영트리거);
 
@@ -357,7 +358,7 @@ namespace DSEV.Schemas
                     Global.조명제어.TurnOn(카메라구분.Cam07);
                     Global.그랩제어.Active(카메라구분.Cam06);
                     Global.그랩제어.Active(카메라구분.Cam07);
-                    
+
                     this.커넥터촬영완료신호 = true;
                     Task.Delay(200).Wait();
                     this.커넥터촬영완료신호 = false;
@@ -378,19 +379,21 @@ namespace DSEV.Schemas
 
             // 강제배출
             Debug.WriteLine("검사결과 강제배출 확인중");
-            if (Global.환경설정.강제배출) { 
+            if (Global.환경설정.강제배출)
+            {
                 결과전송(Global.환경설정.양품불량);
                 Global.검사자료.검사완료알림함수(검사);
-                return; 
+                return;
             }
 
             Debug.WriteLine("강제배출 아님. 검사 비어있는지 확인 중");
-            if (검사 == null) { 
+            if (검사 == null)
+            {
                 결과전송(false);
                 Global.검사자료.검사완료알림함수(검사);
-                return; 
+                return;
             }
-            
+
             Debug.WriteLine("안비어있음. 결과전송 진행 예정");
             // 배출 수행
             결과전송(검사.측정결과 == 결과구분.OK);
