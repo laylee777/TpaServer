@@ -1,11 +1,9 @@
-﻿using DevExpress.Utils.Extensions;
-using MvUtils;
+﻿using MvUtils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace DSEV.Schemas
 {
@@ -64,7 +62,34 @@ namespace DSEV.Schemas
         private void 검사위치확인()
         {
             Dictionary<정보주소, Int32> 변경 = this.입출자료.Changes(정보주소.하부큐알트리거, 정보주소.결과요청트리거);
+            
             if (변경.Count < 1) return;
+
+            if (!this.하부큐알트리거신호 && this.하부큐알확인완료신호)
+            {
+                this.하부큐알결과OK신호 = false;
+                this.하부큐알결과NG신호 = false;
+                this.하부큐알확인완료신호 = false;
+            }
+
+            if (!this.바닥평면트리거신호 && this.바닥평면확인완료신호) this.바닥평면확인완료신호 = false;
+            if (!this.측상촬영트리거신호 && this.측상촬영완료신호) this.측상촬영완료신호 = false;
+            if (!this.상부큐알트리거신호 && this.상부큐알확인완료신호) this.상부큐알확인완료신호 = false;
+            if (!this.하부촬영트리거신호 && this.하부촬영완료신호) this.하부촬영완료신호 = false;
+            if (!this.커넥터촬영트리거신호 && this.커넥터촬영완료신호) this.커넥터촬영완료신호 = false;
+            if (!this.커버조립트리거신호 && this.커버조립확인완료신호)
+            {
+                this.커버조립결과OK신호 = false;
+                this.커버조립결과NG신호 = false;
+                this.커버조립확인완료신호 = false;
+            }
+            if (!this.커버들뜸트리거신호 && this.커버들뜸확인완료신호) this.커버들뜸확인완료신호 = false;
+            if (!this.결과요청트리거신호 && this.결과요청확인완료신호)
+            {
+                this.결과요청결과OK신호 = false;
+                this.결과요청결과NG신호 = false;
+                this.결과요청확인완료신호 = false;
+            }
             this.검사위치알림?.Invoke();
         }
 
@@ -77,16 +102,18 @@ namespace DSEV.Schemas
             검사결과전송();
         }
 
-        private async void 커버조립여부전송(Boolean 사용여부)
+        private void 커버조립여부전송(Boolean 사용여부)
         {
             Debug.WriteLine("커버조립 여부전송시작");
             this.커버조립결과OK신호 = 사용여부;
             this.커버조립결과NG신호 = !사용여부;
+            this.커버조립확인완료신호 = true;
 
-            await Task.Delay(200);
+            //await Task.Delay(200);
 
-            this.커버조립결과OK신호 = false;
-            this.커버조립결과NG신호 = false;
+            //this.커버조립결과OK신호 = false;
+            //this.커버조립결과NG신호 = false;
+            //this.커버조립확인완료신호 = false;
 
             Debug.WriteLine("커버조립 여부전송완료");
         }
@@ -186,28 +213,46 @@ namespace DSEV.Schemas
                     Debug.WriteLine("선택모델 검사시작");
                     Global.검사자료.검사시작(하부큐알검사번호);
                     Debug.WriteLine("검사자료 검사시작");
-                    this.하부큐알확인완료신호 = true;
+
+
                     검사결과 검사 = Global.검사자료.하부큐알리딩수행(하부큐알검사번호);
 
-                    Task.Delay(200).Wait();
-                    this.하부큐알확인완료신호 = false;
+                    //임시 OK 신호 - MES통신 부분 추가해야됨.
+                    if (!Global.환경설정.MES사용유무)
+                    {
+                        this.하부큐알결과OK신호 = true;
+                        this.하부큐알결과NG신호 = false;
+                        this.하부큐알확인완료신호 = true;
+                    }
+                    else
+                    {
+                        //mes 에 보내고 결과 받아서 신호 설정 로직 추가예정
+                        //결과 송부받아서 변경
+                        this.하부큐알결과OK신호 = true;
+                        this.하부큐알결과NG신호 = false;
+                        this.하부큐알확인완료신호 = true;
+                    }
+
+                    Global.검사자료.하부큐알리딩수행종료();
+
                 })
-                { Priority = ThreadPriority.AboveNormal }.Start();
+                { Priority = ThreadPriority.Highest }.Start();
                 Debug.WriteLine("하부 큐알 검사 완료!!!");
             }
 
             if (상부큐알검사번호 > 0)
             {
+
                 new Thread(() =>
                 {
+                    Debug.WriteLine("상부 큐알 검사 시작><");
                     검사결과 검사 = Global.검사자료.상부큐알리딩수행(상부큐알검사번호);
-                    //Debug.WriteLine(검사.큐알등급.ToString());
                     this.상부큐알확인완료신호 = true;
-                    Task.Delay(200).Wait();
-                    this.상부큐알확인완료신호 = false;
+
+                    Global.검사자료.상부큐알리딩수행종료();
                 })
                 { Priority = ThreadPriority.Highest }.Start();
-                Debug.WriteLine("상부 큐알 검사 완료!!!");
+                Debug.WriteLine("상부 큐알 검사 완료><");
             }
         }
 
@@ -234,7 +279,6 @@ namespace DSEV.Schemas
                         {
                             Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러1, 6);
                             Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러2, 6);
-                            //Task.Delay(5000).Wait();
                         }
 
                         //첫번째 항목 "M0" 제외하고 배열로 만듦
@@ -252,7 +296,7 @@ namespace DSEV.Schemas
                             센서자료.Add((센서항목)i + 1, Single.Parse(mergedValues[i]) / 1000);
                         }
                         Global.검사자료.평탄검사수행(바닥평면검사번호, 센서자료);
-                        this.바닥평면확인완료신호 = false;
+                        //this.바닥평면확인완료신호 = false;
                     }
                     catch (Exception ex)
                     {
@@ -295,7 +339,7 @@ namespace DSEV.Schemas
                             센서자료.Add((센서항목)i + 21, Single.Parse(mergedValues[i]) / 1000);
                         }
                         Global.검사자료.평탄검사수행(커버들뜸검사번호, 센서자료);
-                        this.커버들뜸확인완료신호 = false;
+                        //this.커버들뜸확인완료신호 = false;
                     }
                     catch (Exception ex)
                     {
@@ -327,9 +371,6 @@ namespace DSEV.Schemas
                     Global.그랩제어.Active(카메라구분.Cam03);
 
                     this.측상촬영완료신호 = true;
-                    Task.Delay(200).Wait();
-                    this.측상촬영완료신호 = false;
-
                 })
                 { Priority = ThreadPriority.Highest }.Start();
             }
@@ -344,8 +385,6 @@ namespace DSEV.Schemas
                     Global.그랩제어.Active(카메라구분.Cam05);
 
                     this.하부촬영완료신호 = true;
-                    Task.Delay(200).Wait();
-                    this.하부촬영완료신호 = false;
                 })
                 { Priority = ThreadPriority.Highest }.Start();
             }
@@ -360,8 +399,6 @@ namespace DSEV.Schemas
                     Global.그랩제어.Active(카메라구분.Cam07);
 
                     this.커넥터촬영완료신호 = true;
-                    Task.Delay(200).Wait();
-                    this.커넥터촬영완료신호 = false;
                 })
                 { Priority = ThreadPriority.Highest }.Start();
             }
@@ -375,7 +412,6 @@ namespace DSEV.Schemas
 
             Global.모델자료.선택모델.검사종료(검사번호);
             검사결과 검사 = Global.검사자료.검사결과계산(검사번호);
-            //생산수량전송();
 
             // 강제배출
             Debug.WriteLine("검사결과 강제배출 확인중");
@@ -403,17 +439,19 @@ namespace DSEV.Schemas
         }
 
         // 신호 Writing 순서 중요
-        private async void 결과전송(Boolean 양품여부)
+        private void 결과전송(Boolean 양품여부)
         {
             Debug.WriteLine("결과전송시작");
             this.결과요청결과NG신호 = !양품여부;
             this.결과요청결과OK신호 = 양품여부;
+            this.결과요청확인완료신호 = true;
 
             // 1초 후에 a를 false로 변경하는 비동기 작업 예약
-            await Task.Delay(1000);
+            //await Task.Delay(200);
 
-            this.결과요청결과OK신호 = false;
-            this.결과요청결과NG신호 = false;
+            //this.결과요청결과OK신호 = false;
+            //this.결과요청결과NG신호 = false;
+            //this.결과요청확인완료신호 = false;
 
             Debug.WriteLine("결과전송완료");
         }

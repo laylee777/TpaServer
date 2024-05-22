@@ -29,7 +29,7 @@ namespace DSEV.Schemas
         public NetworkStream Stream { get { return this.Client?.GetStream(); } }
         public Boolean 동작여부 = false;
         public Boolean 연결여부 { get { return this.Client != null && this.Client.Connected; } }
-        public Int32 응답분석주기 = 50;  // ms
+        public Int32 응답분석주기 = 20;  // ms
 
         public virtual void Init() => Ping();
         public virtual void Close() { this.Stop(); this.Client?.Close(); }
@@ -86,8 +86,8 @@ namespace DSEV.Schemas
         
         //public String SendCommand(String command, Int32 대기시간 = 1000) => this.SendCommand(Encoding.UTF8.GetBytes(command), 대기시간);
         //public String SendCommand(String command, Int32 대기시간 = 1000) => this.SendCommand(Encoding.UTF8.GetBytes(STX + command + ETX), 대기시간);
-        public String SendCommand(String command, Int32 대기시간 = 1000) => this.SendCommand(Encoding.ASCII.GetBytes(command), 대기시간);
-        public String SendCommand(byte[] buffer, Int32 대기시간 = 1000)
+        public String SendCommand(String command, Int32 대기시간 = 100) => this.SendCommand(Encoding.ASCII.GetBytes(command), 대기시간);
+        public String SendCommand(byte[] buffer, Int32 대기시간 = 100)
         {
             try
             {

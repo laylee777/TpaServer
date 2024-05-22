@@ -33,7 +33,7 @@ namespace DSEV.Schemas
             return 결과;
         }
 
-        protected virtual 리더결과 명령전송(리더명령 명령, String command, Int32 대기시간 = 1000)
+        protected virtual 리더결과 명령전송(리더명령 명령, String command, Int32 대기시간 = 100)
         {
             송신수신알림?.Invoke(통신구분.TX, 명령, command.Trim());
             리더결과 결과 = 자료수신(this.SendCommand(command, 대기시간), 명령);
@@ -45,7 +45,7 @@ namespace DSEV.Schemas
             }
             return 결과;
         }
-        protected virtual 리더결과 명령전송(리더명령 명령, Int32 대기시간 = 1000) => this.명령전송(명령, Utils.GetDescription(명령), 대기시간);
+        protected virtual 리더결과 명령전송(리더명령 명령, Int32 대기시간 = 100) => this.명령전송(명령, Utils.GetDescription(명령), 대기시간);
 
         public void 리딩시작(검사결과 검사)
         {
@@ -53,16 +53,16 @@ namespace DSEV.Schemas
             리더결과 결과 = 리딩시작();
 
             Debug.WriteLine($"응답번호 : {결과.응답번호}, 응답자료 : {결과.응답자료}");
-            큐알등급 등급 = (큐알등급)결과.응답번호;
-            if (등급 == 큐알등급.X || 등급 > 큐알등급.C)
-            {
-                리딩종료();
-                리더결과 결과2 = 리딩시작();
-                if ((큐알등급)결과2.응답번호 != 큐알등급.X && !String.IsNullOrEmpty(결과2.응답자료) && 결과.응답번호 > 결과2.응답번호)
-                    결과 = 결과2;
-            }
-            리딩종료();
-            if (검사 == null) return;
+            //큐알등급 등급 = (큐알등급)결과.응답번호;
+            //if (등급 == 큐알등급.X || 등급 > 큐알등급.C)
+            //{
+            //    리딩종료();
+            //    리더결과 결과2 = 리딩시작();
+            //    if ((큐알등급)결과2.응답번호 != 큐알등급.X && !String.IsNullOrEmpty(결과2.응답자료) && 결과.응답번호 > 결과2.응답번호)
+            //        결과 = 결과2;
+            //}
+            //리딩종료();
+            //if (검사 == null) return;
             //검사.큐알정보검사(결과.응답자료, (큐알등급)결과.응답번호);
         }
         public 리더결과 리딩시작() => 명령전송(리더명령.리딩시작, "LON\r");
@@ -88,7 +88,7 @@ namespace DSEV.Schemas
             return 결과;
         }
 
-        protected virtual 리더결과 명령전송(리더명령 명령, String command, Int32 대기시간 = 1000)
+        protected virtual 리더결과 명령전송(리더명령 명령, String command, Int32 대기시간 = 100)
         {
             송신수신알림?.Invoke(통신구분.TX, 명령, command.Trim());
             리더결과 결과 = 자료수신(this.SendCommand(command, 대기시간), 명령);
@@ -100,7 +100,7 @@ namespace DSEV.Schemas
             }
             return 결과;
         }
-        protected virtual 리더결과 명령전송(리더명령 명령, Int32 대기시간 = 1000) => this.명령전송(명령, Utils.GetDescription(명령), 대기시간);
+        protected virtual 리더결과 명령전송(리더명령 명령, Int32 대기시간 = 100) => this.명령전송(명령, Utils.GetDescription(명령), 대기시간);
 
         public void 리딩시작(검사결과 검사)
         {
@@ -108,15 +108,15 @@ namespace DSEV.Schemas
             리더결과 결과 = 리딩시작();
 
             Debug.WriteLine($"응답번호 : {결과.응답번호}, 응답자료 : {결과.응답자료}");
-            큐알등급 등급 = (큐알등급)결과.응답번호;
-            if (등급 == 큐알등급.X || 등급 > 큐알등급.C)
-            {
-                리딩종료();
-                리더결과 결과2 = 리딩시작();
-                if ((큐알등급)결과2.응답번호 != 큐알등급.X && !String.IsNullOrEmpty(결과2.응답자료) && 결과.응답번호 > 결과2.응답번호)
-                    결과 = 결과2;
-            }
-            리딩종료();
+            //큐알등급 등급 = (큐알등급)결과.응답번호;
+            //if (등급 == 큐알등급.X || 등급 > 큐알등급.C)
+            //{
+            //    리딩종료();
+            //    리더결과 결과2 = 리딩시작();
+            //    if ((큐알등급)결과2.응답번호 != 큐알등급.X && !String.IsNullOrEmpty(결과2.응답자료) && 결과.응답번호 > 결과2.응답번호)
+            //        결과 = 결과2;
+            //}
+            //리딩종료();
             if (검사 == null) return;
             //검사.큐알정보검사(결과.응답자료, (큐알등급)결과.응답번호);
         }
@@ -141,7 +141,7 @@ namespace DSEV.Schemas
             return 결과;
         }
 
-        protected virtual 리더결과 명령전송(리더명령 명령, String command, Int32 대기시간 = 1000)
+        protected virtual 리더결과 명령전송(리더명령 명령, String command, Int32 대기시간 = 100)
         {
             송신수신알림?.Invoke(통신구분.TX, 명령, command.Trim());
             리더결과 결과 = 자료수신(this.SendCommand(command, 대기시간), 명령);
@@ -153,7 +153,7 @@ namespace DSEV.Schemas
             }
             return 결과;
         }
-        protected virtual 리더결과 명령전송(리더명령 명령, Int32 대기시간 = 1000) => this.명령전송(명령, Utils.GetDescription(명령), 대기시간);
+        protected virtual 리더결과 명령전송(리더명령 명령, Int32 대기시간 = 100) => this.명령전송(명령, Utils.GetDescription(명령), 대기시간);
 
         public void 리딩시작(검사결과 검사)
         {
@@ -161,17 +161,17 @@ namespace DSEV.Schemas
             리더결과 결과 = 리딩시작();
 
             Debug.WriteLine($"응답번호 : {결과.응답번호}, 응답자료 : {결과.응답자료}");
-            큐알등급 등급 = (큐알등급)결과.응답번호;
-            if (등급 == 큐알등급.X || 등급 > 큐알등급.C)
-            {
-                리딩종료();
-                리더결과 결과2 = 리딩시작();
-                if ((큐알등급)결과2.응답번호 != 큐알등급.X && !String.IsNullOrEmpty(결과2.응답자료) && 결과.응답번호 > 결과2.응답번호)
-                    결과 = 결과2;
-            }
-            리딩종료();
-            if (검사 == null) return;
-            검사.큐알정보검사(결과.응답자료, (큐알등급)결과.응답번호);
+            //큐알등급 등급 = (큐알등급)결과.응답번호;
+            //if (등급 == 큐알등급.X || 등급 > 큐알등급.C)
+            //{
+            //    리딩종료();
+            //    리더결과 결과2 = 리딩시작();
+            //    if ((큐알등급)결과2.응답번호 != 큐알등급.X && !String.IsNullOrEmpty(결과2.응답자료) && 결과.응답번호 > 결과2.응답번호)
+            //        결과 = 결과2;
+            //}
+            //리딩종료();
+            //if (검사 == null) return;
+            //검사.큐알정보검사(결과.응답자료, (큐알등급)결과.응답번호);
         }
         public 리더결과 리딩시작() => 명령전송(리더명령.리딩시작, "LON\r");
         public 리더결과 리딩종료() => 명령전송(리더명령.리딩종료, "LOFF\r");
