@@ -1,4 +1,5 @@
 ﻿using ActUtlType64Lib;
+using DevExpress.CodeParser;
 using MvUtils;
 using System;
 using System.Collections;
@@ -29,113 +30,94 @@ namespace DSEV.Schemas
 
         private enum 정보주소 : Int32
         {
-            [Address("W110")]
-            하부큐알트리거1,
-            [Address("W112")]
-            바닥평면트리거1,
-            [Address("W114")]
-            측상촬영트리거1,
-            [Address("W116")]
-            상부큐알트리거1,
-            [Address("W118")]
-            하부촬영트리거1,
-            [Address("W12A")]
-            커넥터촬영트리거1,
-            [Address("W120")]
-            커버조립트리거1,
-            [Address("W122")]
-            커버들뜸트리거1,
-            [Address("W126")]
-            라벨발행트리거1,
-            [Address("W128")]
-            결과요청트리거1,
-
-            [Address("W210")]
-            하부큐알트리거2,
-            [Address("W212")]
-            바닥평면트리거2,
-            [Address("W214")]
-            측상촬영트리거2,
-            [Address("W216")]
-            상부큐알트리거2,
-            [Address("W218")]
-            하부촬영트리거2,
-            [Address("W22A")]
-            커넥터촬영트리거2,
-            [Address("W220")]
-            커버조립트리거2,
-            [Address("W222")]
-            커버들뜸트리거2,
-            [Address("W226")]
-            라벨발행트리거2,
-            [Address("W228")]
-            결과요청트리거2,
-
-            [Address("W211")]
-            하부큐알트리거3,
-            [Address("W213")]
-            바닥평면트리거3,
-            [Address("W215")]
-            측상촬영트리거3,
-            [Address("W217")]
-            상부큐알트리거3,
-            [Address("W219")]
-            하부촬영트리거3,
-            [Address("W22B")]
-            커넥터촬영트리거3,
-            [Address("W221")]
-            커버조립트리거3,
-            [Address("W223")]
-            커버들뜸트리거3,
-            [Address("W227")]
-            라벨발행트리거3,
-            [Address("W229")]
-            결과요청트리거3,
-
-            [Address("W13F")]
-            생산수량,
-
-            [Address("W232")]
-            불량여부,
-            [Address("W233")]
-            양품여부,
-
-            [Address("W100")]
-            자동수동,
             [Address("W101")]
-            시작정지,
+            하부큐알트리거,
             [Address("W102")]
-            재검사,
-            //[Address("B107")]
-            //피씨알람,
-            //[Address("B108")]
-            //비상정지,
-            [Address("W200", 1000)]
-            통신핑퐁,
+            바닥평면트리거,
+            [Address("W103")]
+            측상촬영트리거,
+            [Address("W104")]
+            상부큐알트리거,
+            [Address("W105")]
+            하부촬영트리거,
+            [Address("W106")]
+            커넥터촬영트리거,
+            [Address("W107")]
+            커버조립트리거,
+            [Address("W108")]
+            커버들뜸트리거,
+            [Address("W109")]
+            결과요청트리거,
 
-            [Address("W201",2000)]
-            번호리셋,
+            //컴플리트 신호
+            [Address("W121")]
+            하부큐알확인완료,
+            [Address("W122")]
+            바닥평면확인완료,
+            [Address("W123")]
+            측상촬영완료,
+            [Address("W124")]
+            상부큐알확인완료,
+            [Address("W125")]
+            하부촬영완료,
+            [Address("W126")]
+            커넥터촬영완료,
+            [Address("W127")]
+            커버조립확인완료,
+            [Address("W128")]
+            커버들뜸확인완료,
+            [Address("W129")]
+            결과요청확인완료,
 
-            [Address("W310")]
+            //OK 신호
+            [Address("W141")]
+            하부큐알결과OK,
+            [Address("W147")]
+            커버조립결과OK,
+            [Address("W149")]
+            결과요청결과OK,
+
+
+            //NG 신호
+            [Address("W161")]
+            하부큐알결과NG,
+            [Address("W167")]
+            커버조립결과NG,
+            [Address("W169")]
+            결과요청결과NG,
+
+            [Address("W201")]
             셔틀01제품인덱스,
-            [Address("W311")]
+            [Address("W202")]
             셔틀02제품인덱스,
-            [Address("W312")]
+            [Address("W203")]
             셔틀03제품인덱스,
-            [Address("W313")]
+            [Address("W204")]
             셔틀04제품인덱스,
-            [Address("W314")]
+            [Address("W205")]
             셔틀05제품인덱스,
-            [Address("W315")]
+            [Address("W206")]
             셔틀06제품인덱스,
-            [Address("W316")]
+            [Address("W207")]
             셔틀07제품인덱스,
-            [Address("W317")]
+            [Address("W208")]
             셔틀08제품인덱스,
-            [Address("W318")]
+            [Address("W209")]
             셔틀09제품인덱스,
-            [Address("W319")]
+            [Address("W210")]
             셔틀10제품인덱스,
+
+
+            [Address("W300", 1000)]
+            통신핑퐁,
+            [Address("W301")]
+            자동수동,
+            [Address("W302")]
+            시작정지,
+            [Address("W303")]
+            재검사,
+            [Address("W304", 1000)]
+            번호리셋
         }
 
         // 센서 읽어들이는 순번으로 맞출 것
@@ -178,7 +160,7 @@ namespace DSEV.Schemas
 
 
         private 통신자료 입출자료 = new 통신자료();
- 
+
         public static Boolean ToBool(Int32 val) { return val != 0; }
         public static Int32 ToInt(Boolean val) { return val ? 1 : 0; }
         private Int32 정보읽기(정보주소 구분) { return this.입출자료.Get(구분); }
@@ -189,60 +171,51 @@ namespace DSEV.Schemas
 
 
         #region 입출신호
-        public Boolean 하부큐알트리거1검사신호 { get => 신호읽기(정보주소.하부큐알트리거1); set => 정보쓰기(정보주소.하부큐알트리거1, value); }
-        public Boolean 하부큐알트리거2검사신호 { get => 신호읽기(정보주소.하부큐알트리거2); set => 정보쓰기(정보주소.하부큐알트리거2, value); }
-        public Boolean 하부큐알트리거3검사신호 { get => 신호읽기(정보주소.하부큐알트리거3); set => 정보쓰기(정보주소.하부큐알트리거3, value); }
+        public Boolean 하부큐알트리거신호  { get => 신호읽기(정보주소.하부큐알트리거); set => 정보쓰기(정보주소.하부큐알트리거, value); }
+        public Boolean 하부큐알결과OK신호  { get => 신호읽기(정보주소.하부큐알결과OK); set => 정보쓰기(정보주소.하부큐알결과OK, value); }
+        public Boolean 하부큐알결과NG신호  { get => 신호읽기(정보주소.하부큐알결과NG); set => 정보쓰기(정보주소.하부큐알결과NG, value); }
+        public Boolean 하부큐알확인완료신호 { get => 신호읽기(정보주소.하부큐알확인완료); set => 정보쓰기(정보주소.하부큐알확인완료, value); }
 
-        public Boolean 바닥평면트리거1검사신호 { get => 신호읽기(정보주소.바닥평면트리거1); set => 정보쓰기(정보주소.바닥평면트리거1, value); }
-        public Boolean 바닥평면트리거2검사신호 { get => 신호읽기(정보주소.바닥평면트리거2); set => 정보쓰기(정보주소.바닥평면트리거2, value); }
-        public Boolean 바닥평면트리거3검사신호 { get => 신호읽기(정보주소.바닥평면트리거3); set => 정보쓰기(정보주소.바닥평면트리거3, value); }
+        public Boolean 바닥평면트리거신호   { get => 신호읽기(정보주소.바닥평면트리거); set => 정보쓰기(정보주소.바닥평면트리거, value); }
+        public Boolean 바닥평면확인완료신호 { get => 신호읽기(정보주소.바닥평면확인완료); set => 정보쓰기(정보주소.바닥평면확인완료, value); }
 
-        public Boolean 측상촬영트리거1검사신호 { get => 신호읽기(정보주소.측상촬영트리거1); set => 정보쓰기(정보주소.측상촬영트리거1, value); }
-        public Boolean 측상촬영트리거2검사신호 { get => 신호읽기(정보주소.측상촬영트리거2); set => 정보쓰기(정보주소.측상촬영트리거2, value); }
-        public Boolean 측상촬영트리거3검사신호 { get => 신호읽기(정보주소.측상촬영트리거3); set => 정보쓰기(정보주소.측상촬영트리거3, value); }
+        public Boolean 측상촬영트리거신호 { get => 신호읽기(정보주소.측상촬영트리거); set => 정보쓰기(정보주소.측상촬영트리거, value); }
+        public Boolean 측상촬영완료신호   { get => 신호읽기(정보주소.측상촬영완료); set => 정보쓰기(정보주소.측상촬영완료, value); }
 
-        public Boolean 상부큐알트리거1검사신호 { get => 신호읽기(정보주소.상부큐알트리거1); set => 정보쓰기(정보주소.상부큐알트리거1, value); }
-        public Boolean 상부큐알트리거2검사신호 { get => 신호읽기(정보주소.상부큐알트리거2); set => 정보쓰기(정보주소.상부큐알트리거2, value); }
-        public Boolean 상부큐알트리거3검사신호 { get => 신호읽기(정보주소.상부큐알트리거3); set => 정보쓰기(정보주소.상부큐알트리거3, value); }
+        public Boolean 상부큐알트리거신호   { get => 신호읽기(정보주소.상부큐알트리거); set => 정보쓰기(정보주소.상부큐알트리거, value); }
+        public Boolean 상부큐알확인완료신호 { get => 신호읽기(정보주소.상부큐알확인완료); set => 정보쓰기(정보주소.상부큐알확인완료, value); }
 
-        public Boolean 하부촬영트리거1검사신호 { get => 신호읽기(정보주소.하부촬영트리거1); set => 정보쓰기(정보주소.하부촬영트리거1, value); }
-        public Boolean 하부촬영트리거2검사신호 { get => 신호읽기(정보주소.하부촬영트리거2); set => 정보쓰기(정보주소.하부촬영트리거2, value); }
-        public Boolean 하부촬영트리거3검사신호 { get => 신호읽기(정보주소.하부촬영트리거3); set => 정보쓰기(정보주소.하부촬영트리거3, value); }
+        public Boolean 하부촬영트리거신호 { get => 신호읽기(정보주소.하부촬영트리거); set => 정보쓰기(정보주소.하부촬영트리거, value); }
+        public Boolean 하부촬영완료신호   { get => 신호읽기(정보주소.하부촬영완료); set => 정보쓰기(정보주소.하부촬영완료, value); }
 
-        public Boolean 커넥터촬영트리거1검사신호 { get => 신호읽기(정보주소.커넥터촬영트리거1); set => 정보쓰기(정보주소.커넥터촬영트리거1, value); }
-        public Boolean 커넥터촬영트리거2검사신호 { get => 신호읽기(정보주소.커넥터촬영트리거2); set => 정보쓰기(정보주소.커넥터촬영트리거2, value); }
-        public Boolean 커넥터촬영트리거3검사신호 { get => 신호읽기(정보주소.커넥터촬영트리거3); set => 정보쓰기(정보주소.커넥터촬영트리거3, value); }
+        public Boolean 커넥터촬영트리거신호 { get => 신호읽기(정보주소.커넥터촬영트리거); set => 정보쓰기(정보주소.커넥터촬영트리거, value); }
+        public Boolean 커넥터촬영완료신호  { get => 신호읽기(정보주소.커넥터촬영완료); set => 정보쓰기(정보주소.커넥터촬영완료, value); }
 
-        public Boolean 커버조립트리거1검사신호 { get => 신호읽기(정보주소.커버조립트리거1); set => 정보쓰기(정보주소.커버조립트리거1, value); }
-        public Boolean 커버조립트리거2검사신호 { get => 신호읽기(정보주소.커버조립트리거2); set => 정보쓰기(정보주소.커버조립트리거2, value); }
-        public Boolean 커버조립트리거3검사신호 { get => 신호읽기(정보주소.커버조립트리거3); set => 정보쓰기(정보주소.커버조립트리거3, value); }
+        public Boolean 커버조립트리거신호   { get => 신호읽기(정보주소.커버조립트리거); set => 정보쓰기(정보주소.커버조립트리거, value); }
+        public Boolean 커버조립결과OK신호  { get => 신호읽기(정보주소.커버조립결과OK); set => 정보쓰기(정보주소.커버조립결과OK, value); }
+        public Boolean 커버조립결과NG신호  { get => 신호읽기(정보주소.커버조립결과NG); set => 정보쓰기(정보주소.커버조립결과NG, value); }
+        public Boolean 커버조립확인완료신호 { get => 신호읽기(정보주소.커버조립확인완료); set => 정보쓰기(정보주소.커버조립확인완료, value); }
 
+        public Boolean 커버들뜸트리거신호   { get => 신호읽기(정보주소.커버들뜸트리거); set => 정보쓰기(정보주소.커버들뜸트리거, value); }
+        public Boolean 커버들뜸확인완료신호 { get => 신호읽기(정보주소.커버들뜸확인완료); set => 정보쓰기(정보주소.커버들뜸확인완료, value); }
 
-        public Boolean 커버들뜸트리거1검사신호 { get => 신호읽기(정보주소.커버들뜸트리거1); set => 정보쓰기(정보주소.커버들뜸트리거1, value); }
-        public Boolean 커버들뜸트리거2검사신호 { get => 신호읽기(정보주소.커버들뜸트리거2); set => 정보쓰기(정보주소.커버들뜸트리거2, value); }
-        public Boolean 커버들뜸트리거3검사신호 { get => 신호읽기(정보주소.커버들뜸트리거3); set => 정보쓰기(정보주소.커버들뜸트리거3, value); }
-
-        public Boolean 결과요청트리거1검사신호 { get => 신호읽기(정보주소.결과요청트리거1); set => 정보쓰기(정보주소.결과요청트리거1, value); }
-        public Boolean 결과요청트리거2검사신호 { get => 신호읽기(정보주소.결과요청트리거2); set => 정보쓰기(정보주소.결과요청트리거2, value); }
-        public Boolean 결과요청트리거3검사신호 { get => 신호읽기(정보주소.결과요청트리거3); set => 정보쓰기(정보주소.결과요청트리거3, value); }
-
-
+        public Boolean 결과요청트리거신호 { get => 신호읽기(정보주소.결과요청트리거); set => 정보쓰기(정보주소.결과요청트리거, value); }
+        public Boolean 결과요청결과OK신호 { get => 신호읽기(정보주소.결과요청결과OK); set => 정보쓰기(정보주소.결과요청결과OK, value); }
+        public Boolean 결과요청결과NG신호 { get => 신호읽기(정보주소.결과요청결과NG); set => 정보쓰기(정보주소.결과요청결과NG, value); }
 
         public Boolean 자동수동여부 { get => 신호읽기(정보주소.자동수동); }
         public Boolean 시작정지여부 { get => 신호읽기(정보주소.시작정지); }
-        //public Boolean 비상정지발생 { get => 신호읽기(정보주소.비상정지); }
-        //public Boolean 피씨알람발생 { get => 신호읽기(정보주소.피씨알람); set => 정보쓰기(정보주소.피씨알람, value); }
+
         public Boolean 검사번호리셋 { get => 신호읽기(정보주소.번호리셋); set => 정보쓰기(정보주소.번호리셋, value); }
-        
+
         public Boolean 통신확인핑퐁 { get => 신호읽기(정보주소.통신핑퐁); set => 정보쓰기(정보주소.통신핑퐁, value); }
         #endregion
 
 
 
-
         #region TPA 제품 인덱스확인 by LHD
 
-        public Int32 제품투입번호 => this.입출자료.Get(정보주소.셔틀01제품인덱스);  
+        public Int32 제품투입번호 => this.입출자료.Get(정보주소.셔틀01제품인덱스);
 
         public Int32 평탄도측정검사번호 => this.입출자료.Get(정보주소.셔틀02제품인덱스);
 
@@ -262,12 +235,11 @@ namespace DSEV.Schemas
 
         public Int32 결과요청번호 => this.입출자료.Get(정보주소.셔틀10제품인덱스);
         #endregion
-
-
         //public Int32 양불판정번호 => this.입출자료.Get(정보주소.검사지그3); // 안착 후 양불 판정
 
-        public Int32 생산수량정보 { get => this.입출자료.Get(정보주소.생산수량); set => 정보쓰기(정보주소.생산수량, value); }
+        //public Int32 생산수량정보 { get => this.입출자료.Get(정보주소.생산수량); set => 정보쓰기(정보주소.생산수량, value); }
         // 트리거 입력 시 버퍼에 입력
+        
         private Dictionary<정보주소, Int32> 인덱스버퍼 = new Dictionary<정보주소, Int32>();
         #endregion
 
@@ -313,7 +285,7 @@ namespace DSEV.Schemas
         {
             try
             {
-                if(this.PLC != null) PLC.Close();
+                if (this.PLC != null) PLC.Close();
 
                 Global.정보로그(로그영역, "PLC 연결종료", $"서버에 연결을 종료하였습니다.", false);
             }
@@ -344,48 +316,44 @@ namespace DSEV.Schemas
 
         private void 출력자료리셋()
         {
-            this.하부큐알트리거1검사신호           = false;
-            this.하부큐알트리거2검사신호           = false;
-            this.하부큐알트리거3검사신호           = false;
-            this.바닥평면트리거1검사신호           = false;
-            this.바닥평면트리거2검사신호           = false;
-            this.바닥평면트리거3검사신호           = false;
-            this.측상촬영트리거1검사신호           = false;
-            this.측상촬영트리거2검사신호           = false;
-            this.측상촬영트리거3검사신호           = false;
-            this.상부큐알트리거1검사신호           = false;
-            this.상부큐알트리거2검사신호           = false;
-            this.상부큐알트리거3검사신호           = false;
-            this.하부촬영트리거1검사신호           = false;
-            this.하부촬영트리거2검사신호           = false;
-            this.하부촬영트리거3검사신호           = false;
-            this.커넥터촬영트리거1검사신호         = false;
-            this.커넥터촬영트리거2검사신호         = false;
-            this.커넥터촬영트리거3검사신호         = false;
-            this.커버조립트리거1검사신호           = false;
-            this.커버조립트리거1검사신호           = false;
-            this.커버조립트리거1검사신호           = false;
-            this.커버들뜸트리거1검사신호           = false;
-            this.커버들뜸트리거2검사신호           = false;
-            this.커버들뜸트리거3검사신호           = false;
-            this.결과요청트리거1검사신호           = false;
-            this.결과요청트리거2검사신호           = false;
-            this.결과요청트리거3검사신호           = false;
+            this.하부큐알트리거신호 = false;
+            this.하부큐알결과OK신호 = false;
+            this.하부큐알결과NG신호 = false;
+            this.하부큐알확인완료신호 = false;
+            this.바닥평면트리거신호 = false;
+            this.바닥평면확인완료신호 = false;
+            this.측상촬영트리거신호 = false;
+            this.측상촬영완료신호 = false;
+            this.상부큐알트리거신호 = false;
+            this.상부큐알확인완료신호 = false;
+            this.하부촬영트리거신호 = false;
+            this.하부촬영완료신호 = false;
+            this.커넥터촬영트리거신호 = false;
+            this.커넥터촬영완료신호 = false;
+            this.커버조립트리거신호 = false;
+            this.커버조립결과OK신호 = false;
+            this.커버조립결과NG신호 = false;
+            this.커버조립확인완료신호 = false;
+            this.커버들뜸트리거신호 = false;
+            this.커버들뜸확인완료신호 = false;
+            this.결과요청트리거신호 = false;
+            this.결과요청결과OK신호 = false;
+            this.결과요청결과NG신호 = false;
         }
 
         private void 인덱스버퍼리셋()
         {
             this.인덱스버퍼.Clear();
 
-            this.인덱스버퍼.Add(정보주소.하부큐알트리거1, 0);
-            this.인덱스버퍼.Add(정보주소.바닥평면트리거1, 0);
-            this.인덱스버퍼.Add(정보주소.측상촬영트리거1, 0);
-            this.인덱스버퍼.Add(정보주소.상부큐알트리거1, 0);
-            this.인덱스버퍼.Add(정보주소.하부촬영트리거1, 0);
-            this.인덱스버퍼.Add(정보주소.커넥터촬영트리거1, 0);
-            this.인덱스버퍼.Add(정보주소.커버조립트리거1, 0);
-            this.인덱스버퍼.Add(정보주소.커버들뜸트리거1, 0);
-            this.인덱스버퍼.Add(정보주소.결과요청트리거1, 0);
+            this.인덱스버퍼.Add(정보주소.하부큐알트리거, 0);
+            this.인덱스버퍼.Add(정보주소.바닥평면트리거, 0);
+            this.인덱스버퍼.Add(정보주소.측상촬영트리거, 0);
+            this.인덱스버퍼.Add(정보주소.상부큐알트리거, 0);
+            this.인덱스버퍼.Add(정보주소.하부촬영트리거, 0);
+            this.인덱스버퍼.Add(정보주소.커넥터촬영트리거, 0);
+            this.인덱스버퍼.Add(정보주소.커버조립트리거, 0);
+            this.인덱스버퍼.Add(정보주소.커버들뜸트리거, 0);
+            this.인덱스버퍼.Add(정보주소.결과요청트리거, 0);
         }
 
         // 검사자료 로드 후 수행해야 함
@@ -397,7 +365,7 @@ namespace DSEV.Schemas
                 this.검사번호리셋 = true;
             }
         }
-        public void 생산수량전송() => this.생산수량정보 = Global.모델자료.선택모델.전체갯수;
+        //public void 생산수량전송() => this.생산수량정보 = Global.모델자료.선택모델.전체갯수;
         #endregion
 
         #region Get / Set 함수
@@ -435,7 +403,7 @@ namespace DSEV.Schemas
         }
         private static BitArray FromUInt16(UInt16 val) => new BitArray(BitConverter.GetBytes(val));
 
-        private class AddressAttribute : Attribute
+        private class AddressAttribute : System.Attribute
         {
             public String Address = String.Empty;
             public Int32 Delay = 0;
@@ -541,7 +509,8 @@ namespace DSEV.Schemas
                     if (!this[구분].Set(value, true)) return;
                     this.Transmit?.Invoke(구분, value);
                 }
-                Task.Run(() => {
+                Task.Run(() =>
+                {
                     Task.Delay(resetTime).Wait();
                     if (this[구분].Set(value, true))
                         this.Transmit?.Invoke(구분, value);

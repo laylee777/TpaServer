@@ -99,6 +99,7 @@ namespace DSEV.Schemas
         //[Translation("MES Server Port", "MES 서버 포트"), JsonProperty("MESPort")] // Client or Server
         //public Int32 MES포트 { get; set; } = 6003;
 
+
         [JsonProperty("CurrentModel")]
         public 모델구분 선택모델 { get; set; } = 모델구분.VDA590TPA;
 

@@ -63,7 +63,7 @@ namespace DSEV.Schemas
         // 검사위치 변경 확인
         private void 검사위치확인()
         {
-            Dictionary<정보주소, Int32> 변경 = this.입출자료.Changes(정보주소.하부큐알트리거1, 정보주소.결과요청트리거3);
+            Dictionary<정보주소, Int32> 변경 = this.입출자료.Changes(정보주소.하부큐알트리거, 정보주소.결과요청트리거);
             if (변경.Count < 1) return;
             this.검사위치알림?.Invoke();
         }
@@ -80,13 +80,13 @@ namespace DSEV.Schemas
         private async void 커버조립여부전송(Boolean 사용여부)
         {
             Debug.WriteLine("커버조립 여부전송시작");
-            this.커버조립트리거2검사신호 = !사용여부;
-            this.커버조립트리거3검사신호 = 사용여부;
+            this.커버조립결과OK신호 = 사용여부;
+            this.커버조립결과NG신호 = !사용여부;
 
             await Task.Delay(200);
 
-            this.커버조립트리거2검사신호 = false;
-            this.커버조립트리거3검사신호 = false;
+            this.커버조립결과OK신호 = false;
+            this.커버조립결과NG신호 = false;
 
             Debug.WriteLine("커버조립 여부전송완료");
         }
@@ -94,7 +94,7 @@ namespace DSEV.Schemas
         private void 커버조립확인()
         {
 
-            Int32 검사번호 = this.검사위치번호(정보주소.커버조립트리거1);
+            Int32 검사번호 = this.검사위치번호(정보주소.커버조립트리거);
 
             if (검사번호 > 0)
             {
@@ -106,29 +106,18 @@ namespace DSEV.Schemas
                     {
                         Debug.WriteLine("강제커버조립 들어옴");
                         커버조립여부전송(Global.환경설정.커버조립여부);
-                        //this.커버조립트리거2검사신호 = false;
-                        //this.커버조립트리거3검사신호 = true;
                     }
                     else
                     {
                         if (검사.측정결과 == 결과구분.OK || 검사.측정결과 == 결과구분.PS)
                         {
                             커버조립여부전송(true);
-                            //this.커버조립트리거2검사신호 = false;
-                            //this.커버조립트리거3검사신호 = true;
                         }
                         else
                         {
                             커버조립여부전송(false);
-                            //this.커버조립트리거2검사신호 = true;
-                            //this.커버조립트리거3검사신호 = false;
                         }
                     }
-
-                    //Task.Delay(200).Wait();
-
-                    //this.커버조립트리거2검사신호 = false;
-                    //this.커버조립트리거3검사신호 = false;
                 })
                 { Priority = ThreadPriority.Highest }.Start();
                 Debug.WriteLine("커버조립부분 확인 완료!!!");
@@ -138,9 +127,9 @@ namespace DSEV.Schemas
         // 카메라 별 현재 검사 위치의 검사번호를 요청
         public Int32 촬영위치번호(카메라구분 구분)
         {
-            if (구분 == 카메라구분.Cam01 || 구분 == 카메라구분.Cam02 || 구분 == 카메라구분.Cam03) return this.인덱스버퍼[정보주소.측상촬영트리거1];
-            if (구분 == 카메라구분.Cam04 || 구분 == 카메라구분.Cam05) return this.인덱스버퍼[정보주소.하부촬영트리거1];
-            if (구분 == 카메라구분.Cam06 || 구분 == 카메라구분.Cam07) return this.인덱스버퍼[정보주소.커넥터촬영트리거1];
+            if (구분 == 카메라구분.Cam01 || 구분 == 카메라구분.Cam02 || 구분 == 카메라구분.Cam03) return this.인덱스버퍼[정보주소.측상촬영트리거];
+            if (구분 == 카메라구분.Cam04 || 구분 == 카메라구분.Cam05) return this.인덱스버퍼[정보주소.하부촬영트리거];
+            if (구분 == 카메라구분.Cam06 || 구분 == 카메라구분.Cam07) return this.인덱스버퍼[정보주소.커넥터촬영트리거];
             return 0;
         }
 
@@ -153,15 +142,15 @@ namespace DSEV.Schemas
             }
 
             Int32 index = 0;
-            if (구분 == 정보주소.하부큐알트리거1) index = this.제품투입번호;
-            else if (구분 == 정보주소.바닥평면트리거1) index = this.평탄도측정검사번호;
-            else if (구분 == 정보주소.측상촬영트리거1) index = this.측상검사번호;
-            else if (구분 == 정보주소.상부큐알트리거1) index = this.상부큐알검사번호;
-            else if (구분 == 정보주소.하부촬영트리거1) index = this.인슐폭측정검사번호;
-            else if (구분 == 정보주소.커넥터촬영트리거1) index = this.커넥턱검사번호;
-            else if (구분 == 정보주소.커버조립트리거1) index = this.커버체결번호;
-            else if (구분 == 정보주소.커버들뜸트리거1) index = this.커버검사번호;
-            else if (구분 == 정보주소.결과요청트리거1) index = this.결과요청번호;
+            if (구분 == 정보주소.하부큐알트리거) index = this.제품투입번호;
+            else if (구분 == 정보주소.바닥평면트리거) index = this.평탄도측정검사번호;
+            else if (구분 == 정보주소.측상촬영트리거) index = this.측상검사번호;
+            else if (구분 == 정보주소.상부큐알트리거) index = this.상부큐알검사번호;
+            else if (구분 == 정보주소.하부촬영트리거) index = this.인슐폭측정검사번호;
+            else if (구분 == 정보주소.커넥터촬영트리거) index = this.커넥턱검사번호;
+            else if (구분 == 정보주소.커버조립트리거) index = this.커버체결번호;
+            else if (구분 == 정보주소.커버들뜸트리거) index = this.커버검사번호;
+            else if (구분 == 정보주소.결과요청트리거) index = this.결과요청번호;
 
             this.인덱스버퍼[구분] = index;
 
@@ -188,8 +177,8 @@ namespace DSEV.Schemas
 
         private void 큐알리딩수행()
         {
-            Int32 하부큐알검사번호 = this.검사위치번호(정보주소.하부큐알트리거1);
-            Int32 상부큐알검사번호 = this.검사위치번호(정보주소.상부큐알트리거1);
+            Int32 하부큐알검사번호 = this.검사위치번호(정보주소.하부큐알트리거);
+            Int32 상부큐알검사번호 = this.검사위치번호(정보주소.상부큐알트리거);
 
             if (하부큐알검사번호 > 0)
             {
@@ -199,11 +188,11 @@ namespace DSEV.Schemas
                     Debug.WriteLine("선택모델 검사시작");
                     Global.검사자료.검사시작(하부큐알검사번호);
                     Debug.WriteLine("검사자료 검사시작");
-                    this.하부큐알트리거3검사신호 = true;
+                    this.하부큐알확인완료신호 = true;
                     검사결과 검사 = Global.검사자료.하부큐알리딩수행(하부큐알검사번호);
                    
                     Task.Delay(200).Wait();
-                    this.하부큐알트리거3검사신호 = false;
+                    this.하부큐알확인완료신호 = false;
                 })
                 { Priority = ThreadPriority.AboveNormal }.Start();
                 Debug.WriteLine("하부 큐알 검사 완료!!!");
@@ -214,9 +203,9 @@ namespace DSEV.Schemas
                 new Thread(() => {
                     검사결과 검사 = Global.검사자료.상부큐알리딩수행(상부큐알검사번호);
                     //Debug.WriteLine(검사.큐알등급.ToString());
-                    this.상부큐알트리거3검사신호 = true;
+                    this.상부큐알확인완료신호 = true;
                     Task.Delay(200).Wait();
-                    this.상부큐알트리거3검사신호 = false;
+                    this.상부큐알확인완료신호 = false;
                 })
                 { Priority = ThreadPriority.Highest }.Start();
                 Debug.WriteLine("상부 큐알 검사 완료!!!");
@@ -231,8 +220,8 @@ namespace DSEV.Schemas
         }
         private void 평탄검사수행()
         {
-            Int32 바닥평면검사번호 = this.검사위치번호(정보주소.바닥평면트리거1);
-            Int32 커버들뜸검사번호 = this.검사위치번호(정보주소.커버들뜸트리거1);
+            Int32 바닥평면검사번호 = this.검사위치번호(정보주소.바닥평면트리거);
+            Int32 커버들뜸검사번호 = this.검사위치번호(정보주소.커버들뜸트리거);
 
             if (바닥평면검사번호 > 0)
             {
@@ -243,9 +232,6 @@ namespace DSEV.Schemas
                     {
                         if (Global.환경설정.제로셋모드)
                         {
-                            //Global.센서제어.SaveZeroSet(센서컨트롤러.컨트롤러1, 6);
-                            //Global.센서제어.SaveZeroSet(센서컨트롤러.컨트롤러2, 6);
-                            
                             Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러1, 6);
                             Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러2, 6);
                             //Task.Delay(5000).Wait();
@@ -254,7 +240,7 @@ namespace DSEV.Schemas
                         //첫번째 항목 "M0" 제외하고 배열로 만듦
                         string[] cont1Values = Global.센서제어.ReadValues(센서컨트롤러.컨트롤러1, 바닥평면검사번호).Skip(1).ToArray();
                         string[] cont2Values = Global.센서제어.ReadValues(센서컨트롤러.컨트롤러2, 바닥평면검사번호).Skip(1).ToArray();
-                        this.바닥평면트리거3검사신호 = true;
+                        this.바닥평면확인완료신호 = true;
 
                         //배열을 붙임!
                         string[] mergedValues = cont1Values.Concat(cont2Values).ToArray();
@@ -266,12 +252,12 @@ namespace DSEV.Schemas
                             센서자료.Add((센서항목)i+1, Single.Parse(mergedValues[i]) / 1000);
                         }
                         Global.검사자료.평탄검사수행(바닥평면검사번호, 센서자료);
-                        this.바닥평면트리거3검사신호 = false;
+                        this.바닥평면확인완료신호 = false;
                     }
                     catch (Exception ex)
                     {
                         Global.오류로그(로그영역, "바닥평면검사", ex.Message, true);
-                        this.바닥평면트리거3검사신호 = false;
+                        this.바닥평면확인완료신호 = false;
                     }
 
                     Debug.WriteLine("바닥평면검사 종료");
@@ -289,19 +275,14 @@ namespace DSEV.Schemas
                     {
                         if (Global.환경설정.제로셋모드)
                         {
-                            //Global.센서제어.SaveZeroSet(센서컨트롤러.컨트롤러3, 7);
-                            //Global.센서제어.SaveZeroSet(센서컨트롤러.컨트롤러4, 8);
-
                             Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러3, 7);
                             Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러4, 8);
-
-                            //Task.Delay(5000).Wait();
                         }
 
                         //첫번째 항목 "M0" 제외하고 배열로 만듦
                         string[] cont1Values = Global.센서제어.ReadValues(센서컨트롤러.컨트롤러3, 커버들뜸검사번호).Skip(1).ToArray();
                         string[] cont2Values = Global.센서제어.ReadValues(센서컨트롤러.컨트롤러4, 커버들뜸검사번호).Skip(1).ToArray();
-                        this.커버들뜸트리거3검사신호 = true;
+                        this.커버들뜸확인완료신호 = true;
 
                         //배열을 붙임!
                         string[] mergedValues = cont1Values.Concat(cont2Values).ToArray();
@@ -313,12 +294,12 @@ namespace DSEV.Schemas
                             센서자료.Add((센서항목)i+21, Single.Parse(mergedValues[i]) / 1000);
                         }
                         Global.검사자료.평탄검사수행(커버들뜸검사번호, 센서자료);
-                        this.커버들뜸트리거3검사신호 = false;
+                        this.커버들뜸확인완료신호 = false;
                     }
                     catch (Exception ex)
                     {
                         Global.오류로그(로그영역, "커버들뜸검사", ex.Message, true);
-                        this.커버들뜸트리거3검사신호 = false;
+                        this.커버들뜸확인완료신호 = false;
                     }
 
                     Debug.WriteLine("커버들뜸검사 종료");
@@ -329,9 +310,9 @@ namespace DSEV.Schemas
 
         private void 영상촬영수행()
         {
-            Int32 측상카메라검사번호 = this.검사위치번호(정보주소.측상촬영트리거1); 
-            Int32 하부카메라검사번호 = this.검사위치번호(정보주소.하부촬영트리거1);
-            Int32 커넥터카메라검사번호 = this.검사위치번호(정보주소.커넥터촬영트리거1);
+            Int32 측상카메라검사번호 = this.검사위치번호(정보주소.측상촬영트리거); 
+            Int32 하부카메라검사번호 = this.검사위치번호(정보주소.하부촬영트리거);
+            Int32 커넥터카메라검사번호 = this.검사위치번호(정보주소.커넥터촬영트리거);
 
             if (측상카메라검사번호 > 0)
             {
@@ -344,9 +325,9 @@ namespace DSEV.Schemas
                     Global.그랩제어.Active(카메라구분.Cam02);
                     Global.그랩제어.Active(카메라구분.Cam03);
 
-                    this.측상촬영트리거3검사신호 = true;
+                    this.측상촬영완료신호 = true;
                     Task.Delay(200).Wait();
-                    this.측상촬영트리거3검사신호 = false;
+                    this.측상촬영완료신호 = false;
 
                 })
                 { Priority = ThreadPriority.Highest }.Start();
@@ -361,9 +342,9 @@ namespace DSEV.Schemas
                     Global.그랩제어.Active(카메라구분.Cam04);
                     Global.그랩제어.Active(카메라구분.Cam05);
 
-                    this.하부촬영트리거3검사신호 = true;
+                    this.하부촬영완료신호 = true;
                     Task.Delay(200).Wait();
-                    this.하부촬영트리거3검사신호 = false;
+                    this.하부촬영완료신호 = false;
                 })
                 { Priority = ThreadPriority.Highest }.Start();
             }
@@ -372,15 +353,14 @@ namespace DSEV.Schemas
             {
                 new Thread(() =>
                 {
-                    //this.커넥터촬영트리거3검사신호 = true;
                     Global.조명제어.TurnOn(카메라구분.Cam06);
                     Global.조명제어.TurnOn(카메라구분.Cam07);
                     Global.그랩제어.Active(카메라구분.Cam06);
                     Global.그랩제어.Active(카메라구분.Cam07);
                     
-                    this.커넥터촬영트리거3검사신호 = true;
+                    this.커넥터촬영완료신호 = true;
                     Task.Delay(200).Wait();
-                    this.커넥터촬영트리거3검사신호 = false;
+                    this.커넥터촬영완료신호 = false;
                 })
                 { Priority = ThreadPriority.Highest }.Start();
             }
@@ -389,12 +369,12 @@ namespace DSEV.Schemas
         // 최종 검사 결과 보고
         private void 검사결과전송()
         {
-            Int32 검사번호 = this.검사위치번호(정보주소.결과요청트리거1);
+            Int32 검사번호 = this.검사위치번호(정보주소.결과요청트리거);
             if (검사번호 <= 0) return;
 
             Global.모델자료.선택모델.검사종료(검사번호);
             검사결과 검사 = Global.검사자료.검사결과계산(검사번호);
-            생산수량전송();
+            //생산수량전송();
 
             // 강제배출
             Debug.WriteLine("검사결과 강제배출 확인중");
@@ -423,14 +403,14 @@ namespace DSEV.Schemas
         private async void 결과전송(Boolean 양품여부)
         {
             Debug.WriteLine("결과전송시작");
-            this.결과요청트리거2검사신호 = !양품여부;
-            this.결과요청트리거3검사신호 = 양품여부;
+            this.결과요청결과NG신호 = !양품여부;
+            this.결과요청결과OK신호 = 양품여부;
 
             // 1초 후에 a를 false로 변경하는 비동기 작업 예약
             await Task.Delay(1000);
 
-            this.결과요청트리거2검사신호 = false;
-            this.결과요청트리거3검사신호 = false;
+            this.결과요청결과OK신호 = false;
+            this.결과요청결과NG신호 = false;
 
             Debug.WriteLine("결과전송완료");
         }
