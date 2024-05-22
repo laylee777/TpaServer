@@ -4,6 +4,7 @@ using System;
 using DSEV.Schemas;
 using DevExpress.Utils.Extensions;
 using DevExpress.XtraEditors.Controls;
+using System.Threading.Tasks;
 
 namespace DSEV.UI.Controls
 {
@@ -23,12 +24,14 @@ namespace DSEV.UI.Controls
             this.e이미지자동삭제.IsOn = Global.환경설정.이미지자동삭제모드;
             this.e강제커버조립.IsOn = Global.환경설정.강제커버조립사용;
             this.e커버조립여부.IsOn = Global.환경설정.커버조립여부;
+            this.eMES사용유무.IsOn = Global.환경설정.MES사용유무;
 
             this.e강제배출.EditValueChanged += 강제배출Changed;
             this.e배출구분.EditValueChanged += 배출구분Changed;
             this.e이미지자동삭제.EditValueChanged += 이미지자동삭제Changed;
             this.e강제커버조립.EditValueChanged += 강제커버조립Changed;
             this.e커버조립여부.EditValueChanged += 커버조립여부Changed;
+            this.eMES사용유무.EditValueChanged += MES사용유무Changed;
 
             this.b캠트리거리셋.Click += 캠트리거리셋;
             this.e센서리셋.IsOn = false;
@@ -39,19 +42,37 @@ namespace DSEV.UI.Controls
             this.e이미지저장일수.ValueChanged += 이미지저장일수Changed;
             this.e이미지삭제시작시간.EditValueChanging += 이미지삭제시작시간Changing;
             this.e이미지삭제시작시간.EditValueChanged += 이미지삭제시작시간Changed;
-            this.b시간초기화.Click += 시간초기화;
-            
+
             this.e카메라.Init();
             this.e큐알장치.Init();
             this.e기본설정.Init();
             this.e유저관리.Init();
         }
 
+        private void MES사용유무Changed(object sender, EventArgs e)
+        {
+            Global.환경설정.MES사용유무 = this.eMES사용유무.IsOn;
+
+            if (Global.환경설정.MES사용유무)
+            {
+                Global.mes통신.Init();
+                Global.mes통신.Start();
+            }
+            else Global.mes통신.Close();
+        }
+
+        private void BTest_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                Global.사진자료.사진정리();
+            });
+        }
+
         private void 커버조립여부Changed(object sender, EventArgs e) => Global.환경설정.커버조립여부 = this.e커버조립여부.IsOn;
-  
+
         private void 강제커버조립Changed(object sender, EventArgs e) => Global.환경설정.강제커버조립사용 = e강제커버조립.IsOn;
 
-        private void 시간초기화(object sender, EventArgs e) => this.e이미지삭제시작시간.Time = DateTime.Now;
         private void 이미지삭제시작시간Changed(object sender, EventArgs e) => Global.환경설정.이미지자동삭제시작시간 = this.e이미지삭제시작시간.Time;
 
         private void 이미지삭제시작시간Changing(object sender, ChangingEventArgs e)
@@ -70,7 +91,7 @@ namespace DSEV.UI.Controls
             Global.환경설정.Save();
             Global.정보로그(환경설정.로그영역.GetString(), 번역.설정저장, 번역.저장완료, true);
         }
-       
+
         public void Close()
         {
             this.e카메라.Close();
@@ -90,7 +111,8 @@ namespace DSEV.UI.Controls
         {
             if (!Utils.Confirm(this.FindForm(), "트리거 보드의 위치를 초기화 하시겠습니까?")) return;
             직렬포트[] 포트들 = new 직렬포트[] { 직렬포트.COM7 };
-            포트들.ForEach(port => {
+            포트들.ForEach(port =>
+            {
                 Enc852 트리거보드 = new Enc852(port);
                 트리거보드.Clear();
                 트리거보드.Close();
@@ -109,7 +131,7 @@ namespace DSEV.UI.Controls
                 [Translation("Save your preferences?", "환경설정을 저장하시겠습니까?")]
                 저장확인,
             }
-           
+
             public String 설정저장 => Localization.GetString(Items.설정저장);
             public String 저장완료 => Localization.GetString(Items.저장완료);
             public String 저장확인 => Localization.GetString(Items.저장확인);

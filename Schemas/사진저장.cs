@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace DSEV.Schemas
 {
@@ -78,6 +79,41 @@ namespace DSEV.Schemas
         public void Save() => File.WriteAllText(저장파일, JsonConvert.SerializeObject(this.Values.ToList()));
         public 사진저장 GetItem(카메라구분 카메라) => this.Values.Where(e => e.카메라 == 카메라).FirstOrDefault();
 
+        public void 폴더내사진삭제(String 폴더경로, DateTime 날짜)
+        {
+            String[] 사진들 = Directory.GetFiles(폴더경로);
+
+            foreach (String 사진 in 사진들)
+            {
+                if (File.GetLastWriteTime(사진) < 날짜)
+                    File.Delete(사진);
+            }
+        }
+
+        public void 사진정리()
+        {
+            try
+            {
+                if (!Directory.Exists(Global.환경설정.사진저장))
+                    return;
+
+                DateTime 삭제날짜 = DateTime.Now.AddDays(-(Double)Global.환경설정.이미지보관일수);
+
+                String[] 폴더목록 = Directory.GetDirectories(Global.환경설정.사진저장);
+
+                foreach (String 폴더 in 폴더목록)
+                {
+                    폴더내사진삭제(폴더, 삭제날짜);
+                    if (Directory.GetFiles(폴더).Length == 0 && Directory.GetDirectories(폴더).Length == 0)
+                        Directory.Delete(폴더);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
         #region 사진저장
         public void SaveImage(그랩장치 장치, 검사결과 결과) => SaveImage(장치.구분, 장치.MatImage(), 결과.검사일시, 결과.검사코드);
         public void SaveImage(카메라구분 카메라, Mat image, DateTime 시간, Int32 번호)
@@ -86,7 +122,8 @@ namespace DSEV.Schemas
             사진저장 정보 = this[카메라];
             if (!정보.원본저장 && !정보.사본저장) return;
 
-            Task.Run(() => {
+            Task.Run(() =>
+            {
                 String file = String.Empty;
                 if (정보.원본저장)
                 {

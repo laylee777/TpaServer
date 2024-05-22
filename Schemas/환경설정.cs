@@ -20,7 +20,7 @@ namespace DSEV.Schemas
         [JsonIgnore]
         public const String 프로젝트번호 = "23-0404-004";
         [JsonIgnore]
-        public const String DefaultPath = @"C:\\IVM\\VDA590\\TPAServer";
+        public const String DefaultPath = @"C:\IVM\VDA590\TPAServer";
 
         [Description("프로그램 동작구분"), JsonProperty("RunType")]
         public 동작구분 동작구분 { get; set; } = 동작구분.Live;
