@@ -141,6 +141,12 @@ namespace DSEV.Schemas
             return 검사;
         }
 
+        public void 하부큐알리딩수행종료()
+        {
+            Global.하부큐알리더.리딩종료();
+            Global.하부큐알리더2.리딩종료();
+        }
+
         public 검사결과 상부큐알리딩수행(Int32 검사코드)
         {
             //검사결과 검사 = 검사시작(검사코드);
@@ -150,6 +156,10 @@ namespace DSEV.Schemas
             return 검사;
         }
 
+        public void 상부큐알리딩수행종료()
+        {
+            Global.상부큐알리더.리딩종료();
+        }
         public Boolean 커버조립명령(Int32 검사코드)
         {
             검사결과 검사 = 검사항목찾기(검사코드);

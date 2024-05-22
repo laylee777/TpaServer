@@ -28,7 +28,7 @@ namespace DSEV.Schemas
         {
             REP_PROCESS_START = 0,
             REP_PROCESS_END = 3,
-            REP_LINK_TEST = 5,
+            REQ_LINK_TEST = 5,
         }
 
 
@@ -73,9 +73,9 @@ namespace DSEV.Schemas
                     Global.정보로그(로그영역, "MES통신", $"착공완료응답 수신완료", true);
                     return;
                 }
-                else if (e.MSG_ID == 메세지아이디.REP_LINK_TEST.ToString())
+                else if (e.MSG_ID == 메세지아이디.REQ_LINK_TEST.ToString())
                 {
-                    Global.정보로그(로그영역, "MES통신", $"LINKTEST 수신완료", true);
+                    Global.정보로그(로그영역, "MES통신", $"LINKTEST 수신완료", false);
                     return;
                 }
 

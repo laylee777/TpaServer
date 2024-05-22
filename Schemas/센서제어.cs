@@ -54,7 +54,7 @@ namespace DSEV.Schemas
             return 결과;
         }
 
-        protected virtual 리더결과 명령전송(리더명령 명령, String command, Int32 대기시간 = 1000)
+        protected virtual 리더결과 명령전송(리더명령 명령, String command, Int32 대기시간 = 100)
         {
             송신수신알림?.Invoke(통신구분.TX, 명령, command.Trim());
             리더결과 결과 = 자료수신(this.SendCommand(command, 대기시간), 명령);
@@ -66,7 +66,7 @@ namespace DSEV.Schemas
             }
             return 결과;
         }
-        protected virtual 리더결과 명령전송(리더명령 명령, Int32 대기시간 = 1000) => this.명령전송(명령, Utils.GetDescription(명령), 대기시간);
+        protected virtual 리더결과 명령전송(리더명령 명령, Int32 대기시간 = 100) => this.명령전송(명령, Utils.GetDescription(명령), 대기시간);
 
 
 

@@ -117,7 +117,11 @@ namespace DSEV.Schemas
             [Address("W303")]
             재검사,
             [Address("W304", 1000)]
-            번호리셋
+            번호리셋,
+
+            //오류메시지
+            [Address("M10050")]
+            MES오류
         }
 
         // 센서 읽어들이는 순번으로 맞출 것
@@ -202,6 +206,7 @@ namespace DSEV.Schemas
         public Boolean 결과요청트리거신호 { get => 신호읽기(정보주소.결과요청트리거); set => 정보쓰기(정보주소.결과요청트리거, value); }
         public Boolean 결과요청결과OK신호 { get => 신호읽기(정보주소.결과요청결과OK); set => 정보쓰기(정보주소.결과요청결과OK, value); }
         public Boolean 결과요청결과NG신호 { get => 신호읽기(정보주소.결과요청결과NG); set => 정보쓰기(정보주소.결과요청결과NG, value); }
+        public Boolean 결과요청확인완료신호 { get => 신호읽기(정보주소.결과요청확인완료); set => 정보쓰기(정보주소.결과요청확인완료, value); }
 
         public Boolean 자동수동여부 { get => 신호읽기(정보주소.자동수동); }
         public Boolean 시작정지여부 { get => 신호읽기(정보주소.시작정지); }
@@ -209,6 +214,8 @@ namespace DSEV.Schemas
         public Boolean 검사번호리셋 { get => 신호읽기(정보주소.번호리셋); set => 정보쓰기(정보주소.번호리셋, value); }
 
         public Boolean 통신확인핑퐁 { get => 신호읽기(정보주소.통신핑퐁); set => 정보쓰기(정보주소.통신핑퐁, value); }
+
+        public Boolean MES오류 { get => 신호읽기(정보주소.MES오류); }
         #endregion
 
 
