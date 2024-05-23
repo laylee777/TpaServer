@@ -12,23 +12,29 @@ using System.Xml.Serialization;
 using System.IO;
 using static DSEV.Schemas.MESClient;
 using System.Windows.Forms;
+using static DSEV.Schemas.MES통신;
 
 namespace DSEV.Schemas
 {
     public class MES통신
     {
-        public event EventHandler<string> 검사진행요청;
-
+        //public event EventHandler<string> 검사진행요청;
         public MES통신() { }
 
         public String 로그영역 = "MES통신";
-        private MESClient 통신장치;
+        public MESClient 통신장치;
 
-        public enum 메세지아이디
+        public enum 송신메세지아이디
         {
-            REP_PROCESS_START = 0,
-            REP_PROCESS_END = 3,
+            REQ_PROCESS_START = 1,
+            REQ_PROCESS_END = 3,
             REQ_LINK_TEST = 5,
+        }
+        public enum 수신메세지아이디
+        {
+            REP_PROCESS_START = 11,
+            REP_PROCESS_END = 13,
+            REP_LINK_TEST = 15,
         }
 
 
@@ -50,35 +56,48 @@ namespace DSEV.Schemas
             return true;
         }
 
+        public void 하부큐알결과신호전송(Boolean 결과)
+        {
+            Global.장치통신.하부큐알결과OK신호 = 결과;
+            Global.장치통신.하부큐알결과NG신호 = !결과;
+            Global.장치통신.하부큐알확인완료신호 = true;
+        }
+
         private void 통신장치_자료수신(object sender, MESSAGE e)
         {
             try
             {
                 Debug.WriteLine("자료수신");
-                // 장비 구동 여부 관련 메시지일 경우
-                if (e.MSG_ID == 메세지아이디.REP_PROCESS_START.ToString())
+                if (e.MSG_ID == 수신메세지아이디.REP_PROCESS_START.ToString()) //하부큐알관련
                 {
                     //OK일 경우
                     if (e.RESULT == "0")
                     {
-                        Global.정보로그(로그영역, "MES통신", $"양품투입됨", true);
+                        하부큐알결과신호전송(true);
+                        Global.정보로그(로그영역, "MES통신", $"양품투입됨", false);
                         //검사진행요청.Invoke(this, null);
                         return;
                     }
+                    하부큐알결과신호전송(false);
                     Global.오류로그(로그영역, "MES통신", $"불량품 투입됨", true);
 
                 }
-                else if (e.MSG_ID == 메세지아이디.REP_PROCESS_END.ToString())
+                else if (e.MSG_ID == 수신메세지아이디.REP_PROCESS_END.ToString())
                 {
-                    Global.정보로그(로그영역, "MES통신", $"착공완료응답 수신완료", true);
+                    Global.정보로그(로그영역, "MES통신", $"착공완료응답 수신완료", false);
                     return;
                 }
-                else if (e.MSG_ID == 메세지아이디.REQ_LINK_TEST.ToString())
+                else if (e.MSG_ID == 수신메세지아이디.REP_LINK_TEST.ToString())
                 {
+                    //PROGRAM에서 보낸 LINKTEST에 대한 응답.
                     Global.정보로그(로그영역, "MES통신", $"LINKTEST 수신완료", false);
                     return;
                 }
-
+                else if(e.MSG_ID == 송신메세지아이디.REQ_LINK_TEST.ToString())
+                {
+                    //MES에서 보낸 LINK테스트 확인.
+                    Global.정보로그(로그영역, "MES통신", $"{e.SYSTEMID} 에서 송신한 LINKTEST 수신완료.", false);
+                }
             }
             catch (Exception ex)
             {
@@ -96,6 +115,7 @@ namespace DSEV.Schemas
             if (this.통신장치.Send(XmlMessageConverter.GenerateXmlMessage(messge))) return true;
 
             Global.오류로그(로그영역, "자료전송", $"[REQ_PROCESS_START] 자료전송에 실패하였습니다.", true);
+            //this.통신장치.Close();
             return false;
         }
     }
@@ -109,7 +129,6 @@ namespace DSEV.Schemas
         public Boolean 동작여부 { get; set; } = false;
         public String 로그영역 { get; set; } = "MES통신";
         public virtual Boolean 연결여부 { get => this.Connected(); }
-
         public TcpClient 통신소켓 = null;
         public NetworkStream Stream { get => 통신소켓?.GetStream(); }
 
@@ -126,6 +145,7 @@ namespace DSEV.Schemas
         private Int32 PollingPeriod = 1000;
         private DateTime PollingTime = DateTime.Today;
         private Boolean PollingState = false;
+
         public Boolean Connected()
         {
             if (this.통신소켓 == null) return false;
@@ -151,14 +171,13 @@ namespace DSEV.Schemas
         public Boolean Connect()
         {
             //if (Global.환경설정.동작구분 == 동작구분.LocalTest) return false;
-
             try
             {
                 if ((DateTime.Now - 통신연결시간).TotalSeconds < 통신연결간격) return false;
                 this.Disconnect();
                 this.Init();
                 this.통신연결시간 = DateTime.Now;
-                String address = Global.환경설정.동작구분 == 동작구분.LocalTest ? "localhost" : "192.168.10.2";
+                String address = Global.환경설정.동작구분 == 동작구분.LocalTest ? "localhost" : Global.환경설정.MES주소;
                 //String address = "192.168.10.2";
                 this.통신소켓?.Connect(address, 6003);
                 return 연결여부;
@@ -187,6 +206,7 @@ namespace DSEV.Schemas
 
                 try
                 {
+                    //통신핑퐁전송();
                     if (this.통신소켓.Available < 1) continue;
 
                     Debug.WriteLine("자료수신2");
@@ -223,6 +243,15 @@ namespace DSEV.Schemas
                 return false;
             }
         }
+
+        public void 통신핑퐁전송()
+        {
+            if ((DateTime.Now - 통신연결시간).TotalSeconds < 통신연결간격) return;
+
+            MESSAGE message = new MESSAGE();
+            message.SetMessage(송신메세지아이디.REQ_LINK_TEST.ToString(), "IVM01", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fffff"), String.Empty, String.Empty, String.Empty, String.Empty);
+            Global.mes통신.자료송신(message);
+        }
     }
 
 
@@ -239,12 +268,12 @@ namespace DSEV.Schemas
 
         public MESSAGE SetMessage(String msgid, String systemid, String datetime, String barcodeid, String result, String resultmsg, String key)
         {
-            this.MSG_ID = msgid;
+            this.MSG_ID = msgid.ToString();
             this.SYSTEMID = systemid;
             this.DATE_TIME = datetime;
             this.BARCODE_ID = barcodeid;
-            this.RESULT = result;
-            this.RESULT_MSG = resultmsg;
+            //this.RESULT = result;
+            //this.RESULT_MSG = resultmsg;
             this.KEY = key;
 
             return this;

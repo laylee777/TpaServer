@@ -16,11 +16,11 @@ namespace DSEV.UI.Controls
 
         public enum ViewTypes { Auto, Manual }
         private ViewTypes RunType = ViewTypes.Manual;
-        VDA590UFA3D UFA = null;
+        VDA590TPA3D UFA = null;
         public void Init(ViewTypes runType = ViewTypes.Manual)
         {
             RunType = runType;
-            UFA = new VDA590UFA3D();
+            UFA = new VDA590TPA3D();
             //if (runType == ViewTypes.Auto)
             {
                 UFA.CameraPosition = new Point3D(0.6, -2.6, 967);

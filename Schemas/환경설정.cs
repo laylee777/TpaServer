@@ -90,12 +90,12 @@ namespace DSEV.Schemas
 
         //새롭게 추가 24.04.02
         [Translation("MES Server Host", "MES 서버 주소"), JsonProperty("MESHost")] // Client or Server
-        public String MES주소 { get; set; } = "192.168.211.3";
+        public String MES주소 { get; set; } = "127.0.0.1";
         [Translation("MES Server Port", "MES 서버 포트"), JsonProperty("MESPort")] // Client or Server
         public Int32 MES포트 { get; set; } = 6003;
 
         //[Translation("MES Server Host", "MES 서버 주소"), JsonProperty("MESHost")] // Client or Server
-        //public String MES주소 { get; set; } = "127.0.0.1";
+        //public String MES주소 { get; set; } = "192.168.10.2";
         //[Translation("MES Server Port", "MES 서버 포트"), JsonProperty("MESPort")] // Client or Server
         //public Int32 MES포트 { get; set; } = 6003;
 

@@ -156,7 +156,7 @@
     <Compile Include="Schemas\MES통신.cs" />
     <Compile Include="Schemas\MVSol.Enc.cs" />
     <Compile Include="Schemas\PlaneDistanceCalculator.cs" />
-    <Compile Include="Schemas\Viewport\VDA590UFA3D.cs" />
+    <Compile Include="Schemas\Viewport\VDA590TPA3D.cs" />
     <Compile Include="Schemas\Viewport\Graphics3D.cs" />
     <Compile Include="Schemas\Viewport\HelixViewport.cs" />
     <Compile Include="Schemas\모델정보.검사설정.cs" />

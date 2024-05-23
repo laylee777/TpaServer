@@ -52,6 +52,7 @@ namespace DSEV
             public static Boolean 조명장치 => 조명제어.정상여부;
             public static Boolean 그랩장치 => Global.그랩제어.정상여부;
             public static Boolean 카메라1 => Global.그랩제어.상부검사카메라.상태 && Global.그랩제어.측면검사카메라1.상태 && Global.그랩제어.측면검사카메라2.상태 && Global.그랩제어.하부검사카메라1.상태 && Global.그랩제어.하부검사카메라2.상태 && Global.그랩제어.커넥터검사카메라1.상태 && Global.그랩제어.커넥터검사카메라2.상태;
+            public static Boolean MES상태 => Global.mes통신.통신장치 == null ? false : Global.mes통신.통신장치.연결여부;
             public static Boolean 자동수동 => Global.장치통신.자동수동여부;
             public static Boolean 시작정지 => Global.장치통신.시작정지여부;
         }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using static DSEV.Schemas.MES통신;
 
 namespace DSEV.Schemas
 {
@@ -62,7 +63,7 @@ namespace DSEV.Schemas
         private void 검사위치확인()
         {
             Dictionary<정보주소, Int32> 변경 = this.입출자료.Changes(정보주소.하부큐알트리거, 정보주소.결과요청트리거);
-            
+
             if (변경.Count < 1) return;
 
             if (!this.하부큐알트리거신호 && this.하부큐알확인완료신호)
@@ -214,23 +215,19 @@ namespace DSEV.Schemas
                     Global.검사자료.검사시작(하부큐알검사번호);
                     Debug.WriteLine("검사자료 검사시작");
 
-
                     검사결과 검사 = Global.검사자료.하부큐알리딩수행(하부큐알검사번호);
 
-                    //임시 OK 신호 - MES통신 부분 추가해야됨.
                     if (!Global.환경설정.MES사용유무)
                     {
-                        this.하부큐알결과OK신호 = true;
-                        this.하부큐알결과NG신호 = false;
-                        this.하부큐알확인완료신호 = true;
+                        //MES사용안할시 강제 OK
+                        Global.mes통신.하부큐알결과신호전송(true);
                     }
                     else
                     {
                         //mes 에 보내고 결과 받아서 신호 설정 로직 추가예정
-                        //결과 송부받아서 변경
-                        this.하부큐알결과OK신호 = true;
-                        this.하부큐알결과NG신호 = false;
-                        this.하부큐알확인완료신호 = true;
+                        MESSAGE message = new MESSAGE();
+                        message.SetMessage(송신메세지아이디.REQ_PROCESS_START.ToString(), "IVM01", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fffff"), $"{검사.큐알내용}", String.Empty, String.Empty, 검사.검사코드.ToString("0000"));
+                        Global.mes통신.자료송신(message);
                     }
 
                     Global.검사자료.하부큐알리딩수행종료();
@@ -417,7 +414,7 @@ namespace DSEV.Schemas
             Debug.WriteLine("검사결과 강제배출 확인중");
             if (Global.환경설정.강제배출)
             {
-                결과전송(Global.환경설정.양품불량);
+                결과전송(Global.환경설정.양품불량, 검사);
                 Global.검사자료.검사완료알림함수(검사);
                 return;
             }
@@ -425,33 +422,33 @@ namespace DSEV.Schemas
             Debug.WriteLine("강제배출 아님. 검사 비어있는지 확인 중");
             if (검사 == null)
             {
-                결과전송(false);
+                결과전송(false, 검사);
                 Global.검사자료.검사완료알림함수(검사);
                 return;
             }
 
             Debug.WriteLine("안비어있음. 결과전송 진행 예정");
             // 배출 수행
-            결과전송(검사.측정결과 == 결과구분.OK);
+            결과전송(검사.측정결과 == 결과구분.OK, 검사);
             Debug.WriteLine($"{검사.측정결과}");
 
             Global.검사자료.검사완료알림함수(검사);
         }
 
         // 신호 Writing 순서 중요
-        private void 결과전송(Boolean 양품여부)
+        private void 결과전송(Boolean 양품여부, 검사결과 검사)
         {
             Debug.WriteLine("결과전송시작");
             this.결과요청결과NG신호 = !양품여부;
             this.결과요청결과OK신호 = 양품여부;
             this.결과요청확인완료신호 = true;
 
-            // 1초 후에 a를 false로 변경하는 비동기 작업 예약
-            //await Task.Delay(200);
-
-            //this.결과요청결과OK신호 = false;
-            //this.결과요청결과NG신호 = false;
-            //this.결과요청확인완료신호 = false;
+            if (Global.환경설정.MES사용유무)
+            {
+                MESSAGE message = new MESSAGE();
+                message.SetMessage(송신메세지아이디.REQ_PROCESS_END.ToString(), "IVM01", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fffff"), $"{검사.큐알내용}", String.Empty, String.Empty, String.Empty);
+                Global.mes통신.자료송신(message);
+            }
 
             Debug.WriteLine("결과전송완료");
         }

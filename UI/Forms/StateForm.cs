@@ -16,7 +16,7 @@ namespace DSEV.UI.Forms
             this.Shown += FormShown;
         }
 
-        VDA590UFA3D UFA = null;
+        VDA590TPA3D UFA = null;
         private void FormShown(object sender, EventArgs e) => this.Init();
         public void Init()
         {
@@ -29,7 +29,7 @@ namespace DSEV.UI.Forms
             Global.모델자료.검사수량변경 += 검사수량변경;
             this.e모델.DoubleClick += 화면갱신;
 
-            UFA = new VDA590UFA3D()
+            UFA = new VDA590TPA3D()
             {
                 CameraPosition = new Point3D(0, 30, 1150),
                 CameraLookDirection = new Vector3D(0, 0, -1150),

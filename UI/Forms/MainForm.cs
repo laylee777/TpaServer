@@ -7,6 +7,7 @@ using DSEV.Schemas;
 using DSEV.UI.Controls;
 using System.Diagnostics;
 using DSEV.UI.Forms;
+using static DSEV.Schemas.MES통신;
 
 namespace DSEV
 {
@@ -40,14 +41,7 @@ namespace DSEV
 
         private void 타이틀_ItemDoubleClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            
-            MESSAGE message = new MESSAGE();
-
-            message.SetMessage("REQ_PROCESS_END", "IVM01", DateTime.Now.ToString(), "F00395AB231;F00395AB231", String.Empty, String.Empty, "50");
-  
-            Global.mes통신.자료송신(message);
-
-            Debug.WriteLine("자료송신");
+          
         }
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
@@ -194,16 +188,8 @@ namespace DSEV
             if (e.KeyCode == Keys.Z)
             {
                 MESSAGE message = new MESSAGE();
-                message.MSG_ID = "REQ_PROCESS_START";
-                message.SYSTEMID = "EQU050";
-                message.DATE_TIME = "2024-04-03 14:35:29.55808";
-                message.BARCODE_ID = "F00395AB231;F00395AB231";
-                message.KEY = TestIndexNum.ToString("0000");
-
-                TestIndexNum++;
-
+                message.SetMessage(송신메세지아이디.REQ_PROCESS_START.ToString(), "EQU050", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fffff"), "F00395AB231;F00395AB231", String.Empty, String.Empty, TestIndexNum.ToString("0000"));
                 Global.mes통신.자료송신(message);
-
                 Debug.WriteLine("자료송신");
             }
             if (e.KeyCode == Keys.X)

@@ -47,12 +47,12 @@ namespace DSEV.Schemas
         }
         protected virtual 리더결과 명령전송(리더명령 명령, Int32 대기시간 = 100) => this.명령전송(명령, Utils.GetDescription(명령), 대기시간);
 
-        public void 리딩시작(검사결과 검사)
+        public String 리딩시작(검사결과 검사)
         {
             Debug.WriteLine("리딩시작");
             리더결과 결과 = 리딩시작();
-
             Debug.WriteLine($"응답번호 : {결과.응답번호}, 응답자료 : {결과.응답자료}");
+           
             //큐알등급 등급 = (큐알등급)결과.응답번호;
             //if (등급 == 큐알등급.X || 등급 > 큐알등급.C)
             //{
@@ -62,7 +62,11 @@ namespace DSEV.Schemas
             //        결과 = 결과2;
             //}
             //리딩종료();
-            //if (검사 == null) return;
+            if (검사 == null) return String.Empty;
+            else
+            {
+                return 결과.응답자료;
+            }
             //검사.큐알정보검사(결과.응답자료, (큐알등급)결과.응답번호);
         }
         public 리더결과 리딩시작() => 명령전송(리더명령.리딩시작, "LON\r");
@@ -102,7 +106,7 @@ namespace DSEV.Schemas
         }
         protected virtual 리더결과 명령전송(리더명령 명령, Int32 대기시간 = 100) => this.명령전송(명령, Utils.GetDescription(명령), 대기시간);
 
-        public void 리딩시작(검사결과 검사)
+        public String 리딩시작(검사결과 검사)
         {
             Debug.WriteLine("리딩시작");
             리더결과 결과 = 리딩시작();
@@ -117,7 +121,11 @@ namespace DSEV.Schemas
             //        결과 = 결과2;
             //}
             //리딩종료();
-            if (검사 == null) return;
+            if (검사 == null) return String.Empty;
+            else
+            {
+                return 결과.응답자료;
+            }
             //검사.큐알정보검사(결과.응답자료, (큐알등급)결과.응답번호);
         }
         public 리더결과 리딩시작() => 명령전송(리더명령.리딩시작, "LON\r");

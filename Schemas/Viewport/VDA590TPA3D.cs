@@ -8,7 +8,7 @@ using System.Windows.Media.Media3D;
 
 namespace DSEV.Schemas
 {
-    public class VDA590UFA3D : Viewport
+    public class VDA590TPA3D : Viewport
     {
         #region 초기화
         public override String StlPath => Global.환경설정.기본경로;

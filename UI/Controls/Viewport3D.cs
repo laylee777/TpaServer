@@ -12,8 +12,8 @@ namespace DSEV.UI.Controls
             InitializeComponent();
         }
 
-        private VDA590UFA3D Model3D = null;
-        public void Init(VDA590UFA3D model)
+        private VDA590TPA3D Model3D = null;
+        public void Init(VDA590TPA3D model)
         {
             this.Model3D = model;
             if (!Model3D.Init(out String err2)) { Debug.WriteLine(err2, "Model3D Error"); }

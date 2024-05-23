@@ -159,16 +159,16 @@ namespace DSEV.Schemas
             if (r) return true;
             if (검사.마진값 <= 0 || 마진포함) return false;
 
-            Int32 factor = 0;
+            //Int32 factor = 0;
             if (검사.최소값 > result)
             {
                 if (검사.최소값 > result + 검사.마진값 * 검사.결과부호) return false;
-                factor = 1;
+                //factor = 1;
             }
             else if (검사.최대값 < result)
             {
                 if (검사.최대값 < result - 검사.마진값 * 검사.결과부호) return false;
-                factor = -1;
+                //factor = -1;
             }
 
             return false;

@@ -18,6 +18,7 @@ namespace DSEV.UI.Controls
         //private 장치상태 피씨통신;
         private 장치상태 조명장치;
         private 장치상태 카메라1;
+        private 장치상태 MES상태;
 
         public void Init()
         {
@@ -26,6 +27,7 @@ namespace DSEV.UI.Controls
             //this.피씨통신 = new 장치상태(this.e피씨통신);
             this.조명장치 = new 장치상태(this.e조명장치);
             this.카메라1 = new 장치상태(this.e카메라1);
+            this.MES상태 = new 장치상태(this.eMES통신);
             //this.카메라2 = new 장치상태(this.e카메라2);
             //this.카메라3 = new 장치상태(this.e카메라3);
             Global.장치통신.통신상태알림 += 통신상태알림;
@@ -45,6 +47,7 @@ namespace DSEV.UI.Controls
             this.카메라1.Set(Global.환경설정.동작구분 == 동작구분.LocalTest || Global.장치상태.카메라1);
             this.조명장치.Set(Global.환경설정.동작구분 == 동작구분.LocalTest || Global.장치상태.조명장치);
             this.큐알리더.Set(Global.환경설정.동작구분 == 동작구분.LocalTest || Global.장치상태.상부큐알리더);
+            this.MES상태.Set(Global.환경설정.동작구분 == 동작구분.LocalTest || Global.장치상태.MES상태);
             //this.피씨통신.Set(Global.환경설정.동작구분 == 동작구분.LocalTest || Global.장치상태.피씨통신);
         }
 

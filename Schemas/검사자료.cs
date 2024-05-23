@@ -134,10 +134,14 @@ namespace DSEV.Schemas
         public 검사결과 하부큐알리딩수행(Int32 검사코드)
         {
             //검사결과 검사 = 검사시작(검사코드);
+            List<String> 하부QR = new List<String>();
             검사결과 검사 = 검사항목찾기(검사코드);
             if (검사 == null) return null;
-            Global.하부큐알리더.리딩시작(검사);
-            Global.하부큐알리더2.리딩시작(검사);
+            하부QR.Add(Global.하부큐알리더.리딩시작(검사));
+            하부QR.Add(Global.하부큐알리더2.리딩시작(검사));
+
+            검사.큐알내용 = $"{하부QR[0]}{하부QR[1]}";
+
             return 검사;
         }
 
