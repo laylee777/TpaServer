@@ -8,13 +8,15 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using DSEV.Multicam;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace DSEV.Schemas
 {
     public class 그랩제어 : Dictionary<카메라구분, 그랩장치>
     {
         public static List<카메라구분> 대상카메라 = new List<카메라구분>() { 카메라구분.Cam01, 카메라구분.Cam02, 카메라구분.Cam03, 카메라구분.Cam04, 카메라구분.Cam05, 카메라구분.Cam06, 카메라구분.Cam07 }; //, 카메라구분.Cam02, 카메라구분.Cam03
-        
+
         public delegate void 그랩완료대리자(그랩장치 장치);
         public event 그랩완료대리자 그랩완료보고;
 
@@ -44,13 +46,13 @@ namespace DSEV.Schemas
         public Boolean Init()
         {
             Dalsa16K cam1 = new Dalsa16K(카메라구분.Cam01) { AcquisitionMode = AcquisitionMode.PAGE, PageLength_Ln = 40000 };
-            this.상부검사카메라    = new EuresysLink(cam1) { 코드 = "TOPCAMERA", 가로 = 16384, 세로 = cam1.PageLength_Ln };
-            this.측면검사카메라1   = new HikeGigE()   { 구분 = 카메라구분.Cam02,  코드 = "DA1698484"};
-            this.측면검사카메라2   = new HikeGigE()   { 구분 = 카메라구분.Cam03,  코드 = "DA1698487"};
-            this.하부검사카메라1   = new HikeGigE()   { 구분 = 카메라구분.Cam04,  코드 = "DA1698488"};
-            this.하부검사카메라2   = new HikeGigE()   { 구분 = 카메라구분.Cam05,   코드 = "DA1698486"};
-            this.커넥터검사카메라1 = new HikeGigE()   { 구분 = 카메라구분.Cam06, 코드 = "DA1278379"};
-            this.커넥터검사카메라2 = new HikeGigE()   { 구분 = 카메라구분.Cam07, 코드 = "DA0652350"};
+            this.상부검사카메라 = new EuresysLink(cam1) { 코드 = "TOPCAMERA", 가로 = 16384, 세로 = cam1.PageLength_Ln };
+            this.측면검사카메라1 = new HikeGigE() { 구분 = 카메라구분.Cam02, 코드 = "DA1698484" };
+            this.측면검사카메라2 = new HikeGigE() { 구분 = 카메라구분.Cam03, 코드 = "DA1698487" };
+            this.하부검사카메라1 = new HikeGigE() { 구분 = 카메라구분.Cam04, 코드 = "DA1698488" };
+            this.하부검사카메라2 = new HikeGigE() { 구분 = 카메라구분.Cam05, 코드 = "DA1698486" };
+            this.커넥터검사카메라1 = new HikeGigE() { 구분 = 카메라구분.Cam06, 코드 = "DA1278379" };
+            this.커넥터검사카메라2 = new HikeGigE() { 구분 = 카메라구분.Cam07, 코드 = "DA0652350" };
 
             this.Add(카메라구분.Cam01, this.상부검사카메라);
             this.Add(카메라구분.Cam02, this.측면검사카메라1);
@@ -75,12 +77,12 @@ namespace DSEV.Schemas
             if (Global.환경설정.동작구분 != 동작구분.Live) return true;
 
             MC.OpenDriver();
-            
+
             // CameraLink 초기화
             foreach (그랩장치 장치 in this.Values)
                 if (장치.GetType() == typeof(EuresysLink))
                     장치.Init();
-            
+
             // GigE 카메라 초기화
             List<CCameraInfo> 카메라들 = new List<CCameraInfo>();
             Int32 nRet = CSystem.EnumDevices(CSystem.MV_GIGE_DEVICE, ref 카메라들);// | CSystem.MV_USB_DEVICE
@@ -137,6 +139,11 @@ namespace DSEV.Schemas
                 검사결과 검사 = Global.검사자료.검사항목찾기(검사번호);
                 if (검사 == null) return;
                 Global.비전검사.Run(장치, 검사);
+                if (장치.구분 == 카메라구분.Cam01)
+                {
+                    Debug.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} : 표면 검사시작");
+                    Task.Run(() => { Global.VM제어.GetItem(Flow구분.표면검사).Run(Common.ResizeImage(장치.MatImage(), 장치.ResizeScale), null); });
+                }
             }
             else
             {

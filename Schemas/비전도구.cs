@@ -22,7 +22,7 @@ namespace DSEV.Schemas
     {
         #region 기본설정
         public String 로그영역 = "Vision Tool";
-        public 모델구분 모델구분 = 모델구분.VDA590UFA;
+        public 모델구분 모델구분 = 모델구분.VDA590TPA;
         public 카메라구분 카메라 = 카메라구분.None;
         public String 도구명칭 { get => this.카메라.ToString(); }
         public String 도구경로 { get => Path.Combine(Global.환경설정.도구경로, ((Int32)모델구분).ToString("d2"), $"{도구명칭}.vpp"); }

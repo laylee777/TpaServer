@@ -30,20 +30,20 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DeviceLamp));
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
+            this.eMES통신 = new DevExpress.XtraEditors.SvgImageBox();
             this.e조명장치 = new DevExpress.XtraEditors.SvgImageBox();
             this.e카메라1 = new DevExpress.XtraEditors.SvgImageBox();
             this.e각인리더 = new DevExpress.XtraEditors.SvgImageBox();
             this.e장치통신 = new DevExpress.XtraEditors.SvgImageBox();
             this.e통신체크 = new DevExpress.XtraEditors.SvgImageBox();
-            this.eMES통신 = new DevExpress.XtraEditors.SvgImageBox();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.eMES통신)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e조명장치)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e카메라1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e각인리더)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e장치통신)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e통신체크)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.eMES통신)).BeginInit();
             this.SuspendLayout();
             // 
             // tablePanel1
@@ -70,6 +70,20 @@
             this.tablePanel1.Size = new System.Drawing.Size(200, 94);
             this.tablePanel1.TabIndex = 0;
             this.tablePanel1.UseSkinIndents = true;
+            // 
+            // eMES통신
+            // 
+            this.tablePanel1.SetColumn(this.eMES통신, 0);
+            this.eMES통신.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.eMES통신.Location = new System.Drawing.Point(4, 49);
+            this.eMES통신.Name = "eMES통신";
+            this.tablePanel1.SetRow(this.eMES통신, 1);
+            this.eMES통신.Size = new System.Drawing.Size(45, 41);
+            this.eMES통신.SizeMode = DevExpress.XtraEditors.SvgImageSizeMode.Squeeze;
+            this.eMES통신.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("eMES통신.SvgImage")));
+            this.eMES통신.TabIndex = 17;
+            this.eMES통신.Text = "MES";
+            this.eMES통신.ToolTip = "MES";
             // 
             // e조명장치
             // 
@@ -139,20 +153,6 @@
             this.e통신체크.Text = "svgImageBox1";
             this.e통신체크.ToolTip = "PLC State";
             // 
-            // eMES통신
-            // 
-            this.tablePanel1.SetColumn(this.eMES통신, 0);
-            this.eMES통신.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.eMES통신.Location = new System.Drawing.Point(4, 49);
-            this.eMES통신.Name = "eMES통신";
-            this.tablePanel1.SetRow(this.eMES통신, 1);
-            this.eMES통신.Size = new System.Drawing.Size(45, 41);
-            this.eMES통신.SizeMode = DevExpress.XtraEditors.SvgImageSizeMode.Squeeze;
-            this.eMES통신.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("eMES통신.SvgImage")));
-            this.eMES통신.TabIndex = 17;
-            this.eMES통신.Text = "MES";
-            this.eMES통신.ToolTip = "MES";
-            // 
             // DeviceLamp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -162,12 +162,12 @@
             this.Size = new System.Drawing.Size(200, 94);
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.eMES통신)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e조명장치)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e카메라1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e각인리더)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e장치통신)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e통신체크)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.eMES통신)).EndInit();
             this.ResumeLayout(false);
 
         }

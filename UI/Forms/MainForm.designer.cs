@@ -112,7 +112,7 @@ namespace DSEV
             this.tabFormControl1.Pages.Add(this.p검사도구);
             this.tabFormControl1.Pages.Add(this.p검사내역);
             this.tabFormControl1.Pages.Add(this.p환경설정);
-            this.tabFormControl1.SelectedPage = this.p결과뷰어;
+            this.tabFormControl1.SelectedPage = this.p환경설정;
             this.tabFormControl1.ShowAddPageButton = false;
             this.tabFormControl1.ShowTabCloseButtons = false;
             this.tabFormControl1.ShowTabsInTitleBar = DevExpress.XtraBars.ShowTabsInTitleBar.True;
@@ -189,6 +189,7 @@ namespace DSEV
             // p검사도구
             // 
             this.p검사도구.ContentContainer = this.tabFormContentContainer4;
+            this.p검사도구.ImageOptions.SvgImage = global::DSEV.Properties.Resources.electronics_photo;
             this.p검사도구.Name = "p검사도구";
             this.p검사도구.Text = "Cameras";
             // 
@@ -331,7 +332,6 @@ namespace DSEV
             // t환경설정
             // 
             this.t환경설정.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.t환경설정.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Bottom;
             this.t환경설정.Location = new System.Drawing.Point(0, 0);
             this.t환경설정.Name = "t환경설정";
             this.t환경설정.SelectedTabPage = this.t검사설정;
@@ -408,7 +408,7 @@ namespace DSEV
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1920, 1040);
-            this.Controls.Add(this.tabFormContentContainer1);
+            this.Controls.Add(this.tabFormContentContainer2);
             this.Controls.Add(this.tabFormControl1);
             this.IconOptions.SvgImage = global::DSEV.Properties.Resources.vision;
             this.Name = "MainForm";

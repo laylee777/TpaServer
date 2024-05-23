@@ -107,6 +107,8 @@ namespace DSEV.Schemas
         public String 사진경로 { get { return Path.Combine(기본경로, "Items"); } }
         [Description("비젼 Tools"), JsonIgnore]
         public String 도구경로 { get { return Path.Combine(기본경로, "Tools"); } }
+        [Description("VM비젼 Tools"), JsonIgnore]
+        public String VM도구경로 { get { return Path.Combine(기본경로, "Tools"); } }
         [Description("마스터 이미지"), JsonIgnore]
         public String 마스터사진 { get { return Path.Combine(기본경로, "Masters"); } }
 

@@ -18,6 +18,7 @@ namespace DSEV.Schemas
 {
     public class MES통신
     {
+        public event Global.BaseEvent 통신상태알림;
         //public event EventHandler<string> 검사진행요청;
         public MES통신() { }
 
@@ -90,6 +91,7 @@ namespace DSEV.Schemas
                 else if (e.MSG_ID == 수신메세지아이디.REP_LINK_TEST.ToString())
                 {
                     //PROGRAM에서 보낸 LINKTEST에 대한 응답.
+                    this.통신상태알림?.Invoke();
                     Global.정보로그(로그영역, "MES통신", $"LINKTEST 수신완료", false);
                     return;
                 }
@@ -114,7 +116,20 @@ namespace DSEV.Schemas
             if (!this.통신장치.연결여부) return false;
             if (this.통신장치.Send(XmlMessageConverter.GenerateXmlMessage(messge))) return true;
 
-            Global.오류로그(로그영역, "자료전송", $"[REQ_PROCESS_START] 자료전송에 실패하였습니다.", true);
+            if(messge.MSG_ID == 송신메세지아이디.REQ_LINK_TEST.ToString())
+            {
+                //REQ TEST 실패시 MES사용유무 체크하여 다시 재연결 시도.
+                Task.Run(() =>
+                {
+                    if (Global.환경설정.MES사용유무)
+                    {
+                        Global.mes통신.Init();
+                        Global.mes통신.Start();
+                    }
+                });
+            }
+
+            Global.오류로그(로그영역, "자료전송", $"[{messge.MSG_ID}] 자료전송에 실패하였습니다.", true);
             //this.통신장치.Close();
             return false;
         }
@@ -129,6 +144,7 @@ namespace DSEV.Schemas
         public Boolean 동작여부 { get; set; } = false;
         public String 로그영역 { get; set; } = "MES통신";
         public virtual Boolean 연결여부 { get => this.Connected(); }
+        public Boolean 핑퐁상태 { get; set; }
         public TcpClient 통신소켓 = null;
         public NetworkStream Stream { get => 통신소켓?.GetStream(); }
 
@@ -166,8 +182,8 @@ namespace DSEV.Schemas
             this.통신소켓 = null;
         }
 
-        private Int32 통신연결간격 = 3;
-        private DateTime 통신연결시간 = DateTime.Today;
+        private Int32 통신연결간격 = 1;
+        private DateTime 통신연결시간 = DateTime.Now;
         public Boolean Connect()
         {
             //if (Global.환경설정.동작구분 == 동작구분.LocalTest) return false;
@@ -206,7 +222,13 @@ namespace DSEV.Schemas
 
                 try
                 {
-                    //통신핑퐁전송();
+                    통신핑퐁전송();
+                    if(this.통신소켓 == null)
+                    {
+                        this.동작여부 = false;
+                        return;
+                    }
+
                     if (this.통신소켓.Available < 1) continue;
 
                     Debug.WriteLine("자료수신2");
@@ -247,6 +269,9 @@ namespace DSEV.Schemas
         public void 통신핑퐁전송()
         {
             if ((DateTime.Now - 통신연결시간).TotalSeconds < 통신연결간격) return;
+            통신연결시간 = DateTime.Now;
+
+            this.핑퐁상태 = !this.핑퐁상태;
 
             MESSAGE message = new MESSAGE();
             message.SetMessage(송신메세지아이디.REQ_LINK_TEST.ToString(), "IVM01", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fffff"), String.Empty, String.Empty, String.Empty, String.Empty);

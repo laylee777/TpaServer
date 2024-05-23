@@ -463,10 +463,11 @@ namespace DSEV.Schemas
                 this.검사번호리셋 = true;
                 Global.모델자료.선택모델.날짜변경();
             }
+
             this.통신확인핑퐁 = !this.통신확인핑퐁;
+            //Debug.WriteLine($"통신확인핑퐁 : {this.통신확인핑퐁}");
             this.통신상태알림?.Invoke();
         }
-
         private Boolean 테스트수행()
         {
             통신핑퐁수행();
