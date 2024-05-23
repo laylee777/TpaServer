@@ -71,6 +71,16 @@ namespace DSEV.Properties {
         }
         
         /// <summary>
+        ///   (아이콘)과(와) 유사한 System.Drawing.Icon 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Icon Cognex {
+            get {
+                object obj = ResourceManager.GetObject("Cognex", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   DevExpress.Utils.Svg.SvgImage 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
         internal static DevExpress.Utils.Svg.SvgImage electronics_photo {
@@ -117,6 +127,16 @@ namespace DSEV.Properties {
             get {
                 object obj = ResourceManager.GetObject("vision", resourceCulture);
                 return ((DevExpress.Utils.Svg.SvgImage)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   (아이콘)과(와) 유사한 System.Drawing.Icon 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Icon Vm {
+            get {
+                object obj = ResourceManager.GetObject("Vm", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
     }

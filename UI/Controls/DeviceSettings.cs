@@ -25,6 +25,7 @@ namespace DSEV.UI.Controls
             this.e강제커버조립.IsOn = Global.환경설정.강제커버조립사용;
             this.e커버조립여부.IsOn = Global.환경설정.커버조립여부;
             this.eMES사용유무.IsOn = Global.환경설정.MES사용유무;
+            this.e표면검사이미지저장.IsOn = Global.환경설정.표면검사이미지저장;
 
             this.e강제배출.EditValueChanged += 강제배출Changed;
             this.e배출구분.EditValueChanged += 배출구분Changed;
@@ -32,6 +33,7 @@ namespace DSEV.UI.Controls
             this.e강제커버조립.EditValueChanged += 강제커버조립Changed;
             this.e커버조립여부.EditValueChanged += 커버조립여부Changed;
             this.eMES사용유무.EditValueChanged += MES사용유무Changed;
+            this.e표면검사이미지저장.EditValueChanged += 표면검사이미지저장Changed;
 
             this.b캠트리거리셋.Click += 캠트리거리셋;
             this.e센서리셋.IsOn = false;
@@ -48,6 +50,8 @@ namespace DSEV.UI.Controls
             this.e기본설정.Init();
             this.e유저관리.Init();
         }
+
+      
 
         private void MES사용유무Changed(object sender, EventArgs e)
         {
@@ -101,6 +105,7 @@ namespace DSEV.UI.Controls
         }
 
         //public void Shown(Boolean shown) { }
+        private void 표면검사이미지저장Changed(object sender, EventArgs e) => Global.환경설정.표면검사이미지저장 = this.e표면검사이미지저장.IsOn;
         private void 강제배출Changed(object sender, EventArgs e) => Global.환경설정.강제배출 = this.e강제배출.IsOn;
         private void 배출구분Changed(object sender, EventArgs e) => Global.환경설정.양품불량 = this.e배출구분.IsOn;
         //private void 센서리셋(object sender, EventArgs e) => Global.장치통신.센서제로수행(this.e센서리셋.IsOn);

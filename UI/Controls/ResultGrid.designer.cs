@@ -163,6 +163,7 @@
             this.col검사명칭.Name = "col검사명칭";
             this.col검사명칭.Visible = true;
             this.col검사명칭.VisibleIndex = 0;
+            this.col검사명칭.Width = 150;
             // 
             // col검사그룹
             // 
@@ -171,6 +172,7 @@
             this.col검사그룹.Caption = "Group";
             this.col검사그룹.FieldName = "검사그룹";
             this.col검사그룹.Name = "col검사그룹";
+            this.col검사그룹.Width = 100;
             // 
             // col검사장치
             // 
@@ -189,6 +191,7 @@
             this.col결과분류.Name = "col결과분류";
             this.col결과분류.Visible = true;
             this.col결과분류.VisibleIndex = 1;
+            this.col결과분류.Width = 71;
             // 
             // col측정단위
             // 
@@ -199,6 +202,7 @@
             this.col측정단위.Name = "col측정단위";
             this.col측정단위.Visible = true;
             this.col측정단위.VisibleIndex = 2;
+            this.col측정단위.Width = 71;
             // 
             // col측정값
             // 
@@ -221,6 +225,7 @@
             this.col기준값.Name = "col기준값";
             this.col기준값.Visible = true;
             this.col기준값.VisibleIndex = 4;
+            this.col기준값.Width = 71;
             // 
             // col최소값
             // 
@@ -233,6 +238,7 @@
             this.col최소값.Name = "col최소값";
             this.col최소값.Visible = true;
             this.col최소값.VisibleIndex = 3;
+            this.col최소값.Width = 71;
             // 
             // col최대값
             // 
@@ -245,6 +251,7 @@
             this.col최대값.Name = "col최대값";
             this.col최대값.Visible = true;
             this.col최대값.VisibleIndex = 5;
+            this.col최대값.Width = 71;
             // 
             // col보정값
             // 
@@ -267,6 +274,7 @@
             this.col결과값.Name = "col결과값";
             this.col결과값.Visible = true;
             this.col결과값.VisibleIndex = 6;
+            this.col결과값.Width = 71;
             // 
             // col측정결과
             // 

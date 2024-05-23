@@ -64,7 +64,11 @@ namespace DSEV.UI.Controls
             this.e왼쪽측면캠 = new Cogutils.RecordDisplay();
             this.d하부캠 = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel2_Container = new DevExpress.XtraBars.Docking.ControlContainer();
+            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
+            this.p치수검사 = new DevExpress.XtraTab.XtraTabPage();
             this.e상부캠 = new Cogutils.RecordDisplay();
+            this.p표면검사 = new DevExpress.XtraTab.XtraTabPage();
+            this.e표면검사 = new VMControls.Winform.Release.VmRenderControl();
             this.d상부인슐오른쪽캠 = new DevExpress.XtraBars.Docking.DockPanel();
             this.controlContainer1 = new DevExpress.XtraBars.Docking.ControlContainer();
             this.e오른쪽측면캠 = new Cogutils.RecordDisplay();
@@ -83,10 +87,6 @@ namespace DSEV.UI.Controls
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
             this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
-            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
-            this.p치수검사 = new DevExpress.XtraTab.XtraTabPage();
-            this.p표면검사 = new DevExpress.XtraTab.XtraTabPage();
-            this.e표면검사 = new VMControls.Winform.Release.VmRenderControl();
             ((System.ComponentModel.ISupportInitialize)(this.documentGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.document1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentGroup2)).BeginInit();
@@ -108,7 +108,11 @@ namespace DSEV.UI.Controls
             ((System.ComponentModel.ISupportInitialize)(this.e왼쪽측면캠)).BeginInit();
             this.d하부캠.SuspendLayout();
             this.dockPanel2_Container.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
+            this.xtraTabControl1.SuspendLayout();
+            this.p치수검사.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.e상부캠)).BeginInit();
+            this.p표면검사.SuspendLayout();
             this.d상부인슐오른쪽캠.SuspendLayout();
             this.controlContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.e오른쪽측면캠)).BeginInit();
@@ -129,10 +133,6 @@ namespace DSEV.UI.Controls
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
-            this.xtraTabControl1.SuspendLayout();
-            this.p치수검사.SuspendLayout();
-            this.p표면검사.SuspendLayout();
             this.SuspendLayout();
             // 
             // documentGroup1
@@ -380,6 +380,25 @@ namespace DSEV.UI.Controls
             this.dockPanel2_Container.Size = new System.Drawing.Size(703, 967);
             this.dockPanel2_Container.TabIndex = 0;
             // 
+            // xtraTabControl1
+            // 
+            this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
+            this.xtraTabControl1.Name = "xtraTabControl1";
+            this.xtraTabControl1.SelectedTabPage = this.p치수검사;
+            this.xtraTabControl1.Size = new System.Drawing.Size(703, 967);
+            this.xtraTabControl1.TabIndex = 1;
+            this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.p치수검사,
+            this.p표면검사});
+            // 
+            // p치수검사
+            // 
+            this.p치수검사.Controls.Add(this.e상부캠);
+            this.p치수검사.Name = "p치수검사";
+            this.p치수검사.Size = new System.Drawing.Size(701, 936);
+            this.p치수검사.Text = "CTQ";
+            // 
             // e상부캠
             // 
             this.e상부캠.ColorMapLowerClipColor = System.Drawing.Color.Black;
@@ -398,6 +417,27 @@ namespace DSEV.UI.Controls
             this.e상부캠.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("e상부캠.OcxState")));
             this.e상부캠.Size = new System.Drawing.Size(701, 936);
             this.e상부캠.TabIndex = 0;
+            // 
+            // p표면검사
+            // 
+            this.p표면검사.Controls.Add(this.e표면검사);
+            this.p표면검사.Name = "p표면검사";
+            this.p표면검사.Size = new System.Drawing.Size(701, 936);
+            this.p표면검사.Text = "Surface";
+            // 
+            // e표면검사
+            // 
+            this.e표면검사.BackColor = System.Drawing.Color.Black;
+            this.e표면검사.CoordinateInfoVisible = true;
+            this.e표면검사.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.e표면검사.ImageSource = null;
+            this.e표면검사.IsShowCustomROIMenu = false;
+            this.e표면검사.Location = new System.Drawing.Point(0, 0);
+            this.e표면검사.Margin = new System.Windows.Forms.Padding(4);
+            this.e표면검사.ModuleSource = null;
+            this.e표면검사.Name = "e표면검사";
+            this.e표면검사.Size = new System.Drawing.Size(701, 936);
+            this.e표면검사.TabIndex = 0;
             // 
             // d상부인슐오른쪽캠
             // 
@@ -641,46 +681,6 @@ namespace DSEV.UI.Controls
             dockingContainer5,
             dockingContainer6});
             // 
-            // xtraTabControl1
-            // 
-            this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
-            this.xtraTabControl1.Name = "xtraTabControl1";
-            this.xtraTabControl1.SelectedTabPage = this.p치수검사;
-            this.xtraTabControl1.Size = new System.Drawing.Size(703, 967);
-            this.xtraTabControl1.TabIndex = 1;
-            this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.p치수검사,
-            this.p표면검사});
-            // 
-            // p치수검사
-            // 
-            this.p치수검사.Controls.Add(this.e상부캠);
-            this.p치수검사.Name = "p치수검사";
-            this.p치수검사.Size = new System.Drawing.Size(701, 936);
-            this.p치수검사.Text = "치수검사";
-            // 
-            // p표면검사
-            // 
-            this.p표면검사.Controls.Add(this.e표면검사);
-            this.p표면검사.Name = "p표면검사";
-            this.p표면검사.Size = new System.Drawing.Size(701, 936);
-            this.p표면검사.Text = "표면검사";
-            // 
-            // e표면검사
-            // 
-            this.e표면검사.BackColor = System.Drawing.Color.Black;
-            this.e표면검사.CoordinateInfoVisible = true;
-            this.e표면검사.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.e표면검사.ImageSource = null;
-            this.e표면검사.IsShowCustomROIMenu = false;
-            this.e표면검사.Location = new System.Drawing.Point(0, 0);
-            this.e표면검사.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.e표면검사.ModuleSource = null;
-            this.e표면검사.Name = "e표면검사";
-            this.e표면검사.Size = new System.Drawing.Size(701, 936);
-            this.e표면검사.TabIndex = 0;
-            // 
             // CamViewers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -714,7 +714,11 @@ namespace DSEV.UI.Controls
             ((System.ComponentModel.ISupportInitialize)(this.e왼쪽측면캠)).EndInit();
             this.d하부캠.ResumeLayout(false);
             this.dockPanel2_Container.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
+            this.xtraTabControl1.ResumeLayout(false);
+            this.p치수검사.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.e상부캠)).EndInit();
+            this.p표면검사.ResumeLayout(false);
             this.d상부인슐오른쪽캠.ResumeLayout(false);
             this.controlContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.e오른쪽측면캠)).EndInit();
@@ -735,10 +739,6 @@ namespace DSEV.UI.Controls
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
-            this.xtraTabControl1.ResumeLayout(false);
-            this.p치수검사.ResumeLayout(false);
-            this.p표면검사.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
