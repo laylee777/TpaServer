@@ -25,7 +25,6 @@ namespace DSEV.Schemas
         public event 현재결과상태갱신 결과상태갱신알림;
         public 모델구분 모델구분 = 모델구분.VDA590TPA;
         public String 도구명칭 { get => this.모델구분.ToString(); }
-        //private String 도구파일 { get => Path.Combine(Global.환경설정.VM도구경로, $"{Utils.GetDescription(Global.환경설정.선택모델)}.sol"); }
         public String 도구파일 { get => Path.Combine(Global.환경설정.도구경로, ((Int32)모델구분).ToString("d2"), $"{도구명칭}.sol"); }
 
         public Boolean Init() => Load();
@@ -70,7 +69,6 @@ namespace DSEV.Schemas
                 if ((int)플로우.플로우 == (int)구분) return 플로우;
             return null;
         }
-
         public void Close() => VmSolution.Instance.CloseSolution();
     }
 
@@ -127,9 +125,6 @@ namespace DSEV.Schemas
 
                 Debug.WriteLine($"{DateTime.Now:HH:mm:ss.fff} : 표면검사 끝");
 
-                //if (Global.환경설정.표면검사이미지저장)
-                //    Global.사진자료.SaveImage(mat, 검사번호);
-
                 return this.결과;
             }
             catch (Exception ex)
@@ -175,7 +170,6 @@ namespace DSEV.Schemas
                         Single val = Single.NaN;
                         if (!String.IsNullOrEmpty(vals[0])) val = Convert.ToSingle(vals[0]);
                         if (vals.Length > 1) ok = MvUtils.Utils.IntValue(vals[1]) == 1;
-                        //Global.검사자료.항목검사(this.플로우, name, val);
                     }
                     catch (Exception e)
                     {

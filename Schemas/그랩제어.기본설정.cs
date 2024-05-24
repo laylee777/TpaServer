@@ -250,10 +250,6 @@ namespace DSEV.Schemas
         public override Boolean Active()
         {
             this.Camera.ClearImageBuffer();
-            //if(this.구분 == 카메라구분.Cam08 || this.구분 == 카메라구분.Cam09)
-            //{
-            //    return 그랩제어.Validate($"{this.구분} Active", Camera.StartGrabbing(), false);
-            //}
             return 그랩제어.Validate($"{this.구분} Active", Camera.StartGrabbing(), true);
         }
 
@@ -285,7 +281,6 @@ namespace DSEV.Schemas
         {
             this.구분 = cam.Camera;
             this.Device = cam;
-            //this.ResizeScale = 0.1;
         }
 
         public override Boolean Init()
@@ -303,7 +298,6 @@ namespace DSEV.Schemas
         {
             if (surfaceAddr == IntPtr.Zero) this.AcquisitionFinished(error);
             else this.AcquisitionFinished(surfaceAddr, width, height);
-            //this.Stop();
         }
 
         public override Boolean Close() { base.Close(); this.Device.Free(); return true; }
@@ -324,7 +318,6 @@ namespace DSEV.Schemas
             try
             {
                 this.Device = new VideoCapture(Index, VideoCaptureAPIs.DSHOW) { FrameWidth = 가로, FrameHeight = 세로 };
-                //if (Device.IsOpened()) Debug.WriteLine(this.Device.GetBackendName(), "BackendName");
                 this.상태 = Device.IsOpened();
             }
             catch (Exception ex)

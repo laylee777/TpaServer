@@ -538,43 +538,7 @@ namespace DSEV.Schemas
             }
             catch (Exception e) { Utils.DebugException(e, 0); }
         }
-
-        public void 측면윤곽도계산()
-        {
-            //List<Decimal> 전면편차 = this.검사내역.Where(e => e.결과항목 == 검사항목.Profile3).Select(e => Math.Abs(e.결과값 - e.기준값)).ToList();
-            //List<Decimal> 후면편차 = this.검사내역.Where(e => e.결과항목 == 검사항목.Profile4).Select(e => Math.Abs(e.결과값 - e.기준값)).ToList();
-            //Decimal 면윤곽도F = 전면편차.Count > 0 ? 전면편차.Max() - 전면편차.Min() : 0;
-            //Decimal 면윤곽도R = 후면편차.Count > 0 ? 후면편차.Max() - 후면편차.Min() : 0;
-            //SetResult(검사항목.Profile3, Convert.ToDouble(면윤곽도F));
-            //SetResult(검사항목.Profile4, Convert.ToDouble(면윤곽도R));
-            ////Debug.WriteLine($"Front => {면윤곽도F}, Rear => {면윤곽도R}", "면윤곽도");
-        }
-
-        public void 부자재검사결과()
-        {
-            //Int32 필름F = 검사내역.Any(e => e.결과항목 == 검사항목.필름F && e.측정결과 != 결과구분.OK) ? 1 : 0;
-            //Int32 필름C = 검사내역.Any(e => e.결과항목 == 검사항목.필름C && e.측정결과 != 결과구분.OK) ? 1 : 0;
-            //Int32 필름R = 검사내역.Any(e => e.결과항목 == 검사항목.필름R && e.측정결과 != 결과구분.OK) ? 1 : 0;
-            //Int32 레진F = 검사내역.Any(e => e.결과항목 == 검사항목.레진F && e.측정결과 != 결과구분.OK) ? 1 : 0;
-            //Int32 레진R = 검사내역.Any(e => e.결과항목 == 검사항목.레진R && e.측정결과 != 결과구분.OK) ? 1 : 0;
-            //SetResult(검사항목.필름F, 필름F);
-            //SetResult(검사항목.필름C, 필름C);
-            //SetResult(검사항목.필름R, 필름R);
-            //SetResult(검사항목.레진F, 레진F);
-            //SetResult(검사항목.레진R, 레진R);
-        }
-
-
-        //public void 하부표면검사결과()
-        //{
-        //    if (검사내역.Where(e => e.검사항목 == 검사항목.BottomDent).FirstOrDefault().측정결과 == 결과구분.NG || 검사내역.Where(e => e.검사항목 == 검사항목.BottomScratch).FirstOrDefault().측정결과 == 결과구분.NG)
-        //    {
-        //        this.SetResult(검사항목.BottomSurface, 0);
-        //        return;
-        //    }
-        //    this.SetResult(검사항목.BottomSurface, 1);
-        //}
-
+      
         public void 큐알정보검사(String 코드, 큐알등급 등급)
         {
             this.큐알내용 = 코드;

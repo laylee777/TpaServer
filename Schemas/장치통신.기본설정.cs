@@ -220,8 +220,6 @@ namespace DSEV.Schemas
         public Boolean MES오류 { get => 신호읽기(정보주소.MES오류); }
         #endregion
 
-
-
         #region TPA 제품 인덱스확인 by LHD
 
         public Int32 제품투입번호 => this.입출자료.Get(정보주소.셔틀01제품인덱스);

@@ -40,7 +40,6 @@ namespace DSEV.UI.Controls
             this.col보정값.DisplayFormat.FormatString = Global.환경설정.결과표현;
             this.col마진값.DisplayFormat.FormatString = Global.환경설정.결과표현;
             this.col실측값.DisplayFormat.FormatString = Global.환경설정.결과표현;
-            //this.col교정값.DisplayFormat.FormatString = Global.환경설정.결과표현;
 
             popupMenu = new PopupMenu(this.barManager1);
 
@@ -113,7 +112,6 @@ namespace DSEV.UI.Controls
                     {
                         Task.Delay(500).Wait();
                         this.GridView1.MoveFirst();
-                        //this.SetEditable(this.GridView1, this.GridView1.FocusedRowHandle);
                         this.검사항목변경?.Invoke(Global.모델자료.GetItem(this.선택모델), this.GetItem(this.GridView1, this.GridView1.FocusedRowHandle));
                     });
                 }

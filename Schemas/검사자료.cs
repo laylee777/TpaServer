@@ -19,8 +19,6 @@ namespace DSEV.Schemas
         public delegate void 수동검사수행(카메라구분 카메라, 검사결과 결과);
         public event 검사진행알림 검사완료알림;
         public event 수동검사수행 수동검사알림;
-        //public event 검사진행알림 검사결과추가;
-        //public event 검사진행알림 현재검사변경;
 
         [JsonIgnore]
         public static TranslationAttribute 로그영역 = new TranslationAttribute("Inspection", "검사내역");
@@ -115,7 +113,6 @@ namespace DSEV.Schemas
                 this.수동검사.Reset();
                 return this.수동검사;
             }
-            //검사결과 검사 = 검사시작(검사코드);
             검사결과 검사 = 검사항목찾기(검사코드, true);
             if (검사 == null)
             {
@@ -126,14 +123,11 @@ namespace DSEV.Schemas
                 Global.정보로그(로그영역.GetString(), $"검사시작", $"[{(Int32)Global.환경설정.선택모델} - {검사.검사코드}] 신규검사 시작.", false);
             }
 
-            //if (this.Count < 1 || this.현재검사찾기() == null)
-            //    this.현재검사변경?.Invoke(검사);
             return 검사;
         }
 
         public 검사결과 하부큐알리딩수행(Int32 검사코드)
         {
-            //검사결과 검사 = 검사시작(검사코드);
             List<String> 하부QR = new List<String>();
             검사결과 검사 = 검사항목찾기(검사코드);
             if (검사 == null) return null;
@@ -153,7 +147,6 @@ namespace DSEV.Schemas
 
         public 검사결과 상부큐알리딩수행(Int32 검사코드)
         {
-            //검사결과 검사 = 검사시작(검사코드);
             검사결과 검사 = 검사항목찾기(검사코드);
             if (검사 == null) return null;
             Global.상부큐알리더.리딩시작(검사);
@@ -182,8 +175,7 @@ namespace DSEV.Schemas
             if (검사 == null || 자료 == null || 자료.Count < 1) return 검사;
             foreach (var s in 자료)
                 검사.SetResult(s.Key.ToString(), s.Value);
-            //foreach (var s in 자료)
-            //    Debug.WriteLine(s.Key.ToString(), s.Value.ToString());
+
             return 검사;
         }
         public 검사결과 외폭검사수행(Int32 검사코드, Dictionary<센서항목, Single> 자료)
@@ -201,15 +193,6 @@ namespace DSEV.Schemas
             }
             return 검사;
         }
-        //public 검사결과 라벨부착수행(Int32 검사코드)
-        //{
-        //    //검사결과 검사 = 검사시작(검사코드);
-        //    검사결과 검사 = 검사항목찾기(검사코드, true);
-        //    if (검사 == null) return null;
-        //    Global.라벨부착기제어.라벨부착();
-        //    return 검사;
-        //}
-
         public 검사결과 검사결과계산(Int32 검사코드)
         {
             if (검사코드 < 1) return null;
@@ -235,7 +218,6 @@ namespace DSEV.Schemas
             }
 
             Debug.WriteLine("결과계산완료");
-            //this.검사완료알림?.Invoke(검사);
             return 검사;
         }
 
@@ -249,59 +231,6 @@ namespace DSEV.Schemas
             this.검사완료알림?.Invoke(검사);
             this.수동검사알림?.Invoke(카메라, 검사);
         }
-        public void 검사테스트()
-        {
-            //Random rnd = new Random();
-            //Double fx = 4;
-            //수동검사.SetResult(검사항목.DistC1, (217 + Math.Round(rnd.NextDouble() / fx, 3)) / 18.378812375 * 1000);
-            //수동검사.SetResult(검사항목.DistC2, (217 + Math.Round(rnd.NextDouble() / fx, 3)) / 18.378812375 * 1000);
-            //수동검사.SetResult(검사항목.DistC3, (217 + Math.Round(rnd.NextDouble() / fx, 3)) / 18.378812375 * 1000);
-            //수동검사.SetResult(검사항목.DistD1, 108.5 + Math.Round(rnd.NextDouble() / fx, 3));
-            //수동검사.SetResult(검사항목.DistD2, 108.5 + Math.Round(rnd.NextDouble() / fx, 3));
-            //수동검사.SetResult(검사항목.DistD3, 108.5 + Math.Round(rnd.NextDouble() / fx, 3));
-            //수동검사.SetResult(검사항목.DistD4, 108.5 + Math.Round(rnd.NextDouble() / fx, 3));
-            //수동검사.SetResult(검사항목.DistD5, 108.5 + Math.Round(rnd.NextDouble() / fx, 3));
-            //수동검사.SetResult(검사항목.DistD6, 108.5 + Math.Round(rnd.NextDouble() / fx, 3));
-
-            //List<Double> values1 = new List<Double>();
-            //List<Double> values2 = new List<Double>();
-            //for (int i = 0; i < 3; i++) values1.Add(Math.Round(rnd.NextDouble() / fx, 3));
-            //for (int i = 0; i < 6; i++) values2.Add(Math.Round(rnd.NextDouble() / fx, 3));
-            //수동검사.SetResult(검사항목.FLATa2, values1[0]);
-            //수동검사.SetResult(검사항목.FLATa5, values1[1]);
-            //수동검사.SetResult(검사항목.FLATa8, values1[2]);
-            //수동검사.SetResult(검사항목.FLATa1, values2[0]);
-            //수동검사.SetResult(검사항목.FLATa3, values2[1]);
-            //수동검사.SetResult(검사항목.FLATa4, values2[2]);
-            //수동검사.SetResult(검사항목.FLATa6, values2[3]);
-            //수동검사.SetResult(검사항목.FLATa7, values2[4]);
-            //수동검사.SetResult(검사항목.FLATa9, values2[5]);
-            //수동검사.SetResult(검사항목.Profile1, values1.Max());
-            //수동검사.SetResult(검사항목.Profile2, values2.Max());
-
-            ////수동검사.큐알내용 = Global.샘플자료.First().Key;
-            ////Global.샘플자료.검사결과(수동검사);
-            //this.검사완료알림?.Invoke(수동검사);
-        }
-
-        //public void 스플제거(Int32 검사코드)
-        //{
-        //    if (검사코드 <= 0 || !this.검사스플.ContainsKey(검사코드)) return;
-        //    this.검사스플.Remove(검사코드);
-
-        //    검사결과 검사 = this.현재검사찾기();
-        //    if (검사 != null) this.현재검사변경?.Invoke(검사);
-        //}
-
-        //public void 스플정리()
-        //{
-        //    List<Int32> 대상 = Global.장치통신.검사중인항목();
-        //    List<Int32> 제거 = new List<Int32>();
-        //    foreach (Int32 검사코드 in this.검사스플.Keys)
-        //        if (!대상.Contains(검사코드)) 제거.Add(검사코드);
-        //    foreach (Int32 검사코드 in 제거)
-        //        this.검사스플.Remove(검사코드);
-        //}
 
         // 현재 검사중인 정보를 검색
         public 검사결과 검사항목찾기(Int32 검사코드, Boolean 신규여부 = false)
@@ -344,7 +273,6 @@ namespace DSEV.Schemas
             modelBuilder.Entity<검사결과>().Property(e => e.측정결과).HasConversion(new EnumToNumberConverter<결과구분, Int32>());
             modelBuilder.Entity<검사결과>().Property(e => e.CTQ결과).HasConversion(new EnumToNumberConverter<결과구분, Int32>());
             modelBuilder.Entity<검사결과>().Property(e => e.외관결과).HasConversion(new EnumToNumberConverter<결과구분, Int32>());
-            //modelBuilder.Entity<검사결과>().Property(e => e.큐알등급).HasConversion(new EnumToNumberConverter<큐알등급, Int32>());
 
             modelBuilder.Entity<검사정보>().HasKey(e => new { e.검사일시, e.검사항목 });
             modelBuilder.Entity<검사정보>().Property(e => e.검사그룹).HasConversion(new EnumToNumberConverter<검사그룹, Int32>());
@@ -492,14 +420,11 @@ namespace DSEV.Schemas
             if (!Global.큐알검증.중복체크 || indexs.Length < 1) return result;
             DateTime 시작 = DateTime.Today.AddDays(-Global.큐알검증.중복일수);
             String Sql = $"SELECT * FROM qr_duplicated('{qrcode}', ARRAY[{String.Join(",", indexs)}]::integer[], '{시작.ToString("yyyy-MM-dd")}');";
-            //Debug.WriteLine(Sql, "중복쿼리");
             try
             {
                 DateTime sday = new DateTime(시작.Year, 시작.Month, 시작.Day);
                 using (NpgsqlCommand cmd = new NpgsqlCommand(Sql, this.DbConn))
                 {
-                    //cmd.Parameters.Add(new NpgsqlParameter("@sday", sday));
-                    //cmd.Parameters.Add(new NpgsqlParameter("@code", qrcode));
                     if (cmd.Connection.State != ConnectionState.Open) cmd.Connection.Open();
                     using (NpgsqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -511,7 +436,6 @@ namespace DSEV.Schemas
             }
             catch (Exception ex)
             {
-                //Global.오류로그(로그영역.GetString(), Localization.삭제.GetString(), $"{삭제오류.GetString()}\r\n{ex.Message}", true);
                 Global.오류로그(로그영역.GetString(), "중복검사", $"{ex.Message}", true);
             }
             return result;

@@ -127,7 +127,6 @@ namespace DSEV.Schemas
             {
                 검사정보 정보 = 결과.GetItem(항목.Type);
                 if (정보 == null) continue;
-                //if (항목.Type == 검사항목.QrLegibility) 항목.Draw(Decimal.MinValue, 결과.큐알결과());
                 else 항목.Draw(정보.결과값, 정보.측정결과);
             }
         }

@@ -350,8 +350,6 @@ namespace DSEV.Schemas
         [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchHeightRL2")]
         NotchHeightRL2 = 1508,
 
-     
-
         //커넥터상부
         [Result(피씨구분.Server,검사그룹.Surface, 결과분류.Summary, 장치구분.Cam06, None)]
         CntT= 1801,
@@ -597,7 +595,6 @@ namespace DSEV.Schemas
 
         public String DisplayText(Decimal value)
         {
-            //if (this.검사항목 == 검사항목.QrLegibility) return Utils.GetDescription((큐알등급)Convert.ToInt32(value));
             if (this.측정단위 == 단위구분.EA) return Utils.FormatNumeric(value);
             if (this.측정단위 == 단위구분.ON) return value == 1 ? "OK" : "NG";
             return String.Empty;

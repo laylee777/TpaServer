@@ -33,8 +33,6 @@ namespace DSEV.UI.Controls
             if (Global.환경설정.권한여부(유저권한구분.관리자))
             {
                 this.GridView1.AddDeleteMenuItem(정보삭제);
-                //this.GridView1.AddExpandMasterPopMenuItems();
-                //this.GridView1.AddSelectPopMenuItems();
             }
             else
             {
@@ -44,14 +42,11 @@ namespace DSEV.UI.Controls
 
             this.GridControl1.DataSource = Global.검사자료;
             this.GridControl1.ViewRegistered += GridControl1_ViewRegistered;
-            //this.GridView1.RowCountChanged += GridView1_RowCountChanged;
             this.GridView1.CustomDrawCell += GridView1_CustomDrawCell;
             this.GridView2.CustomDrawCell += GridView2_CustomDrawCell;
 
             Localization.SetColumnCaption(this.GridView1, typeof(검사결과));
             Localization.SetColumnCaption(this.GridView2, typeof(검사정보));
-            //this.col검사일자.Caption = Localization.일자.GetString();
-            //this.col검사시간.Caption = Localization.시간.GetString();
         }
 
         public void Close() { }
@@ -96,8 +91,6 @@ namespace DSEV.UI.Controls
             view.Init(this.barManager1);
             view.AddRowSelectedEvent(카메라검사보기);
         }
-
-        //private void GridView1_RowCountChanged(object sender, EventArgs e) => (sender as GridView).MoveFirst();
         private void GridView1_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
         {
             if (e.RowHandle < 0) return;

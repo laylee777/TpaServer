@@ -86,7 +86,7 @@ namespace DSEV.Schemas
 
             // GigE 카메라 초기화
             List<CCameraInfo> 카메라들 = new List<CCameraInfo>();
-            Int32 nRet = CSystem.EnumDevices(CSystem.MV_GIGE_DEVICE, ref 카메라들);// | CSystem.MV_USB_DEVICE
+            Int32 nRet = CSystem.EnumDevices(CSystem.MV_GIGE_DEVICE, ref 카메라들);
             if (!Validate("Enumerate devices fail!", nRet, true)) return false;
 
             for (int i = 0; i < 카메라들.Count; i++)
@@ -94,9 +94,7 @@ namespace DSEV.Schemas
                 CGigECameraInfo gigeInfo = 카메라들[i] as CGigECameraInfo;
                 HikeGigE gige = this.GetItem(gigeInfo.chSerialNumber) as HikeGigE;
                 if (gige == null) continue;
-                //Debug.WriteLine(gigeInfo.chSerialNumber, "시리얼");
                 gige.Init(gigeInfo);
-                //if (gige.상태) gige.Start();
             }
 
             Debug.WriteLine($"카메라 갯수: {this.Count}");
@@ -150,11 +148,6 @@ namespace DSEV.Schemas
                     }
 
                     if(Global.환경설정.표면검사이미지저장) Global.사진자료.SaveImage(표면검사용이미지, 검사번호);
-                    //}else if (Global.환경설정.표면검사이미지저장) //표면검사 사용안하고 이미지만 저장.(학습용이미지 획득할때 사용하면 될듯..?)
-                    //{
-                    //    Mat 이미지 = Common.ResizeImage(장치.MatImage(), 장치.ResizeScale);
-                    //    Global.사진자료.SaveImage(이미지, 검사번호);
-                    //}
                 }
             }
             else

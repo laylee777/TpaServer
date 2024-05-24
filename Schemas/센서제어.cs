@@ -73,8 +73,6 @@ namespace DSEV.Schemas
         public string[] 센서값확인(Int32 검사번호)
         {
             Debug.WriteLine("변위센서 측정 시작");
-
-
             // 센서에 명령어를 전송하고 응답을 받아옵니다.
             this.command2 = "M0\r\n";
             this.commandBytes2 = encoding.GetBytes(command2);
@@ -84,7 +82,6 @@ namespace DSEV.Schemas
             byte[] buffer = new byte[1024];
             int bytesRead = Stream.Read(buffer, 0, buffer.Length);
             Debug.WriteLine(encoding.GetString(buffer, 0, bytesRead));
-
 
             // 문자열을 ','를 기준으로 분할하여 배열로 저장
             string[] values = encoding.GetString(buffer, 0, bytesRead).Split(',');
@@ -171,10 +168,7 @@ namespace DSEV.Schemas
             Debug.WriteLine($"{센서번호:D2} ZeroSet세이브기능On 완료");
             return values;
         }
-
     }
-
-
 
     public class 센서제어 : Dictionary<센서컨트롤러, 변위센서>
     {

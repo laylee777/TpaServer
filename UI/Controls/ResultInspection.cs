@@ -16,19 +16,18 @@ namespace DSEV.UI.Controls
 
         public enum ViewTypes { Auto, Manual }
         private ViewTypes RunType = ViewTypes.Manual;
-        VDA590TPA3D UFA = null;
+        VDA590TPA3D TPA = null;
         public void Init(ViewTypes runType = ViewTypes.Manual)
         {
             RunType = runType;
-            UFA = new VDA590TPA3D();
-            //if (runType == ViewTypes.Auto)
+            TPA = new VDA590TPA3D();
             {
-                UFA.CameraPosition = new Point3D(0.6, -2.6, 967);
-                UFA.CameraLookDirection = new Vector3D(0, 0, -967);
-                UFA.CameraUpDirection = new Vector3D(0, 1, 0);
+                TPA.CameraPosition = new Point3D(0.6, -2.6, 967);
+                TPA.CameraLookDirection = new Vector3D(0, 0, -967);
+                TPA.CameraUpDirection = new Vector3D(0, 1, 0);
             }
 
-            this.e결과뷰어.Init(UFA);
+            this.e결과뷰어.Init(TPA);
             this.e결과목록.Init();
 
             if (this.RunType == ViewTypes.Auto)

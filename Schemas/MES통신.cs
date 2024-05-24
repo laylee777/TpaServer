@@ -19,7 +19,6 @@ namespace DSEV.Schemas
     public class MES통신
     {
         public event Global.BaseEvent 통신상태알림;
-        //public event EventHandler<string> 검사진행요청;
         public MES통신() { }
 
         public String 로그영역 = "MES통신";
@@ -37,8 +36,6 @@ namespace DSEV.Schemas
             REP_PROCESS_END = 13,
             REP_LINK_TEST = 15,
         }
-
-
         public Boolean Init()
         {
             try
@@ -56,14 +53,12 @@ namespace DSEV.Schemas
             }
             return true;
         }
-
         public void 하부큐알결과신호전송(Boolean 결과)
         {
             Global.장치통신.하부큐알결과OK신호 = 결과;
             Global.장치통신.하부큐알결과NG신호 = !결과;
             Global.장치통신.하부큐알확인완료신호 = true;
         }
-
         private void 통신장치_자료수신(object sender, MESSAGE e)
         {
             try
@@ -76,7 +71,6 @@ namespace DSEV.Schemas
                     {
                         하부큐알결과신호전송(true);
                         Global.정보로그(로그영역, "MES통신", $"양품투입됨", false);
-                        //검사진행요청.Invoke(this, null);
                         return;
                     }
                     하부큐알결과신호전송(false);
@@ -130,7 +124,6 @@ namespace DSEV.Schemas
             }
 
             Global.오류로그(로그영역, "자료전송", $"[{messge.MSG_ID}] 자료전송에 실패하였습니다.", true);
-            //this.통신장치.Close();
             return false;
         }
     }
@@ -147,8 +140,6 @@ namespace DSEV.Schemas
         public Boolean 핑퐁상태 { get; set; }
         public TcpClient 통신소켓 = null;
         public NetworkStream Stream { get => 통신소켓?.GetStream(); }
-
-        //string xmlData = GenerateXmlMessage("REQ_PROCESS_START", "EQPID", "20240304093001553", "F00395AB231;F00395AB231");
         public void Init() { this.통신소켓 = new TcpClient() { ReceiveBufferSize = 4096, SendBufferSize = 4096, SendTimeout = 10000, ReceiveTimeout = 10000 }; }
         public void Start() { this.동작여부 = true; new Thread(Read) { Priority = ThreadPriority.AboveNormal }.Start(); }
         public void Close()
@@ -200,7 +191,6 @@ namespace DSEV.Schemas
             }
             catch (Exception ex)
             {
-                //Debug.WriteLine($"[{Global.환경설정.서버주소}] 연결할 수 없습니다. {ex.Message}", 로그영역);
                 Global.경고로그(로그영역, "MES연결", $"[MES] 연결할 수 없습니다. {ex.Message}", true);
             }
             return false;
@@ -278,7 +268,6 @@ namespace DSEV.Schemas
             Global.mes통신.자료송신(message);
         }
     }
-
 
     public class MESSAGE
     {

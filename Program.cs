@@ -28,13 +28,11 @@ namespace DSEV
             DevExpress.Data.CurrencyDataController.DisableThreadingProblemsDetection = true;
             DevExpress.XtraEditors.WindowsFormsSettings.LoadApplicationSettings();
             DevExpress.XtraEditors.WindowsFormsSettings.FormThickBorder = false;
-            //DevExpress.XtraEditors.WindowsFormsSettings.ForceDirectXPaint();
             DevExpress.Skins.SkinManager.EnableFormSkins();
 
             String paletteName = String.IsNullOrEmpty(Properties.Settings.Default.SvgPaletteName) ? Global.BlackPalette : Properties.Settings.Default.SvgPaletteName;
             DevExpress.LookAndFeel.UserLookAndFeel.Default.SetSkinStyle(Global.SkinName, paletteName);
             DevExpress.LookAndFeel.UserLookAndFeel.Default.StyleChanged += Default_StyleChanged;
-            //Debug.WriteLine($"{Properties.Settings.Default.SkinName}, {Properties.Settings.Default.SvgPaletteName}");
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

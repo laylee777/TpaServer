@@ -74,12 +74,6 @@ namespace DSEV.UI.Controls
             });
         }
 
-        private void 커버조립여부Changed(object sender, EventArgs e) => Global.환경설정.커버조립여부 = this.e커버조립여부.IsOn;
-
-        private void 강제커버조립Changed(object sender, EventArgs e) => Global.환경설정.강제커버조립사용 = e강제커버조립.IsOn;
-
-        private void 이미지삭제시작시간Changed(object sender, EventArgs e) => Global.환경설정.이미지자동삭제시작시간 = this.e이미지삭제시작시간.Time;
-
         private void 이미지삭제시작시간Changing(object sender, ChangingEventArgs e)
         {
             if (DateTime.Now > (DateTime)e.NewValue)
@@ -105,12 +99,15 @@ namespace DSEV.UI.Controls
             this.e유저관리.Close();
         }
 
-        //public void Shown(Boolean shown) { }
+        private void 커버조립여부Changed(object sender, EventArgs e) => Global.환경설정.커버조립여부 = this.e커버조립여부.IsOn;
+
+        private void 강제커버조립Changed(object sender, EventArgs e) => Global.환경설정.강제커버조립사용 = e강제커버조립.IsOn;
+
+        private void 이미지삭제시작시간Changed(object sender, EventArgs e) => Global.환경설정.이미지자동삭제시작시간 = this.e이미지삭제시작시간.Time;
         private void 표면검사사용Changed(object sender, EventArgs e) => Global.환경설정.표면검사사용 = this.e표면검사사용.IsOn;
         private void 표면검사이미지저장Changed(object sender, EventArgs e) => Global.환경설정.표면검사이미지저장 = this.e표면검사이미지저장.IsOn;
         private void 강제배출Changed(object sender, EventArgs e) => Global.환경설정.강제배출 = this.e강제배출.IsOn;
         private void 배출구분Changed(object sender, EventArgs e) => Global.환경설정.양품불량 = this.e배출구분.IsOn;
-        //private void 센서리셋(object sender, EventArgs e) => Global.장치통신.센서제로수행(this.e센서리셋.IsOn);
         private void 제로셋모드Changed(object sender, EventArgs e) => Global.환경설정.제로셋모드 = this.e센서리셋.IsOn;
         private void 이미지자동삭제Changed(object sender, EventArgs e) => Global.환경설정.이미지자동삭제모드 = this.e이미지자동삭제.IsOn;
         private void 이미지저장일수Changed(object sender, EventArgs e) => Global.환경설정.이미지보관일수 = this.e이미지저장일수.Value;

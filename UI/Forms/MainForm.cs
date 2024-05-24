@@ -28,20 +28,9 @@ namespace DSEV
             this.p검사내역.Enabled = false;
             this.Shown += MainFormShown;
             this.FormClosing += MainFormClosing;
-            //this.TabFormControl.SelectedPageChanged += SelectedPageChanged;
-            //this.t환경설정.SelectedPageChanged += SelectedTabPageChanged;
             this.KeyPreview = true;
             this.KeyDown += MainForm_KeyDown;
-
-
-
-            //MES테스트용
-            this.타이틀.ItemDoubleClick += 타이틀_ItemDoubleClick;
-        }
-
-        private void 타이틀_ItemDoubleClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-          
+           
         }
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
@@ -304,21 +293,6 @@ namespace DSEV
                 if (!e.Cancel) this.CloseForm();
             }
         }
-
-        //private void SelectedPageChanged(object sender, DevExpress.XtraBars.TabFormSelectedPageChangedEventArgs e)
-        //{
-        //    ShowHideControl();
-        //}
-        //private void SelectedTabPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
-        //{
-        //    ShowHideControl();
-        //}
-        //private void ShowHideControl()
-        //{
-        //    //this.e그랩뷰어.Shown(this.TabFormControl.SelectedPage == this.p그랩뷰어);
-        //    //this.e장치설정.Shown(this.TabFormControl.SelectedPage == this.p환경설정 && this.t환경설정.SelectedTabPage == this.t장치설정);
-        //    //this.e환경설정.Shown(this.TabFormControl.SelectedPage == this.p환경설정 && this.t환경설정.SelectedTabPage == this.t검사설정);
-        //}
 
         private void SetLocalization()
         {

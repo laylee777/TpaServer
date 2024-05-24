@@ -213,7 +213,6 @@ namespace DSEV.Schemas
                 return;
             }
 
-            //Debug.WriteLine($"{명령} => {this.응답자료}", "큐알리더");
             try
             {
                 if (명령 == 리더명령.리딩시작)
@@ -233,7 +232,6 @@ namespace DSEV.Schemas
                         else if (등급 == 큐알등급.E.ToString()) this.응답번호 = (Int32)큐알등급.E;
                         else if (등급 == 큐알등급.F.ToString()) this.응답번호 = (Int32)큐알등급.F;
                         else this.응답번호 = (Int32)큐알등급.X;
-                        //Debug.WriteLine($"{this.응답자료} => {등급}", "판독결과");
                     }
                 }
             }

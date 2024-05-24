@@ -59,7 +59,6 @@ namespace DSEV.Schemas.Reports
 
             foreach (검사정보 설정 in Global.모델자료.GetItem(모델구분).검사설정)
             {
-                //if (설정.결과분류 != 결과분류.Summary) continue;
                 String name = $"C{설정.검사항목}";
                 col = this.검사자료.Columns.Add(name, typeof(Decimal));
                 col.DefaultValue = Convert.DBNull;
@@ -145,7 +144,6 @@ namespace DSEV.Schemas.Reports
                 row = this.검사자료.NewRow();
                 foreach (검사정보 검사 in 결과.검사내역)
                 {
-                    //if (검사.결과분류 != 결과분류.Summary) continue;
                     row[검사시간] = 결과.검사일시;
                     foreach (PropertyInfo p in typeof(검사결과).GetProperties())
                     {

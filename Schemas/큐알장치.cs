@@ -20,8 +20,6 @@ namespace DSEV.Schemas
         public abstract String 로그영역 { get; }
         public abstract String Host { get; set; }
         public abstract Int32 Port { get; set; }
-        //public virtual String STX { get { return String.Empty; } }
-        //public virtual Char ETX { get { return '\r'; } }
         public virtual String STX { get { return $"{Convert.ToChar(2)}"; } }
         public virtual String ETX { get { return $"{Convert.ToChar(3)}"; } }
 
@@ -55,7 +53,6 @@ namespace DSEV.Schemas
                 if ((DateTime.Now - 연결불량알림).TotalSeconds >= 불량알림간격)
                 {
                     this.연결불량알림 = DateTime.Now;
-                    //Task.Run(() => Global.오류로그(로그영역, "통신체크", $"[{Host}] 장치와 통신할 수 없습니다.", true));
                     Global.오류로그(로그영역, "통신체크", $"[{Host}] 장치와 통신할 수 없습니다.", true);
                 }
             }
@@ -77,15 +74,12 @@ namespace DSEV.Schemas
                 if ((DateTime.Now - 연결불량알림).TotalSeconds >= 불량알림간격)
                 {
                     this.연결불량알림 = DateTime.Now;
-                    //Task.Run(() => Global.오류로그(로그영역, "장치연결", $"[{Host}] 장치에 연결할 수 없습니다.\n{ex.Message}", true));
                     Global.오류로그(로그영역, "장치연결", $"[{Host}] 장치에 연결할 수 없습니다.\n{ex.Message}", true);
                 }
             }
             return false;
         }
-        
-        //public String SendCommand(String command, Int32 대기시간 = 1000) => this.SendCommand(Encoding.UTF8.GetBytes(command), 대기시간);
-        //public String SendCommand(String command, Int32 대기시간 = 1000) => this.SendCommand(Encoding.UTF8.GetBytes(STX + command + ETX), 대기시간);
+     
         public String SendCommand(String command, Int32 대기시간 = 100) => this.SendCommand(Encoding.ASCII.GetBytes(command), 대기시간);
         public String SendCommand(byte[] buffer, Int32 대기시간 = 100)
         {
@@ -98,7 +92,6 @@ namespace DSEV.Schemas
             }
             catch (Exception ex)
             {
-                //Task.Run(() => Global.오류로그(로그영역, "명령전송", $"[{로그영역}] 명령 전송 중 오류가 발생하였습니다.\n{ex.Message}", true));
                 Global.오류로그(로그영역, "명령전송", $"[{로그영역}] 명령 전송 중 오류가 발생하였습니다.\n{ex.Message}", true);
                 return String.Empty;
             }

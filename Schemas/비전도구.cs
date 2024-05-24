@@ -139,7 +139,6 @@ namespace DSEV.Schemas
             if (this.ToolBlock != null) this.ToolBlock.DataBindings.Clear();
             else this.ToolBlock = new CogToolBlock();
             this.ToolBlock.Name = this.도구명칭;
-            //if (this.카메라 == 카메라구분.Cam10) return;
 
             // 파라미터 체크
             AddInput(this.ToolBlock, "InputImage", typeof(CogImage8Grey));
@@ -236,15 +235,6 @@ namespace DSEV.Schemas
                 results.Add(terminal.Name, terminal.Value == null ? Double.NaN : (Double)terminal.Value);
             }
 
-
-            //results.Add(ResultAttribute.VarName(검사항목.Scratchs), SurfaceResults(검사항목.Scratchs));
-            //results.Add(ResultAttribute.VarName(검사항목.Dents), SurfaceResults(검사항목.Dents));
-
-
-            //results.Add(ResultAttribute.VarName(검사항목.Scratchs), SurfaceResults(검사항목.Scratchs));
-            //results.Add(ResultAttribute.VarName(검사항목.Dents), SurfaceResults(검사항목.Dents));
-
-
             return results;
         }
 
@@ -261,38 +251,6 @@ namespace DSEV.Schemas
                 list.Add(new 불량영역(this.카메라, 항목, rect));
             return list;
         }
-
-        // Deep Learning
-        //private void 표면검사(검사결과 검사)
-        //{
-        //    if (this.카메라 != 카메라구분.Cam01) return;
-        //    if (this.InputImage == null || this.OutputImage == null || this.BaseTools == null) return;
-        //    String json = this.BaseTools.Outputs["Perspective"].Value.ToString();
-        //    if (String.IsNullOrEmpty(json)) return;
-        //    UfaVision.RectanglePerspectiveTransform trans = new UfaVision.RectanglePerspectiveTransform();
-        //    if (!trans.Load(json)) return;
-        //    Point2d p = PointTransform(this.OutputImage, "@", trans.Left, trans.Top);
-        //    Rect2d rect = new Rect2d(p.X, p.Y, trans.Width, trans.Height);
-        //    사진분할 분할 = new 사진분할();
-        //    사진분할자료 자료 = 분할.분할하기(this.InputImage, rect, out String path, out Exception ex);
-        //    if (ex != null) { Debug.WriteLine(ex.ToString()); return; }
-
-        //    IEnumerable<ImageData> images = Learning.LoadImagesFromDirectory(path);
-        //    if (images.Count() < 1) return;
-        //    IEnumerable<ModelOutput> predictions = Learning.RunInspect(images, path);
-        //    List<ModelOutput> Bads = predictions.Where(prediction => prediction.PredictedLabel != Schemas.LableType.C.ToString()).ToList();
-        //    List<String> files = Bads.Select(s => s.ImagePath).ToList();
-        //    List<Rect2d> rects = 자료.GetRegions(files);
-        //    foreach (Rect2d br in rects)
-        //    {
-        //        Point2d cp = PointTransform(this.InputImage, "Fixture", br.X, br.Y);
-        //        Rect2d cr = new Rect2d(cp.X, cp.Y, br.Width, br.Height);
-        //        Debug.WriteLine(cr.ToString());
-        //        //검사.표면불량.Add(new 불량영역(this.카메라, 검사항목.스크레치B, cr.ToRect()));
-        //        this.DrawRectangle(this.Display, cr, 비전도구.GraphicColor(결과구분.NG));
-        //    }
-        //    Directory.Delete(path, true);
-        //}
         #endregion
 
         #region 도구설정, 마스터
@@ -301,7 +259,6 @@ namespace DSEV.Schemas
         {
             if (this.InputImage == null) return false;
             //png로 저장할 경우 이미지 변형 발생확인
-            //Boolean r = Common.ImageSavePng(this.InputImage, this.마스터경로, out String error);
             Boolean r = Common.ImageSaveBmp(this.InputImage, this.마스터경로, out String error);
 
             if (!r) Utils.WarningMsg("마스터 이미지 등록실패!!!\n" + error);
@@ -386,16 +343,6 @@ namespace DSEV.Schemas
             if (판정 == 결과구분.ER) return CogColorConstants.Magenta;
             return CogColorConstants.LightGrey;
         }
-
-        //public static CogRectangle CreateRectangle(Rect2d rect, CogColorConstants color) =>
-        //    new CogRectangle() { X = rect.X, Y = rect.Y, Width = rect.Width, Height = rect.Height, Color = color };
-
-        //public static CogGraphicLabel CreateLabel(String text, Double x, Double y, Single size, CogColorConstants color, String spaceName, CogGraphicLabelAlignmentConstants alignment = CogGraphicLabelAlignmentConstants.TopCenter)
-        //{
-        //    CogGraphicLabel label = new CogGraphicLabel() { Text = text, X = x, Y = y, Color = color, SelectedSpaceName = spaceName, Alignment = alignment };
-        //    label.Font = new Font(label.Font.FontFamily, size, FontStyle.Bold);
-        //    return label;
-        //}
         #endregion
 
         #region 이미지 저장

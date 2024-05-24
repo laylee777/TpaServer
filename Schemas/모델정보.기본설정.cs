@@ -89,7 +89,6 @@ namespace DSEV.Schemas
             this.양품갯수 = 0;
             this.불량갯수 = 0;
             this.양산일자 = DateTime.Today;
-            //Global.모델자료.Save();
         }
 
         public void 수량추가(결과구분 구분)
@@ -177,7 +176,6 @@ namespace DSEV.Schemas
                 if (구분 == 모델구분.None) continue;
                 모델정보 모델 = this.GetItem(구분);
                 if (모델 == null) this.Add(new 모델정보(구분));
-                //else 모델.모델설명 = 모델정보.GetModelDescription(구분);
             }
             if (this.선택모델 == null) Global.환경설정.선택모델 = 모델구분.None;
         }

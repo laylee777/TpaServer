@@ -195,7 +195,6 @@
     <Compile Include="Schemas\MES통신.cs" />
     <Compile Include="Schemas\MVSol.Enc.cs" />
     <Compile Include="Schemas\PlaneDistanceCalculator.cs" />
-    <Compile Include="Schemas\PythonEngine.cs" />
     <Compile Include="Schemas\Viewport\VDA590TPA3D.cs" />
     <Compile Include="Schemas\Viewport\Graphics3D.cs" />
     <Compile Include="Schemas\Viewport\HelixViewport.cs" />

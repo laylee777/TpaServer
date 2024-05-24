@@ -38,7 +38,6 @@ namespace DSEV.Schemas
                 return false;
             }
             this.입출자료.Set(자료);
-            //Debug.WriteLine("오류없음.");
             return true;
         }
 
@@ -109,21 +108,12 @@ namespace DSEV.Schemas
             this.커버조립결과OK신호 = 사용여부;
             this.커버조립결과NG신호 = !사용여부;
             this.커버조립확인완료신호 = true;
-
-            //await Task.Delay(200);
-
-            //this.커버조립결과OK신호 = false;
-            //this.커버조립결과NG신호 = false;
-            //this.커버조립확인완료신호 = false;
-
             Debug.WriteLine("커버조립 여부전송완료");
         }
 
         private void 커버조립확인()
         {
-
             Int32 검사번호 = this.검사위치번호(정보주소.커버조립트리거);
-
             if (검사번호 > 0)
             {
                 Debug.WriteLine("커버조립트리거 진입");
@@ -179,10 +169,8 @@ namespace DSEV.Schemas
 
             this.인덱스버퍼[구분] = index;
 
-            //Debug.WriteLine("----------------------------------");
             if (index == 0) Global.경고로그(로그영역, 구분.ToString(), $"해당 위치에 검사할 제품의 Index가 없습니다.", false);
             else Debug.WriteLine($"{Utils.FormatDate(DateTime.Now, "{0:HH:mm:ss.fff}")}  {구분} => {index}", "Trigger");
-            //Debug.WriteLine($"이송장치1=>{정보읽기(정보주소.이송장치1)}, 검사지그1=>{정보읽기(정보주소.검사지그1)}, 이송장치2=>{정보읽기(정보주소.이송장치2)}, 검사지그2=>{정보읽기(정보주소.검사지그2)}, 이송장치3=>{정보읽기(정보주소.이송장치3)}, 검사지그3=>{정보읽기(정보주소.검사지그3)}, 투입버퍼=>{정보읽기(정보주소.투입버퍼)}", "PLC Index");
             return index;
         }
 
@@ -239,7 +227,6 @@ namespace DSEV.Schemas
 
             if (상부큐알검사번호 > 0)
             {
-
                 new Thread(() =>
                 {
                     Debug.WriteLine("상부 큐알 검사 시작><");
@@ -254,11 +241,8 @@ namespace DSEV.Schemas
         }
 
         private Boolean 센서제로모드 = false;
-        public void 센서제로수행(Boolean 모드)
-        {
-            this.센서제로모드 = 모드;
-            //if (!모드) 정보쓰기(정보주소.평탄센서, 0);
-        }
+        public void 센서제로수행(Boolean 모드) => this.센서제로모드 = 모드;
+
         private void 평탄검사수행()
         {
             Int32 바닥평면검사번호 = this.검사위치번호(정보주소.바닥평면트리거);
