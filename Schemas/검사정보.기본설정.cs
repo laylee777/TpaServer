@@ -266,11 +266,11 @@ namespace DSEV.Schemas
         ShapeBigNotchLR = 801,
 
         //하단부 큰 노치 윤곽도하위
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeBigNotchLR, "DistBigNotchL")]
-        DistBigNotchL = 821,
         [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeBigNotchLR, "DistBigNotchR")]
-        DistBigNotchR = 822,
-
+        DistBigNotchR = 821,
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeBigNotchLR, "DistBigNotchL")]
+        DistBigNotchL = 822,
+   
 
         //J1J2윤곽도
         [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "ShapeJ1J2")]
