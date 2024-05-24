@@ -625,7 +625,7 @@ namespace DSEV.Schemas
             {
                 if (this.검사코드 >= 9999 || this.검사코드 < 1 || 정보 == null || !CameraAttribute.IsCamera(정보.검사장치)) return false;
                 카메라구분 카메라 = (카메라구분)정보.검사장치;
-                String file = Global.사진자료.CopyImageFile(this.검사일시, this.검사코드, 카메라);
+                String file = Global.사진자료.CopyImageFile(this.검사일시, this.검사코드, 카메라, false);
                 if (String.IsNullOrEmpty(file) || !File.Exists(file))
                     return Utils.WarningMsg("The image file does not exist.");
                 CogToolEdit cogToolEdit = new CogToolEdit() { 사진파일 = file };

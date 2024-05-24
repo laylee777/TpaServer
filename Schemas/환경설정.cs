@@ -128,6 +128,8 @@ namespace DSEV.Schemas
         public Decimal 이미지보관일수 { get; set; } = 0;
         [JsonProperty("MES Used")]
         public Boolean MES사용유무 { get; set; } = false;
+        [JsonProperty("Surface Inspection")]
+        public Boolean 표면검사사용 { get; set; } = false;
         [JsonProperty("Surface Image Save")]
         public Boolean 표면검사이미지저장 { get; set; } = false;
         [JsonIgnore]

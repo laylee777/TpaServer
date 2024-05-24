@@ -10,6 +10,7 @@ using System.Linq;
 using DSEV.Multicam;
 using System.Threading;
 using System.Threading.Tasks;
+using OpenCvSharp;
 
 namespace DSEV.Schemas
 {
@@ -141,8 +142,19 @@ namespace DSEV.Schemas
                 Global.비전검사.Run(장치, 검사);
                 if (장치.구분 == 카메라구분.Cam01)
                 {
-                    Debug.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} : 표면 검사시작");
-                    Task.Run(() => { Global.VM제어.GetItem(Flow구분.표면검사).Run(Common.ResizeImage(장치.MatImage(), 장치.ResizeScale), null); });
+                    Mat 표면검사용이미지 = Common.ResizeImage(장치.MatImage(), 장치.ResizeScale);
+                    if (Global.환경설정.표면검사사용)
+                    {
+                        Debug.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} : 표면 검사시작");
+                        Task.Run(() => { Global.VM제어.GetItem(Flow구분.표면검사).Run(표면검사용이미지, null, 검사번호); });
+                    }
+
+                    if(Global.환경설정.표면검사이미지저장) Global.사진자료.SaveImage(표면검사용이미지, 검사번호);
+                    //}else if (Global.환경설정.표면검사이미지저장) //표면검사 사용안하고 이미지만 저장.(학습용이미지 획득할때 사용하면 될듯..?)
+                    //{
+                    //    Mat 이미지 = Common.ResizeImage(장치.MatImage(), 장치.ResizeScale);
+                    //    Global.사진자료.SaveImage(이미지, 검사번호);
+                    //}
                 }
             }
             else

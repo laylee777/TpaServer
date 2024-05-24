@@ -103,12 +103,12 @@ namespace DSEV.Schemas
                 this.출력이미지 = this.Procedure["OutputImage"] as GraphicsSetModuleTool;
                 this.플로우출력값 = this.Procedure["Resulte"] as ShellModuleTool;
 
-                if (this.입력이미지 != null) 
+                if (this.입력이미지 != null)
                     this.입력이미지.ModuParams.ImageSourceType = ImageSourceParam.ImageSourceTypeEnum.SDK;
             }
         }
 
-        public Boolean Run(Mat mat, ImageBaseData imageBaseData)
+        public Boolean Run(Mat mat, ImageBaseData imageBaseData, Int32 검사번호)
         {
             try
             {
@@ -125,7 +125,10 @@ namespace DSEV.Schemas
 
                 this.Procedure.Run();
 
-                Debug.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} : 표면검사 끝");
+                Debug.WriteLine($"{DateTime.Now:HH:mm:ss.fff} : 표면검사 끝");
+
+                //if (Global.환경설정.표면검사이미지저장)
+                //    Global.사진자료.SaveImage(mat, 검사번호);
 
                 return this.결과;
             }

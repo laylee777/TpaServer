@@ -39,7 +39,7 @@ namespace DSEV.Schemas
         [JsonIgnore, Description("카메라 초기화 상태"), Translation("Live", "상태")]
         public virtual Boolean 상태 { get; set; } = false;
         [JsonIgnore]
-        public virtual Double ResizeScale { get; set; } = 0.25;
+        public virtual Double ResizeScale { get; set; } = 0.1;
         [JsonIgnore]
         internal virtual MatType ImageType => MatType.CV_8UC1;
         [JsonIgnore]
@@ -285,7 +285,7 @@ namespace DSEV.Schemas
         {
             this.구분 = cam.Camera;
             this.Device = cam;
-            this.ResizeScale = 0.25;
+            //this.ResizeScale = 0.1;
         }
 
         public override Boolean Init()
