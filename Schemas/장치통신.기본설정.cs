@@ -27,6 +27,8 @@ namespace DSEV.Schemas
         private Boolean 작업여부 = false;  // 동작 FLAG 
         private ActUtlType64 PLC = null;
         public Boolean 정상여부 = false;
+        public DateTime 통신확인주기시간 = DateTime.Now;
+        public Int32 통신확인주기 = 1;
 
         private enum 정보주소 : Int32
         {
@@ -217,8 +219,6 @@ namespace DSEV.Schemas
 
         public Boolean MES오류 { get => 신호읽기(정보주소.MES오류); }
         #endregion
-
-
 
         #region TPA 제품 인덱스확인 by LHD
 

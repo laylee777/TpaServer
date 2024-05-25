@@ -57,6 +57,25 @@ namespace DSEV
             return true;
         }
 
+        public static Mat ResizeImage(Mat inputImage, double scaleFactor)
+        {
+            if (inputImage == null)
+                throw new ArgumentNullException(nameof(inputImage));
+
+            // Calculate the new size
+            OpenCvSharp.Size newSize = new OpenCvSharp.Size(
+                (int)(inputImage.Width * scaleFactor),
+                (int)(inputImage.Height * scaleFactor));
+
+            // Create a new Mat for the resized image
+            Mat resizedImage = new Mat();
+
+            // Resize the image
+            Cv2.Resize(inputImage, resizedImage, newSize);
+
+            return resizedImage;
+        }
+
         public static Mat ToMat(ICogImage image)
         {
             if (image == null) return null;

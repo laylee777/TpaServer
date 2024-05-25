@@ -115,8 +115,11 @@ namespace DSEV.Schemas
         }
 
         #region 사진저장
-        public void SaveImage(그랩장치 장치, 검사결과 결과) => SaveImage(장치.구분, 장치.MatImage(), 결과.검사일시, 결과.검사코드);
-        public void SaveImage(카메라구분 카메라, Mat image, DateTime 시간, Int32 번호)
+        public void SaveImage(그랩장치 장치, 검사결과 결과) => SaveImage(장치.구분, 장치.MatImage(), 결과.검사일시, 결과.검사코드, false);
+
+        public void SaveImage(Mat 이미지, Int32 검사코드) => SaveImage(카메라구분.Cam01, 이미지, DateTime.Now, 검사코드, true); 
+
+        public void SaveImage(카메라구분 카메라, Mat image, DateTime 시간, Int32 번호, Boolean 표면검사)
         {
             if (!this.ContainsKey(카메라)) return;
             사진저장 정보 = this[카메라];
@@ -127,13 +130,13 @@ namespace DSEV.Schemas
                 String file = String.Empty;
                 if (정보.원본저장)
                 {
-                    file = OriginImageFile(시간, 번호, 카메라);
+                    file = OriginImageFile(시간, 번호, 카메라, 표면검사);
                     if (String.IsNullOrEmpty(file)) return;
                     if (!Common.ImageSavePng(image, file, out String error))
                         Global.오류로그(로그영역.GetString(), 카메라.ToString(), error, false);
                 }
                 if (!정보.사본저장) return;
-                file = CopyImageFile(시간, 번호, 카메라, 정보.사본유형);
+                file = CopyImageFile(시간, 번호, 카메라, 정보.사본유형, 표면검사);
                 Double scale = Math.Max(0.1, Math.Min((Double)정보.사진비율 / 100, 1.0));
                 //Debug.WriteLine($"Scale: {정보.사진비율} => {scale}", 카메라.ToString());
                 if (scale == 1) this.SaveImage(정보, image, file);
@@ -170,32 +173,36 @@ namespace DSEV.Schemas
             }
         }
 
-        public String OriginImagePath(DateTime 시간, 카메라구분 카메라)
+        public String OriginImagePath(DateTime 시간, 카메라구분 카메라, Boolean 표면검사)
         {
-            List<String> paths = new List<String> { Global.환경설정.원본보관폴더, Utils.FormatDate(시간, "{0:yyyy-MM-dd}"), 카메라.ToString() }; // , Global.환경설정.선택모델.ToString()
+            String name = 표면검사 ? $"{카메라}_Surface" : 카메라.ToString();
+
+            List<String> paths = new List<String> { Global.환경설정.원본보관폴더, Utils.FormatDate(시간, "{0:yyyy-MM-dd}"), name }; // , Global.환경설정.선택모델.ToString()
             return Common.CreateDirectory(paths);
         }
-        public String OriginImageFile(DateTime 시간, Int32 번호, 카메라구분 카메라)
+        public String OriginImageFile(DateTime 시간, Int32 번호, 카메라구분 카메라, Boolean 표면검사)
         {
-            String path = OriginImagePath(시간, 카메라);
+            String path = OriginImagePath(시간, 카메라, 표면검사);
             String file = SaveImageFileName(시간, 번호, 사진형식.Png);
             if (String.IsNullOrEmpty(path) || String.IsNullOrEmpty(file)) return String.Empty;
             return Path.Combine(path, file);
         }
 
-        public String CopyImagePath(DateTime 시간, 카메라구분 카메라)
+        public String CopyImagePath(DateTime 시간, 카메라구분 카메라, Boolean 표면검사)
         {
-            List<String> paths = new List<String> { Global.환경설정.사진저장, Utils.FormatDate(시간, "{0:yyyy-MM-dd}"), 카메라.ToString() }; // , Global.환경설정.선택모델.ToString()
+            String name = 표면검사 ? $"{카메라}_Surface" : 카메라.ToString();
+
+            List<String> paths = new List<String> { Global.환경설정.사진저장, Utils.FormatDate(시간, "{0:yyyy-MM-dd}"), name }; // , Global.환경설정.선택모델.ToString()
             return Common.CreateDirectory(paths);
         }
-        public String CopyImageFile(DateTime 시간, Int32 번호, 카메라구분 카메라)
+        public String CopyImageFile(DateTime 시간, Int32 번호, 카메라구분 카메라, Boolean 표면검사)
         {
             if (!this.ContainsKey(카메라)) return String.Empty;
-            return CopyImageFile(시간, 번호, 카메라, this[카메라].사본유형);
+            return CopyImageFile(시간, 번호, 카메라, this[카메라].사본유형, 표면검사);
         }
-        public String CopyImageFile(DateTime 시간, Int32 번호, 카메라구분 카메라, 사진형식 형식)
+        public String CopyImageFile(DateTime 시간, Int32 번호, 카메라구분 카메라, 사진형식 형식, Boolean 표면검사)
         {
-            String path = CopyImagePath(시간, 카메라);
+            String path = CopyImagePath(시간, 카메라, 표면검사);
             String file = SaveImageFileName(시간, 번호, 형식);
             if (String.IsNullOrEmpty(path) || String.IsNullOrEmpty(file)) return String.Empty;
             return Path.Combine(path, file);

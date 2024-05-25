@@ -6,6 +6,9 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using DSEV.Schemas;
+using System.Windows.Forms;
+using DSEV.UI.Forms;
+using System.Drawing;
 
 namespace DSEV.UI.Controls
 {
@@ -19,6 +22,8 @@ namespace DSEV.UI.Controls
         public delegate void 검사항목선택(모델정보 모델, 검사정보 설정);
         public event 검사항목선택 검사항목변경;
         private LocalizationInspection 번역 = new LocalizationInspection();
+        private PopupMenu popupMenu;
+        private Int32 IconSize = 16;
 
         public void Init()
         {
@@ -35,7 +40,20 @@ namespace DSEV.UI.Controls
             this.col보정값.DisplayFormat.FormatString = Global.환경설정.결과표현;
             this.col마진값.DisplayFormat.FormatString = Global.환경설정.결과표현;
             this.col실측값.DisplayFormat.FormatString = Global.환경설정.결과표현;
-            //this.col교정값.DisplayFormat.FormatString = Global.환경설정.결과표현;
+
+            popupMenu = new PopupMenu(this.barManager1);
+
+            BarButtonItem Cognex = new BarButtonItem(this.barManager1, "Cognex (CTQ)");
+            BarButtonItem Vm = new BarButtonItem(this.barManager1, "VM (Surface)");
+
+            Cognex.ImageOptions.Image = LoadIconFromResources(Properties.Resources.Cognex, IconSize);
+            Vm.ImageOptions.Image = LoadIconFromResources(Properties.Resources.Vm, IconSize);
+
+            popupMenu.AddItem(Cognex);
+            popupMenu.AddItem(Vm);
+
+            Vm.ItemClick += VmItemClick;
+            Cognex.ItemClick += CognexItemClick;
 
             this.e모델선택.EditValueChanged += 모델선택;
             this.e모델선택.Properties.DataSource = Global.모델자료;
@@ -56,6 +74,28 @@ namespace DSEV.UI.Controls
             this.b설정저장.Text = 번역.설정저장;
             this.모델선택(this.e모델선택, EventArgs.Empty);
         }
+
+        private Image LoadIconFromResources(Icon icon, Int32 Size)
+        {
+            // Convert Icon to Bitmap
+            Bitmap bitmap = icon.ToBitmap();
+            // Resize the bitmap
+            Bitmap resizedBitmap = new Bitmap(bitmap, new Size(Size, Size));
+            return resizedBitmap;
+        }
+
+        private void CognexItemClick(object sender, ItemClickEventArgs e) => Global.비전검사.도구설정(카메라구분.Cam01);
+
+        private void VmItemClick(object sender, ItemClickEventArgs e)
+        {
+            Form opFrm = Application.OpenForms["VMForm"];
+
+            if (opFrm != null) return;
+
+            VMForm form = new VMForm();
+            form.Show(Global.MainForm);
+        }
+
         public void Close() { }
 
         private 모델구분 선택모델 { get { return (모델구분)this.e모델선택.EditValue; } }
@@ -63,20 +103,22 @@ namespace DSEV.UI.Controls
 
         private void 모델선택(object sender, EventArgs e)
         {
-            try { 
+            try
+            {
                 this.GridControl1.DataSource = this.검사설정;
                 if (this.검사설정 != null && this.검사설정.Count > 0)
                 {
-                    Task.Run(() => { 
+                    Task.Run(() =>
+                    {
                         Task.Delay(500).Wait();
                         this.GridView1.MoveFirst();
-                        //this.SetEditable(this.GridView1, this.GridView1.FocusedRowHandle);
                         this.검사항목변경?.Invoke(Global.모델자료.GetItem(this.선택모델), this.GetItem(this.GridView1, this.GridView1.FocusedRowHandle));
                     });
                 }
             }
-            catch (Exception ex) {
-                Global.오류로그(검사설정.로그영역.GetString(), 번역.모델선택, $"{번역.모델선택}\r\n{ex.Message}" , true);
+            catch (Exception ex)
+            {
+                Global.오류로그(검사설정.로그영역.GetString(), 번역.모델선택, $"{번역.모델선택}\r\n{ex.Message}", true);
                 this.GridControl1.DataSource = null;
             }
         }
@@ -108,7 +150,13 @@ namespace DSEV.UI.Controls
         private void 도구설정(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             if (this.b도구설정.EditValue == null || e.Button.Index != 1) return;
-            Global.비전검사.도구설정((카메라구분)this.b도구설정.EditValue);
+
+            if ((카메라구분)this.b도구설정.EditValue == 카메라구분.Cam01)
+            {
+                Point btnLocation = this.b도구설정.PointToScreen(Point.Empty);
+                popupMenu.ShowPopup(new Point(btnLocation.X + this.b도구설정.Width, btnLocation.Y));
+            }
+            else Global.비전검사.도구설정((카메라구분)this.b도구설정.EditValue);
         }
 
         private void 검사설정변경()
@@ -120,7 +168,7 @@ namespace DSEV.UI.Controls
         private void 수동검사알림(카메라구분 카메라, 검사결과 결과)
         {
             if (this.InvokeRequired) { this.BeginInvoke(new Action(() => 수동검사알림(카메라, 결과))); return; }
-            foreach(검사정보 설정 in 검사설정)
+            foreach (검사정보 설정 in 검사설정)
             {
                 if (설정.검사장치 != (장치구분)카메라) continue;
                 검사정보 검사 = 결과.검사내역.Where(e => e.검사항목 == 설정.검사항목).FirstOrDefault();

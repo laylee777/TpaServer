@@ -39,6 +39,8 @@ namespace DSEV.Schemas
         [JsonIgnore, Description("카메라 초기화 상태"), Translation("Live", "상태")]
         public virtual Boolean 상태 { get; set; } = false;
         [JsonIgnore]
+        public virtual Double ResizeScale { get; set; } = 0.1;
+        [JsonIgnore]
         internal virtual MatType ImageType => MatType.CV_8UC1;
         [JsonIgnore]
         internal virtual Boolean UseMemoryCopy => false;
@@ -56,6 +58,7 @@ namespace DSEV.Schemas
         internal Queue<Mat> Images = new Queue<Mat>();
         [JsonIgnore]
         internal Mat Image => Images.LastOrDefault<Mat>();
+
         [JsonIgnore]
         public const String 로그영역 = "Camera";
 
@@ -247,10 +250,6 @@ namespace DSEV.Schemas
         public override Boolean Active()
         {
             this.Camera.ClearImageBuffer();
-            //if(this.구분 == 카메라구분.Cam08 || this.구분 == 카메라구분.Cam09)
-            //{
-            //    return 그랩제어.Validate($"{this.구분} Active", Camera.StartGrabbing(), false);
-            //}
             return 그랩제어.Validate($"{this.구분} Active", Camera.StartGrabbing(), true);
         }
 
@@ -299,7 +298,6 @@ namespace DSEV.Schemas
         {
             if (surfaceAddr == IntPtr.Zero) this.AcquisitionFinished(error);
             else this.AcquisitionFinished(surfaceAddr, width, height);
-            //this.Stop();
         }
 
         public override Boolean Close() { base.Close(); this.Device.Free(); return true; }
@@ -320,7 +318,6 @@ namespace DSEV.Schemas
             try
             {
                 this.Device = new VideoCapture(Index, VideoCaptureAPIs.DSHOW) { FrameWidth = 가로, FrameHeight = 세로 };
-                //if (Device.IsOpened()) Debug.WriteLine(this.Device.GetBackendName(), "BackendName");
                 this.상태 = Device.IsOpened();
             }
             catch (Exception ex)

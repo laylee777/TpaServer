@@ -100,48 +100,8 @@ namespace DSEV.Schemas
         public void RunMaster()
         {
             this.Values.ForEach(도구 => 도구.마스터로드());
-            //// 결과 이미지 저장 테스트
-            //this.Values.ForEach(도구 => {
-            //    Stopwatch sw = new Stopwatch();
-            //    sw.Start();
-
-            //    String file = SaveImageFile(도구.카메라, DateTime.Now, 0, ImageFormat.Jpeg);
-            //    Common.ImageSaveJpeg(도구.InputImage, file, out String error, 70);
-            //    /*
-            //     * Mat JpegQuality: 60%, JpegOptimize: false
-            //      저장시간: Cam01 => 3,659ms, 38.83MB, 0000_193624.Jpeg
-            //      저장시간: Cam02 =>   144ms, 10.74MB, 0000_193627.Jpeg
-            //      저장시간: Cam03 =>   144ms, 10.79MB, 0000_193628.Jpeg
-
-            //      Mat JpegQuality: 70%, JpegOptimize: true
-            //      저장시간: Cam01 => 1,509ms, 44.94MB, 0000_203608.Jpeg
-            //      저장시간: Cam02 =>   364ms, 12.78MB, 0000_203609.Jpeg
-            //      저장시간: Cam03 =>   351ms, 12.86MB, 0000_203610.Jpeg
-
-            //      저장시간: Cam01 => 1,533ms, 44.94MB, 0000_205206.Jpeg
-            //      저장시간: Cam02 =>   361ms, 12.78MB, 0000_205207.Jpeg
-            //      저장시간: Cam03 =>   354ms, 12.86MB, 0000_205208.Jpeg
-
-            //     * Cognex
-            //      저장시간: Cam01 => 8,611ms, 239.44MB, 0000_185042.Jpeg
-            //      저장시간: Cam02 => 1,831ms,  60.44MB, 0000_185051.Jpeg
-            //      저장시간: Cam03 => 1,817ms,  61.66MB, 0000_185053.Jpeg
-            //    */
-
-            //    //String file = SaveImageFile(도구.카메라, DateTime.Now, 0, ImageFormat.Png);
-            //    //Common.ImageSavePng(도구.InputImage, file, out String error);
-            //    /*
-            //     * Cognex
-            //      저장시간: Cam01 => 33,499ms, 215.78MB
-            //      저장시간: Cam02 =>  5,170ms,  32.60MB
-            //      저장시간: Cam03 =>  5,479ms,  33,51MB
-            //    */
-
-            //    sw.Stop();
-            //    FileInfo fileInfo = new FileInfo(file);
-            //    Debug.WriteLine($"{도구.카메라} => {sw.ElapsedMilliseconds.ToString("#,0")}ms, {Math.Round(fileInfo.Length / 1000000d, 2).ToString("#,0.00")}MB, {fileInfo.Name}", "저장시간");
-            //});
         }
+
         public Boolean RunMaster(카메라구분 카메라)
         {
             if (!this.ContainsKey(카메라)) return false;

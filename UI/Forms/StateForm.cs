@@ -16,7 +16,7 @@ namespace DSEV.UI.Forms
             this.Shown += FormShown;
         }
 
-        VDA590UFA3D UFA = null;
+        VDA590TPA3D UFA = null;
         private void FormShown(object sender, EventArgs e) => this.Init();
         public void Init()
         {
@@ -27,9 +27,8 @@ namespace DSEV.UI.Forms
             Global.환경설정.모델변경알림 += 모델변경알림;
             Global.검사자료.검사완료알림 += 검사완료알림;
             Global.모델자료.검사수량변경 += 검사수량변경;
-            this.e모델.DoubleClick += 화면갱신;
 
-            UFA = new VDA590UFA3D()
+            UFA = new VDA590TPA3D()
             {
                 CameraPosition = new Point3D(0, 30, 1150),
                 CameraLookDirection = new Vector3D(0, 0, -1150),
@@ -80,11 +79,6 @@ namespace DSEV.UI.Forms
             this.e시간.Text = $"{Utils.FormatDate(결과.검사일시, "{0:HH:mm:ss}")}";
             this.e큐알.Text = 결과.큐알내용;
             this.e큐알.Appearance.ForeColor = 환경설정.ResultColor(결과.큐알결과());
-        }
-        private void 화면갱신(object sender, EventArgs e)
-        {
-            Global.검사자료.검사테스트();
-            //this.e뷰어.SetResults(Global.검사자료.수동검사);
         }
     }
 }

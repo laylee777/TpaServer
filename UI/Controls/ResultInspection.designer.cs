@@ -34,7 +34,6 @@
             this.e외관결과 = new DevExpress.XtraEditors.TextEdit();
             this.Bind검사결과 = new System.Windows.Forms.BindingSource(this.components);
             this.eCTQ결과 = new DevExpress.XtraEditors.TextEdit();
-            //this.e큐알등급 = new DevExpress.XtraEditors.TextEdit();
             this.e검사순번 = new DevExpress.XtraEditors.TextEdit();
             this.e측정결과 = new DevExpress.XtraEditors.LabelControl();
             this.e검사시간 = new DevExpress.XtraEditors.TextEdit();
@@ -57,7 +56,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.e외관결과.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Bind검사결과)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.eCTQ결과.Properties)).BeginInit();
-            //((System.ComponentModel.ISupportInitialize)(this.e큐알등급.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e검사순번.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e검사시간.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e큐알코드.Properties)).BeginInit();
@@ -81,7 +79,6 @@
             this.layoutControl1.Controls.Add(this.e결과뷰어);
             this.layoutControl1.Controls.Add(this.e외관결과);
             this.layoutControl1.Controls.Add(this.eCTQ결과);
-            //this.layoutControl1.Controls.Add(this.e큐알등급);
             this.layoutControl1.Controls.Add(this.e검사순번);
             this.layoutControl1.Controls.Add(this.e측정결과);
             this.layoutControl1.Controls.Add(this.e검사시간);
@@ -91,7 +88,7 @@
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsView.AlwaysScrollActiveControlIntoView = false;
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(1268, 900);
+            this.layoutControl1.Size = new System.Drawing.Size(1152, 900);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -99,7 +96,7 @@
             // 
             this.e결과뷰어.Location = new System.Drawing.Point(6, 96);
             this.e결과뷰어.Name = "e결과뷰어";
-            this.e결과뷰어.Size = new System.Drawing.Size(1256, 798);
+            this.e결과뷰어.Size = new System.Drawing.Size(1140, 798);
             this.e결과뷰어.TabIndex = 1;
             // 
             // e외관결과
@@ -114,7 +111,7 @@
             this.e외관결과.Properties.Appearance.Options.UseTextOptions = true;
             this.e외관결과.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.e외관결과.Properties.ReadOnly = true;
-            this.e외관결과.Size = new System.Drawing.Size(127, 32);
+            this.e외관결과.Size = new System.Drawing.Size(100, 32);
             this.e외관결과.StyleController = this.layoutControl1;
             this.e외관결과.TabIndex = 9;
             // 
@@ -134,32 +131,16 @@
             this.eCTQ결과.Properties.Appearance.Options.UseTextOptions = true;
             this.eCTQ결과.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.eCTQ결과.Properties.ReadOnly = true;
-            this.eCTQ결과.Size = new System.Drawing.Size(127, 32);
+            this.eCTQ결과.Size = new System.Drawing.Size(100, 32);
             this.eCTQ결과.StyleController = this.layoutControl1;
             this.eCTQ결과.TabIndex = 8;
-            // 
-            // e큐알등급
-            // 
-            //this.e큐알등급.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.Bind검사결과, "큐알등급", true));
-            //this.e큐알등급.EditValue = "-";
-            //this.e큐알등급.EnterMoveNextControl = true;
-            //this.e큐알등급.Location = new System.Drawing.Point(1192, 10);
-            //this.e큐알등급.Name = "e큐알등급";
-            //this.e큐알등급.Properties.Appearance.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            //this.e큐알등급.Properties.Appearance.Options.UseFont = true;
-            //this.e큐알등급.Properties.Appearance.Options.UseTextOptions = true;
-            //this.e큐알등급.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            //this.e큐알등급.Properties.ReadOnly = true;
-            //this.e큐알등급.Size = new System.Drawing.Size(66, 32);
-            //this.e큐알등급.StyleController = this.layoutControl1;
-            //this.e큐알등급.TabIndex = 7;
             // 
             // e검사순번
             // 
             this.e검사순번.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.Bind검사결과, "검사코드", true));
             this.e검사순번.EditValue = 0;
             this.e검사순번.EnterMoveNextControl = true;
-            this.e검사순번.Location = new System.Drawing.Point(613, 54);
+            this.e검사순번.Location = new System.Drawing.Point(586, 54);
             this.e검사순번.Name = "e검사순번";
             this.e검사순번.Properties.Appearance.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.e검사순번.Properties.Appearance.Options.UseFont = true;
@@ -170,7 +151,7 @@
             this.e검사순번.Properties.EditFormat.FormatString = "d4";
             this.e검사순번.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.e검사순번.Properties.ReadOnly = true;
-            this.e검사순번.Size = new System.Drawing.Size(169, 32);
+            this.e검사순번.Size = new System.Drawing.Size(137, 32);
             this.e검사순번.StyleController = this.layoutControl1;
             this.e검사순번.TabIndex = 1;
             // 
@@ -194,7 +175,7 @@
             // 
             this.e검사시간.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.Bind검사결과, "검사일시", true));
             this.e검사시간.EnterMoveNextControl = true;
-            this.e검사시간.Location = new System.Drawing.Point(886, 54);
+            this.e검사시간.Location = new System.Drawing.Point(827, 54);
             this.e검사시간.Name = "e검사시간";
             this.e검사시간.Properties.Appearance.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.e검사시간.Properties.Appearance.Options.UseFont = true;
@@ -205,7 +186,7 @@
             this.e검사시간.Properties.EditFormat.FormatString = "{0:yyyy-MM-dd HH:mm:ss}";
             this.e검사시간.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.e검사시간.Properties.ReadOnly = true;
-            this.e검사시간.Size = new System.Drawing.Size(372, 32);
+            this.e검사시간.Size = new System.Drawing.Size(315, 32);
             this.e검사시간.StyleController = this.layoutControl1;
             this.e검사시간.TabIndex = 5;
             // 
@@ -214,14 +195,14 @@
             this.e큐알코드.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.Bind검사결과, "큐알내용", true));
             this.e큐알코드.EditValue = "-";
             this.e큐알코드.EnterMoveNextControl = true;
-            this.e큐알코드.Location = new System.Drawing.Point(613, 10);
+            this.e큐알코드.Location = new System.Drawing.Point(586, 10);
             this.e큐알코드.Name = "e큐알코드";
             this.e큐알코드.Properties.Appearance.Font = new System.Drawing.Font("맑은 고딕", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.e큐알코드.Properties.Appearance.Options.UseFont = true;
             this.e큐알코드.Properties.Appearance.Options.UseTextOptions = true;
             this.e큐알코드.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.e큐알코드.Properties.ReadOnly = true;
-            this.e큐알코드.Size = new System.Drawing.Size(567, 32);
+            this.e큐알코드.Size = new System.Drawing.Size(444, 32);
             this.e큐알코드.StyleController = this.layoutControl1;
             this.e큐알코드.TabIndex = 4;
             // 
@@ -242,16 +223,16 @@
             this.layoutControlItem8});
             this.Root.Name = "Root";
             this.Root.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 4, 4);
-            this.Root.Size = new System.Drawing.Size(1268, 900);
+            this.Root.Size = new System.Drawing.Size(1152, 900);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.e큐알코드;
-            this.layoutControlItem1.Location = new System.Drawing.Point(511, 0);
+            this.layoutControlItem1.Location = new System.Drawing.Point(484, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
             this.layoutControlItem1.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 6, 6);
-            this.layoutControlItem1.Size = new System.Drawing.Size(671, 44);
+            this.layoutControlItem1.Size = new System.Drawing.Size(548, 44);
             this.layoutControlItem1.Text = "QR Code";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(80, 25);
             // 
@@ -270,30 +251,29 @@
             // layoutControlItem4
             // 
             this.layoutControlItem4.Control = this.e검사순번;
-            this.layoutControlItem4.Location = new System.Drawing.Point(511, 44);
+            this.layoutControlItem4.Location = new System.Drawing.Point(484, 44);
             this.layoutControlItem4.Name = "layoutControlItem4";
             this.layoutControlItem4.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 6, 6);
-            this.layoutControlItem4.Size = new System.Drawing.Size(273, 46);
+            this.layoutControlItem4.Size = new System.Drawing.Size(241, 46);
             this.layoutControlItem4.Text = "Index";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(80, 25);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.e검사시간;
-            this.layoutControlItem2.Location = new System.Drawing.Point(784, 44);
+            this.layoutControlItem2.Location = new System.Drawing.Point(725, 44);
             this.layoutControlItem2.Name = "layoutControlItem2";
             this.layoutControlItem2.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 6, 6);
-            this.layoutControlItem2.Size = new System.Drawing.Size(476, 46);
+            this.layoutControlItem2.Size = new System.Drawing.Size(419, 46);
             this.layoutControlItem2.Text = "Time";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(80, 25);
             // 
             // layoutControlItem5
             // 
-            //this.layoutControlItem5.Control = this.e큐알등급;
-            this.layoutControlItem5.Location = new System.Drawing.Point(1182, 0);
+            this.layoutControlItem5.Location = new System.Drawing.Point(1032, 0);
             this.layoutControlItem5.Name = "layoutControlItem5";
             this.layoutControlItem5.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 6, 6);
-            this.layoutControlItem5.Size = new System.Drawing.Size(78, 44);
+            this.layoutControlItem5.Size = new System.Drawing.Size(112, 44);
             this.layoutControlItem5.Text = "Legibility";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextVisible = false;
@@ -304,7 +284,7 @@
             this.layoutControlItem6.Location = new System.Drawing.Point(280, 0);
             this.layoutControlItem6.Name = "layoutControlItem6";
             this.layoutControlItem6.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 6, 6);
-            this.layoutControlItem6.Size = new System.Drawing.Size(231, 44);
+            this.layoutControlItem6.Size = new System.Drawing.Size(204, 44);
             this.layoutControlItem6.Text = "CTQ";
             this.layoutControlItem6.TextSize = new System.Drawing.Size(80, 25);
             // 
@@ -314,7 +294,7 @@
             this.layoutControlItem7.Location = new System.Drawing.Point(280, 44);
             this.layoutControlItem7.Name = "layoutControlItem7";
             this.layoutControlItem7.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 6, 6);
-            this.layoutControlItem7.Size = new System.Drawing.Size(231, 46);
+            this.layoutControlItem7.Size = new System.Drawing.Size(204, 46);
             this.layoutControlItem7.Text = "Surface";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(80, 25);
             // 
@@ -323,7 +303,7 @@
             this.layoutControlItem8.Control = this.e결과뷰어;
             this.layoutControlItem8.Location = new System.Drawing.Point(0, 90);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(1260, 802);
+            this.layoutControlItem8.Size = new System.Drawing.Size(1144, 802);
             this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem8.TextVisible = false;
             // 
@@ -353,10 +333,10 @@
             this.dockPanel1.Dock = DevExpress.XtraBars.Docking.DockingStyle.Right;
             this.dockPanel1.FloatSize = new System.Drawing.Size(793, 857);
             this.dockPanel1.ID = new System.Guid("81df941b-8b06-4b13-9a7e-2c01f5ee4a1b");
-            this.dockPanel1.Location = new System.Drawing.Point(1268, 0);
+            this.dockPanel1.Location = new System.Drawing.Point(1152, 0);
             this.dockPanel1.Name = "dockPanel1";
-            this.dockPanel1.OriginalSize = new System.Drawing.Size(652, 200);
-            this.dockPanel1.Size = new System.Drawing.Size(652, 900);
+            this.dockPanel1.OriginalSize = new System.Drawing.Size(768, 200);
+            this.dockPanel1.Size = new System.Drawing.Size(768, 900);
             this.dockPanel1.Text = "Inspection Results";
             // 
             // dockPanel1_Container
@@ -364,7 +344,7 @@
             this.dockPanel1_Container.Controls.Add(this.e결과목록);
             this.dockPanel1_Container.Location = new System.Drawing.Point(4, 30);
             this.dockPanel1_Container.Name = "dockPanel1_Container";
-            this.dockPanel1_Container.Size = new System.Drawing.Size(645, 867);
+            this.dockPanel1_Container.Size = new System.Drawing.Size(761, 867);
             this.dockPanel1_Container.TabIndex = 0;
             // 
             // e결과목록
@@ -372,7 +352,7 @@
             this.e결과목록.Dock = System.Windows.Forms.DockStyle.Fill;
             this.e결과목록.Location = new System.Drawing.Point(0, 0);
             this.e결과목록.Name = "e결과목록";
-            this.e결과목록.Size = new System.Drawing.Size(645, 867);
+            this.e결과목록.Size = new System.Drawing.Size(761, 867);
             this.e결과목록.TabIndex = 0;
             // 
             // ResultInspection
@@ -388,7 +368,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.e외관결과.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Bind검사결과)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.eCTQ결과.Properties)).EndInit();
-            //((System.ComponentModel.ISupportInitialize)(this.e큐알등급.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e검사순번.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e검사시간.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e큐알코드.Properties)).EndInit();

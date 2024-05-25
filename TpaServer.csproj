@@ -92,11 +92,20 @@
     <Reference Include="DevExpress.XtraPrinting.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraRichEdit.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraTreeList.v23.2, Version=23.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="GraphicsSetModuleCs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=969f13d2d78c3370, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ImageSourceModuleCs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6a03c4a48a6df5e6, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="MvCamCtrl.Net">
       <HintPath>C:\Program Files (x86)\MVS\Development\DotNet\win64\MvCamCtrl.Net.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="ShellModuleCs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a88b3f19f0240810, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -115,6 +124,36 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="VM.Controls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=48472957e1d7b05f, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VM.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=61600122bc9264b9, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VM.ModuleControl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6903f2164b1b4178, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VM.PlatformSDKCS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c1484a72052ee3d4, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VMControls.BaseInterface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=14444b8df74b6e6a, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VMControls.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d3a6b40f3e34b5af, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VMControls.Interface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cb41614600cf774b, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VMControls.RenderInterface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4bcfc50547abbb24, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VMControls.Winform.Release, Version=1.0.0.0, Culture=neutral, PublicKeyToken=2efa940dfee4dc7e, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VMControls.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=fef8a9e4baab915f, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
@@ -156,9 +195,10 @@
     <Compile Include="Schemas\MES통신.cs" />
     <Compile Include="Schemas\MVSol.Enc.cs" />
     <Compile Include="Schemas\PlaneDistanceCalculator.cs" />
-    <Compile Include="Schemas\Viewport\VDA590UFA3D.cs" />
+    <Compile Include="Schemas\Viewport\VDA590TPA3D.cs" />
     <Compile Include="Schemas\Viewport\Graphics3D.cs" />
     <Compile Include="Schemas\Viewport\HelixViewport.cs" />
+    <Compile Include="Schemas\VM제어.cs" />
     <Compile Include="Schemas\모델정보.검사설정.cs" />
     <Compile Include="Schemas\검사자료.cs" />
     <Compile Include="Schemas\검사자료.Reports.cs" />
@@ -367,6 +407,12 @@
     <Compile Include="UI\Forms\TestForm.Designer.cs">
       <DependentUpon>TestForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Forms\VMForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\VMForm.Designer.cs">
+      <DependentUpon>VMForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\WaitForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -480,6 +526,9 @@
     <EmbeddedResource Include="UI\Forms\TestForm.resx">
       <DependentUpon>TestForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\VMForm.resx">
+      <DependentUpon>VMForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\WaitForm.resx">
       <DependentUpon>WaitForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -559,6 +608,13 @@
       <Project>{88ad3d48-11a5-4350-8430-6c35cd85d49e}</Project>
       <Name>UfaVision</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\electronics_photo.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Cognex.ico" />
+    <Content Include="Resources\Vm.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

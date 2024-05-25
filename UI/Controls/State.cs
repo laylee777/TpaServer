@@ -104,7 +104,6 @@ namespace DSEV.UI.Controls
         {
             if (결과 == null) return;
             if (this.InvokeRequired) { this.BeginInvoke((Action)(() => 검사완료알림(결과))); return; }
-
             // DB 저장
             Global.검사자료.Save();
             this.검사상태표현(결과.측정결과);
@@ -112,7 +111,6 @@ namespace DSEV.UI.Controls
             GC.Collect();
         }
 
-        //private void 측정시작보고() => this.검사상태표현(결과구분.IN);
         private void 동작상태알림()
         {
             if (this.InvokeRequired) { this.BeginInvoke(new Action(동작상태알림)); return; }

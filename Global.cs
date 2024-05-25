@@ -27,22 +27,17 @@ namespace DSEV
         public static 조명제어 조명제어;
         public static 그랩제어 그랩제어;
         public static 비전검사 비전검사;
+        public static VM제어 VM제어;
         public static 사진자료 사진자료;
-
         //추후 합치기 필요 임시.
         public static 상부큐알리더 상부큐알리더;
         public static 하부큐알리더 하부큐알리더;
         public static 하부큐알리더2 하부큐알리더2;
-
         public static 검사자료 검사자료;
         public static 큐알검증 큐알검증;
         public static 캘리브자료 캘리브;
-
         public static 센서제어 센서제어;
-
         public static MES통신 mes통신;
-
-        //public static 샘플자료 샘플자료;
 
         public static class 장치상태
         {
@@ -52,6 +47,7 @@ namespace DSEV
             public static Boolean 조명장치 => 조명제어.정상여부;
             public static Boolean 그랩장치 => Global.그랩제어.정상여부;
             public static Boolean 카메라1 => Global.그랩제어.상부검사카메라.상태 && Global.그랩제어.측면검사카메라1.상태 && Global.그랩제어.측면검사카메라2.상태 && Global.그랩제어.하부검사카메라1.상태 && Global.그랩제어.하부검사카메라2.상태 && Global.그랩제어.커넥터검사카메라1.상태 && Global.그랩제어.커넥터검사카메라2.상태;
+            public static Boolean MES상태 => Global.mes통신.통신장치 == null ? false : Global.mes통신.통신장치.핑퐁상태;
             public static Boolean 자동수동 => Global.장치통신.자동수동여부;
             public static Boolean 시작정지 => Global.장치통신.시작정지여부;
         }
@@ -67,22 +63,17 @@ namespace DSEV
                 조명제어 = new 조명제어();
                 모델자료 = new 모델자료();
                 비전검사 = new 비전검사();
+                VM제어 = new VM제어();
                 그랩제어 = new 그랩제어();
                 사진자료 = new 사진자료();
-
                 //추후 합치기 필요 임시.
-
                 상부큐알리더 = new 상부큐알리더();
                 하부큐알리더 = new 하부큐알리더();
                 하부큐알리더2 = new 하부큐알리더2();
-
                 검사자료 = new 검사자료();
-
                 큐알검증 = new 큐알검증();
                 캘리브 = new 캘리브자료();
-
                 센서제어 = new 센서제어();
-
                 mes통신 = new MES통신();
 
                 로그자료.Init();
@@ -90,7 +81,6 @@ namespace DSEV
                 유저자료.Init();
                 모델자료.Init();
                 검사자료.Init();
-                //추후 합치기 필요 임시.
                 if (Global.환경설정.동작구분 == 동작구분.Live)
                 {
                     장치통신.Init();
@@ -102,13 +92,12 @@ namespace DSEV
                     조명제어.Init();
                     센서제어.Init();
                 }
-
                 비전검사.Init(); // 그랩장치가 먼저 Init 되어야 함
+                VM제어.Init();
                 사진자료.Init();
                 큐알검증.Init();
                 캘리브.Init();
                 //24.04.02 mes 통신 추가 by LHD
-               
                 if(Global.환경설정.MES사용유무) mes통신.Init();
 
                 Global.정보로그(로그영역, "초기화", "시스템을 초기화 합니다.", false);
@@ -146,16 +135,11 @@ namespace DSEV
                 모델자료.Close();
                 로그자료.Close();
                 캘리브.Close();
-
                 센서제어.Close();
-
-                Properties.Settings.Default.Save();
-
-
-                //mes종료추가 24.04.02 by LHD 
-
+                VM제어.Close();
                 mes통신.Close();
 
+                Properties.Settings.Default.Save();
                 Debug.WriteLine("시스템 종료");
                 return true;
             }
@@ -168,10 +152,8 @@ namespace DSEV
         public static void Start()
         {
             장치통신.Start();
-
             //mes통신추가 24.04.02 by LHD
             mes통신.Start();
-
             if (Global.환경설정.동작구분 != 동작구분.Live) return;
             상부큐알리더.Start();
             하부큐알리더.Start();
@@ -185,11 +167,11 @@ namespace DSEV
             if (Localization.CurrentLanguage == Language.KO)
             {
                 MvUtils.Localization.CurrentLanguage = MvUtils.Localization.Language.KO;
-                MvUtils.DxDataGridLocalizer.Enable();
-                MvUtils.DxEditorsLocalizer.Enable();
-                MvUtils.DxDataFilteringLocalizer.Enable();
-                MvUtils.DxLayoutLocalizer.Enable();
-                MvUtils.DxBarLocalizer.Enable();
+                DxDataGridLocalizer.Enable();
+                DxEditorsLocalizer.Enable();
+                DxDataFilteringLocalizer.Enable();
+                DxLayoutLocalizer.Enable();
+                DxBarLocalizer.Enable();
             }
             else MvUtils.Localization.CurrentLanguage = MvUtils.Localization.Language.EN;
         }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using static DSEV.Schemas.MES통신;
 
 namespace DSEV.Schemas
 {
@@ -37,7 +38,6 @@ namespace DSEV.Schemas
                 return false;
             }
             this.입출자료.Set(자료);
-            //Debug.WriteLine("오류없음.");
             return true;
         }
 
@@ -62,7 +62,7 @@ namespace DSEV.Schemas
         private void 검사위치확인()
         {
             Dictionary<정보주소, Int32> 변경 = this.입출자료.Changes(정보주소.하부큐알트리거, 정보주소.결과요청트리거);
-            
+
             if (변경.Count < 1) return;
 
             if (!this.하부큐알트리거신호 && this.하부큐알확인완료신호)
@@ -108,21 +108,12 @@ namespace DSEV.Schemas
             this.커버조립결과OK신호 = 사용여부;
             this.커버조립결과NG신호 = !사용여부;
             this.커버조립확인완료신호 = true;
-
-            //await Task.Delay(200);
-
-            //this.커버조립결과OK신호 = false;
-            //this.커버조립결과NG신호 = false;
-            //this.커버조립확인완료신호 = false;
-
             Debug.WriteLine("커버조립 여부전송완료");
         }
 
         private void 커버조립확인()
         {
-
             Int32 검사번호 = this.검사위치번호(정보주소.커버조립트리거);
-
             if (검사번호 > 0)
             {
                 Debug.WriteLine("커버조립트리거 진입");
@@ -178,10 +169,8 @@ namespace DSEV.Schemas
 
             this.인덱스버퍼[구분] = index;
 
-            //Debug.WriteLine("----------------------------------");
             if (index == 0) Global.경고로그(로그영역, 구분.ToString(), $"해당 위치에 검사할 제품의 Index가 없습니다.", false);
             else Debug.WriteLine($"{Utils.FormatDate(DateTime.Now, "{0:HH:mm:ss.fff}")}  {구분} => {index}", "Trigger");
-            //Debug.WriteLine($"이송장치1=>{정보읽기(정보주소.이송장치1)}, 검사지그1=>{정보읽기(정보주소.검사지그1)}, 이송장치2=>{정보읽기(정보주소.이송장치2)}, 검사지그2=>{정보읽기(정보주소.검사지그2)}, 이송장치3=>{정보읽기(정보주소.이송장치3)}, 검사지그3=>{정보읽기(정보주소.검사지그3)}, 투입버퍼=>{정보읽기(정보주소.투입버퍼)}", "PLC Index");
             return index;
         }
 
@@ -214,23 +203,19 @@ namespace DSEV.Schemas
                     Global.검사자료.검사시작(하부큐알검사번호);
                     Debug.WriteLine("검사자료 검사시작");
 
-
                     검사결과 검사 = Global.검사자료.하부큐알리딩수행(하부큐알검사번호);
 
-                    //임시 OK 신호 - MES통신 부분 추가해야됨.
                     if (!Global.환경설정.MES사용유무)
                     {
-                        this.하부큐알결과OK신호 = true;
-                        this.하부큐알결과NG신호 = false;
-                        this.하부큐알확인완료신호 = true;
+                        //MES사용안할시 강제 OK
+                        Global.mes통신.하부큐알결과신호전송(true);
                     }
                     else
                     {
                         //mes 에 보내고 결과 받아서 신호 설정 로직 추가예정
-                        //결과 송부받아서 변경
-                        this.하부큐알결과OK신호 = true;
-                        this.하부큐알결과NG신호 = false;
-                        this.하부큐알확인완료신호 = true;
+                        MESSAGE message = new MESSAGE();
+                        message.SetMessage(송신메세지아이디.REQ_PROCESS_START.ToString(), "IVM01", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fffff"), $"{검사.큐알내용}", String.Empty, String.Empty, 검사.검사코드.ToString("0000"));
+                        Global.mes통신.자료송신(message);
                     }
 
                     Global.검사자료.하부큐알리딩수행종료();
@@ -242,7 +227,6 @@ namespace DSEV.Schemas
 
             if (상부큐알검사번호 > 0)
             {
-
                 new Thread(() =>
                 {
                     Debug.WriteLine("상부 큐알 검사 시작><");
@@ -257,11 +241,8 @@ namespace DSEV.Schemas
         }
 
         private Boolean 센서제로모드 = false;
-        public void 센서제로수행(Boolean 모드)
-        {
-            this.센서제로모드 = 모드;
-            //if (!모드) 정보쓰기(정보주소.평탄센서, 0);
-        }
+        public void 센서제로수행(Boolean 모드) => this.센서제로모드 = 모드;
+
         private void 평탄검사수행()
         {
             Int32 바닥평면검사번호 = this.검사위치번호(정보주소.바닥평면트리거);
@@ -417,7 +398,7 @@ namespace DSEV.Schemas
             Debug.WriteLine("검사결과 강제배출 확인중");
             if (Global.환경설정.강제배출)
             {
-                결과전송(Global.환경설정.양품불량);
+                결과전송(Global.환경설정.양품불량, 검사);
                 Global.검사자료.검사완료알림함수(검사);
                 return;
             }
@@ -425,33 +406,33 @@ namespace DSEV.Schemas
             Debug.WriteLine("강제배출 아님. 검사 비어있는지 확인 중");
             if (검사 == null)
             {
-                결과전송(false);
+                결과전송(false, 검사);
                 Global.검사자료.검사완료알림함수(검사);
                 return;
             }
 
             Debug.WriteLine("안비어있음. 결과전송 진행 예정");
             // 배출 수행
-            결과전송(검사.측정결과 == 결과구분.OK);
+            결과전송(검사.측정결과 == 결과구분.OK, 검사);
             Debug.WriteLine($"{검사.측정결과}");
 
             Global.검사자료.검사완료알림함수(검사);
         }
 
         // 신호 Writing 순서 중요
-        private void 결과전송(Boolean 양품여부)
+        private void 결과전송(Boolean 양품여부, 검사결과 검사)
         {
             Debug.WriteLine("결과전송시작");
             this.결과요청결과NG신호 = !양품여부;
             this.결과요청결과OK신호 = 양품여부;
             this.결과요청확인완료신호 = true;
 
-            // 1초 후에 a를 false로 변경하는 비동기 작업 예약
-            //await Task.Delay(200);
-
-            //this.결과요청결과OK신호 = false;
-            //this.결과요청결과NG신호 = false;
-            //this.결과요청확인완료신호 = false;
+            if (Global.환경설정.MES사용유무)
+            {
+                MESSAGE message = new MESSAGE();
+                message.SetMessage(송신메세지아이디.REQ_PROCESS_END.ToString(), "IVM01", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fffff"), $"{검사.큐알내용}", String.Empty, String.Empty, String.Empty);
+                Global.mes통신.자료송신(message);
+            }
 
             Debug.WriteLine("결과전송완료");
         }
@@ -466,10 +447,11 @@ namespace DSEV.Schemas
                 this.검사번호리셋 = true;
                 Global.모델자료.선택모델.날짜변경();
             }
+
             this.통신확인핑퐁 = !this.통신확인핑퐁;
+            //Debug.WriteLine($"통신확인핑퐁 : {this.통신확인핑퐁}");
             this.통신상태알림?.Invoke();
         }
-
         private Boolean 테스트수행()
         {
             통신핑퐁수행();

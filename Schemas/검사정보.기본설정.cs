@@ -266,11 +266,11 @@ namespace DSEV.Schemas
         ShapeBigNotchLR = 801,
 
         //하단부 큰 노치 윤곽도하위
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeBigNotchLR, "DistBigNotchL")]
-        DistBigNotchL = 821,
         [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeBigNotchLR, "DistBigNotchR")]
-        DistBigNotchR = 822,
-
+        DistBigNotchR = 821,
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeBigNotchLR, "DistBigNotchL")]
+        DistBigNotchL = 822,
+   
 
         //J1J2윤곽도
         [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "ShapeJ1J2")]
@@ -294,61 +294,61 @@ namespace DSEV.Schemas
       
 
         //사이드노치 위치
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchPosFL")]
-        NotchPosFL = 1101,
         [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchPosFR")]
-        NotchPosFR = 1102,
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchPosRL")]
-        NotchPosRL = 1103,
+        NotchPosFR = 1101,//d1
         [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchPosRR")]
-        NotchPosRR = 1104,
-
+        NotchPosRR = 1102,//d3
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchPosFL")]
+        NotchPosFL = 1103,//d4
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchPosRL")]
+        NotchPosRL = 1104,//d6
+       
 
         //중심 노치높이
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchHeightCL")]
-        NotchHeightCL = 1201,
         [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchHeightCR")]
-        NotchHeightCR = 1202,
-        
+        NotchHeightCR = 1201, //d2
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchHeightCL")]
+        NotchHeightCL = 1202, //d5
+
 
         //중심 노치반폭
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchWidthCR1")]
+        NotchWidthCR1 = 1301, //d2
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchWidthCR2")]
+        NotchWidthCR2 = 1302,
         [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchWidthCL1")]
-        NotchWidthCL1 = 1301,
+        NotchWidthCL1 = 1303, //d5
         [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchWidthCL2")]
-        NotchWidthCL2 = 1302,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchWidthCR1")]
-        NotchWidthCR1 = 1303,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchWidthCR2")]
-        NotchWidthCR2 = 1304,
+        NotchWidthCL2 = 1304,
+
 
         //사이드 노치높이
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchWidthFR")]
+        NotchWidthFR = 1401, //d1
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchWidthRR")]
+        NotchWidthRR = 1402, //d3
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchWidthRL")]
+        NotchWidthRL = 1403, //d4
         [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchWidthFL")]
-        NotchWidthFL = 1401,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchWidthFR")]
-        NotchWidthFR = 1402,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchWidthRL")]
-        NotchWidthRL = 1403,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchWidthRR")]
-        NotchWidthRR = 1404,
+        NotchWidthFL = 1404, //d6
 
         //사이드 노치반폭
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchHeightFL1")]
-        NotchHeightFL1 = 1501,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchHeightFL2")]
-        NotchHeightFL2 = 1502,
         [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchHeightFR1")]
-        NotchHeightFR1 = 1503,
+        NotchHeightFR1 = 1501,
         [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchHeightFR2")]
-        NotchHeightFR2 = 1504,
+        NotchHeightFR2 = 1502,
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchHeightRR1")]
+        NotchHeightRR1 = 1503,
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchHeightRR2")]
+        NotchHeightRR2 = 1504,
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchHeightFL1")]
+        NotchHeightFL1 = 1505,
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchHeightFL2")]
+        NotchHeightFL2 = 1506,
         [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchHeightRL1")]
-        NotchHeightRL1 = 1505,
+        NotchHeightRL1 = 1507,
         [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchHeightRL2")]
-        NotchHeightRL2 = 1506,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchHeightRR1")]
-        NotchHeightRR1 = 1507,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchHeightRR2")]
-        NotchHeightRR2 = 1508,
-
+        NotchHeightRL2 = 1508,
 
         //커넥터상부
         [Result(피씨구분.Server,검사그룹.Surface, 결과분류.Summary, 장치구분.Cam06, None)]
@@ -595,7 +595,6 @@ namespace DSEV.Schemas
 
         public String DisplayText(Decimal value)
         {
-            //if (this.검사항목 == 검사항목.QrLegibility) return Utils.GetDescription((큐알등급)Convert.ToInt32(value));
             if (this.측정단위 == 단위구분.EA) return Utils.FormatNumeric(value);
             if (this.측정단위 == 단위구분.ON) return value == 1 ? "OK" : "NG";
             return String.Empty;

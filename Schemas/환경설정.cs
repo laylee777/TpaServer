@@ -90,12 +90,12 @@ namespace DSEV.Schemas
 
         //새롭게 추가 24.04.02
         [Translation("MES Server Host", "MES 서버 주소"), JsonProperty("MESHost")] // Client or Server
-        public String MES주소 { get; set; } = "192.168.211.3";
+        public String MES주소 { get; set; } = "127.0.0.1";
         [Translation("MES Server Port", "MES 서버 포트"), JsonProperty("MESPort")] // Client or Server
         public Int32 MES포트 { get; set; } = 6003;
 
         //[Translation("MES Server Host", "MES 서버 주소"), JsonProperty("MESHost")] // Client or Server
-        //public String MES주소 { get; set; } = "127.0.0.1";
+        //public String MES주소 { get; set; } = "192.168.10.2";
         //[Translation("MES Server Port", "MES 서버 포트"), JsonProperty("MESPort")] // Client or Server
         //public Int32 MES포트 { get; set; } = 6003;
 
@@ -107,6 +107,8 @@ namespace DSEV.Schemas
         public String 사진경로 { get { return Path.Combine(기본경로, "Items"); } }
         [Description("비젼 Tools"), JsonIgnore]
         public String 도구경로 { get { return Path.Combine(기본경로, "Tools"); } }
+        [Description("VM비젼 Tools"), JsonIgnore]
+        public String VM도구경로 { get { return Path.Combine(기본경로, "Tools"); } }
         [Description("마스터 이미지"), JsonIgnore]
         public String 마스터사진 { get { return Path.Combine(기본경로, "Masters"); } }
 
@@ -126,7 +128,10 @@ namespace DSEV.Schemas
         public Decimal 이미지보관일수 { get; set; } = 0;
         [JsonProperty("MES Used")]
         public Boolean MES사용유무 { get; set; } = false;
-       
+        [JsonProperty("Surface Inspection")]
+        public Boolean 표면검사사용 { get; set; } = false;
+        [JsonProperty("Surface Image Save")]
+        public Boolean 표면검사이미지저장 { get; set; } = false;
         [JsonIgnore]
         public Boolean 제로셋모드 { get; set; } = false;
 

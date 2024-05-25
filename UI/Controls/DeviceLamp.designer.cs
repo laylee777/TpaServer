@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DeviceLamp));
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
+            this.eMES통신 = new DevExpress.XtraEditors.SvgImageBox();
             this.e조명장치 = new DevExpress.XtraEditors.SvgImageBox();
             this.e카메라1 = new DevExpress.XtraEditors.SvgImageBox();
             this.e각인리더 = new DevExpress.XtraEditors.SvgImageBox();
@@ -37,6 +38,7 @@
             this.e통신체크 = new DevExpress.XtraEditors.SvgImageBox();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.eMES통신)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e조명장치)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e카메라1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e각인리더)).BeginInit();
@@ -52,6 +54,7 @@
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F)});
+            this.tablePanel1.Controls.Add(this.eMES통신);
             this.tablePanel1.Controls.Add(this.e조명장치);
             this.tablePanel1.Controls.Add(this.e카메라1);
             this.tablePanel1.Controls.Add(this.e각인리더);
@@ -62,10 +65,25 @@
             this.tablePanel1.Name = "tablePanel1";
             this.tablePanel1.Padding = new System.Windows.Forms.Padding(1);
             this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F)});
             this.tablePanel1.Size = new System.Drawing.Size(200, 94);
             this.tablePanel1.TabIndex = 0;
             this.tablePanel1.UseSkinIndents = true;
+            // 
+            // eMES통신
+            // 
+            this.tablePanel1.SetColumn(this.eMES통신, 0);
+            this.eMES통신.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.eMES통신.Location = new System.Drawing.Point(4, 49);
+            this.eMES통신.Name = "eMES통신";
+            this.tablePanel1.SetRow(this.eMES통신, 1);
+            this.eMES통신.Size = new System.Drawing.Size(45, 41);
+            this.eMES통신.SizeMode = DevExpress.XtraEditors.SvgImageSizeMode.Squeeze;
+            this.eMES통신.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("eMES통신.SvgImage")));
+            this.eMES통신.TabIndex = 17;
+            this.eMES통신.Text = "MES";
+            this.eMES통신.ToolTip = "MES";
             // 
             // e조명장치
             // 
@@ -74,7 +92,7 @@
             this.e조명장치.Location = new System.Drawing.Point(151, 4);
             this.e조명장치.Name = "e조명장치";
             this.tablePanel1.SetRow(this.e조명장치, 0);
-            this.e조명장치.Size = new System.Drawing.Size(45, 86);
+            this.e조명장치.Size = new System.Drawing.Size(45, 41);
             this.e조명장치.SizeMode = DevExpress.XtraEditors.SvgImageSizeMode.Squeeze;
             this.e조명장치.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("e조명장치.SvgImage")));
             this.e조명장치.TabIndex = 16;
@@ -88,7 +106,7 @@
             this.e카메라1.Location = new System.Drawing.Point(53, 4);
             this.e카메라1.Name = "e카메라1";
             this.tablePanel1.SetRow(this.e카메라1, 0);
-            this.e카메라1.Size = new System.Drawing.Size(45, 86);
+            this.e카메라1.Size = new System.Drawing.Size(45, 41);
             this.e카메라1.SizeMode = DevExpress.XtraEditors.SvgImageSizeMode.Squeeze;
             this.e카메라1.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("e카메라1.SvgImage")));
             this.e카메라1.TabIndex = 16;
@@ -102,7 +120,7 @@
             this.e각인리더.Location = new System.Drawing.Point(102, 4);
             this.e각인리더.Name = "e각인리더";
             this.tablePanel1.SetRow(this.e각인리더, 0);
-            this.e각인리더.Size = new System.Drawing.Size(45, 86);
+            this.e각인리더.Size = new System.Drawing.Size(45, 41);
             this.e각인리더.SizeMode = DevExpress.XtraEditors.SvgImageSizeMode.Squeeze;
             this.e각인리더.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("e각인리더.SvgImage")));
             this.e각인리더.TabIndex = 13;
@@ -116,7 +134,7 @@
             this.e장치통신.Location = new System.Drawing.Point(4, 4);
             this.e장치통신.Name = "e장치통신";
             this.tablePanel1.SetRow(this.e장치통신, 0);
-            this.e장치통신.Size = new System.Drawing.Size(45, 86);
+            this.e장치통신.Size = new System.Drawing.Size(45, 41);
             this.e장치통신.SizeMode = DevExpress.XtraEditors.SvgImageSizeMode.Squeeze;
             this.e장치통신.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("e장치통신.SvgImage")));
             this.e장치통신.TabIndex = 10;
@@ -144,6 +162,7 @@
             this.Size = new System.Drawing.Size(200, 94);
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.eMES통신)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e조명장치)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e카메라1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e각인리더)).EndInit();
@@ -161,5 +180,6 @@
         private DevExpress.XtraEditors.SvgImageBox e장치통신;
         private DevExpress.XtraEditors.SvgImageBox e카메라1;
         private DevExpress.XtraEditors.SvgImageBox e조명장치;
+        private DevExpress.XtraEditors.SvgImageBox eMES통신;
     }
 }
