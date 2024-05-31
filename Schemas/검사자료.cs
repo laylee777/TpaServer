@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using static DSEV.Schemas.장치통신;
 
@@ -103,6 +104,7 @@ namespace DSEV.Schemas
         }
         public 검사결과 결과조회(DateTime 일자, 모델구분 모델, Int32 코드) => this.테이블.Select(일자, 모델, 코드);
 
+        public void 검사일시추출실행(int numberOfResults, int numberOfProducts) => this.테이블.검사일시추출(numberOfResults, numberOfProducts);
 
         #region 검사로직
         // PLC에서 검사번호 요청 시 새 검사 자료를 생성하여 스플에 넣음
@@ -439,6 +441,119 @@ namespace DSEV.Schemas
                 Global.오류로그(로그영역.GetString(), "중복검사", $"{ex.Message}", true);
             }
             return result;
+        }
+
+
+
+
+        //반복작업을 피하기 위해 추가 For R&R
+
+        public void 검사일시추출(int numberOfResults, int numberOfProducts)
+        {
+            Debug.WriteLine("추출시작");
+
+
+            DateTime today = DateTime.Today;
+
+
+            // 오늘 날짜 기준으로 최신 데이터부터 필터링
+            var filteredResults = this.검사결과
+                .Where(x => x.검사일시 >= today)
+                .OrderByDescending(x => x.검사일시)
+                .ToList(); // 메모리로 로드하여 인덱스를 사용할 수 있도록 변환
+
+
+            int sheetnum = numberOfProducts;
+            for (int i = 0; i < numberOfProducts; i++)
+            {
+                List<List<decimal>> result = new List<List<decimal>>();
+                var groupedResults = new List<DateTime>();
+                var group = filteredResults
+                    .Where((x, index) => (index % numberOfProducts) == i)
+                    .Take(numberOfResults);
+
+                groupedResults.AddRange(group.Select(x => x.검사일시));
+
+                foreach (var 검사일시 in groupedResults)
+                {
+
+                    Console.WriteLine($"검사일시: {검사일시} {sheetnum}");
+
+                    // 해당 검사일시에 대한 inspd 데이터 조회
+                    var inspdData = this.검사정보
+                        .Where(x => x.검사일시 == 검사일시)
+                        .ToList();
+                    result.Add(inspdData.Select(x => x.결과값).ToList());
+                    //foreach (var data in inspdData)
+                    //{
+                    //    Console.WriteLine($"검사일시: {data.검사일시}, 결과값: {data.결과값}");
+                    //}
+
+
+                    // 행과 열을 전치하여 새로운 데이터 구조 생성
+                    var transposedResults = TransposeList(result);
+
+                    // CSV 파일 경로
+
+                    string csvFileFolder = "C:\\IVM\\RandR";
+                    string csvFileName =$"GageR&R_{sheetnum}_{DateTime.Now.ToString("yyMMddHHmmss")}.csv";
+
+
+                    //var csvFilePath = $"C:\\IVM\\RandR\\GageR&R_{sheetnum}_{DateTime.Now.ToString("yyMMddHHmmss")}.csv";
+
+
+                    // 폴더 없으면 만들고
+                    if (!Directory.Exists(csvFileFolder)) Directory.CreateDirectory(csvFileFolder);
+
+                    
+
+                    // CSV 파일 경로
+                    var csvFilePath = Path.Combine(csvFileFolder, csvFileName);
+
+                    // CSV 파일 쓰기
+                    using (var writer = new StreamWriter(csvFilePath, false, System.Text.Encoding.UTF8))
+                    {
+                        foreach (var row in transposedResults)
+                        {
+                            writer.WriteLine(string.Join(",", row));
+                        }
+                    }
+
+
+                }
+                sheetnum--;
+            }
+
+            Debug.WriteLine("추출끝");
+            return;
+        }
+
+
+        // 리스트 전치 함수(행과열바꾸기)
+        public static List<List<decimal>> TransposeList(List<List<decimal>> original)
+        {
+            var transposed = new List<List<decimal>>();
+
+            // 열 개수 결정
+            int columns = original.Count;
+            if (columns == 0)
+                return transposed;
+
+            // 행 개수 결정
+            int rows = original[0].Count;
+
+            // 전치
+            for (int row = 0; row < rows; row++)
+            {
+                var newRow = new List<decimal>();
+                for (int col = 0; col < columns; col++)
+                {
+                    newRow.Add(original[col][row]);
+                }
+                transposed.Add(newRow);
+            }
+
+            return transposed;
         }
     }
 }

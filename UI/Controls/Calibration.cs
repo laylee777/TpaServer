@@ -28,7 +28,18 @@ namespace DSEV.UI.Controls
             this.GridView1.OptionsBehavior.Editable = true;
             this.GridView1.OptionsView.ColumnAutoWidth = false;
             this.GridControl1.DataSource = Global.캘리브;
+
+            this.b데이터추출.Click += B데이터추출_Click;
+
+
+
         }
+
+        private void B데이터추출_Click(object sender, EventArgs e)
+        {
+            Global.검사자료.검사일시추출실행((int)this.e반복횟수.Value, (int)this.e제품갯수.Value);
+        }
+
         public void Close() { }
 
         public void BestFit() => this.GridView1.BestFitColumns();
