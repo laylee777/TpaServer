@@ -223,15 +223,15 @@ namespace DSEV.Schemas
                     {
                         String[] r = this.응답자료.Split(":".ToCharArray());
                         this.응답자료 = r[0].Trim();
-                        this.매칭률 = r[1].Trim();
-                        String 등급 = r[2].Trim();
-                        if (등급 == 큐알등급.A.ToString()) this.응답번호 = (Int32)큐알등급.A;
-                        else if (등급 == 큐알등급.B.ToString()) this.응답번호 = (Int32)큐알등급.B;
-                        else if (등급 == 큐알등급.C.ToString()) this.응답번호 = (Int32)큐알등급.C;
-                        else if (등급 == 큐알등급.D.ToString()) this.응답번호 = (Int32)큐알등급.D;
-                        else if (등급 == 큐알등급.E.ToString()) this.응답번호 = (Int32)큐알등급.E;
-                        else if (등급 == 큐알등급.F.ToString()) this.응답번호 = (Int32)큐알등급.F;
-                        else this.응답번호 = (Int32)큐알등급.X;
+                        //this.매칭률 = r[1].Trim();
+                        //String 등급 = r[2].Trim();
+                        //if (등급 == 큐알등급.A.ToString()) this.응답번호 = (Int32)큐알등급.A;
+                        //else if (등급 == 큐알등급.B.ToString()) this.응답번호 = (Int32)큐알등급.B;
+                        //else if (등급 == 큐알등급.C.ToString()) this.응답번호 = (Int32)큐알등급.C;
+                        //else if (등급 == 큐알등급.D.ToString()) this.응답번호 = (Int32)큐알등급.D;
+                        //else if (등급 == 큐알등급.E.ToString()) this.응답번호 = (Int32)큐알등급.E;
+                        //else if (등급 == 큐알등급.F.ToString()) this.응답번호 = (Int32)큐알등급.F;
+                        //else this.응답번호 = (Int32)큐알등급.X;
                     }
                 }
             }

@@ -58,6 +58,7 @@ namespace DSEV.Schemas
             Global.장치통신.하부큐알결과OK신호 = 결과;
             Global.장치통신.하부큐알결과NG신호 = !결과;
             Global.장치통신.하부큐알확인완료신호 = true;
+            Debug.WriteLine("하부큐알 완료신호 On");
         }
         private void 통신장치_자료수신(object sender, MESSAGE e)
         {

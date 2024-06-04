@@ -34,7 +34,7 @@ namespace DSEV.Schemas
             if (오류 != 0)
             {
                 통신오류알림(오류);
-                Debug.WriteLine("오휴확인");
+                Debug.WriteLine("오류확인");
                 return false;
             }
             this.입출자료.Set(자료);
@@ -266,6 +266,7 @@ namespace DSEV.Schemas
                         string[] cont1Values = Global.센서제어.ReadValues(센서컨트롤러.컨트롤러1, 바닥평면검사번호).Skip(1).ToArray();
                         string[] cont2Values = Global.센서제어.ReadValues(센서컨트롤러.컨트롤러2, 바닥평면검사번호).Skip(1).ToArray();
                         this.바닥평면확인완료신호 = true;
+                        Debug.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")}바닥평면 완료신호 On");
 
                         //배열을 붙임!
                         string[] mergedValues = cont1Values.Concat(cont2Values).ToArray();
@@ -296,7 +297,7 @@ namespace DSEV.Schemas
                 {
 
                     Debug.WriteLine("커버들뜸 검사시작");
-
+                    
                     try
                     {
                         if (Global.환경설정.제로셋모드)
@@ -344,12 +345,13 @@ namespace DSEV.Schemas
             {
                 new Thread(() =>
                 {
-                    Global.조명제어.TurnOn(카메라구분.Cam01);
                     Global.조명제어.TurnOn(카메라구분.Cam02);
                     Global.조명제어.TurnOn(카메라구분.Cam03);
-                    Global.그랩제어.Active(카메라구분.Cam01);
+                    Global.조명제어.TurnOn(카메라구분.Cam01);
+                    
                     Global.그랩제어.Active(카메라구분.Cam02);
                     Global.그랩제어.Active(카메라구분.Cam03);
+                    Global.그랩제어.Active(카메라구분.Cam01);
 
                     this.측상촬영완료신호 = true;
                 })
