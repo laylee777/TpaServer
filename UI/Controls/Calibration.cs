@@ -5,6 +5,7 @@ using MvUtils;
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using System.Diagnostics;
 
 namespace DSEV.UI.Controls
 {
@@ -20,6 +21,9 @@ namespace DSEV.UI.Controls
             e시작.DateTime = DateTime.Today;
             e종료.DateTime = DateTime.Today;
             b검색.ImageOptions.SvgImage = Resources.GetSvgImage(SvgImageType.검색);
+
+            b마스터캘리브레이션.Click += B마스터캘리브레이션_Click;
+
             this.b검색.Click += B검색_Click;
 
             this.GridView1.Init(this.barManager1);
@@ -33,6 +37,12 @@ namespace DSEV.UI.Controls
 
 
 
+        }
+
+        private void B마스터캘리브레이션_Click(object sender, EventArgs e)
+        {
+            Global.모델자료.선택모델.검사설정.DoAutoCalibration();
+            Debug.WriteLine("마스터캘리브레이션 실행");
         }
 
         private void B데이터추출_Click(object sender, EventArgs e)

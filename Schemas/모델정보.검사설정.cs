@@ -87,5 +87,51 @@ namespace DSEV.Schemas
         }
 
         public 검사정보 GetItem(검사항목 항목) => this.Where(e => e.검사항목 == 항목).FirstOrDefault();
+
+        public void DoAutoCalibration()
+        {
+            try
+            {
+                foreach(검사정보 정보 in this)
+                {
+                    정보.교정계산2();
+                }
+            }catch(Exception ex)
+            {
+                Global.오류로그("모델세팅", "자동교정", ex.Message, true);
+            }
+        }
+
+        public void DoAllUnCheckUse()
+        {
+            try
+            {
+                foreach(검사정보 정보 in this)
+                {
+                    정보.검사여부 = false;
+                }
+            }catch(Exception ex)
+            {
+                Global.오류로그("모델세팅", "체크수정", ex.Message,true);
+            }
+        }
+
+        public void DoAllCheckUse()
+        {
+            try
+            {
+                foreach (검사정보 정보 in this)
+                {
+                    정보.검사여부 = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Global.오류로그("모델세팅", "체크수정", ex.Message, true);
+            }
+        }
+
+
+
     }
 }

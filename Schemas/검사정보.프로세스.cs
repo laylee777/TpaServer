@@ -1,4 +1,5 @@
 ﻿using DevExpress.Diagram.Core.Shapes;
+using DevExpress.XtraRichEdit.Export;
 using DSEV.UI.Forms;
 using MvUtils;
 using Newtonsoft.Json;
@@ -13,8 +14,11 @@ using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Reflection;
+using MathNet.Numerics.LinearAlgebra;
+using MathNet.Numerics.LinearAlgebra.Double;
 
 using static DevExpress.Utils.Drawing.Helpers.NativeMethods;
+using MathNet.Numerics;
 
 namespace DSEV.Schemas
 {
@@ -98,6 +102,11 @@ namespace DSEV.Schemas
                 if ((Int32)정보.검사장치 != (Int32)카메라) continue;
                 검사정보 수동 = this.검사내역.Where(e => e.검사항목 == 정보.검사항목).FirstOrDefault();
                 if (정보 == null) continue;
+                if (수동 == null)
+                {
+                    Global.정보로그("DataReset", "수동", $"검사내역에 {정보.검사명칭}이 없습니다.", true);
+                    continue;
+                }
                 수동.검사명칭 = 정보.검사명칭;
                 수동.최소값 = 정보.최소값;
                 수동.기준값 = 정보.기준값;
@@ -290,19 +299,12 @@ namespace DSEV.Schemas
 
         public 결과구분 결과계산()
         {
-            //if (Global.샘플자료.검사결과(this)) { }
-            //else
-            //{
-            //    this.바닥평면도계산();
-            //    this.측면윤곽도계산();
-            //}
-
             Debug.WriteLine("평면도/운곽도 계산시작");
             this.선윤곽도계산();
             this.바닥평면도계산();
             this.커버윤곽도계산();
-            this.커버들뜸계산();
             Debug.WriteLine("평면도/운곽도 계산종료");
+
             //this.측면윤곽도계산();
             //this.부자재검사결과();
             //this.하부표면검사결과();
@@ -386,14 +388,14 @@ namespace DSEV.Schemas
 
         public void 커버윤곽도계산()
         {
-            Single[,] 기준위치 = {
-                    {  90,  200, (Single)this.GetItem(검사항목.A1_R).결과값 },
-                    { -90,  200, (Single)this.GetItem(검사항목.A2_R).결과값 },
-                    {  90, -230, (Single)this.GetItem(검사항목.A3_R).결과값 },
-                    { -90, -230, (Single)this.GetItem(검사항목.A4_R).결과값 },
+            double[,] 기준위치 = {
+                    {  76.6f,  200, (Single)this.GetItem(검사항목.A1_R).결과값 },
+                    { -76.6f,  200, (Single)this.GetItem(검사항목.A2_R).결과값 },
+                    {  76.6f, -230, (Single)this.GetItem(검사항목.A3_R).결과값 },
+                    { -76.6f, -230, (Single)this.GetItem(검사항목.A4_R).결과값 },
                 };
 
-            Single[,] 커버윤곽위치 = {
+            double[,] 커버윤곽위치 = {
                     {  26.7f,   74.68f, (Single)this.GetItem(검사항목.k1).결과값 },
                     {  26.7f,  -12.62f, (Single)this.GetItem(검사항목.k2).결과값 },
                     {  26.7f,  -85.92f, (Single)this.GetItem(검사항목.k3).결과값 },
@@ -403,90 +405,112 @@ namespace DSEV.Schemas
                     { -26.7f,   33.38f, (Single)this.GetItem(검사항목.k7).결과값 },
                     { -26.7f,   85.48f, (Single)this.GetItem(검사항목.k8).결과값 },
                 };
+
+
+            double[,] 들뜸확인위치 = {
+                    {  0f,    40f, (Single)this.GetItem(검사항목.m1).결과값 },
+                    {  0f,   -60f, (Single)this.GetItem(검사항목.m2).결과값 },
+                    {  0f,  -125f, (Single)this.GetItem(검사항목.m3).결과값 },
+                };
+
+
             try
             {
-                Single[] 커버윤곽편차 = PlaneDistanceCalculator.CalculateDistances(8, 기준위치, 커버윤곽위치);
-                Single 커버윤곽높이 = PlaneDistanceCalculator.FindAbsMaxDiff(커버윤곽편차);
+                double[] plane = FitPlaneLeastSquares(기준위치);
+                Debug.WriteLine($"Plane equation: {plane[0]:E4}x + {plane[1]:E4}y - z + {plane[3]:F4} = 0");
+
+
+                Debug.WriteLine((Single)this.GetItem(검사항목.k1).결과값);
+                Debug.WriteLine((Single)this.GetItem(검사항목.k2).결과값);
+                Debug.WriteLine((Single)this.GetItem(검사항목.k3).결과값);
+                Debug.WriteLine((Single)this.GetItem(검사항목.k4).결과값);
+                Debug.WriteLine((Single)this.GetItem(검사항목.k5).결과값);
+                Debug.WriteLine((Single)this.GetItem(검사항목.k6).결과값);
+                Debug.WriteLine((Single)this.GetItem(검사항목.k7).결과값);
+                Debug.WriteLine((Single)this.GetItem(검사항목.k8).결과값);
+
+                double a = plane[0];
+                double b = plane[1];
+                double c = plane[2];
+                double d = plane[3];
+
+
+                List<double> dist = new List<double>();
+
+                double distance1 = DistanceFromPointToPlane(커버윤곽위치[0, 0], 커버윤곽위치[0, 1], 커버윤곽위치[0, 2], a, b, c, d);
+                double distance2 = DistanceFromPointToPlane(커버윤곽위치[1, 0], 커버윤곽위치[1, 1], 커버윤곽위치[1, 2], a, b, c, d);
+                double distance3 = DistanceFromPointToPlane(커버윤곽위치[2, 0], 커버윤곽위치[2, 1], 커버윤곽위치[2, 2], a, b, c, d);
+                double distance4 = DistanceFromPointToPlane(커버윤곽위치[3, 0], 커버윤곽위치[3, 1], 커버윤곽위치[3, 2], a, b, c, d);
+                double distance5 = DistanceFromPointToPlane(커버윤곽위치[4, 0], 커버윤곽위치[4, 1], 커버윤곽위치[4, 2], a, b, c, d);
+                double distance6 = DistanceFromPointToPlane(커버윤곽위치[5, 0], 커버윤곽위치[5, 1], 커버윤곽위치[5, 2], a, b, c, d);
+                double distance7 = DistanceFromPointToPlane(커버윤곽위치[6, 0], 커버윤곽위치[6, 1], 커버윤곽위치[6, 2], a, b, c, d);
+                double distance8 = DistanceFromPointToPlane(커버윤곽위치[7, 0], 커버윤곽위치[7, 1], 커버윤곽위치[7, 2], a, b, c, d);
+
+
+
+                dist.Add(distance1);
+                dist.Add(distance2);
+                dist.Add(distance3);
+                dist.Add(distance4);
+                dist.Add(distance5);
+                dist.Add(distance6);
+                dist.Add(distance7);
+                dist.Add(distance8);
+
+
+                Debug.WriteLine((Single)dist[0]);
+                Debug.WriteLine((Single)dist[1]);
+                Debug.WriteLine((Single)dist[2]);
+                Debug.WriteLine((Single)dist[3]);
+                Debug.WriteLine((Single)dist[4]);
+                Debug.WriteLine((Single)dist[5]);
+                Debug.WriteLine((Single)dist[6]);
+                Debug.WriteLine((Single)dist[7]);
+
+
+                double 커버윤곽높이 = Math.Max(Math.Abs(dist.Max()), Math.Abs(dist.Min())) * 2;
+
+
+                //this.SetValue(검사항목.k1, -distance1);
+                //this.SetValue(검사항목.k2, -distance2);
+                //this.SetValue(검사항목.k3, -distance3);
+                //this.SetValue(검사항목.k4, -distance4);
+                //this.SetValue(검사항목.k5, -distance5);
+                //this.SetValue(검사항목.k6, -distance6);
+                //this.SetValue(검사항목.k7, -distance7);
+                //this.SetValue(검사항목.k8, -distance8);
+
                 this.SetResult(검사항목.ShapeK1K8, 커버윤곽높이);
+
+
+                Debug.WriteLine((Single)this.GetItem(검사항목.k1).결과값);
+                Debug.WriteLine((Single)this.GetItem(검사항목.k2).결과값);
+                Debug.WriteLine((Single)this.GetItem(검사항목.k3).결과값);
+                Debug.WriteLine((Single)this.GetItem(검사항목.k4).결과값);
+                Debug.WriteLine((Single)this.GetItem(검사항목.k5).결과값);
+                Debug.WriteLine((Single)this.GetItem(검사항목.k6).결과값);
+                Debug.WriteLine((Single)this.GetItem(검사항목.k7).결과값);
+                Debug.WriteLine((Single)this.GetItem(검사항목.k8).결과값);
+
+
+                List<double> dist2 = new List<double>();
+
+                double distance2_1 = DistanceFromPointToPlane(들뜸확인위치[0, 0], 들뜸확인위치[0, 1], 들뜸확인위치[0, 2], a, b, c, d);
+                double distance2_2 = DistanceFromPointToPlane(들뜸확인위치[1, 0], 들뜸확인위치[1, 1], 들뜸확인위치[1, 2], a, b, c, d);
+                double distance2_3 = DistanceFromPointToPlane(들뜸확인위치[2, 0], 들뜸확인위치[2, 1], 들뜸확인위치[2, 2], a, b, c, d);
+
+
+                Debug.WriteLine(distance2_1);
+                Debug.WriteLine(distance2_2);
+                Debug.WriteLine(distance2_3);
+                //this.SetValue(검사항목.m1, -distance2_1);
+                //this.SetValue(검사항목.m2, -distance2_2);
+                //this.SetValue(검사항목.m3, -distance2_3);
+
+                커버들뜸계산();
             }
             catch (Exception e) { Utils.DebugException(e, 0); }
         }
-
-        //김형민대리원본
-        //public void 커버윤곽도계산()
-        //{
-        //    //List<Point3f> 기준위치 = new List<Point3f>() {
-        //    //     new Point3f { X = 90, Y = +200, Z = (Single)this.GetItem(검사항목.A1_R).결과값 },
-        //    //     new Point3f { X = -90, Y = +200, Z = (Single)this.GetItem(검사항목.A3_R).결과값 },
-        //    //     new Point3f { X =  90, Y = -230, Z = (Single)this.GetItem(검사항목.A2_R).결과값 },
-        //    //     new Point3f { X =  -90, Y = -230, Z = (Single)this.GetItem(검사항목.A4_R).결과값 },
-        //    // };
-
-        //    List<Point3f> 기준위치 = new List<Point3f>() {
-        //         new Point3f { X = -200, Y = +90, Z = (Single)this.GetItem(검사항목.A1_R).결과값 },
-        //         new Point3f { X = -200, Y = -90, Z = (Single)this.GetItem(검사항목.A2_R).결과값 },
-        //         new Point3f { X =  230, Y = 90, Z = (Single)this.GetItem(검사항목.A3_R).결과값 },
-        //         new Point3f { X =  230, Y = -90, Z = (Single)this.GetItem(검사항목.A4_R).결과값 },
-        //     };
-
-        //    List<Point3f> 검사위치 = new List<Point3f>();
-        //    검사위치.AddRange(new Point3f[] {
-        //         new Point3f { X = 26.7f, Y =   74.68f, Z = (Single)this.GetItem(검사항목.k1).결과값 },
-        //         new Point3f { X = 26.7f, Y =   -12.62f,  Z = (Single)this.GetItem(검사항목.k2).결과값 },
-        //         new Point3f { X = 26.7f, Y =   -85.92f, Z = (Single)this.GetItem(검사항목.k3).결과값 },
-        //         new Point3f { X = 26.7f, Y =   -175.42f, Z = (Single)this.GetItem(검사항목.k4).결과값 },
-        //         new Point3f { X = -26.7f, Y =  -175.42f,  Z = (Single)this.GetItem(검사항목.k5).결과값 },
-        //         new Point3f { X = -26.7f, Y =  -36.52f, Z = (Single)this.GetItem(검사항목.k6).결과값 },
-        //         new Point3f { X = -26.7f, Y =  33.38f, Z = (Single)this.GetItem(검사항목.k7).결과값 },
-        //         new Point3f { X = -26.7f, Y =  85.48f,  Z = (Single)this.GetItem(검사항목.k8).결과값 },
-        //     });
-
-        //    // Z 값을 기준으로 포인트를 내림차순으로 정렬
-        //    List<Point3f> sortedPoints = 기준위치.OrderByDescending(p => p.Z).ToList();
-        //    // Z 값을 기준으로 포인트를 오름차순으로 정렬
-        //    // List<Point3f> sortedPoints = 기준위치.OrderBy(p => p.Z).ToList();
-
-        //    // Z 값이 가장 큰 3개의 포인트를 선택
-        //    List<Point3f> largest3Points = sortedPoints.Take(3).ToList();
-
-        //    // Create an array of Vector3 containing the points
-        //    Vector3[] pointArray = new Vector3[largest3Points.Count];
-        //    for (int i = 0; i < largest3Points.Count; i++)
-        //    {
-        //        pointArray[i] = new Vector3(largest3Points[i].X, largest3Points[i].Y, largest3Points[i].Z);
-        //    }
-
-        //    // Fit a plane to the points
-        //    Plane plane = Plane.CreateFromVertices(pointArray[0], pointArray[1], pointArray[2]);
-
-        //    // Get the coefficients of the plane equation
-        //    float A = plane.Normal.X;
-        //    float B = plane.Normal.Y;
-        //    float C = plane.Normal.Z;
-        //    float D = -plane.D;
-
-        //    Console.WriteLine($"면 방정식: {A}x + {B}y + {C}z + {D} = 0");
-
-        //    // Calculate the perpendicular distances
-        //    List<float> distances = new List<float>();
-        //    foreach (var point in 검사위치)
-        //    {
-        //        Vector3 pointVector = new Vector3(point.X, point.Y, point.Z);
-        //        float distance = (Vector3.Dot(plane.Normal, pointVector) + plane.D) / plane.Normal.Length();
-        //        distances.Add(distance);
-        //    }
-
-        //    try
-        //    {
-        //        Single 커버윤곽높이 = 0;
-        //        커버윤곽높이 = Math.Max(Math.Abs(distances.Max()), Math.Abs(distances.Min())) * 2;
-
-        //        this.SetResult(검사항목.ShapeK1K8, 커버윤곽높이);
-
-        //    }
-        //    catch (Exception e) { Utils.DebugException(e, 0); }
-
-        //}
 
         public void 선윤곽도계산()
         {
@@ -510,17 +534,51 @@ namespace DSEV.Schemas
             this.SetResult(검사항목.ShapeBigNotchLR, PlaneDistanceCalculator.선윤곽도계산(F1, F2));
         }
 
+        static double DistanceFromPointToPlane(double x0, double y0, double z0, double a, double b, double c, double d)
+        {
+            // 직선 거리(방향성 포함) 공식 적용
+            double numerator = a * x0 + b * y0 + c * z0 + d;
+            double denominator = Math.Sqrt(a * a + b * b + c * c);
+            double distance = numerator / denominator;
+            return distance;
+        }
 
+        public static double[] FitPlaneLeastSquares(double[,] points)
+        {
+            int numPoints = points.GetLength(0);
+            double[,] A = new double[numPoints, 3];
+            double[] b = new double[numPoints];
+
+            for (int i = 0; i < numPoints; i++)
+            {
+                A[i, 0] = points[i, 0];
+                A[i, 1] = points[i, 1];
+                A[i, 2] = 1;
+                b[i] = points[i, 2];
+            }
+
+            var matrixA = Matrix.Build.DenseOfArray(A);
+            var vectorB = DenseVector.OfArray(b);
+            var solution = matrixA.PseudoInverse().Multiply(vectorB);
+
+            double a = solution[0];
+            double b_coef = solution[1];
+            double d = solution[2];
+            double c = -1.0;  // We solve for ax + by - z + d = 0
+
+            return new double[] { a, b_coef, c, d };
+        }
 
         //24.06.03 로직 변경 by LHD
         public void 바닥평면도계산()
         {
             Single[,] 기준위치 = {
-                    { 90,  200, (Single)this.GetItem(검사항목.A1_F).결과값},
-                    {-90,  200, (Single)this.GetItem(검사항목.A2_F).결과값},
-                    { 90, -230, (Single)this.GetItem(검사항목.A3_F).결과값},
-                    {-90, -230, (Single)this.GetItem(검사항목.A4_F).결과값},
+                    { 76.6f,  200, (Single)this.GetItem(검사항목.A1_F).결과값},
+                    {-76.6f,  200, (Single)this.GetItem(검사항목.A2_F).결과값},
+                    { 76.6f, -230, (Single)this.GetItem(검사항목.A3_F).결과값},
+                    {-76.6f, -230, (Single)this.GetItem(검사항목.A4_F).결과값},
                 };
+
             Single[,] 검사위치 = {
                     { 105,   200, (Single)this.GetItem(검사항목.a1).결과값},
                     {   0,   200, (Single)this.GetItem(검사항목.a2).결과값},
@@ -532,79 +590,92 @@ namespace DSEV.Schemas
                     { -105, -230, (Single)this.GetItem(검사항목.a8).결과값},
                 };
 
+            double[,] points = {
+                    { 76.6f,  200, (double)this.GetItem(검사항목.A1_F).결과값},
+                    {-76.6f,  200, (double)this.GetItem(검사항목.A2_F).결과값},
+                    { 76.6f, -230, (double)this.GetItem(검사항목.A3_F).결과값},
+                    {-76.6f, -230, (double)this.GetItem(검사항목.A4_F).결과값},
+                };
 
+
+            double[,] points2 = {
+                    { 105,   200, (double)this.GetItem(검사항목.a1).결과값},
+                    {   0,   200, (double)this.GetItem(검사항목.a2).결과값},
+                    {-105,   200, (double)this.GetItem(검사항목.a3).결과값},
+                    {  90,     0, (double)this.GetItem(검사항목.a4).결과값},
+                    { -90,     0, (double)this.GetItem(검사항목.a5).결과값},
+                    { 105,  -230, (double)this.GetItem(검사항목.a6).결과값},
+                    {   0,  -230, (double)this.GetItem(검사항목.a7).결과값},
+                    { -105, -230, (double)this.GetItem(검사항목.a8).결과값},
+                };
+
+
+            double[,] 검사위치2 = {
+                    { 105,   200, (double)this.GetItem(검사항목.a1).결과값},
+                    {   0,   200, (double)this.GetItem(검사항목.a2).결과값},
+                    {-105,   200, (double)this.GetItem(검사항목.a3).결과값},
+                    {  90,     0, (double)this.GetItem(검사항목.a4).결과값},
+                    { -90,     0, (double)this.GetItem(검사항목.a5).결과값},
+                    { 105,  -230, (double)this.GetItem(검사항목.a6).결과값},
+                    {   0,  -230, (double)this.GetItem(검사항목.a7).결과값},
+                    { -105, -230, (double)this.GetItem(검사항목.a8).결과값},
+                };
+
+            double[] plane = FitPlaneLeastSquares(points);
+            Console.WriteLine($"Plane equation: {plane[0]:E4}x + {plane[1]:E4}y - z + {plane[3]:F4} = 0");
+
+            double a = plane[0];
+            double b = plane[1];
+            double c = plane[2];
+            double d = plane[3];
+
+
+            List<double> dist = new List<double>();
+
+            double distance1 = DistanceFromPointToPlane(검사위치2[0, 0], 검사위치2[0, 1], 검사위치2[0, 2], a, b, c, d);
+            double distance2 = DistanceFromPointToPlane(검사위치2[1, 0], 검사위치2[1, 1], 검사위치2[1, 2], a, b, c, d);
+            double distance3 = DistanceFromPointToPlane(검사위치2[2, 0], 검사위치2[2, 1], 검사위치2[2, 2], a, b, c, d);
+            double distance4 = DistanceFromPointToPlane(검사위치2[3, 0], 검사위치2[3, 1], 검사위치2[3, 2], a, b, c, d);
+            double distance5 = DistanceFromPointToPlane(검사위치2[4, 0], 검사위치2[4, 1], 검사위치2[4, 2], a, b, c, d);
+            double distance6 = DistanceFromPointToPlane(검사위치2[5, 0], 검사위치2[5, 1], 검사위치2[5, 2], a, b, c, d);
+            double distance7 = DistanceFromPointToPlane(검사위치2[6, 0], 검사위치2[6, 1], 검사위치2[6, 2], a, b, c, d);
+            double distance8 = DistanceFromPointToPlane(검사위치2[7, 0], 검사위치2[7, 1], 검사위치2[7, 2], a, b, c, d);
+
+
+
+            dist.Add(distance1);
+            dist.Add(distance2);
+            dist.Add(distance3);
+            dist.Add(distance4);
+            dist.Add(distance5);
+            dist.Add(distance6);
+            dist.Add(distance7);
+            dist.Add(distance8);
+
+            Debug.WriteLine($"위치값A1 : {(Single)this.GetItem(검사항목.A1_F).결과값}");
             Single[] 위치편차 = PlaneDistanceCalculator.CalculateDistances(8, 기준위치, 검사위치);
-            Debug.WriteLine($"위치편차 : {위치편차[0]}, {위치편차[1]}, {위치편차[2]}, {위치편차[3]}, {위치편차[4]}, {위치편차[5]}, {위치편차[6]}, {위치편차[7]}");
+            Debug.WriteLine($"위치편차_1 : {위치편차[0]}, {위치편차[1]}, {위치편차[2]}, {위치편차[3]}, {위치편차[4]}, {위치편차[5]}, {위치편차[6]}, {위치편차[7]}");
             Single 바닥평면 = PlaneDistanceCalculator.FindMinMaxDiff(위치편차);
             
-            this.SetResult(검사항목.Flatness, 바닥평면);
+
+            Debug.WriteLine($"위치편차_2 : {dist[0]}, {dist[1]}, {dist[2]}, {dist[3]}, {dist[4]}, {dist[5]}, {dist[6]}, {dist[7]}");
+
+
+            Debug.WriteLine($"평면도1 : {바닥평면}");
+            Debug.WriteLine($"평면도2 : {Math.Abs(dist.Max() - dist.Min())}");
+            double A1_Dist = DistanceFromPointToPlane(points[0, 0], points[0, 1], points[0, 2], a, b, c, d);
+            double A2_Dist = DistanceFromPointToPlane(points[1, 0], points[1, 1], points[1, 2], a, b, c, d);
+            double A3_Dist = DistanceFromPointToPlane(points[2, 0], points[2, 1], points[2, 2], a, b, c, d);
+            double A4_Dist = DistanceFromPointToPlane(points[3, 0], points[3, 1], points[3, 2], a, b, c, d);
+
+            Single[] 데이텀거리 = PlaneDistanceCalculator.CalculateDistances(4, 기준위치, 기준위치);
+
+            Debug.WriteLine($"데이텀첫번째 : {데이텀거리[0]}, {데이텀거리[1]}, {데이텀거리[2]}, {데이텀거리[3]}");
+            Debug.WriteLine($"데이텀두번째 : {A1_Dist}, {A2_Dist}, {A3_Dist}, {A4_Dist}");
+
+            this.SetResult(검사항목.Flatness, Math.Abs(dist.Max() - dist.Min()));
 
         }
-
-        //김형민대리 원본
-        //public void 바닥평면도계산()
-        //{
-        //    List<Point3f> 기준위치 = new List<Point3f>() {
-        //         new Point3f { X = -200, Y = +90, Z = (Single)this.GetItem(검사항목.A1_F).결과값 },
-        //         new Point3f { X = -200, Y = -90, Z = (Single)this.GetItem(검사항목.A2_F).결과값 },
-        //         new Point3f { X =  230, Y = 90, Z = (Single)this.GetItem(검사항목.A3_F).결과값 },
-        //         new Point3f { X =  230, Y = -90, Z = (Single)this.GetItem(검사항목.A4_F).결과값 },
-        //     };
-
-        //    List<Point3f> 검사위치 = new List<Point3f>();
-        //    검사위치.AddRange(new Point3f[] {
-        //         new Point3f { X = -200, Y =   105, Z = (Single)this.GetItem(검사항목.a1).결과값 },
-        //         new Point3f { X = -200, Y =   0,  Z = (Single)this.GetItem(검사항목.a2).결과값 },
-        //         new Point3f { X = -200, Y =  -105, Z = (Single)this.GetItem(검사항목.a3).결과값 },
-        //         new Point3f { X =    0, Y =   90, Z = (Single)this.GetItem(검사항목.a4).결과값 },
-        //         new Point3f { X =    0, Y =   -90,  Z = (Single)this.GetItem(검사항목.a5).결과값 },
-        //         new Point3f { X =    230, Y =  105, Z = (Single)this.GetItem(검사항목.a6).결과값 },
-        //         new Point3f { X =  230, Y =   0, Z = (Single)this.GetItem(검사항목.a7).결과값 },
-        //         new Point3f { X =  230, Y =   -105,  Z = (Single)this.GetItem(검사항목.a8).결과값 },
-        //     });
-
-        //    // Z 값을 기준으로 포인트를 내림차순으로 정렬
-        //    List<Point3f> sortedPoints = 기준위치.OrderBy(p => p.Z).ToList();
-        //    List<Point3f> largest3Points = sortedPoints.Take(3).ToList();
-
-        //    // Create an array of Vector3 containing the points
-        //    Vector3[] pointArray = new Vector3[largest3Points.Count];
-        //    for (int i = 0; i < largest3Points.Count; i++)
-        //    {
-        //        pointArray[i] = new Vector3(largest3Points[i].X, largest3Points[i].Y, largest3Points[i].Z);
-        //    }
-
-        //    // Fit a plane to the points
-        //    Plane plane = Plane.CreateFromVertices(pointArray[0], pointArray[1], pointArray[2]);
-
-        //    // Get the coefficients of the plane equation
-        //    float A = plane.Normal.X;
-        //    float B = plane.Normal.Y;
-        //    float C = plane.Normal.Z;
-        //    float D = -plane.D;
-
-        //    Console.WriteLine($"면 방정식: {A}x + {B}y + {C}z + {D} = 0");
-
-        //    // Calculate the perpendicular distances
-        //    List<float> distances = new List<float>();
-        //    foreach (var point in 검사위치)
-        //    {
-        //        Vector3 pointVector = new Vector3(point.X, point.Y, point.Z);
-        //        float distance = (Vector3.Dot(plane.Normal, pointVector) + plane.D) / plane.Normal.Length();
-        //        distances.Add(distance);
-        //    }
-
-        //    try
-        //    {
-        //        Single 바닥평면 = 0;
-
-        //        바닥평면 = Math.Abs(distances.Max() - distances.Min());
-
-        //        this.SetResult(검사항목.Flatness, 바닥평면);
-
-        //    }
-        //    catch (Exception e) { Utils.DebugException(e, 0); }
-        //}
 
         public void 큐알정보검사(String 코드, 큐알등급 등급)
         {

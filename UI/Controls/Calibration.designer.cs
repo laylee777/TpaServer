@@ -65,20 +65,22 @@
             this.colCalibX = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.colCalibY = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.b마스터캘리브레이션 = new DevExpress.XtraEditors.SimpleButton();
             this.b검색 = new DevExpress.XtraEditors.SimpleButton();
             this.e종료 = new DevExpress.XtraEditors.DateEdit();
             this.e시작 = new DevExpress.XtraEditors.DateEdit();
+            this.b데이터추출 = new DevExpress.XtraEditors.SimpleButton();
+            this.e반복횟수 = new DevExpress.XtraEditors.SpinEdit();
+            this.e제품갯수 = new DevExpress.XtraEditors.SpinEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.b데이터추출 = new DevExpress.XtraEditors.SimpleButton();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.e반복횟수 = new DevExpress.XtraEditors.SpinEdit();
-            this.e제품갯수 = new DevExpress.XtraEditors.SpinEdit();
+            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.BindData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridControl1)).BeginInit();
@@ -90,16 +92,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.e종료.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e시작.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e시작.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.e반복횟수.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.e제품갯수.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.e반복횟수.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.e제품갯수.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             this.SuspendLayout();
             // 
             // BindData
@@ -520,6 +523,7 @@
             // layoutControl1
             // 
             this.layoutControl1.AutoScroll = false;
+            this.layoutControl1.Controls.Add(this.b마스터캘리브레이션);
             this.layoutControl1.Controls.Add(this.b검색);
             this.layoutControl1.Controls.Add(this.e종료);
             this.layoutControl1.Controls.Add(this.e시작);
@@ -533,6 +537,16 @@
             this.layoutControl1.Size = new System.Drawing.Size(1112, 40);
             this.layoutControl1.TabIndex = 10;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // b마스터캘리브레이션
+            // 
+            this.b마스터캘리브레이션.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("b마스터캘리브레이션.ImageOptions.SvgImage")));
+            this.b마스터캘리브레이션.Location = new System.Drawing.Point(985, 7);
+            this.b마스터캘리브레이션.Name = "b마스터캘리브레이션";
+            this.b마스터캘리브레이션.Size = new System.Drawing.Size(120, 36);
+            this.b마스터캘리브레이션.StyleController = this.layoutControl1;
+            this.b마스터캘리브레이션.TabIndex = 9;
+            this.b마스터캘리브레이션.Text = "MasterCalibration";
             // 
             // b검색
             // 
@@ -573,70 +587,6 @@
             this.e시작.StyleController = this.layoutControl1;
             this.e시작.TabIndex = 0;
             // 
-            // Root
-            // 
-            this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            this.Root.GroupBordersVisible = false;
-            this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem1,
-            this.layoutControlItem2,
-            this.layoutControlItem3,
-            this.layoutControlItem4,
-            this.layoutControlItem6,
-            this.layoutControlItem5,
-            this.emptySpaceItem1});
-            this.Root.Name = "Root";
-            this.Root.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
-            this.Root.Size = new System.Drawing.Size(1112, 50);
-            this.Root.TextVisible = false;
-            // 
-            // layoutControlItem1
-            // 
-            this.layoutControlItem1.Control = this.e시작;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem1.MaxSize = new System.Drawing.Size(164, 26);
-            this.layoutControlItem1.MinSize = new System.Drawing.Size(164, 26);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 4, 4);
-            this.layoutControlItem1.Size = new System.Drawing.Size(164, 40);
-            this.layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem1.Text = "시작일자";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(59, 15);
-            // 
-            // layoutControlItem2
-            // 
-            this.layoutControlItem2.Control = this.e종료;
-            this.layoutControlItem2.Location = new System.Drawing.Point(164, 0);
-            this.layoutControlItem2.MaxSize = new System.Drawing.Size(164, 26);
-            this.layoutControlItem2.MinSize = new System.Drawing.Size(164, 26);
-            this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 4, 4);
-            this.layoutControlItem2.Size = new System.Drawing.Size(164, 40);
-            this.layoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem2.Text = "종료일자";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(59, 15);
-            // 
-            // emptySpaceItem1
-            // 
-            this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(944, 0);
-            this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(158, 40);
-            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
-            // 
-            // layoutControlItem3
-            // 
-            this.layoutControlItem3.Control = this.b검색;
-            this.layoutControlItem3.Location = new System.Drawing.Point(328, 0);
-            this.layoutControlItem3.MaxSize = new System.Drawing.Size(120, 30);
-            this.layoutControlItem3.MinSize = new System.Drawing.Size(120, 30);
-            this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 4, 4);
-            this.layoutControlItem3.Size = new System.Drawing.Size(120, 40);
-            this.layoutControlItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem3.TextVisible = false;
-            // 
             // b데이터추출
             // 
             this.b데이터추출.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("b데이터추출.ImageOptions.SvgImage")));
@@ -646,37 +596,6 @@
             this.b데이터추출.StyleController = this.layoutControl1;
             this.b데이터추출.TabIndex = 6;
             this.b데이터추출.Text = "데이터추출";
-            // 
-            // layoutControlItem4
-            // 
-            this.layoutControlItem4.Control = this.b데이터추출;
-            this.layoutControlItem4.Location = new System.Drawing.Point(787, 0);
-            this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(157, 40);
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem4.TextVisible = false;
-            // 
-            // layoutControlItem5
-            // 
-            this.layoutControlItem5.Control = this.e제품갯수;
-            this.layoutControlItem5.Location = new System.Drawing.Point(617, 0);
-            this.layoutControlItem5.MinSize = new System.Drawing.Size(170, 26);
-            this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(170, 40);
-            this.layoutControlItem5.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem5.Text = "제품갯수 : ";
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(59, 15);
-            // 
-            // layoutControlItem6
-            // 
-            this.layoutControlItem6.Control = this.e반복횟수;
-            this.layoutControlItem6.Location = new System.Drawing.Point(448, 0);
-            this.layoutControlItem6.MinSize = new System.Drawing.Size(125, 26);
-            this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(169, 40);
-            this.layoutControlItem6.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem6.Text = "반복횟수 :";
-            this.layoutControlItem6.TextSize = new System.Drawing.Size(59, 15);
             // 
             // e반복횟수
             // 
@@ -736,6 +655,113 @@
             this.e제품갯수.StyleController = this.layoutControl1;
             this.e제품갯수.TabIndex = 7;
             // 
+            // Root
+            // 
+            this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.Root.GroupBordersVisible = false;
+            this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem1,
+            this.layoutControlItem2,
+            this.layoutControlItem3,
+            this.layoutControlItem4,
+            this.layoutControlItem6,
+            this.layoutControlItem5,
+            this.emptySpaceItem1,
+            this.layoutControlItem7});
+            this.Root.Name = "Root";
+            this.Root.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
+            this.Root.Size = new System.Drawing.Size(1112, 50);
+            this.Root.TextVisible = false;
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.e시작;
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.MaxSize = new System.Drawing.Size(164, 26);
+            this.layoutControlItem1.MinSize = new System.Drawing.Size(164, 26);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 4, 4);
+            this.layoutControlItem1.Size = new System.Drawing.Size(164, 40);
+            this.layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem1.Text = "시작일자";
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(59, 15);
+            // 
+            // layoutControlItem2
+            // 
+            this.layoutControlItem2.Control = this.e종료;
+            this.layoutControlItem2.Location = new System.Drawing.Point(164, 0);
+            this.layoutControlItem2.MaxSize = new System.Drawing.Size(164, 26);
+            this.layoutControlItem2.MinSize = new System.Drawing.Size(164, 26);
+            this.layoutControlItem2.Name = "layoutControlItem2";
+            this.layoutControlItem2.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 4, 4);
+            this.layoutControlItem2.Size = new System.Drawing.Size(164, 40);
+            this.layoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem2.Text = "종료일자";
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(59, 15);
+            // 
+            // layoutControlItem3
+            // 
+            this.layoutControlItem3.Control = this.b검색;
+            this.layoutControlItem3.Location = new System.Drawing.Point(328, 0);
+            this.layoutControlItem3.MaxSize = new System.Drawing.Size(120, 30);
+            this.layoutControlItem3.MinSize = new System.Drawing.Size(120, 30);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Padding = new DevExpress.XtraLayout.Utils.Padding(4, 4, 4, 4);
+            this.layoutControlItem3.Size = new System.Drawing.Size(120, 40);
+            this.layoutControlItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem3.TextVisible = false;
+            // 
+            // layoutControlItem4
+            // 
+            this.layoutControlItem4.Control = this.b데이터추출;
+            this.layoutControlItem4.Location = new System.Drawing.Point(787, 0);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(157, 40);
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem4.TextVisible = false;
+            // 
+            // layoutControlItem6
+            // 
+            this.layoutControlItem6.Control = this.e반복횟수;
+            this.layoutControlItem6.Location = new System.Drawing.Point(448, 0);
+            this.layoutControlItem6.MinSize = new System.Drawing.Size(125, 26);
+            this.layoutControlItem6.Name = "layoutControlItem6";
+            this.layoutControlItem6.Size = new System.Drawing.Size(169, 40);
+            this.layoutControlItem6.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem6.Text = "반복횟수 :";
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(59, 15);
+            // 
+            // layoutControlItem5
+            // 
+            this.layoutControlItem5.Control = this.e제품갯수;
+            this.layoutControlItem5.Location = new System.Drawing.Point(617, 0);
+            this.layoutControlItem5.MinSize = new System.Drawing.Size(170, 26);
+            this.layoutControlItem5.Name = "layoutControlItem5";
+            this.layoutControlItem5.Size = new System.Drawing.Size(170, 40);
+            this.layoutControlItem5.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem5.Text = "제품갯수 : ";
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(59, 15);
+            // 
+            // emptySpaceItem1
+            // 
+            this.emptySpaceItem1.AllowHotTrack = false;
+            this.emptySpaceItem1.Location = new System.Drawing.Point(944, 0);
+            this.emptySpaceItem1.Name = "emptySpaceItem1";
+            this.emptySpaceItem1.Size = new System.Drawing.Size(34, 40);
+            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // layoutControlItem7
+            // 
+            this.layoutControlItem7.Control = this.b마스터캘리브레이션;
+            this.layoutControlItem7.Location = new System.Drawing.Point(978, 0);
+            this.layoutControlItem7.MinSize = new System.Drawing.Size(89, 26);
+            this.layoutControlItem7.Name = "layoutControlItem7";
+            this.layoutControlItem7.Size = new System.Drawing.Size(124, 40);
+            this.layoutControlItem7.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem7.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem7.TextVisible = false;
+            // 
             // Calibration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -759,16 +785,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.e종료.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e시작.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e시작.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.e반복횟수.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.e제품갯수.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.e반복횟수.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.e제품갯수.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -825,5 +852,7 @@
         private DevExpress.XtraEditors.SpinEdit e제품갯수;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
+        private DevExpress.XtraEditors.SimpleButton b마스터캘리브레이션;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
     }
 }

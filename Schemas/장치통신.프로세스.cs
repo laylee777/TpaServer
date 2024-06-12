@@ -209,6 +209,10 @@ namespace DSEV.Schemas
                     {
                         //MES사용안할시 강제 OK
                         Global.mes통신.하부큐알결과신호전송(true);
+                        //Global.장치통신.하부큐알결과OK신호 = true;
+                        //Global.장치통신.하부큐알결과NG신호 = false;
+                        //Global.장치통신.하부큐알확인완료신호 = true;
+                        Debug.WriteLine("하부큐알 완료신호 On");
                     }
                     else
                     {
@@ -221,7 +225,7 @@ namespace DSEV.Schemas
                     Global.검사자료.하부큐알리딩수행종료();
 
                 })
-                { Priority = ThreadPriority.Highest }.Start();
+                { Priority = ThreadPriority.AboveNormal }.Start();
                 Debug.WriteLine("하부 큐알 검사 완료!!!");
             }
 
@@ -235,7 +239,7 @@ namespace DSEV.Schemas
 
                     Global.검사자료.상부큐알리딩수행종료();
                 })
-                { Priority = ThreadPriority.Highest }.Start();
+                { Priority = ThreadPriority.AboveNormal }.Start();
                 Debug.WriteLine("상부 큐알 검사 완료><");
             }
         }
@@ -256,17 +260,17 @@ namespace DSEV.Schemas
 
                     try
                     {
-                        if (Global.환경설정.제로셋모드)
-                        {
-                            Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러1, 6);
-                            Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러2, 6);
-                        }
+                        //if (Global.환경설정.제로셋모드)
+                        //{
+                        //    Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러1, 6);
+                        //    Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러2, 6);
+                        //}
 
                         //첫번째 항목 "M0" 제외하고 배열로 만듦
                         string[] cont1Values = Global.센서제어.ReadValues(센서컨트롤러.컨트롤러1, 바닥평면검사번호).Skip(1).ToArray();
                         string[] cont2Values = Global.센서제어.ReadValues(센서컨트롤러.컨트롤러2, 바닥평면검사번호).Skip(1).ToArray();
                         this.바닥평면확인완료신호 = true;
-                        Debug.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")}바닥평면 완료신호 On");
+                        //Debug.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")}바닥평면 완료신호 On");
 
                         //배열을 붙임!
                         string[] mergedValues = cont1Values.Concat(cont2Values).ToArray();
@@ -300,11 +304,11 @@ namespace DSEV.Schemas
                     
                     try
                     {
-                        if (Global.환경설정.제로셋모드)
-                        {
-                            Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러3, 7);
-                            Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러4, 8);
-                        }
+                        //if (Global.환경설정.제로셋모드)
+                        //{
+                        //    Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러3, 7);
+                        //    Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러4, 8);
+                        //}
 
                         //첫번째 항목 "M0" 제외하고 배열로 만듦
                         string[] cont1Values = Global.센서제어.ReadValues(센서컨트롤러.컨트롤러3, 커버들뜸검사번호).Skip(1).ToArray();
@@ -345,13 +349,13 @@ namespace DSEV.Schemas
             {
                 new Thread(() =>
                 {
+                    Global.조명제어.TurnOn(카메라구분.Cam01);
                     Global.조명제어.TurnOn(카메라구분.Cam02);
                     Global.조명제어.TurnOn(카메라구분.Cam03);
-                    Global.조명제어.TurnOn(카메라구분.Cam01);
-                    
+
+                    Global.그랩제어.Active(카메라구분.Cam01);
                     Global.그랩제어.Active(카메라구분.Cam02);
                     Global.그랩제어.Active(카메라구분.Cam03);
-                    Global.그랩제어.Active(카메라구분.Cam01);
 
                     this.측상촬영완료신호 = true;
                 })
@@ -364,12 +368,13 @@ namespace DSEV.Schemas
                 {
                     Global.조명제어.TurnOn(카메라구분.Cam04);
                     Global.조명제어.TurnOn(카메라구분.Cam05);
+
                     Global.그랩제어.Active(카메라구분.Cam04);
                     Global.그랩제어.Active(카메라구분.Cam05);
 
                     this.하부촬영완료신호 = true;
                 })
-                { Priority = ThreadPriority.Highest }.Start();
+                { Priority = ThreadPriority.AboveNormal }.Start();
             }
 
             if (커넥터카메라검사번호 > 0)
@@ -378,12 +383,13 @@ namespace DSEV.Schemas
                 {
                     Global.조명제어.TurnOn(카메라구분.Cam06);
                     Global.조명제어.TurnOn(카메라구분.Cam07);
+
                     Global.그랩제어.Active(카메라구분.Cam06);
                     Global.그랩제어.Active(카메라구분.Cam07);
 
                     this.커넥터촬영완료신호 = true;
                 })
-                { Priority = ThreadPriority.Highest }.Start();
+                { Priority = ThreadPriority.Normal }.Start();
             }
         }
 

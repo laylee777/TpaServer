@@ -250,6 +250,7 @@ namespace DSEV.Schemas
         public override Boolean Active()
         {
             this.Camera.ClearImageBuffer();
+            Debug.WriteLine($"{this.구분} Active");
             return 그랩제어.Validate($"{this.구분} Active", Camera.StartGrabbing(), true);
         }
 

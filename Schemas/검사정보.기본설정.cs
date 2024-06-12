@@ -586,6 +586,14 @@ namespace DSEV.Schemas
             return true;
         }
 
+        public Boolean 교정계산2()
+        {
+            if(this.실측값 <= 0) return false; 
+            if (this.측정값 <= 0) return false;
+            if(this.검사여부) this.교정값 = Convert.ToDecimal(Math.Round((this.실측값 / this.측정값 * 1000), 9));
+            return true;
+        }
+
         public 결과구분 결과계산()
         {
             Boolean ok = this.결과값 >= this.최소값 && this.결과값 <= this.최대값;
