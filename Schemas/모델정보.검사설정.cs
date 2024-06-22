@@ -95,6 +95,7 @@ namespace DSEV.Schemas
                 foreach(검사정보 정보 in this)
                 {
                     정보.교정계산2();
+                    Debug.WriteLine(정보.검사명칭);
                 }
             }catch(Exception ex)
             {

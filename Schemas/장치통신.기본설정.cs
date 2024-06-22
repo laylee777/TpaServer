@@ -174,8 +174,6 @@ namespace DSEV.Schemas
         private void 정보쓰기(정보주소 구분, Int32 val) { this.입출자료.Set(구분, val); }
         private void 정보쓰기(정보주소 구분, Boolean val) { this.입출자료.Set(구분, ToInt(val)); }
 
-
-
         #region 입출신호
         public Boolean 하부큐알트리거신호  { get => 신호읽기(정보주소.하부큐알트리거); set => 정보쓰기(정보주소.하부큐알트리거, value); }
         public Boolean 하부큐알결과OK신호  { get => 신호읽기(정보주소.하부큐알결과OK); set => 정보쓰기(정보주소.하부큐알결과OK, value); }
@@ -243,7 +241,6 @@ namespace DSEV.Schemas
         public Int32 결과요청번호 => this.입출자료.Get(정보주소.셔틀10제품인덱스);
         #endregion
         //public Int32 양불판정번호 => this.입출자료.Get(정보주소.검사지그3); // 안착 후 양불 판정
-
         //public Int32 생산수량정보 { get => this.입출자료.Get(정보주소.생산수량); set => 정보쓰기(정보주소.생산수량, value); }
         // 트리거 입력 시 버퍼에 입력
         

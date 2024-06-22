@@ -117,6 +117,7 @@ namespace DSEV.Schemas
             this.표면불량.RemoveAll(e => (Int32)e.장치구분 == (Int32)카메라);
             return this;
         }
+
         public void AddRange(List<검사정보> 자료)
         {
             this.검사내역.AddRange(자료);
@@ -143,24 +144,18 @@ namespace DSEV.Schemas
         {
             Double result = 0;
             if (value == 0 || 검사.교정값 <= 0) result = value;
-            //else if (검사.카메라여부) result = value * Decimal.ToDouble(검사.교정값) / 1000;
             else if (검사.카메라여부) result = value * (Decimal.ToDouble(검사.교정값) / 1000);
             else result = value;
             return (Decimal)Math.Round(result, Global.환경설정.결과자릿수);
-            //VDA590에서 사용, 여기선 사용하지 않음
-            //if (검사.검사장치 == 장치구분.Flatness) return value + Decimal.ToDouble(검사.교정값);
         }
         private Double MeterToPixel(검사정보 검사, Decimal value)
         {
             if (검사.교정값 <= 0 || !검사.카메라여부) return Decimal.ToDouble(value);
-            //return Decimal.ToDouble(value) / Decimal.ToDouble(검사.교정값) * 1000;
             return Decimal.ToDouble(value) / Decimal.ToDouble(검사.교정값);
         }
 
-
         public Boolean SetResultValue_Client(검사정보 검사, Double value, out Decimal 결과값, out Decimal 측정값, Boolean 마진포함 = false)
         {
-            //Decimal result = PixelToMeter(검사, value);
             Decimal result = (Decimal)value;
             Boolean r = result >= 검사.최소값 && result <= 검사.최대값;
             결과값 = result;
@@ -168,18 +163,14 @@ namespace DSEV.Schemas
             if (r) return true;
             if (검사.마진값 <= 0 || 마진포함) return false;
 
-            //Int32 factor = 0;
             if (검사.최소값 > result)
             {
                 if (검사.최소값 > result + 검사.마진값 * 검사.결과부호) return false;
-                //factor = 1;
             }
             else if (검사.최대값 < result)
             {
                 if (검사.최대값 < result - 검사.마진값 * 검사.결과부호) return false;
-                //factor = -1;
             }
-
             return false;
         }
         public Boolean SetResultValue(검사정보 검사, Double value, out Decimal 결과값, out Decimal 측정값, Boolean 마진포함 = false)
@@ -406,19 +397,16 @@ namespace DSEV.Schemas
                     { -26.7f,   85.48f, (Single)this.GetItem(검사항목.k8).결과값 },
                 };
 
-
             double[,] 들뜸확인위치 = {
                     {  0f,    40f, (Single)this.GetItem(검사항목.m1).결과값 },
                     {  0f,   -60f, (Single)this.GetItem(검사항목.m2).결과값 },
                     {  0f,  -125f, (Single)this.GetItem(검사항목.m3).결과값 },
                 };
 
-
             try
             {
                 double[] plane = FitPlaneLeastSquares(기준위치);
                 Debug.WriteLine($"Plane equation: {plane[0]:E4}x + {plane[1]:E4}y - z + {plane[3]:F4} = 0");
-
 
                 Debug.WriteLine((Single)this.GetItem(검사항목.k1).결과값);
                 Debug.WriteLine((Single)this.GetItem(검사항목.k2).결과값);
@@ -446,8 +434,6 @@ namespace DSEV.Schemas
                 double distance7 = DistanceFromPointToPlane(커버윤곽위치[6, 0], 커버윤곽위치[6, 1], 커버윤곽위치[6, 2], a, b, c, d);
                 double distance8 = DistanceFromPointToPlane(커버윤곽위치[7, 0], 커버윤곽위치[7, 1], 커버윤곽위치[7, 2], a, b, c, d);
 
-
-
                 dist.Add(distance1);
                 dist.Add(distance2);
                 dist.Add(distance3);
@@ -456,7 +442,6 @@ namespace DSEV.Schemas
                 dist.Add(distance6);
                 dist.Add(distance7);
                 dist.Add(distance8);
-
 
                 Debug.WriteLine((Single)dist[0]);
                 Debug.WriteLine((Single)dist[1]);
@@ -467,21 +452,14 @@ namespace DSEV.Schemas
                 Debug.WriteLine((Single)dist[6]);
                 Debug.WriteLine((Single)dist[7]);
 
-
-                double 커버윤곽높이 = Math.Max(Math.Abs(dist.Max()), Math.Abs(dist.Min())) * 2;
-
-
-                //this.SetValue(검사항목.k1, -distance1);
-                //this.SetValue(검사항목.k2, -distance2);
-                //this.SetValue(검사항목.k3, -distance3);
-                //this.SetValue(검사항목.k4, -distance4);
-                //this.SetValue(검사항목.k5, -distance5);
-                //this.SetValue(검사항목.k6, -distance6);
-                //this.SetValue(검사항목.k7, -distance7);
-                //this.SetValue(검사항목.k8, -distance8);
-
-                this.SetResult(검사항목.ShapeK1K8, 커버윤곽높이);
-
+                this.SetValue(검사항목.k1, -distance1);
+                this.SetValue(검사항목.k2, -distance2);
+                this.SetValue(검사항목.k3, -distance3);
+                this.SetValue(검사항목.k4, -distance4);
+                this.SetValue(검사항목.k5, -distance5);
+                this.SetValue(검사항목.k6, -distance6);
+                this.SetValue(검사항목.k7, -distance7);
+                this.SetValue(검사항목.k8, -distance8);
 
                 Debug.WriteLine((Single)this.GetItem(검사항목.k1).결과값);
                 Debug.WriteLine((Single)this.GetItem(검사항목.k2).결과값);
@@ -492,20 +470,19 @@ namespace DSEV.Schemas
                 Debug.WriteLine((Single)this.GetItem(검사항목.k7).결과값);
                 Debug.WriteLine((Single)this.GetItem(검사항목.k8).결과값);
 
-
                 List<double> dist2 = new List<double>();
 
                 double distance2_1 = DistanceFromPointToPlane(들뜸확인위치[0, 0], 들뜸확인위치[0, 1], 들뜸확인위치[0, 2], a, b, c, d);
                 double distance2_2 = DistanceFromPointToPlane(들뜸확인위치[1, 0], 들뜸확인위치[1, 1], 들뜸확인위치[1, 2], a, b, c, d);
                 double distance2_3 = DistanceFromPointToPlane(들뜸확인위치[2, 0], 들뜸확인위치[2, 1], 들뜸확인위치[2, 2], a, b, c, d);
 
-
                 Debug.WriteLine(distance2_1);
                 Debug.WriteLine(distance2_2);
                 Debug.WriteLine(distance2_3);
-                //this.SetValue(검사항목.m1, -distance2_1);
-                //this.SetValue(검사항목.m2, -distance2_2);
-                //this.SetValue(검사항목.m3, -distance2_3);
+
+                this.SetValue(검사항목.m1, -distance2_1);
+                this.SetValue(검사항목.m2, -distance2_2);
+                this.SetValue(검사항목.m3, -distance2_3);
 
                 커버들뜸계산();
             }

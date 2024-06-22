@@ -180,21 +180,21 @@ namespace DSEV.Schemas
 
             return 검사;
         }
-        public 검사결과 외폭검사수행(Int32 검사코드, Dictionary<센서항목, Single> 자료)
-        {
-            검사결과 검사 = 검사항목찾기(검사코드);
-            if (검사 == null || 자료.Count < 1) return null;
+        //public 검사결과 외폭검사수행(Int32 검사코드, Dictionary<센서항목, Single> 자료)
+        //{
+        //    검사결과 검사 = 검사항목찾기(검사코드);
+        //    if (검사 == null || 자료.Count < 1) return null;
 
-            Random rnd = new Random();
-            foreach (var s in 자료)
-            {
-                Double value = s.Value;
-                // 임시로 값 생성
-                value = 108.6 + Math.Round(rnd.NextDouble() / 5, 3);
-                검사.SetResult(s.Key.ToString(), value);
-            }
-            return 검사;
-        }
+        //    Random rnd = new Random();
+        //    foreach (var s in 자료)
+        //    {
+        //        Double value = s.Value;
+        //        // 임시로 값 생성
+        //        value = 108.6 + Math.Round(rnd.NextDouble() / 5, 3);
+        //        검사.SetResult(s.Key.ToString(), value);
+        //    }
+        //    return 검사;
+        //}
         public 검사결과 검사결과계산(Int32 검사코드)
         {
             if (검사코드 < 1) return null;
@@ -224,8 +224,6 @@ namespace DSEV.Schemas
         }
 
         public void 검사완료알림함수(검사결과 결과)=> this.검사완료알림?.Invoke(결과);
-
-
 
         public void 검사수행알림(검사결과 검사) => this.검사완료알림?.Invoke(검사);
         public void 수동검사결과(카메라구분 카메라, 검사결과 검사)
@@ -443,9 +441,6 @@ namespace DSEV.Schemas
             return result;
         }
 
-
-
-
         //반복작업을 피하기 위해 추가 For R&R
 
         public void 검사일시추출(int numberOfResults, int numberOfProducts)
@@ -482,12 +477,13 @@ namespace DSEV.Schemas
                     // 해당 검사일시에 대한 inspd 데이터 조회
                     var inspdData = this.검사정보
                         .Where(x => x.검사일시 == 검사일시)
+                        .OrderBy(x => x.검사항목)
                         .ToList();
                     result.Add(inspdData.Select(x => x.결과값).ToList());
-                    //foreach (var data in inspdData)
-                    //{
-                    //    Console.WriteLine($"검사일시: {data.검사일시}, 결과값: {data.결과값}");
-                    //}
+                    foreach (var data in inspdData)
+                    {
+                        Console.WriteLine($"검사일시: {data.검사일시}, 결과값: {data.결과값}");
+                    }
 
 
                     // 행과 열을 전치하여 새로운 데이터 구조 생성

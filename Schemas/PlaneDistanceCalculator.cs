@@ -39,7 +39,6 @@ namespace DSEV.Schemas
             return distances;
         }
 
-
         public static float[] CalculateDistances(Int32 queryPointCnt, float[,] planePoints, float[,] queryPoints)
         {
             var matrixX = DenseMatrix.OfArray(new float[,] {
@@ -73,8 +72,6 @@ namespace DSEV.Schemas
 
             return distances;
         }
-
-
 
         public static float[] 편차계산(List<Single> 센서값)
         {

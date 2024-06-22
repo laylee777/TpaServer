@@ -260,17 +260,10 @@ namespace DSEV.Schemas
 
                     try
                     {
-                        //if (Global.환경설정.제로셋모드)
-                        //{
-                        //    Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러1, 6);
-                        //    Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러2, 6);
-                        //}
-
                         //첫번째 항목 "M0" 제외하고 배열로 만듦
                         string[] cont1Values = Global.센서제어.ReadValues(센서컨트롤러.컨트롤러1, 바닥평면검사번호).Skip(1).ToArray();
                         string[] cont2Values = Global.센서제어.ReadValues(센서컨트롤러.컨트롤러2, 바닥평면검사번호).Skip(1).ToArray();
                         this.바닥평면확인완료신호 = true;
-                        //Debug.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")}바닥평면 완료신호 On");
 
                         //배열을 붙임!
                         string[] mergedValues = cont1Values.Concat(cont2Values).ToArray();
@@ -282,7 +275,6 @@ namespace DSEV.Schemas
                             센서자료.Add((센서항목)i + 1, Single.Parse(mergedValues[i]) / 1000);
                         }
                         Global.검사자료.평탄검사수행(바닥평면검사번호, 센서자료);
-                        //this.바닥평면확인완료신호 = false;
                     }
                     catch (Exception ex)
                     {
@@ -299,17 +291,9 @@ namespace DSEV.Schemas
             {
                 new Thread(() =>
                 {
-
                     Debug.WriteLine("커버들뜸 검사시작");
-                    
                     try
                     {
-                        //if (Global.환경설정.제로셋모드)
-                        //{
-                        //    Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러3, 7);
-                        //    Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러4, 8);
-                        //}
-
                         //첫번째 항목 "M0" 제외하고 배열로 만듦
                         string[] cont1Values = Global.센서제어.ReadValues(센서컨트롤러.컨트롤러3, 커버들뜸검사번호).Skip(1).ToArray();
                         string[] cont2Values = Global.센서제어.ReadValues(센서컨트롤러.컨트롤러4, 커버들뜸검사번호).Skip(1).ToArray();
@@ -325,14 +309,12 @@ namespace DSEV.Schemas
                             센서자료.Add((센서항목)i + 21, Single.Parse(mergedValues[i]) / 1000);
                         }
                         Global.검사자료.평탄검사수행(커버들뜸검사번호, 센서자료);
-                        //this.커버들뜸확인완료신호 = false;
                     }
                     catch (Exception ex)
                     {
                         Global.오류로그(로그영역, "커버들뜸검사", ex.Message, true);
                         this.커버들뜸확인완료신호 = false;
                     }
-
                     Debug.WriteLine("커버들뜸검사 종료");
                 })
                 { Priority = ThreadPriority.Highest }.Start();
@@ -457,7 +439,6 @@ namespace DSEV.Schemas
             }
 
             this.통신확인핑퐁 = !this.통신확인핑퐁;
-            //Debug.WriteLine($"통신확인핑퐁 : {this.통신확인핑퐁}");
             this.통신상태알림?.Invoke();
         }
         private Boolean 테스트수행()

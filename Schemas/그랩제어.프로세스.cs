@@ -35,8 +35,6 @@ namespace DSEV.Schemas
         public HikeGigE 커넥터검사카메라1 = null;
         [JsonIgnore]
         public HikeGigE 커넥터검사카메라2 = null;
-
-
         [JsonIgnore]
         private const string 로그영역 = "Camera";
         [JsonIgnore]

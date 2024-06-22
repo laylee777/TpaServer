@@ -123,11 +123,12 @@ namespace DSEV.Schemas
         [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeH3H4, "h4")]
         h4 = 322,
 
+
         //M1M3, K1K8 윤곽도
         [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Flatness, None)]
         ShapeM1M3 = 401,
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Flatness, None)]
-        ShapeK1K8 = 402,
+        //[Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Flatness, None)]
+        //ShapeK1K8 = 402,
         
         //M1M3, K1K8 윤곽도하위
         [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, ShapeM1M3)]
@@ -136,30 +137,31 @@ namespace DSEV.Schemas
         m2 = 422,
         [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, ShapeM1M3)]
         m3 = 423,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, ShapeK1K8)]
+        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
         k1 = 424,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, ShapeK1K8)]
+        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
         k2 = 425,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, ShapeK1K8)]
+        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
         k3 = 426,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, ShapeK1K8)]
+        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
         k4 = 427,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, ShapeK1K8)]
+        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
         k5 = 428,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, ShapeK1K8)]
+        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
         k6 = 429,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, ShapeK1K8)]
+        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
         k7 = 430,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, ShapeK1K8)]
+        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
         k8 = 431,
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, ShapeM1M3)]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
         A1_R = 432,
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, ShapeM1M3)]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
         A2_R = 433,
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, ShapeM1M3)]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
         A3_R = 434,
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, ShapeM1M3)]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
         A4_R = 435,
+
 
         //가공부 높이
         [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam02,None, "f1")]
@@ -261,6 +263,7 @@ namespace DSEV.Schemas
         [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, Flatness)]
         a8 = 732,
 
+
         //하단부 큰 노치 윤곽도
         [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "ShapeBigNotchLR")]
         ShapeBigNotchLR = 801,
@@ -281,7 +284,6 @@ namespace DSEV.Schemas
         j1 = 921,
         [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeJ1J2, "j2")]
         j2 = 922,
-
 
         //J3J4윤곽도
         [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "ShapeJ3J4")]
@@ -327,10 +329,10 @@ namespace DSEV.Schemas
         NotchWidthFR = 1401, //d1
         [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchWidthRR")]
         NotchWidthRR = 1402, //d3
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchWidthRL")]
-        NotchWidthRL = 1403, //d4
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchWidthFL")]
-        NotchWidthFL = 1404, //d6
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchWidthFL")]
+        NotchWidthFL = 1403, //d4
+        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchWidthRL")]
+        NotchWidthRL = 1404, //d6
 
         //사이드 노치반폭
         [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchHeightFR1")]
