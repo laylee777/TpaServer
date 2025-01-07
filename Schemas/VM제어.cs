@@ -1,4 +1,5 @@
 ﻿using DevExpress.Utils;
+using DevExpress.XtraPrinting;
 using GraphicsSetModuleCs;
 using ImageSourceModuleCs;
 using MvUtils;
@@ -123,6 +124,22 @@ namespace DSEV.Schemas
 
                 this.Procedure.Run();
 
+
+                
+
+                //List<VmIO> t = this.Procedure.Outputs.GetAllIO();
+                //this.Procedure["스크레치"] as 
+
+                //String name = t[0].UniqueName.Split('%')[1];
+                //if (t[0].Value != null)
+                //{
+                //    str = ((ImvsSdkDefine.IMVS_MODULE_STRING_VALUE_EX[])t[0].Value)[0].strValue;
+                //}
+
+                //Boolean resBool = str == "0" ? false : true;
+                
+
+                //Debug.WriteLine(resBool);
                 Debug.WriteLine($"{DateTime.Now:HH:mm:ss.fff} : 표면검사 끝");
 
                 return this.결과;

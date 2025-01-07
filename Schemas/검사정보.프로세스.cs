@@ -17,9 +17,6 @@ using System.Reflection;
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Double;
 
-using static DevExpress.Utils.Drawing.Helpers.NativeMethods;
-using MathNet.Numerics;
-
 namespace DSEV.Schemas
 {
     [Table("inspl")]
@@ -161,16 +158,16 @@ namespace DSEV.Schemas
             결과값 = result;
             측정값 = (Decimal)Math.Round(value, Global.환경설정.결과자릿수);
             if (r) return true;
-            if (검사.마진값 <= 0 || 마진포함) return false;
+            //if (검사.마진값 <= 0 || 마진포함) return false;
 
-            if (검사.최소값 > result)
-            {
-                if (검사.최소값 > result + 검사.마진값 * 검사.결과부호) return false;
-            }
-            else if (검사.최대값 < result)
-            {
-                if (검사.최대값 < result - 검사.마진값 * 검사.결과부호) return false;
-            }
+            //if (검사.최소값 > result)
+            //{
+            //    if (검사.최소값 > result + 검사.마진값 * 검사.결과부호) return false;
+            //}
+            //else if (검사.최대값 < result)
+            //{
+            //    if (검사.최대값 < result - 검사.마진값 * 검사.결과부호) return false;
+            //}
             return false;
         }
         public Boolean SetResultValue(검사정보 검사, Double value, out Decimal 결과값, out Decimal 측정값, Boolean 마진포함 = false)
@@ -328,7 +325,9 @@ namespace DSEV.Schemas
                 }
 
                 if (정보.검사그룹 == 검사그룹.CTQ) { if (!품질결과.Contains(정보.측정결과)) 품질결과.Add(정보.측정결과); }
-                if (정보.검사그룹 == 검사그룹.Surface) { if (!외관결과.Contains(정보.측정결과)) 외관결과.Add(정보.측정결과); }
+                if (정보.검사그룹 == 검사그룹.Surface) {
+                    if (!외관결과.Contains(정보.측정결과)) 외관결과.Add(정보.측정결과); 
+                }
             }
 
 
@@ -346,16 +345,20 @@ namespace DSEV.Schemas
                 this.외관결과 = 최종결과(외관결과);
 
                 List<검사정보> 불량내역 = this.검사내역.Where(e => e.결과분류 == 결과분류.Summary && (e.측정결과 == 결과구분.NG || e.측정결과 == 결과구분.ER)).ToList();
+                
                 if (불량내역.Count > 0)
                 {
                     foreach (검사정보 정보 in 불량내역)
                         this.불량내역.Add(정보.검사항목.ToString());
                 }
+                
                 this.불량정보 = String.Join(",", this.불량내역.ToArray());
                 this.불량내역.Clear();
             }
+
             Debug.WriteLine($"{this.검사코드} = {this.측정결과}", "검사완료");
             Debug.WriteLine($"{this.검사코드} = {this.마킹전결과}", "마킹전검사완료");
+            
             return this.측정결과;
         }
 
@@ -379,6 +382,7 @@ namespace DSEV.Schemas
 
         public void 커버윤곽도계산()
         {
+            //if(this.GetItem())
             double[,] 기준위치 = {
                     {  76.6f,  200, (Single)this.GetItem(검사항목.A1_R).결과값 },
                     { -76.6f,  200, (Single)this.GetItem(검사항목.A2_R).결과값 },
@@ -574,20 +578,7 @@ namespace DSEV.Schemas
                     {-76.6f, -230, (double)this.GetItem(검사항목.A4_F).결과값},
                 };
 
-
             double[,] points2 = {
-                    { 105,   200, (double)this.GetItem(검사항목.a1).결과값},
-                    {   0,   200, (double)this.GetItem(검사항목.a2).결과값},
-                    {-105,   200, (double)this.GetItem(검사항목.a3).결과값},
-                    {  90,     0, (double)this.GetItem(검사항목.a4).결과값},
-                    { -90,     0, (double)this.GetItem(검사항목.a5).결과값},
-                    { 105,  -230, (double)this.GetItem(검사항목.a6).결과값},
-                    {   0,  -230, (double)this.GetItem(검사항목.a7).결과값},
-                    { -105, -230, (double)this.GetItem(검사항목.a8).결과값},
-                };
-
-
-            double[,] 검사위치2 = {
                     { 105,   200, (double)this.GetItem(검사항목.a1).결과값},
                     {   0,   200, (double)this.GetItem(검사항목.a2).결과값},
                     {-105,   200, (double)this.GetItem(검사항목.a3).결과값},
@@ -609,16 +600,14 @@ namespace DSEV.Schemas
 
             List<double> dist = new List<double>();
 
-            double distance1 = DistanceFromPointToPlane(검사위치2[0, 0], 검사위치2[0, 1], 검사위치2[0, 2], a, b, c, d);
-            double distance2 = DistanceFromPointToPlane(검사위치2[1, 0], 검사위치2[1, 1], 검사위치2[1, 2], a, b, c, d);
-            double distance3 = DistanceFromPointToPlane(검사위치2[2, 0], 검사위치2[2, 1], 검사위치2[2, 2], a, b, c, d);
-            double distance4 = DistanceFromPointToPlane(검사위치2[3, 0], 검사위치2[3, 1], 검사위치2[3, 2], a, b, c, d);
-            double distance5 = DistanceFromPointToPlane(검사위치2[4, 0], 검사위치2[4, 1], 검사위치2[4, 2], a, b, c, d);
-            double distance6 = DistanceFromPointToPlane(검사위치2[5, 0], 검사위치2[5, 1], 검사위치2[5, 2], a, b, c, d);
-            double distance7 = DistanceFromPointToPlane(검사위치2[6, 0], 검사위치2[6, 1], 검사위치2[6, 2], a, b, c, d);
-            double distance8 = DistanceFromPointToPlane(검사위치2[7, 0], 검사위치2[7, 1], 검사위치2[7, 2], a, b, c, d);
-
-
+            double distance1 = DistanceFromPointToPlane(points2[0, 0], points2[0, 1], points2[0, 2], a, b, c, d);
+            double distance2 = DistanceFromPointToPlane(points2[1, 0], points2[1, 1], points2[1, 2], a, b, c, d);
+            double distance3 = DistanceFromPointToPlane(points2[2, 0], points2[2, 1], points2[2, 2], a, b, c, d);
+            double distance4 = DistanceFromPointToPlane(points2[3, 0], points2[3, 1], points2[3, 2], a, b, c, d);
+            double distance5 = DistanceFromPointToPlane(points2[4, 0], points2[4, 1], points2[4, 2], a, b, c, d);
+            double distance6 = DistanceFromPointToPlane(points2[5, 0], points2[5, 1], points2[5, 2], a, b, c, d);
+            double distance7 = DistanceFromPointToPlane(points2[6, 0], points2[6, 1], points2[6, 2], a, b, c, d);
+            double distance8 = DistanceFromPointToPlane(points2[7, 0], points2[7, 1], points2[7, 2], a, b, c, d);
 
             dist.Add(distance1);
             dist.Add(distance2);
@@ -652,6 +641,22 @@ namespace DSEV.Schemas
 
             this.SetResult(검사항목.Flatness, Math.Abs(dist.Max() - dist.Min()));
 
+
+            this.SetValue(검사항목.A1_F, A1_Dist);
+            this.SetValue(검사항목.A2_F, A2_Dist);
+            this.SetValue(검사항목.A3_F, A3_Dist);
+            this.SetValue(검사항목.A4_F, A4_Dist);
+
+
+
+            this.SetValue(검사항목.a1, -distance1);
+            this.SetValue(검사항목.a2, -distance2);
+            this.SetValue(검사항목.a3, -distance3);
+            this.SetValue(검사항목.a4, -distance4);
+            this.SetValue(검사항목.a5, -distance5);
+            this.SetValue(검사항목.a6, -distance6);
+            this.SetValue(검사항목.a7, -distance7);
+            this.SetValue(검사항목.a8, -distance8);
         }
 
         public void 큐알정보검사(String 코드, 큐알등급 등급)
@@ -665,6 +670,7 @@ namespace DSEV.Schemas
         private void 큐알정보검사()
         {
             Boolean r = Global.큐알검증.검증수행(this.큐알내용, out String 오류내용, out Int32[] indexs);
+
             // 큐알코드 검증, 중복여부 체크
             if (!Global.큐알검증.코드검증 || r) this.SetResult(검사항목.QrValidate, 0);
             else this.SetResult(검사항목.QrValidate, 1);

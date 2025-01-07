@@ -18,6 +18,7 @@ namespace DSEV.Schemas
         public 검사설정(모델정보 모델) { this.모델정보 = 모델; }
 
         public void Init() => this.Load();
+        
         public void Load()
         {
             this.Clear();

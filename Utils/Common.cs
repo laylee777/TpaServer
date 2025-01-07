@@ -208,9 +208,11 @@ namespace DSEV
             try
             {
                 Debug.WriteLine("11");
-                using (Bitmap bitmap = new Bitmap(path))
+
+                Mat tempImage = Cv2.ImRead(path,ImreadModes.Grayscale);
+                
+                using (Bitmap bitmap = tempImage.ToBitmap())
                 {
-                    
                     Debug.WriteLine("22");
                     if (Colored) return new CogImage24PlanarColor(bitmap);
                     Debug.WriteLine("33");

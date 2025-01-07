@@ -1,9 +1,11 @@
-﻿using MvUtils;
+﻿using DevExpress.XtraPrinting.Native;
+using MvUtils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using static DSEV.Schemas.MES통신;
 
 namespace DSEV.Schemas
@@ -12,6 +14,7 @@ namespace DSEV.Schemas
     {
         private DateTime 오류알림시간 = DateTime.Today.AddDays(-1);
         private Int32 오류알림간격 = 30; // 초
+
 
         public void 통신오류알림(Int32 오류코드)
         {
@@ -260,6 +263,15 @@ namespace DSEV.Schemas
 
                     try
                     {
+                        if(Global.환경설정.제로셋모드)
+                        {
+                            Global.센서제어.SaveZeroSet(센서컨트롤러.컨트롤러1, 6);
+                            Global.센서제어.SaveZeroSet(센서컨트롤러.컨트롤러2, 6);
+
+                            Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러1, 6);
+                            Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러2, 6);
+                        }
+
                         //첫번째 항목 "M0" 제외하고 배열로 만듦
                         string[] cont1Values = Global.센서제어.ReadValues(센서컨트롤러.컨트롤러1, 바닥평면검사번호).Skip(1).ToArray();
                         string[] cont2Values = Global.센서제어.ReadValues(센서컨트롤러.컨트롤러2, 바닥평면검사번호).Skip(1).ToArray();
@@ -294,6 +306,16 @@ namespace DSEV.Schemas
                     Debug.WriteLine("커버들뜸 검사시작");
                     try
                     {
+
+                        if (Global.환경설정.제로셋모드)
+                        {
+                            Global.센서제어.SaveZeroSet(센서컨트롤러.컨트롤러3, 7);
+                            Global.센서제어.SaveZeroSet(센서컨트롤러.컨트롤러4, 8);
+
+                            Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러3, 7);
+                            Global.센서제어.DoZeroSet(센서컨트롤러.컨트롤러4, 8);
+                        }
+
                         //첫번째 항목 "M0" 제외하고 배열로 만듦
                         string[] cont1Values = Global.센서제어.ReadValues(센서컨트롤러.컨트롤러3, 커버들뜸검사번호).Skip(1).ToArray();
                         string[] cont2Values = Global.센서제어.ReadValues(센서컨트롤러.컨트롤러4, 커버들뜸검사번호).Skip(1).ToArray();
@@ -329,34 +351,50 @@ namespace DSEV.Schemas
 
             if (측상카메라검사번호 > 0)
             {
-                new Thread(() =>
+
+                Parallel.ForEach(Global.그랩제어.측상카메라들, 카메라구분 =>
                 {
-                    Global.조명제어.TurnOn(카메라구분.Cam01);
-                    Global.조명제어.TurnOn(카메라구분.Cam02);
-                    Global.조명제어.TurnOn(카메라구분.Cam03);
+                    Global.조명제어.TurnOn(카메라구분);
+                    Global.그랩제어.Active(카메라구분);
+                });
 
-                    Global.그랩제어.Active(카메라구분.Cam01);
-                    Global.그랩제어.Active(카메라구분.Cam02);
-                    Global.그랩제어.Active(카메라구분.Cam03);
+                this.측상촬영완료신호 = true;
+                //new Thread(() =>
+                //{
+                //    Global.조명제어.TurnOn(카메라구분.Cam01);
+                //    Global.조명제어.TurnOn(카메라구분.Cam02);
+                //    Global.조명제어.TurnOn(카메라구분.Cam03);
 
-                    this.측상촬영완료신호 = true;
-                })
-                { Priority = ThreadPriority.Highest }.Start();
+                //    Global.그랩제어.Active(카메라구분.Cam01);
+                //    Global.그랩제어.Active(카메라구분.Cam02);
+                //    Global.그랩제어.Active(카메라구분.Cam03);
+
+                //    this.측상촬영완료신호 = true;
+                //})
+                //{ Priority = ThreadPriority.Highest }.Start();
             }
 
             if (하부카메라검사번호 > 0)
             {
-                new Thread(() =>
+                Parallel.ForEach(Global.그랩제어.하부카메라들, 카메라구분 =>
                 {
-                    Global.조명제어.TurnOn(카메라구분.Cam04);
-                    Global.조명제어.TurnOn(카메라구분.Cam05);
+                    Global.조명제어.TurnOn(카메라구분);
+                    Global.그랩제어.Active(카메라구분);
+                });
 
-                    Global.그랩제어.Active(카메라구분.Cam04);
-                    Global.그랩제어.Active(카메라구분.Cam05);
+                this.하부촬영완료신호 = true;
 
-                    this.하부촬영완료신호 = true;
-                })
-                { Priority = ThreadPriority.AboveNormal }.Start();
+                //new Thread(() =>
+                //{
+                //    Global.조명제어.TurnOn(카메라구분.Cam04);
+                //    Global.조명제어.TurnOn(카메라구분.Cam05);
+
+                //    Global.그랩제어.Active(카메라구분.Cam04);
+                //    Global.그랩제어.Active(카메라구분.Cam05);
+
+                //    this.하부촬영완료신호 = true;
+                //})
+                //{ Priority = ThreadPriority.Highest }.Start();
             }
 
             if (커넥터카메라검사번호 > 0)
@@ -371,7 +409,7 @@ namespace DSEV.Schemas
 
                     this.커넥터촬영완료신호 = true;
                 })
-                { Priority = ThreadPriority.Normal }.Start();
+                { Priority = ThreadPriority.Highest }.Start();
             }
         }
 
@@ -441,6 +479,7 @@ namespace DSEV.Schemas
             this.통신확인핑퐁 = !this.통신확인핑퐁;
             this.통신상태알림?.Invoke();
         }
+
         private Boolean 테스트수행()
         {
             통신핑퐁수행();

@@ -18,6 +18,9 @@ namespace DSEV.Schemas
     {
         public static List<카메라구분> 대상카메라 = new List<카메라구분>() { 카메라구분.Cam01, 카메라구분.Cam02, 카메라구분.Cam03, 카메라구분.Cam04, 카메라구분.Cam05, 카메라구분.Cam06, 카메라구분.Cam07 }; //, 카메라구분.Cam02, 카메라구분.Cam03
 
+        public List<카메라구분> 측상카메라들;
+        public List<카메라구분> 하부카메라들;
+
         public delegate void 그랩완료대리자(그랩장치 장치);
         public event 그랩완료대리자 그랩완료보고;
 
@@ -60,6 +63,17 @@ namespace DSEV.Schemas
             this.Add(카메라구분.Cam05, this.하부검사카메라2);
             this.Add(카메라구분.Cam06, this.커넥터검사카메라1);
             this.Add(카메라구분.Cam07, this.커넥터검사카메라2);
+
+            측상카메라들 = new List<카메라구분>(){
+                카메라구분.Cam01,
+                카메라구분.Cam02,
+                카메라구분.Cam03
+            };
+
+            하부카메라들 = new List<카메라구분>(){
+                카메라구분.Cam04,
+                카메라구분.Cam05,
+            };
 
             // 카메라 설정 저장정보 로드
             그랩장치 정보;
