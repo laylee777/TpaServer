@@ -1,5 +1,5 @@
 ﻿
-namespace DSEV.UI.Controls
+namespace IVM.UI.Controls
 {
     partial class DeviceSettings
     {
@@ -32,7 +32,7 @@ namespace DSEV.UI.Controls
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DeviceSettings));
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
-            this.e카메라 = new DSEV.UI.Controls.CamSettings();
+            this.e카메라 = new IVM.UI.Controls.CamSettings();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
@@ -74,10 +74,10 @@ namespace DSEV.UI.Controls
             this.layoutControlGroup8 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.e큐알장치 = new DSEV.UI.Controls.QrControls();
+            this.e큐알장치 = new IVM.UI.Controls.QrControls();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
-            this.e기본설정 = new DSEV.UI.Controls.Config();
-            this.e유저관리 = new DSEV.UI.Controls.Users();
+            this.e기본설정 = new IVM.UI.Controls.Config();
+            this.e유저관리 = new IVM.UI.Controls.Users();
             this.Bind환경설정 = new System.Windows.Forms.BindingSource(this.components);
             this.BindLocalization = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
@@ -741,11 +741,11 @@ namespace DSEV.UI.Controls
             // 
             // Bind환경설정
             // 
-            this.Bind환경설정.DataSource = typeof(DSEV.Schemas.환경설정);
+            this.Bind환경설정.DataSource = typeof(IVM.Schemas.환경설정);
             // 
             // BindLocalization
             // 
-            this.BindLocalization.DataSource = typeof(DSEV.UI.Controls.DeviceSettings.LocalizationDeviceSetting);
+            this.BindLocalization.DataSource = typeof(IVM.UI.Controls.DeviceSettings.LocalizationDeviceSetting);
             // 
             // DeviceSettings
             // 

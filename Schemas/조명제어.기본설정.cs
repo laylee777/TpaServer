@@ -7,7 +7,7 @@ using System.IO;
 using System.IO.Ports;
 using System.Threading.Tasks;
 
-namespace DSEV.Schemas
+namespace IVM.Schemas
 {
     public enum 직렬포트
     {

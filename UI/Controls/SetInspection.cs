@@ -5,12 +5,12 @@ using MvUtils;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using DSEV.Schemas;
+using IVM.Schemas;
 using System.Windows.Forms;
-using DSEV.UI.Forms;
+using IVM.UI.Forms;
 using System.Drawing;
 
-namespace DSEV.UI.Controls
+namespace IVM.UI.Controls
 {
     public partial class SetInspection : XtraUserControl
     {

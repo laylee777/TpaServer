@@ -10,11 +10,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using System.IO;
-using static DSEV.Schemas.MESClient;
+using static IVM.Schemas.MESClient;
 using System.Windows.Forms;
-using static DSEV.Schemas.MES통신;
+using static IVM.Schemas.MES통신;
 
-namespace DSEV.Schemas
+namespace IVM.Schemas
 {
     public class MES통신
     {

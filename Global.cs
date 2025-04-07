@@ -1,4 +1,4 @@
-﻿using DSEV.Schemas;
+﻿using IVM.Schemas;
 using MvUtils;
 using System;
 using System.Diagnostics;
@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace DSEV
+namespace IVM
 {
     public static class Global
     {

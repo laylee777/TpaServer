@@ -1,4 +1,4 @@
-﻿namespace DSEV.UI.Controls
+﻿namespace IVM.UI.Controls
 {
     partial class ResultSearch
     {
@@ -41,7 +41,7 @@
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.e결과뷰어 = new DSEV.UI.Controls.ResultInspection();
+            this.e결과뷰어 = new IVM.UI.Controls.ResultInspection();
             this.BindLocalization = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -215,7 +215,7 @@
             // 
             // BindLocalization
             // 
-            this.BindLocalization.DataSource = typeof(DSEV.UI.Controls.Results.LocalizationResults);
+            this.BindLocalization.DataSource = typeof(IVM.UI.Controls.Results.LocalizationResults);
             // 
             // ResultSearch
             // 

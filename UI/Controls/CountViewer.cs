@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DSEV.UI.Controls
+namespace IVM.UI.Controls
 {
     public partial class CountViewer : XtraUserControl
     {

@@ -4,7 +4,7 @@ using System;
 using System.Diagnostics;
 using System.Windows;
 
-namespace DSEV.UI.Controls
+namespace IVM.UI.Controls
 {
     public partial class QrValidate : XtraUserControl
     {

@@ -7,7 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
 
-namespace DSEV.Schemas
+namespace IVM.Schemas
 {
     public partial class Viewport : HelixViewport3D
     {

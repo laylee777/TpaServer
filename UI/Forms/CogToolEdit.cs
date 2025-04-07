@@ -5,9 +5,9 @@ using OpenCvSharp;
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
-using DSEV.Schemas;
+using IVM.Schemas;
 
-namespace DSEV.UI.Forms
+namespace IVM.UI.Forms
 {
     public partial class CogToolEdit : DevExpress.XtraBars.ToolbarForm.ToolbarForm
     {

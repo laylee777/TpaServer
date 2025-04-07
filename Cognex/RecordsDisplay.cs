@@ -1,7 +1,7 @@
 ﻿using Cognex.VisionPro;
 using Cognex.VisionPro.Display;
 using DevExpress.XtraEditors;
-using DSEV.Schemas;
+using IVM.Schemas;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

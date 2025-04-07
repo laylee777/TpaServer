@@ -13,7 +13,7 @@ using System.Runtime.InteropServices;
 using VM.Core;
 using VM.PlatformSDKCS;
 
-namespace DSEV.Schemas
+namespace IVM.Schemas
 {
     public enum Flow구분
     {

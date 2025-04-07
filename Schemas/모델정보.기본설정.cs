@@ -8,7 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 
-namespace DSEV.Schemas
+namespace IVM.Schemas
 {
     public enum 모델구분
     {

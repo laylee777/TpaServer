@@ -1,4 +1,4 @@
-﻿namespace DSEV.UI.Forms
+﻿namespace IVM.UI.Forms
 {
     partial class VMForm
     {

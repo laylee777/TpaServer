@@ -1,4 +1,4 @@
-﻿namespace DSEV.UI.Controls
+﻿namespace IVM.UI.Controls
 {
     partial class QrControls
     {

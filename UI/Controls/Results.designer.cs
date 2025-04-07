@@ -1,5 +1,5 @@
 ﻿
-namespace DSEV.UI.Controls
+namespace IVM.UI.Controls
 {
     partial class Results
     {
@@ -299,7 +299,7 @@ namespace DSEV.UI.Controls
             // 
             // Bind검사자료
             // 
-            this.Bind검사자료.DataSource = typeof(DSEV.Schemas.검사자료);
+            this.Bind검사자료.DataSource = typeof(IVM.Schemas.검사자료);
             // 
             // GridView1
             // 
@@ -468,7 +468,7 @@ namespace DSEV.UI.Controls
             // 
             // BindLocalization
             // 
-            this.BindLocalization.DataSource = typeof(DSEV.UI.Controls.Results.LocalizationResults);
+            this.BindLocalization.DataSource = typeof(IVM.UI.Controls.Results.LocalizationResults);
             // 
             // layoutControl1
             // 

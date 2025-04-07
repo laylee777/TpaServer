@@ -1,13 +1,13 @@
 ﻿using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
-using DSEV.Schemas;
-using DSEV.UI.Forms;
+using IVM.Schemas;
+using IVM.UI.Forms;
 using MvUtils;
 using System;
 using System.Collections;
 
-namespace DSEV.UI.Controls
+namespace IVM.UI.Controls
 {
     public partial class Results : XtraUserControl
     {

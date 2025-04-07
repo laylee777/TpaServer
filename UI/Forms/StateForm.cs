@@ -1,11 +1,11 @@
 ﻿using DevExpress.XtraEditors;
-using DSEV.Schemas;
+using IVM.Schemas;
 using MvUtils;
 using System;
 using System.IO;
 using System.Windows.Media.Media3D;
 
-namespace DSEV.UI.Forms
+namespace IVM.UI.Forms
 {
     public partial class StateForm : XtraForm
     {

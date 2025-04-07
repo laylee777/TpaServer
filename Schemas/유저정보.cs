@@ -10,7 +10,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
-namespace DSEV.Schemas
+namespace IVM.Schemas
 {
     public enum 유저권한구분
     {

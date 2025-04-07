@@ -1,4 +1,4 @@
-﻿namespace DSEV.UI.Forms
+﻿namespace IVM.UI.Forms
 {
     partial class CogToolEdit
     {
@@ -47,7 +47,7 @@
             this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager(this.components);
             this.dockPanel1 = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
-            this.e결과목록 = new DSEV.UI.Controls.ResultGrid();
+            this.e결과목록 = new IVM.UI.Controls.ResultGrid();
             ((System.ComponentModel.ISupportInitialize)(this.toolbarFormControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toolbarFormManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();

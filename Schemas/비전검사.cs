@@ -13,7 +13,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace DSEV.Schemas
+namespace IVM.Schemas
 {
     public class 비전검사 : Dictionary<카메라구분, 비전도구>
     {

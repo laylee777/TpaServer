@@ -1,4 +1,4 @@
-﻿using DSEV.Schemas;
+﻿using IVM.Schemas;
 using Euresys.MultiCam;
 using MvUtils;
 using System;
@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-namespace DSEV.Multicam
+namespace IVM.Multicam
 {
     [Description("카메라 설정")]
     public abstract class CamControl

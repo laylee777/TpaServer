@@ -4,12 +4,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("EV2020 UFA Vision Inspection System")]
-[assembly: AssemblyDescription("DSEV PL EV2020 UFA Vision Inspection System")]
+[assembly: AssemblyTitle("VDA590 TPA Vision Inspection System")]
+[assembly: AssemblyDescription("OhsungD&E VDA590 TPA Vision Inspection System")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("IVM")]
-[assembly: AssemblyProduct("EV2020 UFA Vision Inspection System")]
-[assembly: AssemblyCopyright("Copyright ©IVM  2023")]
+[assembly: AssemblyProduct("VDA590 TPA Vision Inspection System")]
+[assembly: AssemblyCopyright("Copyright ©IVM  2025")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 // Setting ComVisible to false makes the types in this assembly not visible 

@@ -10,9 +10,9 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using static DSEV.Schemas.장치통신;
+using static IVM.Schemas.장치통신;
 
-namespace DSEV.Schemas
+namespace IVM.Schemas
 {
     public class 검사자료 : BindingList<검사결과>
     {

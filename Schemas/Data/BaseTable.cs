@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics;
 using System.Linq;
 
-namespace DSEV.Schemas.Data
+namespace IVM.Schemas.Data
 {
     public enum MyBool
     {

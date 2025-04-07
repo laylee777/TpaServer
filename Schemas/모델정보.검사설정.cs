@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
-namespace DSEV.Schemas
+namespace IVM.Schemas
 {
     public class 검사설정 : List<검사정보>
     {

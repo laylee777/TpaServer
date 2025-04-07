@@ -2,9 +2,9 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using DSEV.Schemas;
+using IVM.Schemas;
 
-namespace DSEV.Multicam
+namespace IVM.Multicam
 {
     public class Dalsa16K : CamControl
     {

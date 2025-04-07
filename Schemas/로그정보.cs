@@ -12,7 +12,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DSEV.Schemas
+namespace IVM.Schemas
 {
     public enum 로그구분
     {

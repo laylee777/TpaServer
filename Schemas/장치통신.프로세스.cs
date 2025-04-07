@@ -6,9 +6,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using static DSEV.Schemas.MES통신;
+using static IVM.Schemas.MES통신;
 
-namespace DSEV.Schemas
+namespace IVM.Schemas
 {
     partial class 장치통신
     {

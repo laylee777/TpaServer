@@ -1,11 +1,11 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
-using DSEV.Schemas;
-using DSEV.UI.Forms;
+using IVM.Schemas;
+using IVM.UI.Forms;
 using System;
 
-namespace DSEV.UI.Controls
+namespace IVM.UI.Controls
 {
     public partial class ResultGrid : XtraUserControl
     {

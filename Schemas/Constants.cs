@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DSEV.Schemas
+namespace IVM.Schemas
 {
     public enum 피씨구분
     {

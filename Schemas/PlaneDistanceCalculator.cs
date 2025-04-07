@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MathNet.Numerics.LinearAlgebra.Single;
 
-namespace DSEV.Schemas
+namespace IVM.Schemas
 {
     public static class PlaneDistanceCalculator
     {

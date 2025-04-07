@@ -1,4 +1,4 @@
-﻿namespace DSEV.UI.Controls
+﻿namespace IVM.UI.Controls
 {
     partial class ResultsPivot
     {
@@ -109,7 +109,7 @@
             // 
             // BindLocalization
             // 
-            this.BindLocalization.DataSource = typeof(DSEV.UI.Controls.Results.LocalizationResults);
+            this.BindLocalization.DataSource = typeof(IVM.UI.Controls.Results.LocalizationResults);
             // 
             // b자료조회
             // 

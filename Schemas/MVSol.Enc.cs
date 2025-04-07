@@ -3,7 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace DSEV.Schemas
+namespace IVM.Schemas
 {
     public class Serial : IDisposable
     {

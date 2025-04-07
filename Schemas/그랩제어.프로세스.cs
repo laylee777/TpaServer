@@ -7,12 +7,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using DSEV.Multicam;
+using IVM.Multicam;
 using System.Threading;
 using System.Threading.Tasks;
 using OpenCvSharp;
 
-namespace DSEV.Schemas
+namespace IVM.Schemas
 {
     public class 그랩제어 : Dictionary<카메라구분, 그랩장치>
     {

@@ -1,5 +1,5 @@
 ﻿using Cognex.VisionPro;
-using DSEV.Multicam;
+using IVM.Multicam;
 using MvCamCtrl.NET;
 using MvCamCtrl.NET.CameraParams;
 using Newtonsoft.Json;
@@ -12,7 +12,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
-namespace DSEV.Schemas
+namespace IVM.Schemas
 {
     public class 그랩장치 : IDisposable
     {

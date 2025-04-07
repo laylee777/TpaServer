@@ -1,9 +1,9 @@
 ﻿using DevExpress.XtraEditors;
-using DSEV.Schemas;
+using IVM.Schemas;
 using System;
 using System.Diagnostics;
 
-namespace DSEV.UI.Controls
+namespace IVM.UI.Controls
 {
     public partial class Viewport3D : XtraUserControl
     {

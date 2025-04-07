@@ -1,5 +1,5 @@
 ﻿
-namespace DSEV.UI.Controls
+namespace IVM.UI.Controls
 {
     partial class LogViewer
     {
@@ -83,7 +83,7 @@ namespace DSEV.UI.Controls
             // 
             // Bind로그자료
             // 
-            this.Bind로그자료.DataSource = typeof(DSEV.Schemas.로그자료);
+            this.Bind로그자료.DataSource = typeof(IVM.Schemas.로그자료);
             // 
             // GridView1
             // 
@@ -304,7 +304,7 @@ namespace DSEV.UI.Controls
             // 
             // BindLocalization
             // 
-            this.BindLocalization.DataSource = typeof(DSEV.UI.Controls.LogViewer.LocalizationLogs);
+            this.BindLocalization.DataSource = typeof(IVM.UI.Controls.LogViewer.LocalizationLogs);
             // 
             // LogViewer
             // 

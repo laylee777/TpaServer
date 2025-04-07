@@ -1,5 +1,5 @@
 ﻿
-namespace DSEV.UI.Controls
+namespace IVM.UI.Controls
 {
     partial class SetInspection
     {
@@ -97,7 +97,7 @@ namespace DSEV.UI.Controls
             // 
             // 검사설정Bind
             // 
-            this.검사설정Bind.DataSource = typeof(DSEV.Schemas.검사설정);
+            this.검사설정Bind.DataSource = typeof(IVM.Schemas.검사설정);
             // 
             // GridView1
             // 
@@ -426,7 +426,7 @@ namespace DSEV.UI.Controls
             // 
             // 모델자료Bind
             // 
-            this.모델자료Bind.DataSource = typeof(DSEV.Schemas.검사설정);
+            this.모델자료Bind.DataSource = typeof(IVM.Schemas.검사설정);
             // 
             // b설정저장
             // 

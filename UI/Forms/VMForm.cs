@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DSEV.UI.Forms
+namespace IVM.UI.Forms
 {
     public partial class VMForm : DevExpress.XtraEditors.XtraForm
     {

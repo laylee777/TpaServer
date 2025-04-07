@@ -1,4 +1,4 @@
-﻿namespace DSEV.UI.Forms
+﻿namespace IVM.UI.Forms
 {
     partial class CalibInfo
     {
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CalibInfo));
-            this.calibration1 = new DSEV.UI.Controls.Calibration();
+            this.calibration1 = new IVM.UI.Controls.Calibration();
             this.SuspendLayout();
             // 
             // calibration1

@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 
-namespace DSEV.Schemas
+namespace IVM.Schemas
 {
     public class 사진분할
     {

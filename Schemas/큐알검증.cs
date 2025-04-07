@@ -8,7 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace DSEV.Schemas
+namespace IVM.Schemas
 {
     public enum 큐알코드구분
     {

@@ -1,4 +1,4 @@
-﻿namespace DSEV.UI.Controls
+﻿namespace IVM.UI.Controls
 {
     partial class ResultInspection
     {
@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.e결과뷰어 = new DSEV.UI.Controls.Viewport3D();
+            this.e결과뷰어 = new IVM.UI.Controls.Viewport3D();
             this.e외관결과 = new DevExpress.XtraEditors.TextEdit();
             this.Bind검사결과 = new System.Windows.Forms.BindingSource(this.components);
             this.eCTQ결과 = new DevExpress.XtraEditors.TextEdit();
@@ -50,7 +50,7 @@
             this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager(this.components);
             this.dockPanel1 = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
-            this.e결과목록 = new DSEV.UI.Controls.ResultGrid();
+            this.e결과목록 = new IVM.UI.Controls.ResultGrid();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.e외관결과.Properties)).BeginInit();
@@ -117,7 +117,7 @@
             // 
             // Bind검사결과
             // 
-            this.Bind검사결과.DataSource = typeof(DSEV.Schemas.검사결과);
+            this.Bind검사결과.DataSource = typeof(IVM.Schemas.검사결과);
             // 
             // eCTQ결과
             // 

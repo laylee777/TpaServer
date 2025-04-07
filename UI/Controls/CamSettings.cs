@@ -1,9 +1,9 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using System;
-using DSEV.Schemas;
+using IVM.Schemas;
 
-namespace DSEV.UI.Controls
+namespace IVM.UI.Controls
 {
     public partial class CamSettings : XtraUserControl
     {

@@ -1,6 +1,6 @@
 ﻿using DevExpress.Diagram.Core.Shapes;
 using DevExpress.XtraRichEdit.Export;
-using DSEV.UI.Forms;
+using IVM.UI.Forms;
 using MvUtils;
 using Newtonsoft.Json;
 using OpenCvSharp;
@@ -17,7 +17,7 @@ using System.Reflection;
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Double;
 
-namespace DSEV.Schemas
+namespace IVM.Schemas
 {
     [Table("inspl")]
     public class 검사결과

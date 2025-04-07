@@ -1,11 +1,11 @@
 ﻿using DevExpress.XtraEditors;
-using DSEV.Schemas;
+using IVM.Schemas;
 
 using System;
 
 
 
-namespace DSEV.UI.Controls
+namespace IVM.UI.Controls
 {
     public partial class CamViewers : DevExpress.XtraEditors.XtraUserControl
     {

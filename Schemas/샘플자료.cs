@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace DSEV.Schemas
+namespace IVM.Schemas
 {
     public class 샘플자료 : Dictionary<String, 검사결과>
     {

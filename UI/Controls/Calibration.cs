@@ -1,13 +1,13 @@
 ﻿using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
-using DSEV.Schemas;
+using IVM.Schemas;
 using MvUtils;
 using System;
 using System.Collections.Generic;
 using System.Collections;
 using System.Diagnostics;
 
-namespace DSEV.UI.Controls
+namespace IVM.UI.Controls
 {
     public partial class Calibration : XtraUserControl
     {

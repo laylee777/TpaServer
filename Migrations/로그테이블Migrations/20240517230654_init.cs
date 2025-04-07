@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace DSEV.Migrations.로그테이블Migrations
+namespace IVM.Migrations.로그테이블Migrations
 {
     public partial class init : Migration
     {

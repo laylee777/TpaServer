@@ -1,5 +1,5 @@
 ﻿
-namespace DSEV.UI.Controls
+namespace IVM.UI.Controls
 {
     partial class Login
     {
@@ -81,7 +81,7 @@ namespace DSEV.UI.Controls
             // e한글
             // 
             this.e한글.GroupIndex = 0;
-            this.e한글.ImageOptions.SvgImage = global::DSEV.Properties.Resources.Korea;
+            this.e한글.ImageOptions.SvgImage = global::IVM.Properties.Resources.Korea;
             this.e한글.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.e한글.Location = new System.Drawing.Point(160, 20);
             this.e한글.Name = "e한글";
@@ -118,7 +118,7 @@ namespace DSEV.UI.Controls
             // 
             // BindLocalization
             // 
-            this.BindLocalization.DataSource = typeof(DSEV.UI.Controls.Login.LocalizationLogin);
+            this.BindLocalization.DataSource = typeof(IVM.UI.Controls.Login.LocalizationLogin);
             // 
             // b인증
             // 

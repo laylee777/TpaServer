@@ -17,7 +17,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using UfaVision;
 
-namespace DSEV.Schemas
+namespace IVM.Schemas
 {
     public class 캘리브자료 : BindingList<캘리브정보>
     {

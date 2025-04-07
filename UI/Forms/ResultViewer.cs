@@ -1,8 +1,8 @@
 ﻿using DevExpress.XtraEditors;
-using DSEV.Schemas;
+using IVM.Schemas;
 using System;
 
-namespace DSEV.UI.Forms
+namespace IVM.UI.Forms
 {
     public partial class ResultViewer : XtraForm
     {

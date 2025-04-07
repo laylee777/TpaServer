@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading;
 
-namespace DSEV.Schemas
+namespace IVM.Schemas
 {
     public enum 리더명령
     {

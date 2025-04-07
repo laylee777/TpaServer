@@ -16,7 +16,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace DSEV.Schemas
+namespace IVM.Schemas
 {
     public class 비전도구
     {

@@ -4,9 +4,9 @@ using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.BandedGrid;
 using DevExpress.XtraPrinting;
-using DSEV.Schemas;
-using DSEV.Schemas.Reports;
-using DSEV.UI.Forms;
+using IVM.Schemas;
+using IVM.Schemas.Reports;
+using IVM.UI.Forms;
 using MvUtils;
 using System;
 using System.Data;
@@ -14,7 +14,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace DSEV.UI.Controls
+namespace IVM.UI.Controls
 {
     public partial class ResultsPivot : XtraUserControl
     {

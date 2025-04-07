@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using DevExpress.Utils.Extensions;
 using DevExpress.XtraRichEdit.Model;
 using MvUtils;
-namespace DSEV.Schemas
+namespace IVM.Schemas
 {
 
     public enum 센서컨트롤러

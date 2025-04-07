@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DSEV.UI.Controls
+namespace IVM.UI.Controls
 {
     partial class QrValidate
     {
@@ -109,11 +109,11 @@ namespace DSEV.UI.Controls
             // 
             // Bind검증자료
             // 
-            this.Bind검증자료.DataSource = typeof(DSEV.Schemas.큐알검증);
+            this.Bind검증자료.DataSource = typeof(IVM.Schemas.큐알검증);
             // 
             // Bind검증정보
             // 
-            this.Bind검증정보.DataSource = typeof(System.Collections.Generic.List<DSEV.Schemas.큐알검증정보>);
+            this.Bind검증정보.DataSource = typeof(System.Collections.Generic.List<IVM.Schemas.큐알검증정보>);
             // 
             // layoutControl1
             // 

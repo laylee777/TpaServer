@@ -10,7 +10,7 @@ using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
-namespace DSEV.Schemas
+namespace IVM.Schemas
 {
     public class 환경설정
     {

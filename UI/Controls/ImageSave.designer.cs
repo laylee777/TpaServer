@@ -1,4 +1,4 @@
-﻿namespace DSEV.UI.Controls
+﻿namespace IVM.UI.Controls
 {
     partial class ImageSave
     {
@@ -61,7 +61,7 @@
             // 
             // BindSaveImage
             // 
-            this.BindSaveImage.DataSource = typeof(DSEV.Schemas.사진저장);
+            this.BindSaveImage.DataSource = typeof(IVM.Schemas.사진저장);
             // 
             // barManager1
             // 

@@ -11,7 +11,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DSEV.Schemas
+namespace IVM.Schemas
 {
     public enum 사진형식 { Jpg, Bmp, Png }
     public class 사진저장

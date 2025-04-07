@@ -1,12 +1,12 @@
 ﻿using MvUtils;
 using DevExpress.XtraEditors;
 using System;
-using DSEV.Schemas;
+using IVM.Schemas;
 using DevExpress.Utils.Extensions;
 using DevExpress.XtraEditors.Controls;
 using System.Threading.Tasks;
 
-namespace DSEV.UI.Controls
+namespace IVM.UI.Controls
 {
     public partial class DeviceSettings : XtraUserControl
     {

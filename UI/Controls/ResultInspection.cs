@@ -1,11 +1,11 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
-using DSEV.Schemas;
+using IVM.Schemas;
 using System;
 using System.Windows.Media.Media3D;
 
-namespace DSEV.UI.Controls
+namespace IVM.UI.Controls
 {
     public partial class ResultInspection : XtraUserControl
     {

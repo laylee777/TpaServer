@@ -1,5 +1,5 @@
 ﻿
-namespace DSEV.UI.Controls
+namespace IVM.UI.Controls
 {
     partial class Users
     {
@@ -61,7 +61,7 @@ namespace DSEV.UI.Controls
             // 
             // Bind사용자
             // 
-            this.Bind사용자.DataSource = typeof(DSEV.Schemas.유저자료);
+            this.Bind사용자.DataSource = typeof(IVM.Schemas.유저자료);
             // 
             // GridControl1
             // 

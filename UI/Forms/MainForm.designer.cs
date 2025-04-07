@@ -1,5 +1,5 @@
 ﻿
-namespace DSEV
+namespace IVM
 {
     partial class MainForm
     {
@@ -39,34 +39,34 @@ namespace DSEV
             this.p결과뷰어 = new DevExpress.XtraBars.TabFormPage();
             this.tabFormContentContainer1 = new DevExpress.XtraBars.TabFormContentContainer();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.e결과뷰어 = new DSEV.UI.Controls.ResultInspection();
-            this.e상태뷰어 = new DSEV.UI.Controls.State();
+            this.e결과뷰어 = new IVM.UI.Controls.ResultInspection();
+            this.e상태뷰어 = new IVM.UI.Controls.State();
             this.p검사도구 = new DevExpress.XtraBars.TabFormPage();
             this.tabFormContentContainer4 = new DevExpress.XtraBars.TabFormContentContainer();
-            this.e검사도구 = new DSEV.UI.Controls.CamViewers();
+            this.e검사도구 = new IVM.UI.Controls.CamViewers();
             this.p검사내역 = new DevExpress.XtraBars.TabFormPage();
             this.tabFormContentContainer3 = new DevExpress.XtraBars.TabFormContentContainer();
             this.xtraTabControl2 = new DevExpress.XtraTab.XtraTabControl();
             this.t내역조회 = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
-            this.e검사내역 = new DSEV.UI.Controls.Results();
+            this.e검사내역 = new IVM.UI.Controls.Results();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
-            this.e검사피봇 = new DSEV.UI.Controls.ResultsPivot();
+            this.e검사피봇 = new IVM.UI.Controls.ResultsPivot();
             this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
-            this.e결과검색 = new DSEV.UI.Controls.ResultSearch();
+            this.e결과검색 = new IVM.UI.Controls.ResultSearch();
             this.t결과보고 = new DevExpress.XtraTab.XtraTabPage();
             this.p환경설정 = new DevExpress.XtraBars.TabFormPage();
             this.tabFormContentContainer2 = new DevExpress.XtraBars.TabFormContentContainer();
             this.t환경설정 = new DevExpress.XtraTab.XtraTabControl();
             this.t검사설정 = new DevExpress.XtraTab.XtraTabPage();
-            this.e검사설정 = new DSEV.UI.Controls.SetInspection();
+            this.e검사설정 = new IVM.UI.Controls.SetInspection();
             this.t장치설정 = new DevExpress.XtraTab.XtraTabPage();
-            this.e장치설정 = new DSEV.UI.Controls.DeviceSettings();
+            this.e장치설정 = new IVM.UI.Controls.DeviceSettings();
             this.t큐알검증 = new DevExpress.XtraTab.XtraTabPage();
-            this.e큐알검증 = new DSEV.UI.Controls.QrValidate();
+            this.e큐알검증 = new IVM.UI.Controls.QrValidate();
             this.t로그내역 = new DevExpress.XtraTab.XtraTabPage();
-            this.e로그내역 = new DSEV.UI.Controls.LogViewer();
+            this.e로그내역 = new IVM.UI.Controls.LogViewer();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabFormControl1)).BeginInit();
             this.tabFormContentContainer1.SuspendLayout();
@@ -128,7 +128,7 @@ namespace DSEV
             // 
             this.타이틀.Caption = "VDA590 UFA Vision Inspection System";
             this.타이틀.Id = 0;
-            this.타이틀.ImageOptions.SvgImage = global::DSEV.Properties.Resources.vision;
+            this.타이틀.ImageOptions.SvgImage = global::IVM.Properties.Resources.vision;
             this.타이틀.Name = "타이틀";
             this.타이틀.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             // 
@@ -189,7 +189,7 @@ namespace DSEV
             // p검사도구
             // 
             this.p검사도구.ContentContainer = this.tabFormContentContainer4;
-            this.p검사도구.ImageOptions.SvgImage = global::DSEV.Properties.Resources.electronics_photo;
+            this.p검사도구.ImageOptions.SvgImage = global::IVM.Properties.Resources.electronics_photo;
             this.p검사도구.Name = "p검사도구";
             this.p검사도구.Text = "Cameras";
             // 
@@ -410,7 +410,7 @@ namespace DSEV
             this.ClientSize = new System.Drawing.Size(1920, 1040);
             this.Controls.Add(this.tabFormContentContainer2);
             this.Controls.Add(this.tabFormControl1);
-            this.IconOptions.SvgImage = global::DSEV.Properties.Resources.vision;
+            this.IconOptions.SvgImage = global::IVM.Properties.Resources.vision;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.TabFormControl = this.tabFormControl1;

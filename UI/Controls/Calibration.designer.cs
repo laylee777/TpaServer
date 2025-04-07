@@ -1,4 +1,4 @@
-﻿namespace DSEV.UI.Controls
+﻿namespace IVM.UI.Controls
 {
     partial class Calibration
     {
@@ -107,7 +107,7 @@
             // 
             // BindData
             // 
-            this.BindData.DataSource = typeof(DSEV.Schemas.캘리브자료);
+            this.BindData.DataSource = typeof(IVM.Schemas.캘리브자료);
             // 
             // barManager1
             // 

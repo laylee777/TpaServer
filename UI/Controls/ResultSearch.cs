@@ -1,11 +1,11 @@
 ﻿using DevExpress.XtraEditors;
-using DSEV.Schemas;
+using IVM.Schemas;
 using MvUtils;
 using System;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 
-namespace DSEV.UI.Controls
+namespace IVM.UI.Controls
 {
     public partial class ResultSearch : XtraUserControl
     {

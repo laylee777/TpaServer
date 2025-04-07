@@ -6,7 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Reflection;
 
-namespace DSEV.Schemas.Reports
+namespace IVM.Schemas.Reports
 {
     public class 검사내역 : IDisposable
     {

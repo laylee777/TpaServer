@@ -3,13 +3,13 @@ using MvUtils;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DSEV.Schemas;
-using DSEV.UI.Controls;
+using IVM.Schemas;
+using IVM.UI.Controls;
 using System.Diagnostics;
-using DSEV.UI.Forms;
-using static DSEV.Schemas.MES통신;
+using IVM.UI.Forms;
+using static IVM.Schemas.MES통신;
 
-namespace DSEV
+namespace IVM
 {
     public partial class MainForm : DevExpress.XtraBars.TabForm
     {

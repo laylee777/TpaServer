@@ -2,7 +2,7 @@
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
-using DSEV.Schemas;
+using IVM.Schemas;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DSEV.UI.Controls
+namespace IVM.UI.Controls
 {
     public partial class Users : XtraUserControl
     {

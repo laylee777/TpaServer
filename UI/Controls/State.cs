@@ -3,10 +3,10 @@ using DevExpress.XtraEditors;
 using MvUtils;
 using System;
 using System.Diagnostics;
-using DSEV.Schemas;
-using DSEV.UI.Forms;
+using IVM.Schemas;
+using IVM.UI.Forms;
 
-namespace DSEV.UI.Controls
+namespace IVM.UI.Controls
 {
     public partial class State : XtraUserControl
     {

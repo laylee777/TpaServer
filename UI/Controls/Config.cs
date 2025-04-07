@@ -2,9 +2,9 @@
 using MvUtils;
 using System;
 using System.Windows.Forms;
-using DSEV.Schemas;
+using IVM.Schemas;
 
-namespace DSEV.UI.Controls
+namespace IVM.UI.Controls
 {
     public partial class Config : XtraUserControl
     {

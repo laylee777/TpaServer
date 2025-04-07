@@ -1,5 +1,5 @@
 ﻿
-namespace DSEV.UI.Controls
+namespace IVM.UI.Controls
 {
     partial class State
     {
@@ -35,18 +35,18 @@ namespace DSEV.UI.Controls
             this.e모델선택 = new DevExpress.XtraEditors.LookUpEdit();
             this.모델자료Bind = new System.Windows.Forms.BindingSource(this.components);
             this.b동작구분 = new DevExpress.XtraEditors.LabelControl();
-            this.e장치상태 = new DSEV.UI.Controls.DeviceLamp();
+            this.e장치상태 = new IVM.UI.Controls.DeviceLamp();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
-            this.e양품수율 = new DSEV.UI.Controls.CountViewer();
+            this.e양품수율 = new IVM.UI.Controls.CountViewer();
             this.BindLocalization = new System.Windows.Forms.BindingSource(this.components);
-            this.e전체수량 = new DSEV.UI.Controls.CountViewer();
-            this.e불량수량 = new DSEV.UI.Controls.CountViewer();
-            this.e양품수량 = new DSEV.UI.Controls.CountViewer();
+            this.e전체수량 = new IVM.UI.Controls.CountViewer();
+            this.e불량수량 = new IVM.UI.Controls.CountViewer();
+            this.e양품수량 = new IVM.UI.Controls.CountViewer();
             this.b수량리셋 = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.e저장용량 = new DevExpress.XtraEditors.ProgressBarControl();
-            this.ciView1 = new DSEV.UI.Controls.CiView();
-            this.titleView1 = new DSEV.UI.Controls.TitleView();
+            this.ciView1 = new IVM.UI.Controls.CiView();
+            this.titleView1 = new IVM.UI.Controls.TitleView();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
@@ -113,7 +113,7 @@ namespace DSEV.UI.Controls
             // 
             // 모델자료Bind
             // 
-            this.모델자료Bind.DataSource = typeof(DSEV.Schemas.모델자료);
+            this.모델자료Bind.DataSource = typeof(IVM.Schemas.모델자료);
             // 
             // b동작구분
             // 
@@ -178,7 +178,7 @@ namespace DSEV.UI.Controls
             // 
             // BindLocalization
             // 
-            this.BindLocalization.DataSource = typeof(DSEV.UI.Controls.State.LocalizationState);
+            this.BindLocalization.DataSource = typeof(IVM.UI.Controls.State.LocalizationState);
             // 
             // e전체수량
             // 

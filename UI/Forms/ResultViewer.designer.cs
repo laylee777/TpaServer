@@ -1,4 +1,4 @@
-﻿namespace DSEV.UI.Forms
+﻿namespace IVM.UI.Forms
 {
     partial class ResultViewer
     {
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.e결과뷰어 = new DSEV.UI.Controls.ResultInspection();
+            this.e결과뷰어 = new IVM.UI.Controls.ResultInspection();
             this.SuspendLayout();
             // 
             // e결과뷰어
@@ -45,7 +45,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1920, 1010);
             this.Controls.Add(this.e결과뷰어);
-            this.IconOptions.SvgImage = global::DSEV.Properties.Resources.vision;
+            this.IconOptions.SvgImage = global::IVM.Properties.Resources.vision;
             this.Name = "ResultViewer";
             this.Text = "Result Viewer";
             this.ResumeLayout(false);

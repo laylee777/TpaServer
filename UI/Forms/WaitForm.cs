@@ -1,7 +1,7 @@
 ﻿using DevExpress.XtraWaitForm;
 using System;
 
-namespace DSEV.UI.Controls
+namespace IVM.UI.Controls
 {
     public partial class WaitForm : DevExpress.XtraWaitForm.WaitForm
     {

@@ -8,7 +8,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
 
-namespace DSEV
+namespace IVM
 {
     public enum Language
     {

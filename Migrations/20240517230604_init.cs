@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace DSEV.Migrations
+namespace IVM.Migrations
 {
     public partial class init : Migration
     {

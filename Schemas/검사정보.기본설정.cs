@@ -1,5 +1,5 @@
 ﻿using Cognex.VisionPro;
-using DSEV.Schemas;
+using IVM.Schemas;
 using MvUtils;
 using Newtonsoft.Json;
 using System;
@@ -10,7 +10,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reflection;
 
-namespace DSEV.Schemas
+namespace IVM.Schemas
 {
     public enum 카메라구분
     {

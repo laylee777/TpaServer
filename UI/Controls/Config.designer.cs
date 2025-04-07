@@ -1,5 +1,5 @@
 ﻿
-namespace DSEV.UI.Controls
+namespace IVM.UI.Controls
 {
     partial class Config
     {
@@ -70,7 +70,7 @@ namespace DSEV.UI.Controls
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             this.d사본저장 = new DevExpress.XtraEditors.XtraFolderBrowserDialog(this.components);
             this.g환경설정 = new DevExpress.XtraEditors.GroupControl();
-            this.e사진저장 = new DSEV.UI.Controls.ImageSave();
+            this.e사진저장 = new IVM.UI.Controls.ImageSave();
             this.Bind환경설정 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -340,7 +340,7 @@ namespace DSEV.UI.Controls
             // 
             // BindLocalization
             // 
-            this.BindLocalization.DataSource = typeof(DSEV.UI.Controls.Config.LocalizationConfig);
+            this.BindLocalization.DataSource = typeof(IVM.UI.Controls.Config.LocalizationConfig);
             // 
             // layoutControlItem4
             // 
@@ -627,7 +627,7 @@ namespace DSEV.UI.Controls
             // 
             // Bind환경설정
             // 
-            this.Bind환경설정.DataSource = typeof(DSEV.Schemas.환경설정);
+            this.Bind환경설정.DataSource = typeof(IVM.Schemas.환경설정);
             // 
             // Config
             // 

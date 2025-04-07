@@ -1,4 +1,4 @@
-﻿namespace DSEV.UI.Forms
+﻿namespace IVM.UI.Forms
 {
     partial class StateForm
     {
@@ -35,14 +35,14 @@
             this.e결과 = new DevExpress.XtraEditors.LabelControl();
             this.e큐알 = new DevExpress.XtraEditors.LabelControl();
             this.e모델 = new DevExpress.XtraEditors.LabelControl();
-            this.e뷰어 = new DSEV.UI.Controls.Viewport3D();
-            this.e시계 = new DSEV.UI.Controls.AnalogClock();
-            this.e양품수율 = new DSEV.UI.Controls.CountViewer();
+            this.e뷰어 = new IVM.UI.Controls.Viewport3D();
+            this.e시계 = new IVM.UI.Controls.AnalogClock();
+            this.e양품수율 = new IVM.UI.Controls.CountViewer();
             this.BindLocalization = new System.Windows.Forms.BindingSource(this.components);
             this.모델자료Bind = new System.Windows.Forms.BindingSource(this.components);
-            this.e전체수량 = new DSEV.UI.Controls.CountViewer();
-            this.e불량수량 = new DSEV.UI.Controls.CountViewer();
-            this.e양품수량 = new DSEV.UI.Controls.CountViewer();
+            this.e전체수량 = new IVM.UI.Controls.CountViewer();
+            this.e불량수량 = new IVM.UI.Controls.CountViewer();
+            this.e양품수량 = new IVM.UI.Controls.CountViewer();
             this.e시간 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).BeginInit();
@@ -204,11 +204,11 @@
             // 
             // BindLocalization
             // 
-            this.BindLocalization.DataSource = typeof(DSEV.UI.Forms.StateForm.LocalizationState);
+            this.BindLocalization.DataSource = typeof(IVM.UI.Forms.StateForm.LocalizationState);
             // 
             // 모델자료Bind
             // 
-            this.모델자료Bind.DataSource = typeof(DSEV.Schemas.모델자료);
+            this.모델자료Bind.DataSource = typeof(IVM.Schemas.모델자료);
             // 
             // e전체수량
             // 
@@ -277,7 +277,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1920, 780);
             this.Controls.Add(this.splitContainerControl1);
-            this.IconOptions.SvgImage = global::DSEV.Properties.Resources.vision;
+            this.IconOptions.SvgImage = global::IVM.Properties.Resources.vision;
             this.Name = "StateForm";
             this.Text = "Inspection Status";
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).EndInit();

@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace DSEV.Schemas
+namespace IVM.Schemas
 {
     public partial class 조명제어
     {

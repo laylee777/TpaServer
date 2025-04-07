@@ -1,5 +1,5 @@
 ﻿
-namespace DSEV.UI.Controls
+namespace IVM.UI.Controls
 {
     partial class CamSettings
     {
@@ -100,7 +100,7 @@ namespace DSEV.UI.Controls
             // 
             // Bind조명설정
             // 
-            this.Bind조명설정.DataSource = typeof(DSEV.Schemas.조명제어);
+            this.Bind조명설정.DataSource = typeof(IVM.Schemas.조명제어);
             // 
             // GridView2
             // 
@@ -246,7 +246,7 @@ namespace DSEV.UI.Controls
             // 
             // Bind카메라설정
             // 
-            this.Bind카메라설정.DataSource = typeof(DSEV.Schemas.그랩장치);
+            this.Bind카메라설정.DataSource = typeof(IVM.Schemas.그랩장치);
             // 
             // GridView1
             // 
