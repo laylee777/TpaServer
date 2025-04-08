@@ -22,8 +22,6 @@ namespace IVM.UI.Controls
         public delegate void 검사항목선택(모델정보 모델, 검사정보 설정);
         public event 검사항목선택 검사항목변경;
         private LocalizationInspection 번역 = new LocalizationInspection();
-        private PopupMenu popupMenu;
-        private Int32 IconSize = 16;
 
         public void Init()
         {
@@ -41,19 +39,6 @@ namespace IVM.UI.Controls
             this.col마진값.DisplayFormat.FormatString = Global.환경설정.결과표현;
             this.col실측값.DisplayFormat.FormatString = Global.환경설정.결과표현;
 
-            popupMenu = new PopupMenu(this.barManager1);
-
-            BarButtonItem Cognex = new BarButtonItem(this.barManager1, "Cognex (CTQ)");
-            BarButtonItem Vm = new BarButtonItem(this.barManager1, "VM (Surface)");
-
-            Cognex.ImageOptions.Image = LoadIconFromResources(Properties.Resources.Cognex, IconSize);
-            Vm.ImageOptions.Image = LoadIconFromResources(Properties.Resources.Vm, IconSize);
-
-            popupMenu.AddItem(Cognex);
-            popupMenu.AddItem(Vm);
-
-            Vm.ItemClick += VmItemClick;
-            Cognex.ItemClick += CognexItemClick;
 
             this.e모델선택.EditValueChanged += 모델선택;
             this.e모델선택.Properties.DataSource = Global.모델자료;
@@ -75,26 +60,9 @@ namespace IVM.UI.Controls
             this.모델선택(this.e모델선택, EventArgs.Empty);
         }
 
-        private Image LoadIconFromResources(Icon icon, Int32 Size)
-        {
-            // Convert Icon to Bitmap
-            Bitmap bitmap = icon.ToBitmap();
-            // Resize the bitmap
-            Bitmap resizedBitmap = new Bitmap(bitmap, new Size(Size, Size));
-            return resizedBitmap;
-        }
 
-        private void CognexItemClick(object sender, ItemClickEventArgs e) => Global.비전검사.도구설정(카메라구분.Cam01);
 
-        private void VmItemClick(object sender, ItemClickEventArgs e)
-        {
-            Form opFrm = Application.OpenForms["VMForm"];
 
-            if (opFrm != null) return;
-
-            VMForm form = new VMForm();
-            form.Show(Global.MainForm);
-        }
 
         public void Close() { }
 
@@ -151,12 +119,12 @@ namespace IVM.UI.Controls
         {
             if (this.b도구설정.EditValue == null || e.Button.Index != 1) return;
 
-            if ((카메라구분)this.b도구설정.EditValue == 카메라구분.Cam01)
-            {
-                Point btnLocation = this.b도구설정.PointToScreen(Point.Empty);
-                popupMenu.ShowPopup(new Point(btnLocation.X + this.b도구설정.Width, btnLocation.Y));
-            }
-            else Global.비전검사.도구설정((카메라구분)this.b도구설정.EditValue);
+            //if ((카메라구분)this.b도구설정.EditValue == 카메라구분.Cam01)
+            //{
+            //    Point btnLocation = this.b도구설정.PointToScreen(Point.Empty);
+            //    popupMenu.ShowPopup(new Point(btnLocation.X + this.b도구설정.Width, btnLocation.Y));
+            //}
+            Global.비전검사.도구설정((카메라구분)this.b도구설정.EditValue);
         }
 
         private void 검사설정변경()

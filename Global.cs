@@ -27,7 +27,7 @@ namespace IVM
         public static 조명제어 조명제어;
         public static 그랩제어 그랩제어;
         public static 비전검사 비전검사;
-        public static VM제어 VM제어;
+        //public static VM제어 VM제어;
         public static 사진자료 사진자료;
         //추후 합치기 필요 임시.
         public static 상부큐알리더 상부큐알리더;
@@ -63,7 +63,6 @@ namespace IVM
                 조명제어 = new 조명제어();
                 모델자료 = new 모델자료();
                 비전검사 = new 비전검사();
-                VM제어 = new VM제어();
                 그랩제어 = new 그랩제어();
                 사진자료 = new 사진자료();
                 //추후 합치기 필요 임시.
@@ -93,7 +92,6 @@ namespace IVM
                     센서제어.Init();
                 }
                 비전검사.Init(); // 그랩장치가 먼저 Init 되어야 함
-                VM제어.Init();
                 사진자료.Init();
                 큐알검증.Init();
                 캘리브.Init();
@@ -136,7 +134,6 @@ namespace IVM
                 로그자료.Close();
                 캘리브.Close();
                 센서제어.Close();
-                VM제어.Close();
                 mes통신.Close();
 
                 Properties.Settings.Default.Save();

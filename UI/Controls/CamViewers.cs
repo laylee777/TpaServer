@@ -29,10 +29,12 @@ namespace IVM.UI.Controls
             Global.비전검사.SetDisplay(카메라구분.Cam06, this.e하부커넥터캠);
             Global.비전검사.SetDisplay(카메라구분.Cam07, this.e상부커넥터캠);
 
-            if (Global.VM제어.Count != 0)
-            {
-                this.e표면검사.ModuleSource = Global.VM제어.GetItem(Flow구분.표면검사).출력이미지;
-            }
+
+            //this.e표면검사.ModuleSource = Global.VM제어.GetItem(Flow구분.표면검사).출력이미지;
+            //if (Global.VM제어.Count != 0)
+            //{
+            //    this.e표면검사.ModuleSource = Global.VM제어.GetItem(Flow구분.표면검사).출력이미지;
+            //}
         }
         public void Close() { }
     }

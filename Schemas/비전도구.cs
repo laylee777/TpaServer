@@ -31,6 +31,10 @@ namespace IVM.Schemas
         public CogJob Job = null;
         public CogToolBlock ToolBlock = null;
         public CogToolBlock AlignTools { get => this.GetTool("AlignTools") as CogToolBlock; }
+
+        //새롭게 추가 by LHD 25.04.28 for Rulebase 표면검사
+        //public CogToolBlock SurfaceTools { get => this.GetTool("SurfaceTools") as CogToolBlock;}
+
         public ICogImage InputImage { get => this.Input<ICogImage>("InputImage"); set => this.Input("InputImage", value); }
         public ICogImage OutputImage { get => Output<ICogImage>(this.AlignTools, "OutputImage"); }
         public String ViewerRecodName { get => "AlignTools.Fixture.OutputImage"; }
@@ -126,13 +130,20 @@ namespace IVM.Schemas
             }
             else
             {
+                //Job명 예시 : "JobCam01"
                 this.Job = new CogJob($"Job{도구명칭}");
+
+                //ToolGroup명 예시 : "GroupCam01"
                 CogToolGroup group = new CogToolGroup() { Name = $"Group{도구명칭}" };
                 this.ToolBlock = new CogToolBlock();
+
+                //ToolBlock명 예시 : "Cam01"
                 this.ToolBlock.Name = this.도구명칭;
                 group.Tools.Add(this.ToolBlock);
                 this.Job.VisionTool = group;
+                
                 this.ToolBlock.Tools.Add(new CogToolBlock() { Name = "AlignTools" });
+                
                 this.Save();
             }
 
@@ -140,26 +151,31 @@ namespace IVM.Schemas
             else this.ToolBlock = new CogToolBlock();
             this.ToolBlock.Name = this.도구명칭;
 
+            ////새롭게 추가
+            //if(this.SurfaceTools == null) this.ToolBlock.Tools.Add(new CogToolBlock() { Name = "SurfaceTools" });
+
             // 파라미터 체크
             AddInput(this.ToolBlock, "InputImage", typeof(CogImage8Grey));
-            AddInput(this.AlignTools, "InputImage", typeof(CogImage8Grey));
-            AddInput(this.AlignTools, "CalibX", 0.020d);
-            AddInput(this.AlignTools, "CalibY", 0.020d);
-            AddInput(this.AlignTools, "Width", 107.7d);
-            AddInput(this.AlignTools, "Height", 538d);
-            AddInput(this.AlignTools, "OriginX", 1024d);
-            AddInput(this.AlignTools, "OriginY", 10000d);
-            AddOutput(this.AlignTools, "OutputImage", typeof(CogImage8Grey));
-            AddOutput(this.AlignTools, "Perspective", typeof(String));
-            AddOutput(this.AlignTools, "Detected", false);
-            AddOutput(this.AlignTools, "ResolutionX", 0.0d);
-            AddOutput(this.AlignTools, "ResolutionY", 0.0d);
+            //AddInput(this.AlignTools, "InputImage", typeof(CogImage8Grey));
+            //AddInput(this.AlignTools, "CalibX", 0.020d);
+            //AddInput(this.AlignTools, "CalibY", 0.020d);
+            //AddInput(this.AlignTools, "Width", 107.7d);
+            //AddInput(this.AlignTools, "Height", 538d);
+            //AddInput(this.AlignTools, "OriginX", 1024d);
+            //AddInput(this.AlignTools, "OriginY", 10000d);
+            //AddOutput(this.AlignTools, "OutputImage", typeof(CogImage8Grey));
+            //AddOutput(this.AlignTools, "Perspective", typeof(String));
+            //AddOutput(this.AlignTools, "Detected", false);
+            //AddOutput(this.AlignTools, "ResolutionX", 0.0d);
+            //AddOutput(this.AlignTools, "ResolutionY", 0.0d);
             SetCalib();
 
             // Output 파라메터 설정, 일단 CTQ 항목만
             검사설정 자료 = Global.모델자료.GetItem(this.모델구분)?.검사설정;
             if (자료 == null) return;
+
             List<검사정보> 목록 = 자료.Where(e => (Int32)e.검사장치 == (Int32)this.카메라 && !String.IsNullOrEmpty(e.변수명칭)).ToList();
+            
             foreach (검사정보 검사 in 목록)
             {
                 if (검사.검사그룹 == 검사그룹.CTQ) { 
@@ -172,7 +188,12 @@ namespace IVM.Schemas
                 if (검사.검사그룹 == 검사그룹.Surface)
                 {
                     AddOutput(this.ToolBlock, 검사.변수명칭, typeof(Double));
+
+
+
                 }
+
+                
                 else { } 
             }
             

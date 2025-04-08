@@ -68,7 +68,6 @@ namespace IVM.UI.Controls
             this.p치수검사 = new DevExpress.XtraTab.XtraTabPage();
             this.e상부캠 = new Cogutils.RecordDisplay();
             this.p표면검사 = new DevExpress.XtraTab.XtraTabPage();
-            this.e표면검사 = new VMControls.Winform.Release.VmRenderControl();
             this.d상부인슐오른쪽캠 = new DevExpress.XtraBars.Docking.DockPanel();
             this.controlContainer1 = new DevExpress.XtraBars.Docking.ControlContainer();
             this.e오른쪽측면캠 = new Cogutils.RecordDisplay();
@@ -87,6 +86,7 @@ namespace IVM.UI.Controls
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
             this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
+            this.recordDisplay1 = new Cogutils.RecordDisplay();
             ((System.ComponentModel.ISupportInitialize)(this.documentGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.document1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentGroup2)).BeginInit();
@@ -133,6 +133,7 @@ namespace IVM.UI.Controls
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.recordDisplay1)).BeginInit();
             this.SuspendLayout();
             // 
             // documentGroup1
@@ -144,6 +145,7 @@ namespace IVM.UI.Controls
             // 
             this.document1.Caption = "Top";
             this.document1.ControlName = "d하부캠";
+            this.document1.ControlTypeName = null;
             this.document1.FloatLocation = new System.Drawing.Point(770, 397);
             this.document1.FloatSize = new System.Drawing.Size(600, 1100);
             this.document1.Properties.AllowClose = DevExpress.Utils.DefaultBoolean.False;
@@ -159,6 +161,7 @@ namespace IVM.UI.Controls
             // 
             this.document2.Caption = "SideLeft";
             this.document2.ControlName = "d상부인슐왼쪽캠";
+            this.document2.ControlTypeName = null;
             this.document2.FloatLocation = new System.Drawing.Point(-1265, 565);
             this.document2.FloatSize = new System.Drawing.Size(1165, 200);
             this.document2.Properties.AllowClose = DevExpress.Utils.DefaultBoolean.False;
@@ -174,6 +177,7 @@ namespace IVM.UI.Controls
             // 
             this.document3.Caption = "SideRight";
             this.document3.ControlName = "d상부인슐오른쪽캠";
+            this.document3.ControlTypeName = null;
             this.document3.FloatLocation = new System.Drawing.Point(-1054, 570);
             this.document3.FloatSize = new System.Drawing.Size(200, 200);
             this.document3.Properties.AllowClose = DevExpress.Utils.DefaultBoolean.False;
@@ -189,6 +193,7 @@ namespace IVM.UI.Controls
             // 
             this.document4.Caption = "BottomLeft";
             this.document4.ControlName = "dockPanel4";
+            this.document4.ControlTypeName = null;
             this.document4.FloatLocation = new System.Drawing.Point(1154, 569);
             this.document4.FloatSize = new System.Drawing.Size(200, 200);
             this.document4.Properties.AllowClose = DevExpress.Utils.DefaultBoolean.False;
@@ -204,6 +209,7 @@ namespace IVM.UI.Controls
             // 
             this.document5.Caption = "BottomRight";
             this.document5.ControlName = "dockPanel3";
+            this.document5.ControlTypeName = null;
             this.document5.FloatLocation = new System.Drawing.Point(1155, 573);
             this.document5.FloatSize = new System.Drawing.Size(200, 200);
             this.document5.Properties.AllowClose = DevExpress.Utils.DefaultBoolean.False;
@@ -219,6 +225,7 @@ namespace IVM.UI.Controls
             // 
             this.document6.Caption = "Connectors";
             this.document6.ControlName = "dockPanel2";
+            this.document6.ControlTypeName = null;
             this.document6.FloatLocation = new System.Drawing.Point(1170, 570);
             this.document6.FloatSize = new System.Drawing.Size(200, 200);
             this.document6.Properties.AllowClose = DevExpress.Utils.DefaultBoolean.False;
@@ -420,24 +427,10 @@ namespace IVM.UI.Controls
             // 
             // p표면검사
             // 
-            this.p표면검사.Controls.Add(this.e표면검사);
+            this.p표면검사.Controls.Add(this.recordDisplay1);
             this.p표면검사.Name = "p표면검사";
             this.p표면검사.Size = new System.Drawing.Size(701, 936);
             this.p표면검사.Text = "Surface";
-            // 
-            // e표면검사
-            // 
-            this.e표면검사.BackColor = System.Drawing.Color.Black;
-            this.e표면검사.CoordinateInfoVisible = true;
-            this.e표면검사.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.e표면검사.ImageSource = null;
-            this.e표면검사.IsShowCustomROIMenu = false;
-            this.e표면검사.Location = new System.Drawing.Point(0, 0);
-            this.e표면검사.Margin = new System.Windows.Forms.Padding(4);
-            this.e표면검사.ModuleSource = null;
-            this.e표면검사.Name = "e표면검사";
-            this.e표면검사.Size = new System.Drawing.Size(701, 936);
-            this.e표면검사.TabIndex = 0;
             // 
             // d상부인슐오른쪽캠
             // 
@@ -681,6 +674,24 @@ namespace IVM.UI.Controls
             dockingContainer5,
             dockingContainer6});
             // 
+            // recordDisplay1
+            // 
+            this.recordDisplay1.ColorMapLowerClipColor = System.Drawing.Color.Black;
+            this.recordDisplay1.ColorMapLowerRoiLimit = 0D;
+            this.recordDisplay1.ColorMapPredefined = Cognex.VisionPro.Display.CogDisplayColorMapPredefinedConstants.None;
+            this.recordDisplay1.ColorMapUpperClipColor = System.Drawing.Color.Black;
+            this.recordDisplay1.ColorMapUpperRoiLimit = 1D;
+            this.recordDisplay1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.recordDisplay1.DoubleTapZoomCycleLength = 2;
+            this.recordDisplay1.DoubleTapZoomSensitivity = 2.5D;
+            this.recordDisplay1.Location = new System.Drawing.Point(0, 0);
+            this.recordDisplay1.MouseWheelMode = Cognex.VisionPro.Display.CogDisplayMouseWheelModeConstants.Zoom1;
+            this.recordDisplay1.MouseWheelSensitivity = 1D;
+            this.recordDisplay1.Name = "recordDisplay1";
+            this.recordDisplay1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("recordDisplay1.OcxState")));
+            this.recordDisplay1.Size = new System.Drawing.Size(701, 936);
+            this.recordDisplay1.TabIndex = 0;
+            // 
             // CamViewers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -739,6 +750,7 @@ namespace IVM.UI.Controls
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.recordDisplay1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -793,6 +805,6 @@ namespace IVM.UI.Controls
         private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
         private DevExpress.XtraTab.XtraTabPage p치수검사;
         private DevExpress.XtraTab.XtraTabPage p표면검사;
-        private VMControls.Winform.Release.VmRenderControl e표면검사;
+        private Cogutils.RecordDisplay recordDisplay1;
     }
 }

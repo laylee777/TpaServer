@@ -93,65 +93,65 @@ namespace IVM.Schemas
         None,
 
         //제품 폭
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary,장치구분.Cam01, None, "C1C5")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "C1C5")]
         C1C5 = 101,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "C2C6")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "C2C6")]
         C2C6 = 102,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "C3C7")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "C3C7")]
         C3C7 = 103,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "C4C8")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "C4C8")]
         C4C8 = 104,
 
 
         //H1H2 윤곽도
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "ShapeH1H2")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "ShapeH1H2")]
         ShapeH1H2 = 201,
-        
+
         //H1H2 윤곽도하위
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeH1H2, "h1")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeH1H2, "h1")]
         h1 = 221,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeH1H2, "h2")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeH1H2, "h2")]
         h2 = 222,
 
         //H3H4 윤곽도
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "ShapeH3H4")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "ShapeH3H4")]
         ShapeH3H4 = 301,
 
         //H3H4 윤곽도하위
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeH3H4, "h3")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeH3H4, "h3")]
         h3 = 321,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeH3H4, "h4")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeH3H4, "h4")]
         h4 = 322,
 
 
         //M1M3, K1K8 윤곽도
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Flatness, None)]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Flatness, None)]
         ShapeM1M3 = 401,
         //[Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Flatness, None)]
         //ShapeK1K8 = 402,
-        
+
         //M1M3, K1K8 윤곽도하위
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, ShapeM1M3)]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, ShapeM1M3)]
         m1 = 421,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, ShapeM1M3)]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, ShapeM1M3)]
         m2 = 422,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, ShapeM1M3)]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, ShapeM1M3)]
         m3 = 423,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
         k1 = 424,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
         k2 = 425,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
         k3 = 426,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
         k4 = 427,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
         k5 = 428,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
         k6 = 429,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
         k7 = 430,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
         k8 = 431,
         [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness)]
         A1_R = 432,
@@ -164,77 +164,77 @@ namespace IVM.Schemas
 
 
         //가공부 높이
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam02,None, "f1")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam02, None, "f1")]
         f1 = 501,
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam02,None, "f2")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam02, None, "f2")]
         f2 = 502,
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam02,None, "f3")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam02, None, "f3")]
         f3 = 503,
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam02,None, "f4")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam02, None, "f4")]
         f4 = 504,
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam02,None, "f5")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam02, None, "f5")]
         f5 = 505,
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam02,None, "f6")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam02, None, "f6")]
         f6 = 506,
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam02,None, "f7")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam02, None, "f7")]
         f7 = 507,
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam02,None, "f8")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam02, None, "f8")]
         f8 = 508,
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03,None, "f9")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, None, "f9")]
         f9 = 509,
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03,None, "f10")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, None, "f10")]
         f10 = 510,
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03,None, "f11")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, None, "f11")]
         f11 = 511,
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03,None, "f12")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, None, "f12")]
         f12 = 512,
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03,None, "f13")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, None, "f13")]
         f13 = 513,
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03,None, "f14")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, None, "f14")]
         f14 = 514,
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03,None, "f15")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, None, "f15")]
         f15 = 515,
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03,None, "f16")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam03, None, "f16")]
         f16 = 516,
 
 
         //가공부 폭
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam04,None, "g1")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam04, None, "g1")]
         g1 = 601,
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam04,None, "g2")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam04, None, "g2")]
         g2 = 602,
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam04,None, "g3")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam04, None, "g3")]
         g3 = 603,
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam04,None, "g4")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam04, None, "g4")]
         g4 = 604,
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam04,None, "g5")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam04, None, "g5")]
         g5 = 605,
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam04,None, "g6")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam04, None, "g6")]
         g6 = 606,
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam04,None, "g7")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam04, None, "g7")]
         g7 = 607,
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam04,None, "g8")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam04, None, "g8")]
         g8 = 608,
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam05,None, "g9")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam05, None, "g9")]
         g9 = 609,
-        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam05,None, "g10")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam05, None, "g10")]
         g10 = 610,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam05,None, "g11")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam05, None, "g11")]
         g11 = 611,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam05,None, "g12")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam05, None, "g12")]
         g12 = 612,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam05,None, "g13")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam05, None, "g13")]
         g13 = 613,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam05,None, "g14")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam05, None, "g14")]
         g14 = 614,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam05,None, "g15")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam05, None, "g15")]
         g15 = 615,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam05,None, "g16")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam05, None, "g16")]
         g16 = 616,
 
 
         //바닥평면도
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Flatness, None)]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Flatness, None)]
         Flatness = 701,
 
         //바닥평면도 하위
@@ -246,21 +246,21 @@ namespace IVM.Schemas
         A3_F = 723,
         [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, Flatness)]
         A4_F = 724,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, Flatness)]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, Flatness)]
         a1 = 725,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, Flatness)]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, Flatness)]
         a2 = 726,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, Flatness)]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, Flatness)]
         a3 = 727,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, Flatness)]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, Flatness)]
         a4 = 728,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, Flatness)]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, Flatness)]
         a5 = 729,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, Flatness)]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, Flatness)]
         a6 = 730,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, Flatness)]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, Flatness)]
         a7 = 731,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, Flatness)]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Flatness, Flatness)]
         a8 = 732,
 
 
@@ -273,27 +273,27 @@ namespace IVM.Schemas
         DistBigNotchR = 821,
         [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeBigNotchLR, "DistBigNotchL")]
         DistBigNotchL = 822,
-   
+
 
         //J1J2윤곽도
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "ShapeJ1J2")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "ShapeJ1J2")]
         ShapeJ1J2 = 901,
-        
+
         //J1J2윤곽도 하위
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeJ1J2, "j1")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeJ1J2, "j1")]
         j1 = 921,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeJ1J2, "j2")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeJ1J2, "j2")]
         j2 = 922,
 
         //J3J4윤곽도
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "ShapeJ3J4")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "ShapeJ3J4")]
         ShapeJ3J4 = 1001,
         //J3J4윤곽도 하위
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeJ3J4, "j3")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeJ3J4, "j3")]
         j3 = 1021,
         [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Detail, 장치구분.Cam01, ShapeJ3J4, "j4")]
         j4 = 1022,
-      
+
 
         //사이드노치 위치
         [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchPosFR")]
@@ -304,10 +304,10 @@ namespace IVM.Schemas
         NotchPosFL = 1103,//d4
         [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchPosRL")]
         NotchPosRL = 1104,//d6
-       
+
 
         //중심 노치높이
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchHeightCR")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchHeightCR")]
         NotchHeightCR = 1201, //d2
         [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchHeightCL")]
         NotchHeightCL = 1202, //d5
@@ -318,9 +318,9 @@ namespace IVM.Schemas
         NotchWidthCR1 = 1301, //d2
         [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchWidthCR2")]
         NotchWidthCR2 = 1302,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchWidthCL1")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchWidthCL1")]
         NotchWidthCL1 = 1303, //d5
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchWidthCL2")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchWidthCL2")]
         NotchWidthCL2 = 1304,
 
 
@@ -331,13 +331,14 @@ namespace IVM.Schemas
         NotchWidthRR = 1402, //d3
         [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchWidthFL")]
         NotchWidthFL = 1403, //d4
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchWidthRL")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchWidthRL")]
         NotchWidthRL = 1404, //d6
 
+
         //사이드 노치반폭
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchHeightFR1")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchHeightFR1")]
         NotchHeightFR1 = 1501,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchHeightFR2")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchHeightFR2")]
         NotchHeightFR2 = 1502,
         [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchHeightRR1")]
         NotchHeightRR1 = 1503,
@@ -347,108 +348,216 @@ namespace IVM.Schemas
         NotchHeightFL1 = 1505,
         [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchHeightFL2")]
         NotchHeightFL2 = 1506,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchHeightRL1")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchHeightRL1")]
         NotchHeightRL1 = 1507,
-        [Result(피씨구분.Server,검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchHeightRL2")]
+        [Result(피씨구분.Server, 검사그룹.CTQ, 결과분류.Summary, 장치구분.Cam01, None, "NotchHeightRL2")]
         NotchHeightRL2 = 1508,
 
+
         //커넥터상부
-        [Result(피씨구분.Server,검사그룹.Surface, 결과분류.Summary, 장치구분.Cam06, None)]
-        CntT= 1801,
+        [Result(피씨구분.Server, 검사그룹.Etc, 결과분류.Summary, 장치구분.Cam06, None)]
+        CntT = 1801,
 
         //커넥터상부 하위
-        [Result(피씨구분.Server,검사그룹.Surface, 결과분류.Detail, 장치구분.Cam06, CntT, "CntTL")]
+        [Result(피씨구분.Server, 검사그룹.Etc, 결과분류.Detail, 장치구분.Cam06, CntT, "CntTL")]
         CntTL = 1821,
-        [Result(피씨구분.Server,검사그룹.Surface, 결과분류.Detail, 장치구분.Cam06, CntT, "CntTR")]
+        [Result(피씨구분.Server, 검사그룹.Etc, 결과분류.Detail, 장치구분.Cam06, CntT, "CntTR")]
         CntTR = 1822,
 
 
         //커넥터하부
-        [Result(피씨구분.Server,검사그룹.Surface, 결과분류.Summary, 장치구분.Cam07, None)]
+        [Result(피씨구분.Server, 검사그룹.Etc, 결과분류.Summary, 장치구분.Cam07, None)]
         CntB = 1901,
 
         //커넥터하부 하위
-        [Result(피씨구분.Server,검사그룹.Surface, 결과분류.Detail, 장치구분.Cam07, CntB, "CntBL")]
+        [Result(피씨구분.Server, 검사그룹.Etc, 결과분류.Detail, 장치구분.Cam07, CntB, "CntBL")]
         CntBL = 1921,
-        [Result(피씨구분.Server,검사그룹.Surface, 결과분류.Detail, 장치구분.Cam07, CntB, "CntBR")]
+        [Result(피씨구분.Server, 검사그룹.Etc, 결과분류.Detail, 장치구분.Cam07, CntB, "CntBR")]
         CntBR = 1922,
 
 
         //하부QR검사
-        [Result(피씨구분.Server,검사그룹.Surface, 결과분류.Summary, 장치구분.QRCode, None)]
+        [Result(피씨구분.Server, 검사그룹.Etc, 결과분류.Summary, 장치구분.QRCode, None)]
         BottomQRCode1 = 2001,
-        [Result(피씨구분.Server,검사그룹.Surface, 결과분류.Summary, 장치구분.QRCode, None)]
+        [Result(피씨구분.Server, 검사그룹.Etc, 결과분류.Summary, 장치구분.QRCode, None)]
         BottomQRCode2 = 2002,
-        
+
         //상부QR검사
-        [Result(피씨구분.Server,검사그룹.Surface, 결과분류.Summary, 장치구분.QRCode, None)]
+        [Result(피씨구분.Server, 검사그룹.Etc, 결과분류.Summary, 장치구분.QRCode, None)]
         TopQRCode1 = 2101,
-        [Result(피씨구분.Server,검사그룹.Surface, 결과분류.Summary, 장치구분.QRCode, None)]
+        [Result(피씨구분.Server, 검사그룹.Etc, 결과분류.Summary, 장치구분.QRCode, None)]
         TopQRCode2 = 2102,
-        
+
         //QR검증
-        [Result(피씨구분.Server,검사그룹.Surface, 결과분류.Summary, 장치구분.QRCode, None)]
+        [Result(피씨구분.Server, 검사그룹.Etc, 결과분류.Summary, 장치구분.QRCode, None)]
         QrValidate = 2201,
-        [Result(피씨구분.Server,검사그룹.Surface, 결과분류.Summary, 장치구분.QRCode, None)]
+        [Result(피씨구분.Server, 검사그룹.Etc, 결과분류.Summary, 장치구분.QRCode, None)]
         QrDuplicated = 2202,
 
 
+        // 기타
+
         //투입방향
-        [Result(피씨구분.Server,검사그룹.Surface, 결과분류.Summary, 장치구분.Cam01, None, "InputDirection")]
+        [Result(피씨구분.Server, 검사그룹.Etc, 결과분류.Summary, 장치구분.Cam01, None, "InputDirection")]
         InputDirection = 2301,
-        
+
         //노말미러 각인확인
-        [Result(피씨구분.Server,검사그룹.Surface, 결과분류.Summary, 장치구분.Cam01, None, "NomalMirror")]
+        [Result(피씨구분.Server, 검사그룹.Etc, 결과분류.Summary, 장치구분.Cam01, None, "NomalMirror")]
         NomalMirror = 2303,
 
-        //브라켓각인1~6 확인
-        [Result(피씨구분.Server,검사그룹.Surface, 결과분류.Summary, 장치구분.Cam01, None, "BraketMarkingResult1")]
-        BraketMarkingResult1 = 3401,
-        [Result(피씨구분.Server,검사그룹.Surface, 결과분류.Summary, 장치구분.Cam01, None, "BraketMarkingResult2")]
-        BraketMarkingResult2 = 3402,
-        [Result(피씨구분.Server,검사그룹.Surface, 결과분류.Summary, 장치구분.Cam01, None, "BraketMarkingResult3")]
-        BraketMarkingResult3 = 3403,
-        [Result(피씨구분.Server,검사그룹.Surface, 결과분류.Summary, 장치구분.Cam01, None, "BraketMarkingResult4")]
-        BraketMarkingResult4 = 3404,
-        [Result(피씨구분.Server,검사그룹.Surface, 결과분류.Summary, 장치구분.Cam01, None, "BraketMarkingResult5")]
-        BraketMarkingResult5 = 3405,
-        [Result(피씨구분.Server,검사그룹.Surface, 결과분류.Summary, 장치구분.Cam01, None, "BraketMarkingResult6")]
-        BraketMarkingResult6 = 3406,
 
-        //직선각인확인1~2
-        [Result(피씨구분.Server,검사그룹.Surface, 결과분류.Summary, 장치구분.Cam01, None, "LineMarkingResult1")]
-        LineMarkingResult1 = 3501,
-        [Result(피씨구분.Server,검사그룹.Surface, 결과분류.Summary, 장치구분.Cam01, None, "LineMarkingResult2")]
-        LineMarkingResult2 = 3502,
-        
-        //인슐부착상태확인 L&R
-        [Result(피씨구분.Server,검사그룹.Surface, 결과분류.Summary, 장치구분.Cam04, None, "InsulationAttachmentL")]
-        InsulationAttachmentL = 3601,
-        [Result(피씨구분.Server,검사그룹.Surface, 결과분류.Summary, 장치구분.Cam05, None, "InsulationAttachmentR")]
-        InsulationAttachmentR = 3602,
+        // 상부 외관검사 라인 //
+
+        //브라켓각인 검사
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Summary, 장치구분.None, None)]
+        BraketMarking = 3401,
+
+        //브라켓각인 검사 하위(위치)
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam01, BraketMarking, "BraketMarkingPos1")]
+        BraketMarkingPos1 = 3421,
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam01, BraketMarking, "BraketMarkingPos2")]
+        BraketMarkingPos2 = 3422,
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam01, BraketMarking, "BraketMarkingPos3")]
+        BraketMarkingPos3 = 3423,
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam01, BraketMarking, "BraketMarkingPos4")]
+        BraketMarkingPos4 = 3424,
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam01, BraketMarking, "BraketMarkingPos5")]
+        BraketMarkingPos5 = 3425,
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam01, BraketMarking, "BraketMarkingPos6")]
+        BraketMarkingPos6 = 3426,
+
+        //브라켓각인 검사 하위(유무)
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam01, BraketMarking, "BraketMarkingExi1")]
+        BraketMarkingExi1 = 3427,
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam01, BraketMarking, "BraketMarkingExi2")]
+        BraketMarkingExi2 = 3428,
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam01, BraketMarking, "BraketMarkingExi3")]
+        BraketMarkingExi3 = 3429,
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam01, BraketMarking, "BraketMarkingExi4")]
+        BraketMarkingExi4 = 3430,
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam01, BraketMarking, "BraketMarkingExi5")]
+        BraketMarkingExi5 = 3431,
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam01, BraketMarking, "BraketMarkingExi6")]
+        BraketMarkingExi6 = 3432,
 
 
-        //하부표면검사
-        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Summary, 장치구분.None)]
-        BottomSurface = 6001,
+        //직선각인 검사
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Summary, 장치구분.None, None)]
+        LineMarking = 3501,
 
-        //하부표면검사 하위
-        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.None, BottomSurface, "BottomDent")]
-        BottomDent = 6021,
-        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.None, BottomSurface, "BottomScratch")]
-        BottomScratch = 6022,
+        //직선각인 검사 하위(위치)
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam01, LineMarking, "LineMarkingPos1")]
+        LineMarkingPos1 = 3521,
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam01, LineMarking, "LineMarkingPos2")]
+        LineMarkingPos2 = 3522,
 
+        //직선각인 검사 하위(유무)
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam01, LineMarking, "LineMarkingExi1")]
+        LineMarkingExi1 = 3523,
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam01, LineMarking, "LineMarkingExi2")]
+        LineMarkingExi2 = 3524,
+
+
+        //부호각인 검사
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Summary, 장치구분.None, None)]
+        SignMarking = 3601,
+
+        //직선각인 검사 하위(위치)
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam01, SignMarking, "SignMarkingPos1")]
+        SignMarkingPos1 = 3621,
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam01, SignMarking, "SignMarkingPos2")]
+        SignMarkingPos2 = 3622,
+
+        //직선각인 검사 하위(유무)
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam01, SignMarking, "SignMarkingExi1")]
+        SignMarkingExi1 = 3623,
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam01, SignMarking, "SignMarkingExi2")]
+        SignMarkingExi2 = 3624,
+
+
+        //이형지 검사
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Summary, 장치구분.None, None)]
+        Sticker = 3701,
+
+        //이형지 검사 하위(유무)
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam01, StickerExi1, "StickerExi1")]
+        StickerExi1 = 3721,
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam01, StickerExi2, "StickerExi2")]
+        StickerExi2 = 3722,
+
+
+
+        //하부 외관검사 라인//
+
+        //인슐레이션 검사
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Summary, 장치구분.None, None)]
+        Insulation = 4001,
+
+        //인슐레이션 검사 하위(유무)
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam04, Insulation, "InsulationExi")]
+        InsulationExi = 4021,
+
+        //인슐레이션 검사 하위(뜯김)
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam04, Insulation, "InsulationConditionL")]
+        InsulationConditionL = 4022,
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam05, Insulation, "InsulationConditionR")]
+        InsulationConditionR = 4023,
+
+        //인슐레이션 검사 하위(각인이탈)
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam04, Insulation, "InsulationPos1")]
+        InsulationPos1 = 4024,
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam04, Insulation, "InsulationPos2")]
+        InsulationPos2 = 4025,
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam04, Insulation, "InsulationPos3")]
+        InsulationPos3 = 4026,
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam04, Insulation, "InsulationPos4")]
+        InsulationPos4 = 4027,
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam05, Insulation, "InsulationPos5")]
+        InsulationPos5 = 4028,
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam05, Insulation, "InsulationPos6")]
+        InsulationPos6 = 4029,
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam05, Insulation, "InsulationPos7")]
+        InsulationPos7 = 4030,
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam05, Insulation, "InsulationPos8")]
+        InsulationPos8 = 4031,
+
+
+
+        // 표면검사 라인 //
 
         //상부표면검사
-        [Result(피씨구분.Client1, 검사그룹.Surface, 결과분류.Summary, 장치구분.None)]
-        TopSurfaceL = 6101,
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Summary, 장치구분.None)]
+        TopSurface = 6001,
 
         //상부표면검사 하위
-        [Result(피씨구분.Client1, 검사그룹.Surface, 결과분류.Detail, 장치구분.None, TopSurfaceL, "TopDent")]
-        TopDentL = 6121,
-        [Result(피씨구분.Client1, 검사그룹.Surface, 결과분류.Detail, 장치구분.None, TopSurfaceL, "TopScratch")]
-        TopScratchL = 6122,
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam01, TopSurface, "TopDent")]
+        TopDent = 6021,
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam01, TopSurface, "TopScratch")]
+        TopScratch = 6022,
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam01, TopSurface, "TopPollution")]
+        TopPollution = 6023,
 
+
+        //측면표면검사
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Summary, 장치구분.None)]
+        SideSurface = 6101,
+
+        //측면표면검사 하위
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam02, SideSurface, "SideDentL")]
+        SideDentL = 6121,
+        [Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam03, SideSurface, "SideDentR")]
+        SideDentR = 6122,
+
+
+        ////하부표면검사
+        //[Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Summary, 장치구분.None)]
+        //BottomSurface = 6001,
+
+        ////하부표면검사 하위
+        //[Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam04, BottomSurface, "BottomDentL")]
+        //BottomDentL = 6021,
+        //[Result(피씨구분.Server, 검사그룹.Surface, 결과분류.Detail, 장치구분.Cam05, BottomSurface, "BottomDentR")]
+        //BottomDentR = 6022,
     }
 
     public enum 단위구분
@@ -590,9 +699,9 @@ namespace IVM.Schemas
 
         public Boolean 교정계산2()
         {
-            if(this.실측값 <= 0) return false; 
+            if (this.실측값 <= 0) return false;
             if (this.측정값 <= 0) return false;
-            if(this.검사여부) this.교정값 = Convert.ToDecimal(Math.Round((this.실측값 / this.측정값 * 1000), 9));
+            if (this.검사여부) this.교정값 = Convert.ToDecimal(Math.Round((this.실측값 / this.측정값 * 1000), 9));
             return true;
         }
 
